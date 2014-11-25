@@ -1,8 +1,8 @@
 jQuery(document).ready(function($){
 
     /*
-     * Mobile Navigation
-     * Ensure mobile nav is always hidden when back / forward cache is used  
+     * Mobile navigation.
+     * Ensure mobile nav is always hidden when back / forward cache is used. 
      */
     function pageShown(evt)
     {
@@ -23,6 +23,10 @@ jQuery(document).ready(function($){
 
     }
 
+
+    /*
+     * Toggle mobile navigation.
+     */
     $('.mobile_navigation_navicon').click(function() {
 
         $('.mobile_navigation').toggleClass('mobile_navigation_show');
@@ -32,25 +36,35 @@ jQuery(document).ready(function($){
 
     });
 
-    /*-----IE 7/8-----*/
-    //if ($('html').hasClass('lt-ie10')) {  
-    //};
-            
-    /*-----NO CSS3 TRANSITIONS-----*/ 
-    //if (!Modernizr.csstransitions) {
-    //};
-      
-    /*-----FOOTER SCROLL TO TOP-----*/      
-    /*$("#back_top").hide();
+
+    /*
+     * IE Issues.
+     */
+    if ($('html').hasClass('lt-ie9')) {  
+    
+    };
+
+    if ($('html').hasClass('lt-ie10')) {  
+    
+    };
+
+
+    /*
+     * Scroll to top.
+     */    
+    $("#back_top").hide();
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
             $('#back_top').fadeIn();
         } else {
             $('#back_top').fadeOut();
         }
-    });*/
+    });
 
-    // scroll body to 0px on click
+
+    /*
+     * Scroll body to 0.
+     */
     $('.back_top').click(function () {
         $('body,html').animate({
             scrollTop: 0
@@ -58,17 +72,11 @@ jQuery(document).ready(function($){
         return false;
     });
         
-    /*-----INTERNAL LINKS SCROLL TO-----*/            
-    $('.int_scroll').click(function () {
-        var e = $(this).attr('href');
-        $('body,html').animate({
-            scrollTop: $(e).offset().top-70
-        }, 600);
-        return false;
-    });
 
-    /*-----INTERNAL LINKS SCROLL TO HOME -70 FOR NAV-----*/            
-    $('.home_scroll, .home_scroll_first, .home_scroll a').click(function () {
+    /*
+     * Internal scroll to.
+     */         
+    $('.int_scroll').click(function () {
         var e = $(this).attr('href');
         $('body,html').animate({
             scrollTop: $(e).offset().top-70
