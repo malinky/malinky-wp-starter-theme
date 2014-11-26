@@ -8,10 +8,11 @@
 
 /* ------------------------------------------------------------------------ *
  * Theme Setup
+ * Init
  * Front End Scripts
  * Widgets
  * Login Screen
- * Wordpress Setup
+ * Wordpress Setup Actions and Filters
  * Template Function
  * Template Tags
  * CHECK
@@ -128,6 +129,45 @@ add_action( 'after_setup_theme', 'malinky_media_setup' );
 
 
 
+/* ------------------------------------------------------------------------ *
+ * Init
+ * ------------------------------------------------------------------------ */
+
+/**
+ * Load WP jQuery and jQuery migrate in the footer.
+ */
+function malinky_media_init()
+{
+	
+	if ( ! is_admin() ) {
+
+		wp_deregister_script( 'jquery' );
+		wp_deregister_script( 'jquery-migrate' );
+
+		wp_register_script( 'jquery',
+							'/wp-includes/js/jquery/jquery.js',
+							false,
+							NULL,
+							true
+		);
+		wp_enqueue_script( 'jquery' );
+
+		wp_register_script( 'jquery-migrate',
+							'/wp-includes/js/jquery/jquery-migrate.js',
+							false,
+							NULL,
+							true
+		);
+		wp_enqueue_script( 'jquery-migrate' );
+
+	}
+
+}
+add_action( 'init', 'malinky_media_init' );
+
+
+
+
 
 /* ------------------------------------------------------------------------ *
  * Front End Scripts
@@ -152,24 +192,6 @@ function malinky_media_scripts()
 
 
 	/*
-	 * Load google jQuery.
-	 */
-	/*if ( ! is_admin() ) {
-
-        wp_deregister_script( 'jquery' );
-        wp_register_script( 'malinky-media-jquery',
-        					'http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js',
-        					FALSE,
-        					'1.11.0',
-        					TRUE
-        );
-        wp_enqueue_script( 'malinky-media-jquery' );
-
-    }*/
-
-	wp_enqueue_script( 'jquery', '', '', '', true );
-
-	/*
 	 * Modernizr which includes html5shiv.
 	 *
 	 * @link http://modernizr.com/
@@ -177,15 +199,18 @@ function malinky_media_scripts()
 	 */
 	wp_register_script( 'malinky-media-modernizr-js',
 						get_template_directory_uri() . '/js/modernizr-2.8.3.js',
-						'',
+						false,
 						NULL
 	);
 	wp_enqueue_script( 'malinky-media-modernizr-js' );
 
 
+	/*
+	 * Malinky Media related javascript and jQuery.
+	 */
 	wp_register_script( 'malinky-media-main-js',
 						get_template_directory_uri() . '/js/main.js',
-						array( 'malinky-media-jquery' ),
+						array( 'jquery' ),
 						NULL,
 						true
 	);
@@ -199,7 +224,7 @@ function malinky_media_scripts()
 	 */
 	wp_register_script( 'malinky-media-retina-js',
 						get_template_directory_uri() . '/js/retina.js',
-						'',
+						false,
 						NULL,
 						true
 	);
@@ -213,7 +238,7 @@ function malinky_media_scripts()
 
 		wp_register_script( 'malinky-media-validate-js',
 							get_template_directory_uri() . '/js/jquery.validate.min.js',
-							'',
+							false,
 							NULL,
 							true
 		);
@@ -406,27 +431,79 @@ add_action( 'login_enqueue_scripts', 'malinky_media_login_screen' );
 
 
 /* ------------------------------------------------------------------------ *
- * Wordpress Setup
+ * Wordpress Setup Actions and Filters
  * ------------------------------------------------------------------------ */
 
+remove_action('wp_head', 'wp_generator');
+remove_action('wp_head', 'wlwmanifest_link'); // Display the link to the Windows Live Writer manifest file.
+remove_action('wp_head', 'feed_links', 2); // Display the links to the general feeds: Post and Comment Feed
+remove_action('wp_head', 'feed_links_extra', 3); // Display the links to the extra feeds such as category feeds
+remove_action('wp_head', 'rsd_link'); // Display the link to the Really Simple Discovery service endpoint, EditURI link. xmlrpc.php
+remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
+
+
 /**
- * Remove generator tag.
- *
- * @return string   
+ * Add page slug to body class. Credit: Starkers Wordpress Theme.
  */
-function malinky_media_remove_version()
+function malinky_media_add_slug_to_body_class($classes)
 {
-	return '';
+
+    global $post;
+
+    if ( is_home() ) {
+
+        $key = array_search( 'blog', $classes );
+
+        if ( $key > -1 ) {
+
+            unset( $classes[$key] );
+
+        }
+
+    } elseif ( is_page() ) {
+
+        $classes[] = sanitize_html_class( $post->post_name );
+
+    } elseif ( is_singular() ) {
+
+        $classes[] = sanitize_html_class( $post->post_name );
+    }
+
+    return $classes;
+
 }
 
-add_filter( 'the_generator', 'malinky_media_remove_version' );
+add_filter( 'body_class', 'malinky_media_add_slug_to_body_class' ); // Add slug to body class (Starkers build)
 
 
 /**
+ * Remove wp_head() injected recent comment styles.
+ */
+function malinky_media_remove_recent_comments_style()
+{
+
+    global $wp_widget_factory;
+
+    remove_action( 'wp_head',
+    				array(
+        				$wp_widget_factory->widgets['WP_Widget_Recent_Comments'],
+        				'recent_comments_style'
+        			)
+    );
+
+}
+
+add_action('widgets_init', 'malinky_media_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
+
+
+/**
+ * CHECK
  * Set the content width based on the theme's design and stylesheet.
  */
 if ( ! isset( $content_width ) ) {
+
 	$content_width = 640; /* pixels */
+
 }
 
 

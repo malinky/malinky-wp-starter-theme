@@ -5,6 +5,8 @@
 <head>
 
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
+
+	<!-- Use latest ie engine --> 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 	<!-- Mobile viewport -->    
@@ -19,10 +21,6 @@
 	<!-- Meta -->
 	<meta name="description" content="">
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
-
-	<!-- Link -->
-	<link rel="profile" href="http://gmpg.org/xfn/11">
-	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
 	<!--https://github.com/scottjehl/Respond-->
 	<!--[if lt IE 9]>
