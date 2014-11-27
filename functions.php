@@ -45,12 +45,6 @@ if ( ! function_exists( 'malinky_media_setup' ) ) :
 
 
 		/*
-		 * Add default posts and comments RSS feed links to head.
-		 */
-		add_theme_support( 'automatic-feed-links' );
-
-
-		/*
 		 * Enable support for Post Thumbnails.
 		 *
 		 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
@@ -187,8 +181,23 @@ function malinky_media_scripts()
 
 	/*
 	 * Dashicons font.
+	 *
+	 * @link https://developer.wordpress.org/resource/dashicons
 	 */
 	wp_enqueue_style( 'dashicons' );
+
+
+	/*
+	 * Font awesome font.
+	 *
+	 * @link http://fortawesome.github.io/Font-Awesome/
+	 */		
+	wp_register_style( 'malinky-media-font-awesome',
+					   '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css',
+						false,
+						NULL
+	);
+	wp_enqueue_style( 'malinky-media-font-awesome' );
 
 
 	/*

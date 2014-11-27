@@ -57,12 +57,14 @@
 
 	<div id="mobile_navigation_id" class="col col--gutterless mobile_navigation_bar">
 		<div class="col_item col_item_4_10">
-			<a href="" class="mobile_navigation_navicon"></a>
+			<a href="" class="mobile_navigation_image_font mobile_navigation_navicon"></a>
 		</div><!--
 		--><div class="col_item col_item_6_10 mobile_navigation_icons">
-    		<a href="" target="_blank" class="mobile_navigation_icon"><img src="<?php echo esc_url( site_url( 'img/graphics/mobile_facebook.png' ) ); ?>" data-at2x="<?php echo esc_url( site_url( 'img/graphics/mobile_facebook@2x.png' ) ); ?>" alt="" /></a>
-    		<a href="" target="_blank" class="mobile_navigation_icon"><img src="<?php echo esc_url( site_url( 'img/graphics/mobile_twitter.png' ) ); ?>" data-at2x="<?php echo esc_url( site_url( 'img/graphics/mobile_twitter@2x.png' ) ); ?>" alt="" /></a>
-    		<a href="" target="_blank" class="mobile_navigation_icon"><img src="<?php echo esc_url( site_url( 'img/graphics/mobile_googleplus.png' ) ); ?>" data-at2x="<?php echo esc_url( site_url( 'img/graphics/mobile_googleplus@2x.png' ) ); ?>" alt="" /></a>
+    		<a href="" target="_blank" class="mobile_navigation_graphic"><img src="<?php echo esc_url( site_url( 'img/graphics/mobile_facebook.png' ) ); ?>" data-at2x="<?php echo esc_url( site_url( 'img/graphics/mobile_facebook@2x.png' ) ); ?>" alt="" /></a>
+    		<a href="" target="_blank" class="mobile_navigation_graphic"><img src="<?php echo esc_url( site_url( 'img/graphics/mobile_twitter.png' ) ); ?>" data-at2x="<?php echo esc_url( site_url( 'img/graphics/mobile_facebook@2x.png' ) ); ?>" alt="" /></a>
+    		<a href="" target="_blank" class="mobile_navigation_graphic"><img src="<?php echo esc_url( site_url( 'img/graphics/mobile_googleplus.png' ) ); ?>" data-at2x="<?php echo esc_url( site_url( 'img/graphics/mobile_facebook@2x.png' ) ); ?>" alt="" /></a>    		    		
+    		<a href="" target="_blank" class="mobile_navigation_image_font mobile_navigation_email "></a>
+    		<a href="" target="_blank" class="mobile_navigation_image_font mobile_navigation_phone "></a>
   		</div>
 		<div class="col_item col_item_full">
 			<nav class="mobile_navigation" role="navigation">

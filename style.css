@@ -1373,11 +1373,18 @@ input[type="radio"] {
 }
 
 /*
- * Use as class on second onwards checkbox or radio.
+ * Use as class alongside .checkbox_block
  */
-.checkbox_inline {
+.checkbox_inline input {
     display: inline-block;
     margin-left: 10px;
+}
+
+/*
+ * Used to ensure inline check box label is inline too, especially if text spans more than one line.
+ */
+.checkbox_inline label {
+    display: inline;
 }
 
 /*
@@ -1616,19 +1623,15 @@ input[type="submit"].search-submit {
 **********************************************************************
 */
 
-a {
+a,
+a:visited {
     color: blue;
     text-decoration: none;
-}
-
-a:visited {
-    color: purple;
 }
 
 a:hover,
 a:focus,
 a:active {
-    color: green;
     text-decoration: underline;
 }
 
@@ -1811,6 +1814,7 @@ a:active {
 
 /*
  * The menu bar that is clicked to display the .mobile_navigation.
+ * 1. Set to 41px keeps the main section at 40px especially when used with a bottom border.
  */
 .mobile_navigation_bar {
     display: none;
@@ -1818,37 +1822,10 @@ a:active {
     width: 100%; 
     z-index: 9999;
     background: #bf7b67;
-    height: 40px;
+    height: 41px; /* 1 */
     top: 0px;
     border-bottom: 1px solid #fff;
 }
-
-/*
- * 3 bars.
- */
-.mobile_navigation_navicon {
-    display: inline-block;
-    height: 40px;
-    line-height: 40px;
-}
-
-/*
- * 3 bars.
- */
-.mobile_navigation_navicon:before {
-    content: "\f333";
-    font-family: 'dashicons';
-    font-size: 2.142857em; /* 30/14 */
-    vertical-align: middle;
-}
-
-/*
- * Overide <a> styles for 3 bars.
- */
-a.mobile_navigation_navicon {
-    color: #fff;
-    text-decoration: none;
-} 
 
 /*
  * Little social icons if used in the .mobile_navigation.
@@ -1858,16 +1835,59 @@ a.mobile_navigation_navicon {
 }
 
 /*
- * 1. This will nudge in from the right of the screen. Ensure navicon is set the same from the left. CHECK.
- */ 
-.mobile_navigation_icon {
-    display: inline-block;
-    line-height: 40px;
-    margin-right: 10px; /* 1 */
+ * 3 bars.
+ */
+.mobile_navigation_navicon:before {
+    content: "\f333";
+    font-family: 'dashicons';
+}
+
+.mobile_navigation_email:before {
+    content: "\f465";
+    font-family: 'dashicons';
+}
+
+.mobile_navigation_phone:before {
+    content: "\f095";
+    font-family: 'FontAwesome';
 }
 
 /*
- * The mobile menu that slides in.
+ * Overide <a> styles for image fonts, dashicons font awesome and position so sits in middle of navigation.
+ 1. Set to same height of .mobile_navigation_bar. Also give full height clickable.
+ */
+a.mobile_navigation_image_font {
+    font-size: 2.142857em; /* 30/14 */
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+    height: 40px; /* 1 */
+    margin-right: 8px;
+} 
+
+/*
+ * 3 bars.
+ * Overide above rule for the navicon. This sits central on it's own and when next to a logo.
+ */
+a.mobile_navigation_navicon {
+    vertical-align: baseline;
+}
+
+/*
+ * Set the position for graphics. Ensure graphic is 22px square of 44px @2x.
+ 1. Set to same height of .mobile_navigation_bar. Also give full height clickable.
+ */
+a.mobile_navigation_graphic {
+    position: relative;
+    top: -2px;
+    display: inline-block;
+    line-height: 40px; /* 1 */
+    margin-right: 8px;    
+}
+
+/*
+ * The mobile menu that slides in or down.
  * 1. Set to the same height as .mobile_navigation_bar.
  */
 .mobile_navigation {    
@@ -1876,7 +1896,7 @@ a.mobile_navigation_navicon {
     left: -100%;
     overflow-y: auto;
     width: 100%;
-    top: 40px; /* 1 */ 
+    top: 41px; /* 1 */ 
     background: #bf7b67;
     padding: 0;
     margin: 0;
@@ -1930,12 +1950,18 @@ a.mobile_navigation_navicon {
  * Mobile navigation link style.
  */
 .mobile_navigation ul li a:link,
-.mobile_navigation ul li a:visited
-{
+.mobile_navigation ul li a:visited {
     display: block;
     padding: 7px 0 7px 7px;
     color: #fff;
     text-decoration: none;
+}
+
+/*
+ * All Levels.
+ * Mobile navigation hover style.
+ */
+.mobile_navigation ul li a:hover {
 }
 
 @media screen and (max-width: 767px) {
