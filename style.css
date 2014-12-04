@@ -1,27 +1,27 @@
 /*
-Theme Name: Malinky Media
-Theme URI: http://underscores.me/
+Theme Name: Malinky Starter Theme
+Theme URI: https://github.com/malinky/malinky-starter-theme
 Author: Craig Ramsay
-Author URI: http://www.malinkymedia.com
-Description: Description
-Version: 1.0-wpcom
+Author URI: https://github.com/malinky
+Description: Malinky Starter Theme
+Version: 1.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: malinky-media
-Tags:
+
+This theme has been based around a number of others outlined below:;
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 
-Malinky Media is based on Underscores http://underscores.me/, (C) 2012-2014 Automattic, Inc.
+Malinky Starter Theme is based on Underscores http://underscores.me/, (C) 2012-2014 Automattic, Inc.
 
-Resetting and rebuilding styles have been helped along thanks to the fine work of
+Resetting and rebuilding styles have been helped along thanks to the fine work of:
 Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
-along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
-and Blueprint http://www.blueprintcss.org/
-
-Also included some work from HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/
-This is referenced with H5BP.
+Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
+Blueprint http://www.blueprintcss.org/
+Harry Roberts http://csswizardry.com/ and his great CSS guidelines http://cssguidelin.es/
+Also included some extracts from HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/
 */
 
 /*
@@ -44,6 +44,7 @@ This is referenced with H5BP.
   MOBILE NAVIGATION
   WARNINGS
 	ALIGN
+  GOOGLE MAPS
 	CLEARING
 	SCREEN READERS
 	IE
@@ -813,6 +814,21 @@ textarea {
     width: 100%;
 }
 
+/*
+ * Add margin bottom.
+ */
+.large-col_item--margin_bottom_20 {
+    margin-bottom: 20px;
+}
+
+/*
+ * Add margin bottom.
+ */
+.large-col_item--margin_bottom_40 {
+    margin-bottom: 40px;
+}
+
+
 }
 
 @media only screen and (min-width: 481px) and (max-width: 767px) {
@@ -878,6 +894,20 @@ textarea {
  */
 .medium-full_width {
     width: 100%;
+}
+
+/*
+ * Add margin bottom.
+ */
+.medium-col_item--margin_bottom_20 {
+    margin-bottom: 20px;
+}
+
+/*
+ * Add margin bottom.
+ */
+.medium-col_item--margin_bottom_40 {
+    margin-bottom: 40px;
 }
 
 }
@@ -947,6 +977,20 @@ textarea {
     width: 100%;
 }
 
+/*
+ * Add margin bottom.
+ */
+.small-col_item--margin_bottom_20 {
+    margin-bottom: 20px;
+}
+
+/*
+ * Add margin bottom.
+ */
+.small-col_item--margin_bottom_40 {
+    margin-bottom: 40px;
+}
+
 }
 
 
@@ -959,75 +1003,52 @@ textarea {
 **********************************************************************
 */
 
-#wrap {
-  max-width: 990px;
-  margin: 0 auto;
-  padding: 0 5px;    
-  text-align: left;
+/*
+ * Used for full width navigation
+ */
+.nav_wrap_full {
+    width: 100%;
+    margin: 0 auto;
 }
 
-#wrap_mobile {
-  width: 100%;    
-  text-align: left; /*ie6 check*/
-  margin: 0 auto;
-  display: none;
+/*
+ * Used for innner of full width navigation
+ */
+.nav_wrap {
+    max-width: 990px;
+    margin: 0 auto;
+    padding: 0 5px;
 }
 
-#wrap {
-  max-width: 990px;
-  margin: 166px auto 0 auto; /*40 gap between fixed nav and this*/
-  padding: 0 5px;    
-  text-align: left;
+
+/*
+ * Used for a full width block
+ */
+.wrap_full {
+    width: 100%;
+    margin: 0 auto;
 }
 
-#wrap_coach {
-  max-width: 990px;
-  margin: 100px auto 0 auto; /*40 gap between fixed nav and this*/
-  padding: 0 5px;    
-  text-align: left;
+/*
+ * Used for innner of full width block.
+ * 1. Create large padding top and bottom of block.
+ */
+.wrap {
+    max-width: 990px;
+    margin: 0 auto;
+    padding: 40px 5px; /* 1 */
 }
 
-#wrap_home {
-  max-width: 990px;
-  margin: 0 auto;
-  padding: 0 5px;    
-  text-align: left;
-}
 
-#wrap_mobile {
-  width: 100%;    
-  text-align: left; /*ie6 check*/
-  margin: 0 auto;
-  display: none;
-}
+/*
+ * Nudge whole wrap to site below fixed navigation.
+ */
+@media screen and (max-width: 767px) {
 
-#nav_full,
-#nav_full_coach {
-  width: 100%;
-  text-align: left; /*ie6 check*/
-  background: url(http://dev.plaay.co.uk/img/graphics/nav_bkg.png) repeat;
-  height: 70px;
-  position: fixed;
-  top: 0;
-  z-index: 10000;
-}
+    .wrap_mobile {
+        margin-top: 40px;
+    }
 
-#nav_postcode_full {
-  margin-top: 70px;
-  border-top: 1px solid #FFFFFF;
-  width: 100%;
-  text-align: left; /*ie6 check*/
-  background: #282828;
-  height: 56px;
-  position: fixed;
-  top: 0;
-  z-index: 10000;
-}
-
-#wrap_full_inner {
-  max-width: 990px;
-  margin: 0 auto;       
-  padding: 0 5px;
 }
 
 
@@ -1635,6 +1656,16 @@ a:active {
     text-decoration: underline;
 }
 
+a.back_top {
+    position: fixed;
+    right: 30px;
+    bottom: 70px;
+    font-size: 3em; /* 42/14 */
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 9998;
+} 
+
 
 
 
@@ -1645,11 +1676,66 @@ a:active {
 **********************************************************************
 */
 
+/*
+ * Holder for main navigation.
+ */
+.main_navigation_bar {
+}
+
+/*
+ * Used for fixed main_navigation (not mobile).
+ * 1. Hide off screen set to same as height in .main_navigation_bar_fixed.
+ */
+.nav_wrap_full_fixed {
+    position: fixed;
+    top: -41px; /* 1 */
+    z-index: 100000;
+    width: 100%;
+    margin: 0 auto;
+    border-bottom: 1px solid #fff;
+}
+
+.nav_wrap_full_fixed_show {
+    top: 0;
+    -webkit-transition: top 0.5s;
+    transition: top 0.5s;
+}
+
+/*
+ * Holder for main navigation fixed (not on mobile).
+ * 1. Set to same top as .nav_wrap_full_fixed.
+ */
+.main_navigation_bar_fixed {
+    background: red;
+    height: 41px; /* 1 */
+}
+
+/*
+ * 1. Set to height of navigation.
+ * 2. Set line-height of navigation for vertical centre.
+*/
 .main_navigation {
     position: relative;
-    margin: 21px 0;
+    height: 70px;
+    line-height: 70px;
     border-bottom: 2px solid #e7decc;
 }
+
+/*
+ * Applied to <nav> .main_navigation for a fixed main_navigation (not on mobile).
+ * Overwrite any unwanted styles from .main_navigation as this is added as additional class.
+ */
+.main_navigation_fixed {
+    line-height: 40px;
+    border: none;
+}
+
+/*
+ * Add color or image to full width background.
+ */
+.main_navigation_bkg {
+}
+
 
 /*
  * All Levels.
@@ -1700,6 +1786,7 @@ a:active {
  * Second and Third Level.
  * This makes the dropdown boxed in.
  * 1. Ensure menu starts at bottom border.
+ * 2. Reset back as set in .main_navigation to vertically align nav.
  */
 .main_navigation ul ul {
     display: none;
@@ -1707,8 +1794,9 @@ a:active {
     z-index: 999;
     background: #FFFFFF;
     border: 2px solid #e7decc;
-    margin: 7px 0 0 0; /* 1 */
-    padding: 15px 0 0 15px;    
+    margin: -2px 0 0 0; /* 1 */
+    padding: 15px 0 0 15px;
+    line-height: initial; /* 2 */   
 }
 
 /*
@@ -1767,52 +1855,7 @@ a:active {
 */
 
 /*
- * All Levels.
- * Mobile navigation hover style.
- */
-.mobile_navigation ul li a:hover {
-    color: #fff;
-    background: #f69c2e;
-}
-
-/*
- * Mobile Second and Third Level.
- */ 
-.mobile_navigation > ul ul > li {
-    display: block;
-    margin: 0;
-    padding: 0;
-    background: #bf7b67;
-    border-top: 1px solid #fff;
-}
-
-/*
- * Mobile Second Level.
- * Mobile navigation link style.
- */ 
-.mobile_navigation ul ul li a:link,
-.mobile_navigation ul ul li a:visited
-{
-    display: block;
-    padding: 7px 0 7px 21px;
-    color: #fff;
-    text-decoration: none;
-}
-
-/*
- * Mobile Third Level.
- * Mobile navigation link style.
- */
-.mobile_navigation ul ul ul li a:link,
-.mobile_navigation ul ul ul li a:visited
-{
-    display: block;
-    padding: 7px 0 7px 35px;
-    color: #fff;
-    text-decoration: none;
-}
-
-/*
+ * Holder for mobile navigation.
  * The menu bar that is clicked to display the .mobile_navigation.
  * 1. Set to 41px keeps the main section at 40px especially when used with a bottom border.
  */
@@ -1825,65 +1868,6 @@ a:active {
     height: 41px; /* 1 */
     top: 0px;
     border-bottom: 1px solid #fff;
-}
-
-/*
- * Little social icons if used in the .mobile_navigation.
- */
-.mobile_navigation_icons {
-    text-align: right;
-}
-
-/*
- * 3 bars.
- */
-.mobile_navigation_navicon:before {
-    content: "\f333";
-    font-family: 'dashicons';
-}
-
-.mobile_navigation_email:before {
-    content: "\f465";
-    font-family: 'dashicons';
-}
-
-.mobile_navigation_phone:before {
-    content: "\f095";
-    font-family: 'FontAwesome';
-}
-
-/*
- * Overide <a> styles for image fonts, dashicons font awesome and position so sits in middle of navigation.
- 1. Set to same height of .mobile_navigation_bar. Also give full height clickable.
- */
-a.mobile_navigation_image_font {
-    font-size: 2.142857em; /* 30/14 */
-    color: #fff;
-    text-decoration: none;
-    display: inline-block;
-    vertical-align: middle;
-    height: 40px; /* 1 */
-    margin-right: 8px;
-} 
-
-/*
- * 3 bars.
- * Overide above rule for the navicon. This sits central on it's own and when next to a logo.
- */
-a.mobile_navigation_navicon {
-    vertical-align: baseline;
-}
-
-/*
- * Set the position for graphics. Ensure graphic is 22px square of 44px @2x.
- 1. Set to same height of .mobile_navigation_bar. Also give full height clickable.
- */
-a.mobile_navigation_graphic {
-    position: relative;
-    top: -2px;
-    display: inline-block;
-    line-height: 40px; /* 1 */
-    margin-right: 8px;    
 }
 
 /*
@@ -1962,45 +1946,124 @@ a.mobile_navigation_graphic {
  * Mobile navigation hover style.
  */
 .mobile_navigation ul li a:hover {
+    color: #fff;
+    background: #f69c2e;
+}
+
+/*
+ * Mobile Second and Third Level.
+ */ 
+.mobile_navigation > ul ul > li {
+    display: block;
+    margin: 0;
+    padding: 0;
+    background: #bf7b67;
+    border-top: 1px solid #fff;
+}
+
+/*
+ * Mobile Second Level.
+ * Mobile navigation link style.
+ */ 
+.mobile_navigation ul ul li a:link,
+.mobile_navigation ul ul li a:visited
+{
+    display: block;
+    padding: 7px 0 7px 21px;
+    color: #fff;
+    text-decoration: none;
+}
+
+/*
+ * Mobile Third Level.
+ * Mobile navigation link style.
+ */
+.mobile_navigation ul ul ul li a:link,
+.mobile_navigation ul ul ul li a:visited
+{
+    display: block;
+    padding: 7px 0 7px 35px;
+    color: #fff;
+    text-decoration: none;
+}
+
+/*
+ * Little social icons if used in the .mobile_navigation.
+ */
+.mobile_navigation_icons {
+    text-align: right;
+}
+
+/*
+ * 3 bars.
+ */
+.mobile_navigation_navicon:before {
+    content: "\f333";
+    font-family: 'dashicons';
+}
+
+.mobile_navigation_email:before {
+    content: "\f465";
+    font-family: 'dashicons';
+}
+
+.mobile_navigation_phone:before {
+    content: "\f095";
+    font-family: 'FontAwesome';
+}
+
+/*
+ * Overide <a> styles for image fonts, dashicons font awesome and position so sits in middle of navigation.
+ 1. Set to same height of .mobile_navigation_bar. Also give full height clickable.
+ */
+a.mobile_navigation_image_font {
+    font-size: 2.142857em; /* 30/14 */
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+    height: 40px; /* 1 */
+    margin-right: 8px;
+} 
+
+/*
+ * 3 bars.
+ * Overide above rule for the navicon. This sits central on it's own and when next to a logo.
+ */
+a.mobile_navigation_navicon {
+    vertical-align: baseline;
+}
+
+/*
+ * Set the position for graphics. Ensure graphic is 22px square of 44px @2x.
+ 1. Set to same height of .mobile_navigation_bar. Also give full height clickable.
+ */
+a.mobile_navigation_graphic {
+    position: relative;
+    top: -2px;
+    display: inline-block;
+    line-height: 40px; /* 1 */
+    margin-right: 8px;    
 }
 
 @media screen and (max-width: 767px) {
 
-    .mobile_navigation_bar {
+    .mobile_navigation_bar,
+    .main_navigation_bar_fixed {
         display: block;
     }
 
-    .main_navigation_bar {
+    .main_navigation_bar,
+    .main_navigation_bar_fixed {
         display: none;
     }
 
 }
 
-.main_navigation .current_page_item > a,
-.main_navigation .current-menu-item > a,
-.main_navigation .current_page_ancestor > a {
-}
-
-.site-main .comment-navigation,
-.site-main .paging-navigation,
-.site-main .post-navigation {
-    margin: 0 0 1.5em;
-    overflow: hidden;
-}
-
-.comment-navigation .nav-previous,
-.paging-navigation .nav-previous,
-.post-navigation .nav-previous {
-    float: left;
-    width: 50%;
-}
-
-.comment-navigation .nav-next,
-.paging-navigation .nav-next,
-.post-navigation .nav-next {
-    float: right;
-    text-align: right;
-    width: 50%;
+.current_page_item > a,
+.current-menu-item > a,
+.current_page_ancestor > a {
+    text-decoration: underline;
 }
 
 
@@ -2091,6 +2154,29 @@ img,
 video {
     vertical-align: middle;
 }
+
+
+
+
+
+/*
+**********************************************************************
+  GOOGLE MAPS
+**********************************************************************
+*/
+
+/*
+ * Google maps.
+ */
+#map_canvas {
+    max-width: 100%;
+    height: 500px;
+}
+
+/*
+ * Sort out zoom controls.
+ */
+.gm-style img { max-width: none; }
 
 
 

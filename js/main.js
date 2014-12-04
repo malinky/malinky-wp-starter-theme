@@ -1,28 +1,39 @@
+/* ------------------------------------------------------------------------ *
+ * JavaScript
+ * ------------------------------------------------------------------------ */
+
+/**
+ * Mobile navigation.
+ * Ensure mobile nav is always hidden when back / forward cache is used. 
+ */
+function pageShown(evt)
+{
+    if (evt.persisted) {
+
+        $('.mobile_navigation').hide();
+
+    }
+}
+
+if(window.addEventListener) {
+
+  window.addEventListener("pageshow", pageShown, false);
+
+} else {
+
+  window.attachEvent("pageshow", pageShown, false);
+
+}
+
+
+
+
+
+/* ------------------------------------------------------------------------ *
+ * jQuery
+ * ------------------------------------------------------------------------ */
+
 jQuery(document).ready(function($){
-
-    /*
-     * Mobile navigation.
-     * Ensure mobile nav is always hidden when back / forward cache is used. 
-     */
-    function pageShown(evt)
-    {
-        if (evt.persisted) {
-
-            $('.mobile_navigation').hide();
-
-        }
-    }
-
-    if(window.addEventListener) {
-
-      window.addEventListener("pageshow", pageShown, false);
-
-    } else {
-
-      window.attachEvent("pageshow", pageShown, false);
-
-    }
-
 
     /*
      * Toggle mobile navigation.
@@ -50,14 +61,26 @@ jQuery(document).ready(function($){
 
 
     /*
+     * Show fixed main navigation on scroll.
+     */    
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 80) {
+            $('.nav_wrap_full_fixed').addClass('nav_wrap_full_fixed_show');
+        } else {
+            $('.nav_wrap_full_fixed').removeClass('nav_wrap_full_fixed_show');
+        }
+    });
+
+
+    /*
      * Scroll to top.
      */    
-    $("#back_top").hide();
+    $(".back_top").hide();
     $(window).scroll(function () {
-        if ($(this).scrollTop() > 100) {
-            $('#back_top').fadeIn();
+        if ($(this).scrollTop() > 300) {
+            $('.back_top').fadeIn();
         } else {
-            $('#back_top').fadeOut();
+            $('.back_top').fadeOut();
         }
     });
 
@@ -83,5 +106,11 @@ jQuery(document).ready(function($){
         }, 600);
         return false;
     });
+
+    if (!Modernizr.svg) {
+
+        $(".logo img").attr("src", "images/logo.png");
+        
+    }
 
 });

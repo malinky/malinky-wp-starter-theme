@@ -241,6 +241,36 @@ function malinky_media_scripts()
 
 
 	/*
+	 * Google Map Set Up.
+	 *
+	 * @link https://developers.google.com/maps/documentation/javascript/
+	 */
+	wp_register_script( 'malinky-media-googlemap-js',
+						get_template_directory_uri() . '/js/googlemap.js',
+						false,
+						NULL,
+						true
+	);
+	wp_enqueue_script( 'malinky-media-googlemap-js' );
+
+
+	/*
+	 * Load Google maps API.
+	 * Uses malinky_initialize function which is in googlemap.js.
+	 * Remember to set API Key.
+	 *
+	 * @link https://developers.google.com/maps/documentation/javascript/tutorial
+	 */		
+	wp_register_script( 'malinky-media-googlemap-api-js',
+					   'https://maps.googleapis.com/maps/api/js?key=AIzaSyDSAift8RvCD1f4HioiWU8sOyD1qCsdduM&callback=malinky_initialize',
+						false,
+						NULL,
+						true
+	);
+	wp_enqueue_script( 'malinky-media-googlemap-api-js' );
+
+
+	/*
 	 * Load contact validation scripts.
 	 */
 	if ( is_page( 'contact' ) ) {

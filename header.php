@@ -41,43 +41,71 @@
 
 	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'malinky-media' ); ?></a>
 
-	<div id="main_navigation_id" class="col main_navigation_bar">
-		<div class="col_item col_item_full">
-			<nav class="main_navigation" role="navigation">
-				<?php
-		        $args = array(
-		            'theme_location'    => 'main_navigation',
-		            'container'   		=> 'false'
-		        );
-		        ?>
-				<?php wp_nav_menu( $args ); ?>
-			</nav><!-- .main_navigation -->
-		</div>
-	</div><!-- .col -->
+	<div class="nav_wrap_full main_navigation_bar main_navigation_bkg">
+		<div class="nav_wrap">
 
-	<div id="mobile_navigation_id" class="col col--gutterless mobile_navigation_bar">
-		<div class="col_item col_item_4_10">
-			<a href="" class="mobile_navigation_image_font mobile_navigation_navicon"></a>
-		</div><!--
-		--><div class="col_item col_item_6_10 mobile_navigation_icons">
-    		<a href="" target="_blank" class="mobile_navigation_graphic"><img src="<?php echo esc_url( site_url( 'img/graphics/mobile_facebook.png' ) ); ?>" data-at2x="<?php echo esc_url( site_url( 'img/graphics/mobile_facebook@2x.png' ) ); ?>" alt="" /></a>
-    		<a href="" target="_blank" class="mobile_navigation_graphic"><img src="<?php echo esc_url( site_url( 'img/graphics/mobile_twitter.png' ) ); ?>" data-at2x="<?php echo esc_url( site_url( 'img/graphics/mobile_facebook@2x.png' ) ); ?>" alt="" /></a>
-    		<a href="" target="_blank" class="mobile_navigation_graphic"><img src="<?php echo esc_url( site_url( 'img/graphics/mobile_googleplus.png' ) ); ?>" data-at2x="<?php echo esc_url( site_url( 'img/graphics/mobile_facebook@2x.png' ) ); ?>" alt="" /></a>    		    		
-    		<a href="" target="_blank" class="mobile_navigation_image_font mobile_navigation_email "></a>
-    		<a href="" target="_blank" class="mobile_navigation_image_font mobile_navigation_phone "></a>
-  		</div>
-		<div class="col_item col_item_full">
-			<nav class="mobile_navigation" role="navigation">
-				<?php
-		        $args = array(
-		            'theme_location'    => 'main_navigation',
-		            'container'   		=> 'false',
-		        );
-		        ?>
-				<?php wp_nav_menu( $args ); ?>
-			</nav><!-- .main_navigation -->
-		</div>
-	</div><!-- .col -->
+		<div id="main_navigation_id" class="col ">
+			<div class="col_item col_item_full">
+				<nav class="main_navigation" role="navigation">
+					<?php
+			        $args = array(
+			            'theme_location'    => 'main_navigation',
+			            'container'   		=> 'false'
+			        );
+			        ?>
+					<?php wp_nav_menu( $args ); ?>
+				</nav><!-- .main_navigation -->
+			</div>
+		</div><!-- .col -->
+
+		</div><!-- .nav_wrap -->
+	</div><!-- .nav_wrap_full -->
+
+	<div class="nav_wrap_full_fixed main_navigation_bar_fixed">
+		<div class="nav_wrap">
+
+			<div id="main_navigation_fixed_id" class="col">
+				<div class="col_item col_item_full">
+					<nav class="main_navigation main_navigation_fixed" role="navigation">
+						<?php
+				        $args = array(
+				            'theme_location'    => 'main_navigation',
+				            'container'   		=> 'false'
+				        );
+				        ?>
+						<?php wp_nav_menu( $args ); ?>
+					</nav><!-- .main_navigation -->
+				</div>
+			</div><!-- .col -->	
+
+		</div><!-- .nav_wrap -->
+	</div><!-- .nav_wrap_full -->
+
+	<div class="nav_wrap_full mobile_navigation_bar">
+
+		<div id="mobile_navigation_id" class="col col--gutterless">
+			<div class="col_item col_item_4_10">
+				<a href="" class="mobile_navigation_image_font mobile_navigation_navicon"></a>
+			</div><!--
+			--><div class="col_item col_item_6_10 mobile_navigation_icons">
+	    		<a href="" target="_blank" class="mobile_navigation_graphic"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/graphics/mobile_facebook.png" data-at2x="<?php echo get_stylesheet_directory_uri(); ?>/img/graphics/mobile_facebook@2x.png" alt="" /></a>   		    		
+	    		<a href="" target="_blank" class="mobile_navigation_image_font mobile_navigation_email "></a>
+	    		<a href="" target="_blank" class="mobile_navigation_image_font mobile_navigation_phone "></a>
+	  		</div>
+			<div class="col_item col_item_full">
+				<nav class="mobile_navigation" role="navigation">
+					<?php
+			        $args = array(
+			            'theme_location'    => 'main_navigation',
+			            'container'   		=> 'false',
+			        );
+			        ?>
+					<?php wp_nav_menu( $args ); ?>
+				</nav><!-- .main_navigation -->
+			</div>
+		</div><!-- .col -->
+
+	</div><!-- .nav_wrap_full -->
 
 </header><!-- .main_header -->
 
