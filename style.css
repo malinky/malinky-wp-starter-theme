@@ -8,7 +8,7 @@ Description: Malinky WP Starter Theme.
 Version: 1.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: malinky-media
+Text Domain: malinky
 
 This theme has been based around a number of others which are outlined below:
 
@@ -39,12 +39,13 @@ HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/
 	LINKS
 	MAIN NAVIGATION
   MOBILE NAVIGATION
+  OTHER NAVIGATION
   WARNINGS
 	ALIGN
   GOOGLE MAPS
-	CLEARING
 	SCREEN READERS
 	IE
+  POSTS AND PAGES
 	MEDIA QUERIES
 	SORT
 */
@@ -562,7 +563,7 @@ textarea {
 */
 
 /* 
- * Remove first gutter. negates padding-left on .col_item.
+ * Remove first gutter. negates padding-left on .col-item.
  */
 .col {
     margin:0;   
@@ -570,9 +571,26 @@ textarea {
     margin-left: -24px;
 }
 
+/* 
+ * Add top and bottom padding to main .col creating space on page generally between <section>.
+ * .col--Modifier.
+ */
+.col--padding-20 {
+    padding: 40px; 0
+}
+
+/* 
+ * Add top and bottom padding to main .col creating space on page generally between <section>.
+ * .col--Modifier.
+ */
+.col--padding-40 {
+    padding: 40px 0;
+}
+
 /*
- * This modifier is used when a col will have vertical alignment from a col_item within it.
- * Use this on the main col that sets the overall height of the div.
+ * When a .col will have vertical alignment from a col-item within it.
+ * Use this on the main .col that sets the overall height of the div.
+ * .col--Modifier.
  */
 .col--relative {
     position: relative;
@@ -580,8 +598,9 @@ textarea {
 
 /*
  * Used on the inner div that will be aligned vertically.
+ * CHECK STANDALONE DIV.
  */
-.col_relative_inner {
+.col-relative-inner {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -589,72 +608,91 @@ textarea {
 
 /*
  * Span for vertical alignment needs to be empty and before element to align.
+ * CHECK STANDALONE DIV.
  */
-.vertical_align_outer {
+.vertical-align-outer {
     height: 100%;
     vertical-align: middle;
     display: inline-block;
 }
 
 /*
- * Modifier for col without any gutters or when a background colour is applied or when a background image is added to whole col.
+ * No gutters or when a background colour is applied or when a background image is added to a whole .col.
+ * .col--Modifier.
  */
 .col--gutterless,
-.col--bkg_color,
-.col--bkg_img {
+.col--bkg-color,
+.col--bkg-img {
     margin-left: 0;
 }
 
 /*
- * Removes gutters from all col_item when col is set with modifier col--gutterless.
+ * Removes gutters from all .col-item when .col is set with modifier .col--gutterless.
+ * .col--Modifier.
  */
-.col--gutterless > .col_item {
+.col--gutterless > .col-item {
     padding-left: 0;
 }
 
 /*
- * Can be used inside as a nested col modifier or inside a col_item as a standalone div to add background colour and padding.
- * Can also use with cycle in shopify to overwrite background set below.
+ * Can be used inside as a nested .col modifier or inside a .col-item as a standalone div to add background colour and padding.
+ * .col--Modifier.
+ * CHECK STANDALONE DIV. .col-bkg-color.
  */
-.col--bkg_color,
-.col_bkg_color {
+.col--bkg-color,
+.col-bkg-color {
     background: #f1f1f1;
     padding: 10px 6px;
 }
 
 /*
- * Ensures additional padding isn't added on first-child col_item for both the col modifier and standalone version.
+ * Ensures additional padding isn't added on first-child .col-item for both the .col modifier and standalone div version.
+ * .col--Modifier.
+  * CHECK STANDALONE DIV. .col-bkg-color > .col-item:first-child.
  */
-.col--bkg_color > .col_item:first-child,
-.col_bkg_color > .col_item:first-child,
-.col--bkg_img > .col_item:first-child {
+.col--bkg-color > .col-item:first-child,
+.col--bkg-img > .col-item:first-child,
+.col-bkg-color > .col-item:first-child {
     padding-left: 0;
 }
 
 /*
- * Modifier to centre an entire col.
+ * Centre an .col.
+ * .col--Modifier.
  */
-.col--align_center {
+.col--align-center {
     text-align: center;
 }
 
 /*
- * Modifier to right align an entire col.
+ * Right align .col.
+ * .col--Modifier. 
  */
-.col--align_right {
+.col--align-right {
     text-align: right;
 }
 
 /*
- * When centering an entire col make sure to pull the internal text back to the left.
+ * When centering an .col make sure to pull the content back to the left.
+ * .col--Modifier.  
  */
-.col--align_center > .col_item,
-.col--align_right > .col_item {
+.col--align-center > .col-item,
+.col--align-right > .col-item {
     text-align: left;
 }
 
-.col--margin_bottom_20 {
+/*
+ * .col--Modifier. 
+ */
+.col--margin-bottom-20 {
     margin-bottom: 20px;
+}
+
+/*
+ * .col--Modifier. 
+ */
+.col--margin-bottom-40 {
+    margin-bottom: 40px;
 }
  
 /*
@@ -662,7 +700,7 @@ textarea {
  * 2. Gutter.
  * 3. Align inline-block elements.
  */
-.col_item {
+.col-item {
     display: inline-block; /* 1 */
     padding-left: 24px; /* 2 */
     vertical-align: top; /* 3 */
@@ -672,321 +710,333 @@ textarea {
 }
 
 /*
- * Align col items middle.
+ * Align .col-item middle.
+ * .col-item--Modifier.
  */
-.col_item--middle {
+.col-item--middle {
     vertical-align: middle;
 }
 
 /*
- * Align col items bottom.
+ * Align .col-item bottom.
+ * .col-item--Modifier.
  */
-.col_item--bottom {
+.col-item--bottom {
     vertical-align: bottom;
 }
 
 /*
- * Align col items left. Used to move centered or right align normally with medium- small- modifier.
+ * Align .col-item left. Used to move centered or right align normally with medium-- small-- modifier.
+ * .col-item--Modifier.
  */
-.col_item--align_left {
+.col-item--align-left {
     text-align: left;
 }
 
 /*
- * Align col items center.
+ * Align .col-item center.
+ * .col-item--Modifier.
  */
-.col_item--align_center {
+.col-item--align-center {
     text-align: center;
 }
 
 /*
- * Align col items right.
+ * Align .col-item right.
+ * .col-item--Modifier.
  */
-.col_item--align_right {
+.col-item--align-right {
     text-align: right;
 }
 
 /*
- * Add margin bottom.
+ * .col-item--Modifier.
  */
-.col_item--margin_bottom_20 {
+.col-item--margin-bottom-20 {
     margin-bottom: 20px;
 }
 
-.col_item_full { width: 100%; }
+/*
+ * .col-item--Modifier.
+ */
+.col-item--margin-bottom-40 {
+    margin-bottom: 4px;
+}
 
-.col_item_half { width: 50%; }
+.col-item-full { width: 100%; }
 
-.col_item_third { width: 33.333% }
-.col_item_two_third { width: 66.666%; }
+.col-item-half { width: 50%; }
 
-.col_item_quarter { width: 25%; }
-.col_item_three_quarter { width: 75%; }
+.col-item-third { width: 33.333% }
+.col-item-two-third { width: 66.666%; }
 
-.col_item_1_5 { width: 20%; }
-.col_item_2_5 { width: 40%; }
-.col_item_3_5 { width: 60%; }
-.col_item_4_5 { width: 80%; }
+.col-item-quarter { width: 25%; }
+.col-item-three-quarter { width: 75%; }
 
-.col_item_1_6 { width: 16.666%; }
-.col_item_5_6 { width: 83.333%; }
+.col-item-1-5 { width: 20%; }
+.col-item-2-5 { width: 40%; }
+.col-item-3-5 { width: 60%; }
+.col-item-4-5 { width: 80%; }
 
-.col_item_1_8 { width: 12.5%; }
-.col_item_3_8 { width: 37.5%; }
-.col_item_5_8 { width: 62.5%; }
-.col_item_6_8 { width: 75%; }
-.col_item_7_8 { width: 87.5%; }
+.col-item-1-6 { width: 16.666%; }
+.col-item-5-6 { width: 83.333%; }
 
-.col_item_1_10 { width: 10%; }
-.col_item_2_10 { width: 20%; }
-.col_item_3_10 { width: 30%; }
-.col_item_4_10 { width: 40%; }
-.col_item_6_10 { width: 60%; }
-.col_item_7_10 { width: 70%; }
-.col_item_8_10 { width: 80%; }
-.col_item_9_10 { width: 90%; }
+.col-item-1-8 { width: 12.5%; }
+.col-item-3-8 { width: 37.5%; }
+.col-item-5-8 { width: 62.5%; }
+.col-item-6-8 { width: 75%; }
+.col-item-7-8 { width: 87.5%; }
+
+.col-item-1-10 { width: 10%; }
+.col-item-2-10 { width: 20%; }
+.col-item-3-10 { width: 30%; }
+.col-item-4-10 { width: 40%; }
+.col-item-6-10 { width: 60%; }
+.col-item-7-10 { width: 70%; }
+.col-item-8-10 { width: 80%; }
+.col-item-9-10 { width: 90%; }
 
 @media only screen and (min-width: 768px) and (max-width: 989px) {
 
-.large-col_item_full { width: 100%; }
+    /* 
+     * Add top and bottom padding to main .col creating space on page generally between <section>.
+     * .col--Modifier--Modifier.
+     */
+    .col--padding-20--large {
+        padding: 40px; 0
+    }
 
-.large-col_item_half { width: 50%; }
+    /* 
+     * Add top and bottom padding to main .col creating space on page generally between <section>.
+     * .col--Modifier--Modifier. 
+     */
+    .col--padding-40--large {
+        padding: 40px 0;
+    }
 
-.large-col_item_third { width: 33.333% }
-.large-col_item_two_third { width: 66.666%; }
+    .col-item-full--large { width: 100%; }
 
-.large-col_item_quarter { width: 25%; }
-.large-col_item_three_quarter { width: 75%; }
+    .col-item-half--large { width: 50%; }
 
-.large-col_item_1_5 { width: 20%; }
-.large-col_item_2_5 { width: 40%; }
-.large-col_item_3_5 { width: 60%; }
-.large-col_item_4_5 { width: 80%; }
+    .col-item-third--large { width: 33.333% }
+    .col-item-two-third--large { width: 66.666%; }
 
-.large-col_item_1_6 { width: 16.666%; }
-.large-col_item_5_6 { width: 83.333%; }
+    .col-item-quarter--large { width: 25%; }
+    .col-item-three-quarter--large { width: 75%; }
 
-.large-col_item_1_8 { width: 12.5%; }
-.large-col_item_3_8 { width: 37.5%; }
-.large-col_item_5_8 { width: 62.5%; }
-.large-col_item_6_8 { width: 75%; }
-.large-col_item_7_8 { width: 87.5%; }
+    .col-item-1-5--large { width: 20%; }
+    .col-item-2-5--large { width: 40%; }
+    .col-item-3-5--large { width: 60%; }
+    .col-item-4-5--large { width: 80%; }
 
-.large-col_item_1_10 { width: 10%; }
-.large-col_item_2_10 { width: 20%; }
-.large-col_item_3_10 { width: 30%; }
-.large-col_item_4_10 { width: 40%; }
-.large-col_item_6_10 { width: 60%; }
-.large-col_item_7_10 { width: 70%; }
-.large-col_item_8_10 { width: 80%; }
-.large-col_item_9_10 { width: 90%; }
+    .col-item-1-6--large { width: 16.666%; }
+    .col-item-5-6--large { width: 83.333%; }
 
-/*
- * See full size col_item above for the below rules.
- */
-.large-col_item--middle {
-    vertical-align: middle;
-}
+    .col-item-1-8--large { width: 12.5%; }
+    .col-item-3-8--large { width: 37.5%; }
+    .col-item-5-8--large { width: 62.5%; }
+    .col-item-6-8--large { width: 75%; }
+    .col-item-7-8--large { width: 87.5%; }
 
-.large-col_item--bottom {
-    vertical-align: bottom;
-}
+    .col-item-1-10--large { width: 10%; }
+    .col-item-2-10--large { width: 20%; }
+    .col-item-3-10--large { width: 30%; }
+    .col-item-4-10--large { width: 40%; }
+    .col-item-6-10--large { width: 60%; }
+    .col-item-7-10--large { width: 70%; }
+    .col-item-8-10--large { width: 80%; }
+    .col-item-9-10--large { width: 90%; }
 
-.large-col_item--align_left {
-    text-align: left;
-}
+    /*
+     * See full size .col-item above for the below rules.
+     */
+    .col-item--middle--large {
+        vertical-align: middle;
+    }
 
-.large-col_item--align_center {
-    text-align: center;
-}
+    .col-item--bottom--large {
+        vertical-align: bottom;
+    }
 
-.large-col_item--align_right {
-    text-align: right;
-}
+    .col-item--align-left--large {
+        text-align: left;
+    }
 
-/*
- * Used to make an item full width when it isn't normally.
- */
-.large-full_width {
-    width: 100%;
-}
+    .col-item--align-center--large {
+        text-align: center;
+    }
 
-/*
- * Add margin bottom.
- */
-.large-col_item--margin_bottom_20 {
-    margin-bottom: 20px;
-}
+    .col-item--align-right--large {
+        text-align: right;
+    }
 
-/*
- * Add margin bottom.
- */
-.large-col_item--margin_bottom_40 {
-    margin-bottom: 40px;
-}
+    .col-item--margin-bottom-20--large {
+        margin-bottom: 20px;
+    }
 
+    .col-item--margin-bottom-40--large {
+        margin-bottom: 40px;
+    }
+
+    /*
+     * Used to make an item full width when it isn't normally.
+     * Faux modifier as .full-width doesn't exist.
+     */
+    .full-width--large {
+        width: 100%;
+    }
 
 }
 
 @media only screen and (min-width: 481px) and (max-width: 767px) {
 
-.medium-col_item_full { width: 100%; }
+    .col-item-full--medium { width: 100%; }
 
-.medium-col_item_half { width: 50%; }
+    .col-item-half--medium { width: 50%; }
 
-.medium-col_item_third { width: 33.333% }
-.medium-col_item_two_third { width: 66.666%; }
+    .col-item-third--medium { width: 33.333% }
+    .col-item-two-third--medium { width: 66.666%; }
 
-.medium-col_item_quarter { width: 25%; }
-.medium-col_item_three_quarter { width: 75%; }
+    .col-item-quarter--medium { width: 25%; }
+    .col-item-three-quarter--medium { width: 75%; }
 
-.medium-col_item_1_5 { width: 20%; }
-.medium-col_item_2_5 { width: 40%; }
-.medium-col_item_3_5 { width: 60%; }
-.medium-col_item_4_5 { width: 80%; }
+    .col-item-1-5--medium { width: 20%; }
+    .col-item-2-5--medium { width: 40%; }
+    .col-item-3-5--medium { width: 60%; }
+    .col-item-4-5--medium { width: 80%; }
 
-.medium-col_item_1_6 { width: 16.666%; }
-.medium-col_item_5_6 { width: 83.333%; }
+    .col-item-1-6--medium { width: 16.666%; }
+    .col-item-5-6--medium { width: 83.333%; }
 
-.medium-col_item_1_8 { width: 12.5%; }
-.medium-col_item_3_8 { width: 37.5%; }
-.medium-col_item_5_8 { width: 62.5%; }
-.medium-col_item_6_8 { width: 75%; }
-.medium-col_item_7_8 { width: 87.5%; }
+    .col-item-1-8--medium { width: 12.5%; }
+    .col-item-3-8--medium { width: 37.5%; }
+    .col-item-5-8--medium { width: 62.5%; }
+    .col-item-6-8--medium { width: 75%; }
+    .col-item-7-8--medium { width: 87.5%; }
 
-.medium-col_item_1_10 { width: 10%; }
-.medium-col_item_2_10 { width: 20%; }
-.medium-col_item_3_10 { width: 30%; }
-.medium-col_item_4_10 { width: 40%; }
-.medium-col_item_6_10 { width: 60%; }
-.medium-col_item_7_10 { width: 70%; }
-.medium-col_item_8_10 { width: 80%; }
-.medium-col_item_9_10 { width: 90%; }
+    .col-item-1-10--medium { width: 10%; }
+    .col-item-2-10--medium { width: 20%; }
+    .col-item-3-10--medium { width: 30%; }
+    .col-item-4-10--medium { width: 40%; }
+    .col-item-6-10--medium { width: 60%; }
+    .col-item-7-10--medium { width: 70%; }
+    .col-item-8-10--medium { width: 80%; }
+    .col-item-9-10--medium { width: 90%; }
 
-/*
- * See full size col_item above for the below rules.
- */
-.medium-col_item--middle {
-    vertical-align: middle;
-}
+    /*
+     * See full size col-item above for the below rules.
+     */
+    .col-item--middle--medium {
+        vertical-align: middle;
+    }
 
-.medium-col_item--bottom {
-    vertical-align: bottom;
-}
+    .col-item--bottom--medium {
+        vertical-align: bottom;
+    }
 
-.medium-col_item--align_left {
-    text-align: left;
-}
+    .col-item--align-left--medium {
+        text-align: left;
+    }
 
-.medium-col_item--align_center {
-    text-align: center;
-}
+    .col-item--align-center--medium {
+        text-align: center;
+    }
 
-.medium-col_item--align_right {
-    text-align: right;
-}
+    .col-item--align-right--medium {
+        text-align: right;
+    }
 
-/*
- * Used to make an item full width when it isn't normally.
- */
-.medium-full_width {
-    width: 100%;
-}
+    .col-item--margin-bottom-20--medium {
+        margin-bottom: 20px;
+    }
 
-/*
- * Add margin bottom.
- */
-.medium-col_item--margin_bottom_20 {
-    margin-bottom: 20px;
-}
+    .col-item--margin-bottom-40--medium {
+        margin-bottom: 40px;
+    }
 
-/*
- * Add margin bottom.
- */
-.medium-col_item--margin_bottom_40 {
-    margin-bottom: 40px;
-}
+    /*
+     * Used to make an item full width when it isn't normally.
+     * Faux modifier as .full-width doesn't exist.
+     */
+    .full-width--medium {
+        width: 100%;
+    }
 
 }
 
 @media only screen and (max-width: 480px) {
 
-.small-col_item_full { width: 100%; }
+    .col-item-full--small { width: 100%; }
 
-.small-col_item_half { width: 50%; }
+    .col-item-half--small { width: 50%; }
 
-.small-col_item_third { width: 33.333% }
-.small-col_item_two_third { width: 66.666%; }
+    .col-item-third--small { width: 33.333% }
+    .col-item-two-third--small { width: 66.666%; }
 
-.small-col_item_quarter { width: 25%; }
-.small-col_item_three_quarter { width: 75%; }
+    .col-item-quarter--small { width: 25%; }
+    .col-item-three-quarter--small { width: 75%; }
 
-.small-col_item_1_5 { width: 20%; }
-.small-col_item_2_5 { width: 40%; }
-.small-col_item_3_5 { width: 60%; }
-.small-col_item_4_5 { width: 80%; }
+    .col-item-1-5--small { width: 20%; }
+    .col-item-2-5--small { width: 40%; }
+    .col-item-3-5--small { width: 60%; }
+    .col-item-4-5--small { width: 80%; }
 
-.small-col_item_1_6 { width: 16.666%; }
-.small-col_item_5_6 { width: 83.333%; }
+    .col-item-1-6--small { width: 16.666%; }
+    .col-item-5-6--small { width: 83.333%; }
 
-.small-col_item_1_8 { width: 12.5%; }
-.small-col_item_3_8 { width: 37.5%; }
-.small-col_item_5_8 { width: 62.5%; }
-.small-col_item_6_8 { width: 75%; }
-.small-col_item_7_8 { width: 87.5%; }
+    .col-item-1-8--small { width: 12.5%; }
+    .col-item-3-8--small { width: 37.5%; }
+    .col-item-5-8--small { width: 62.5%; }
+    .col-item-6-8--small { width: 75%; }
+    .col-item-7-8--small { width: 87.5%; }
 
-.small-col_item_1_10 { width: 10%; }
-.small-col_item_2_10 { width: 20%; }
-.small-col_item_3_10 { width: 30%; }
-.small-col_item_4_10 { width: 40%; }
-.small-col_item_6_10 { width: 60%; }
-.small-col_item_7_10 { width: 70%; }
-.small-col_item_8_10 { width: 80%; }
-.small-col_item_9_10 { width: 90%; }
+    .col-item-1-10--small { width: 10%; }
+    .col-item-2-10--small { width: 20%; }
+    .col-item-3-10--small { width: 30%; }
+    .col-item-4-10--small { width: 40%; }
+    .col-item-6-10--small { width: 60%; }
+    .col-item-7-10--small { width: 70%; }
+    .col-item-8-10--small { width: 80%; }
+    .col-item-9-10--small { width: 90%; }
 
-/*
- * See full size col_item above for the below rules.
- */
-.small-col_item--middle {
-    vertical-align: middle;
-}
+    /*
+     * See full size col-item above for the below rules.
+     */
+    .col-item--middle--small {
+        vertical-align: middle;
+    }
 
-.small-col_item--bottom {
-    vertical-align: bottom;
-}
+    .col-item--bottom--small {
+        vertical-align: bottom;
+    }
 
-.small-col_item--align_left {
-    text-align: left;
-}
+    .col-item--align-left--small {
+        text-align: left;
+    }
 
-.small-col_item--align_center {
-    text-align: center;
-}
+    .col-item--align-center--small {
+        text-align: center;
+    }
 
-.small-col_item--align_right {
-    text-align: right;
-}
+    .col-item--align-right--small {
+        text-align: right;
+    }
 
-/*
- * Used to make an item full width when it isn't normally.
- */
-.small-full_width {
-    width: 100%;
-}
+    .col-item--margin-bottom-20--small {
+        margin-bottom: 20px;
+    }
 
-/*
- * Add margin bottom.
- */
-.small-col_item--margin_bottom_20 {
-    margin-bottom: 20px;
-}
+    .col-item--margin-bottom-40--small {
+        margin-bottom: 40px;
+    }
 
-/*
- * Add margin bottom.
- */
-.small-col_item--margin_bottom_40 {
-    margin-bottom: 40px;
-}
+    /*
+     * Used to make an item full width when it isn't normally.
+     * Faux modifier as .full-width doesn't exist.
+     */
+    .full-width--small {
+        width: 100%;
+    }  
 
 }
 
@@ -1001,48 +1051,36 @@ textarea {
 */
 
 /*
- * Used for full width navigation
+ * Used for a full width block.
  */
-.nav_wrap_full {
+.wrap-full {
     width: 100%;
     margin: 0 auto;
 }
 
 /*
- * Used for innner of full width navigation
- */
-.nav_wrap {
-    max-width: 990px;
-    margin: 0 auto;
-    padding: 0 5px;
-}
-
-
-/*
- * Used for a full width block
- */
-.wrap_full {
-    width: 100%;
-    margin: 0 auto;
-}
-
-/*
- * Used for innner of full width block.
- * 1. Create large padding top and bottom of block.
+ * Used for inner of full width block or standalone non full width block.
  */
 .wrap {
     max-width: 990px;
     margin: 0 auto;
-    padding: 40px 5px; /* 1 */
+    padding: 0 5px; /* 1 */
 }
 
+/*
+ * Add color or image to full width background.
+ * .wrap--Modifier. 
+ */
+.wrap--bkg {
+
+}
 
 /*
  * Nudge whole wrap to site below fixed navigation.
  */
 @media screen and (max-width: 767px) {
 
-    .wrap_mobile {
+    .wrap-mobile {
         margin-top: 40px;
     }
 
@@ -1069,32 +1107,32 @@ h6 {
 }
 
 h1,
-.heading_1 {
+.heading-1 {
     font-size: 2em; /* 28/14 */
 }
 
 h2,
-.heading_2 {
+.heading-2 {
     font-size: 1.714286em; /* 24/14 */
 }
 
 h3,
-.heading_3 {
+.heading-3 {
     font-size: 1.428571em; /* 20/14 */
 }
 
 h4,
-.heading_4 {
+.heading-4 {
     font-size: 1.285714em; /* 18/14 */
 }
 
 h5,
-.heading_5 {
+.heading-5 {
     font-size: 1.142857em; /* 16/14 */
 }
 
 h6,
-.heading_6 {
+.heading-6 {
     font-size: 1em; /* 14/14 */
 }
 
@@ -1102,7 +1140,7 @@ p {
     margin-bottom: 21px;
 }
 
-.no_margin {
+.no-margin {
     margin: 0;
 }
 
@@ -1111,7 +1149,7 @@ strong {
     font-weight: bold;
 }
 
-.bold_text {
+.bold-text {
     font-weight: bold;
 }
 
@@ -1268,7 +1306,7 @@ img {
     max-width: 100%;
 }
 
-img.non_responsive {
+img.non-responsive {
     max-width: none;
 } 
 
@@ -1386,14 +1424,14 @@ input[type="radio"] {
 /*
  * Wrap each checkbox or radio or wrap all elements for inline checkbox or radio.
  */
-.checkbox_block {
+.checkbox-block {
     display: block;
 }
 
 /*
- * Use as class alongside .checkbox_block
+ * Use as class alongside .checkbox-block
  */
-.checkbox_inline input {
+.checkbox-inline input {
     display: inline-block;
     margin-left: 10px;
 }
@@ -1401,7 +1439,7 @@ input[type="radio"] {
 /*
  * Used to ensure inline check box label is inline too, especially if text spans more than one line.
  */
-.checkbox_inline label {
+.checkbox-inline label {
     display: inline;
 }
 
@@ -1447,17 +1485,17 @@ input[type="search"]::-webkit-search-decoration {
     color: #999;  
 }
 
-.field_error_icon {
+.field-error-icon {
     float: right;
     width: 30px;
     height: 37px;
 }
 
-.field_error_tick {
+.field-error-tick {
     background: url(http://dev.plaay.co.uk/img/graphics/tick.png) 0 50% no-repeat;
 }
 
-.field_error_cross {
+.field-error-cross {
     background: url(http://dev.plaay.co.uk/img/graphics/cross.png) 0 50% no-repeat;
 }
 
@@ -1576,20 +1614,20 @@ button:active,
     outline: none;
 }
 
-button.full_width,
-.button.full_width {
+button.full-width,
+.button.full-width {
     width: 100%
 }
 
-.round_button {
+.round-button {
     border-radius: 2px;
 }
 
-input[type="button"].bevelled_button,
-input[type="reset"].bevelled_button,
-input[type="submit"].bevelled_button,
-button.bevelled_button,
-.button.bevelled_button
+input[type="button"].bevelled-button,
+input[type="reset"].bevelled-button,
+input[type="submit"].bevelled-button,
+button.bevelled-button,
+.button.bevelled-button
 {
     border: 1px solid;
     border-color: #ccc #ccc #bbb;
@@ -1599,26 +1637,26 @@ button.bevelled_button,
     color: inherit;
 }
 
-input[type="button"]:hover.bevelled_button,
-input[type="reset"]:hover.bevelled_button,
-input[type="submit"]:hover.bevelled_button,
-button:hover.bevelled_button,
-.button:hover.bevelled_button
+input[type="button"]:hover.bevelled-button,
+input[type="reset"]:hover.bevelled-button,
+input[type="submit"]:hover.bevelled-button,
+button:hover.bevelled-button,
+.button:hover.bevelled-button
 {
     border-color: #ccc #bbb #aaa;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 15px 17px rgba(255, 255, 255, 0.8), inset 0 -5px 12px rgba(0, 0, 0, 0.02);
 }
 
-input[type="button"]:focus.bevelled_button,
-input[type="reset"]:focus.bevelled_button,
-input[type="submit"]:focus.bevelled_button,
-button:focus.bevelled_button,
-.button:focus.bevelled_button,
-input[type="button"]:active.bevelled_button,
-input[type="reset"]:active.bevelled_button,
-input[type="submit"]:active.bevelled_button,
-button:active.bevelled_button,
-.button:active.bevelled_button {
+input[type="button"]:focus.bevelled-button,
+input[type="reset"]:focus.bevelled-button,
+input[type="submit"]:focus.bevelled-button,
+button:focus.bevelled-button,
+.button:focus.bevelled-button,
+input[type="button"]:active.bevelled-button,
+input[type="reset"]:active.bevelled-button,
+input[type="submit"]:active.bevelled-button,
+button:active.bevelled-button,
+.button:active.bevelled-button {
     border-color: #aaa #bbb #bbb;
     box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.5), inset 0 2px 5px rgba(0, 0, 0, 0.15);
     outline: none;
@@ -1653,7 +1691,7 @@ a:active {
     text-decoration: underline;
 }
 
-a.back_top {
+a.back-top {
     position: fixed;
     right: 30px;
     bottom: 70px;
@@ -1674,70 +1712,66 @@ a.back_top {
 */
 
 /*
- * Holder for main navigation.
+ * Used for fixed .main-navigation (not mobile).
+ * 1. Hide off screen set to same as height.
+ * .wrap-full--Modifier.
  */
-.main_navigation_bar {
+.wrap-full--full-fixed {
+    position: fixed;
+    height: 41px; /* 1 */    
+    top: -41px; /* 1 */
+    z-index: 100000;
 }
 
 /*
- * Used for fixed main_navigation (not mobile).
- * 1. Hide off screen set to same as height in .main_navigation_bar_fixed.
+ * Class added via js to slide in fixed .main-navigation (not mobile).
+ * .wrap-full--Modifier--Modifier.
  */
-.nav_wrap_full_fixed {
-    position: fixed;
-    top: -41px; /* 1 */
-    z-index: 100000;
-    width: 100%;
-    margin: 0 auto;
-    border-bottom: 1px solid #fff;
-}
-
-.nav_wrap_full_fixed_show {
+.wrap-full--full-fixed--js-show {
     top: 0;
     -webkit-transition: top 0.5s;
     transition: top 0.5s;
 }
 
 /*
- * Holder for main navigation fixed (not on mobile).
- * 1. Set to same top as .nav_wrap_full_fixed.
+ * Holder for main navigation.
  */
-.main_navigation_bar_fixed {
-    background: red;
-    height: 41px; /* 1 */
+.main-navigation-bar {
+}
+
+/*
+ * Add color or image to full width background.
+ * .main-navigation-bar--Modifier. 
+ */
+.main-navigation-bar--bkg {
+    background: #ccc;
 }
 
 /*
  * 1. Set to height of navigation.
  * 2. Set line-height of navigation for vertical centre.
 */
-.main_navigation {
+.main-navigation {
     position: relative;
     height: 70px;
     line-height: 70px;
-    border-bottom: 2px solid #e7decc;
+    /*border-bottom: 2px solid #666;*/
 }
 
 /*
- * Applied to <nav> .main_navigation for a fixed main_navigation (not on mobile).
- * Overwrite any unwanted styles from .main_navigation as this is added as additional class.
+ * Applied to <nav> .main-navigation for a fixed main-navigation (not on mobile).
+ * Overwrite any unwanted styles from .main-navigation as this is a Modifier..
+ * .main-navigation--Modifier.
  */
-.main_navigation_fixed {
+.main-navigation--fixed {
     line-height: 40px;
     border: none;
 }
 
 /*
- * Add color or image to full width background.
- */
-.main_navigation_bkg {
-}
-
-
-/*
  * All Levels.
  */
-.main_navigation ul {
+.main-navigation ul {
     list-style: none;
     margin: 0;
 }
@@ -1746,7 +1780,7 @@ a.back_top {
  * All Levels.
  * 1. Nudge hover down to bottom border.
  */
-.main_navigation ul li {
+.main-navigation ul li {
     display: inline-block;    
     margin: 0 10px;
     padding-bottom: 7px; /* 1 */
@@ -1755,7 +1789,7 @@ a.back_top {
 /*
  * All Levels.
  */
-.main_navigation ul li:first-child {
+.main-navigation ul li:first-child {
     margin-left: 0;
 }
 
@@ -1764,8 +1798,8 @@ a.back_top {
  * Main navigation link style.
  * 1. Nudge hover down to bottom border.
  */
-.main_navigation ul li a:link,
-.main_navigation ul li a:visited
+.main-navigation ul li a:link,
+.main-navigation ul li a:visited
 {
     color: #666;
     padding-bottom: 7px; /* 1 */
@@ -1775,22 +1809,23 @@ a.back_top {
  * All Levels.
  * Main navigation hover style.
  */
-.main_navigation ul li a:hover {
-    color: #f69c2e;
+.main-navigation ul li a:hover {
+    text-decoration: underline;
 }
 
 /*
  * Second and Third Level.
  * This makes the dropdown boxed in.
- * 1. Ensure menu starts at bottom border.
- * 2. Reset back as set in .main_navigation to vertically align nav.
+ * 1. Top margin needs settings to -ve value of border-bottom in .main-navigation if set.
+ * Can also set to -ve as below to merge dropdown into main nav.
+ * 2. Reset from .main-navigation.
  */
-.main_navigation ul ul {
+.main-navigation ul ul {
     display: none;
     position: absolute;
     z-index: 999;
-    background: #FFFFFF;
-    border: 2px solid #e7decc;
+    background: #fff;
+    border: 2px solid #ccc;
     margin: -2px 0 0 0; /* 1 */
     padding: 15px 0 0 15px;
     line-height: initial; /* 2 */   
@@ -1799,14 +1834,14 @@ a.back_top {
 /*
  * Second and Third Level Show.
  */
-.main_navigation ul li:hover > ul {
+.main-navigation ul li:hover > ul {
     display: block;
 }
 
 /*
  * Second and Third Level.
  */
-.main_navigation ul ul li
+.main-navigation ul ul li
 {
     display: block;
     white-space: nowrap;
@@ -1817,7 +1852,7 @@ a.back_top {
 /*
  * Third Level Position.
  */
-.main_navigation ul ul ul
+.main-navigation ul ul ul
 {
     top: 0;
     left: 100%;
@@ -1826,19 +1861,17 @@ a.back_top {
 
 /*
  * Second and Third Level.
- * Main navigation levels link style.
+ * Overide .main-navigation link style.
  */
-.main_navigation ul ul a:link,
-.main_navigation ul ul a:visited {
-    color: #666;
+.main-navigation ul ul a:link,
+.main-navigation ul ul a:visited {
 }
 
 /*
  * Second and Third Level.
- * Main navigation levels hover style.
+ * Overide .main-navigation hover style.
  */
-.main_navigation ul ul a:hover {
-    color: #f69c2e;
+.main-navigation ul ul a:hover {
 }
 
 
@@ -1853,15 +1886,15 @@ a.back_top {
 
 /*
  * Holder for mobile navigation.
- * The menu bar that is clicked to display the .mobile_navigation.
+ * The menu bar that is clicked to display the .mobile-navigation.
  * 1. Set to 41px keeps the main section at 40px especially when used with a bottom border.
  */
-.mobile_navigation_bar {
+.mobile-navigation-bar {
     display: none;
     position: fixed;
     width: 100%; 
     z-index: 9999;
-    background: #bf7b67;
+    background: #ccc;
     height: 41px; /* 1 */
     top: 0px;
     border-bottom: 1px solid #fff;
@@ -1869,16 +1902,16 @@ a.back_top {
 
 /*
  * The mobile menu that slides in or down.
- * 1. Set to the same height as .mobile_navigation_bar.
+ * 1. Set to the same height as .mobile-navigation-bar.
  */
-.mobile_navigation {    
+.mobile-navigation {    
     position: fixed;
     bottom: 0;
     left: -100%;
     overflow-y: auto;
     width: 100%;
     top: 41px; /* 1 */ 
-    background: #bf7b67;
+    background: #ccc;
     padding: 0;
     margin: 0;
     -webkit-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
@@ -1887,42 +1920,40 @@ a.back_top {
     transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);    
 }
 
-.mobile_navigation_show {
+.mobile-navigation-show {
     left: 0;
 }
 
 /*
  * Add to the body in js to ensure scrolling works correctly when the menu is longer than the page.
  */
-.mobile_navigation_show_body {
+.mobile-navigation-show-body {
     overflow: hidden;
 }
 
 /*
  * Mobile All Levels.
  */
-.mobile_navigation ul {
+.mobile-navigation ul {
     list-style: none;
     margin: 0;
 }
 
 /*
  * Mobile First Level.
- * 1. Remove margin previously set and pass onto <a>.
- * 2. Remove padding previously set and pass onto <a>.
+ * 1. Remove margin previously set.
  */
-.mobile_navigation > ul > li {
+.mobile-navigation ul li {
     display: block;
     margin: 0; /* 1 */
-    padding: 0; /* 2 */
-    background: #bf7b67;
+    background: #ccc;
     border-top: 1px solid #fff;
 }
 
 /*
- * Remove double top border on first item if .mobile_navigation has a bottom border set.
+ * Remove double top border on first item if .mobile-navigation has a bottom border set.
  */
-.mobile_navigation > ul > li:first-child {
+.mobile-navigation > ul > li:first-child {
     border-top: none;
 }
 
@@ -1930,8 +1961,8 @@ a.back_top {
  * All Levels.
  * Mobile navigation link style.
  */
-.mobile_navigation ul li a:link,
-.mobile_navigation ul li a:visited {
+.mobile-navigation ul li a:link,
+.mobile-navigation ul li a:visited {
     display: block;
     padding: 7px 0 7px 7px;
     color: #fff;
@@ -1942,28 +1973,17 @@ a.back_top {
  * All Levels.
  * Mobile navigation hover style.
  */
-.mobile_navigation ul li a:hover {
+.mobile-navigation ul li a:hover {
     color: #fff;
-    background: #f69c2e;
-}
-
-/*
- * Mobile Second and Third Level.
- */ 
-.mobile_navigation > ul ul > li {
-    display: block;
-    margin: 0;
-    padding: 0;
-    background: #bf7b67;
-    border-top: 1px solid #fff;
+    background: #666;
 }
 
 /*
  * Mobile Second Level.
  * Mobile navigation link style.
  */ 
-.mobile_navigation ul ul li a:link,
-.mobile_navigation ul ul li a:visited
+.mobile-navigation ul ul li a:link,
+.mobile-navigation ul ul li a:visited
 {
     display: block;
     padding: 7px 0 7px 21px;
@@ -1975,8 +1995,8 @@ a.back_top {
  * Mobile Third Level.
  * Mobile navigation link style.
  */
-.mobile_navigation ul ul ul li a:link,
-.mobile_navigation ul ul ul li a:visited
+.mobile-navigation ul ul ul li a:link,
+.mobile-navigation ul ul ul li a:visited
 {
     display: block;
     padding: 7px 0 7px 35px;
@@ -1985,35 +2005,10 @@ a.back_top {
 }
 
 /*
- * Little social icons if used in the .mobile_navigation.
+ * Overide <a> styles for image fonts (dashicons font awesome) and position so sits in middle of navigation.
+ 1. Set to same height of .mobile-navigation-bar. Also give full height clickable.
  */
-.mobile_navigation_icons {
-    text-align: right;
-}
-
-/*
- * 3 bars.
- */
-.mobile_navigation_navicon:before {
-    content: "\f333";
-    font-family: 'dashicons';
-}
-
-.mobile_navigation_email:before {
-    content: "\f465";
-    font-family: 'dashicons';
-}
-
-.mobile_navigation_phone:before {
-    content: "\f095";
-    font-family: 'FontAwesome';
-}
-
-/*
- * Overide <a> styles for image fonts, dashicons font awesome and position so sits in middle of navigation.
- 1. Set to same height of .mobile_navigation_bar. Also give full height clickable.
- */
-a.mobile_navigation_image_font {
+a.mobile-navigation-image-font {
     font-size: 2.142857em; /* 30/14 */
     color: #fff;
     text-decoration: none;
@@ -2027,15 +2022,40 @@ a.mobile_navigation_image_font {
  * 3 bars.
  * Overide above rule for the navicon. This sits central on it's own and when next to a logo.
  */
-a.mobile_navigation_navicon {
+a.mobile-navigation-navicon {
     vertical-align: baseline;
 }
 
 /*
- * Set the position for graphics. Ensure graphic is 22px square of 44px @2x.
- 1. Set to same height of .mobile_navigation_bar. Also give full height clickable.
+ * 3 bars.
  */
-a.mobile_navigation_graphic {
+.mobile-navigation-navicon:before {
+    content: "\f333";
+    font-family: 'dashicons';
+}
+
+/*
+ * Email.
+ */
+.mobile-navigation-email:before {
+    content: "\f465";
+    font-family: 'dashicons';
+}
+
+/*
+ * Phone.
+ */
+.mobile-navigation-phone:before {
+    content: "\f095";
+    font-family: 'FontAwesome';
+}
+
+/*
+ * Set the position for images instead of image fonts. Try and not use.
+ * Ensure graphic is 22px square and 44px square @2x.
+ 1. Set to same height of .mobile-navigation-bar. Also give full height clickable.
+ */
+a.mobile-navigation-image {
     position: relative;
     top: -2px;
     display: inline-block;
@@ -2045,24 +2065,69 @@ a.mobile_navigation_graphic {
 
 @media screen and (max-width: 767px) {
 
-    .mobile_navigation_bar,
-    .main_navigation_bar_fixed {
+    .mobile-navigation-bar,
+    .main-navigation-bar-fixed {
         display: block;
     }
 
-    .main_navigation_bar,
-    .main_navigation_bar_fixed {
+    .main-navigation-bar,
+    .main-navigation-bar-fixed {
         display: none;
     }
 
 }
 
-.current_page_item > a,
+.current-page-item > a,
 .current-menu-item > a,
-.current_page_ancestor > a {
+.current-page-ancestor > a {
     text-decoration: underline;
 }
 
+
+
+
+
+/*
+**********************************************************************
+  OTHER NAVIGATION
+**********************************************************************
+*/
+
+.comment-navigation .nav-previous,
+.paging-navigation .nav-previous,
+.post-navigation .nav-previous {
+  float: left;
+  width: 50%;
+}
+
+.comment-navigation .nav-next,
+.paging-navigation .nav-next,
+.post-navigation .nav-next {
+  float: right;
+  text-align: right;
+  width: 50%;
+}
+
+
+
+
+
+/*
+**********************************************************************
+  FOOTER
+**********************************************************************
+*/
+
+.main-footer {
+
+}
+
+/*
+ * .main-footer__Element.
+ */
+.main-footer__copyright {
+
+}
 
 
 
@@ -2080,21 +2145,21 @@ a.mobile_navigation_graphic {
 }
 
 .success,
-.success_permanent {
+.success-permanent {
     color: #0a942a; 
     background: #ecfef0;
     border: 1px solid #0A942A;
 }
 
 .error,
-.error_permanent {
+.error-permanent {
     color: #dc0000; 
     background-color: #fff6f6;
     border: 1px solid #dc0000;
 }
 
-.success_plain,
-.error_plain {
+.success-plain,
+.error-plain {
   background: none;
   border: none;
 }
@@ -2125,19 +2190,19 @@ a.mobile_navigation_graphic {
     margin: 0 auto;
 }
 
-.text_left {
+.text-left {
     text-align: left;
 }
 
-.text_right {
+.text-right {
     text-align: right;
 }
 
-.text_center {
+.text-center {
     text-align: center;
 }
 
-.text_justify {
+.text-justify {
     text-align: justify;
 }
 
@@ -2165,7 +2230,7 @@ video {
 /*
  * Google maps.
  */
-#map_canvas {
+#map-canvas {
     max-width: 100%;
     height: 500px;
 }
@@ -2174,41 +2239,6 @@ video {
  * Sort out zoom controls.
  */
 .gm-style img { max-width: none; }
-
-
-
-
-
-/*
-**********************************************************************
-	CLEARING
-**********************************************************************
-*/
-
-.clear:before,
-.clear:after,
-.entry-content:before,
-.entry-content:after,
-.comment-content:before,
-.comment-content:after,
-.site-header:before,
-.site-header:after,
-.site-content:before,
-.site-content:after,
-.site-footer:before,
-.site-footer:after {
-    content: "";
-    display: table;
-}
-
-.clear:after,
-.entry-content:after,
-.comment-content:after,
-.site-header:after,
-.site-content:after,
-.site-footer:after {
-    clear: both;
-}
 
 
 
@@ -2266,6 +2296,46 @@ video {
 
 .lt-ie10 {
     
+}
+
+
+
+
+
+/*
+**********************************************************************
+  POSTS AND PAGES
+**********************************************************************
+*/
+
+.content-header {
+
+}
+
+/*
+ * .content-header-Element.
+ */
+.content-header__title {
+
+}
+
+/*
+ * .content-header-Element.
+ */
+.content-header__meta {
+
+}
+
+.content-main {
+
+}
+
+.content-summary {
+  
+}
+
+.content-footer {
+
 }
 
 
@@ -2429,7 +2499,7 @@ Widgets
 }
 
 /* Search widget */
-.widget_search .search-submit {
+.widget-search .search-submit {
 	display: none;
 }
 

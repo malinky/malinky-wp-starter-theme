@@ -10,7 +10,7 @@ function pageShown(evt)
 {
     if (evt.persisted) {
 
-        $('.mobile_navigation').hide();
+        $('.mobile-navigation').hide();
 
     }
 }
@@ -38,10 +38,10 @@ jQuery(document).ready(function($){
     /*
      * Toggle mobile navigation.
      */
-    $('.mobile_navigation_navicon').click(function() {
+    $('.mobile-navigation-navicon').click(function() {
 
-        $('.mobile_navigation').toggleClass('mobile_navigation_show');
-        $('body').toggleClass('mobile_navigation_show_body');
+        $('.mobile-navigation').toggleClass('mobile-navigation-show');
+        $('body').toggleClass('mobile-navigation-show-body');
 
         event.preventDefault();
 
@@ -65,9 +65,11 @@ jQuery(document).ready(function($){
      */    
     $(window).scroll(function () {
         if ($(this).scrollTop() > 80) {
-            $('.nav_wrap_full_fixed').addClass('nav_wrap_full_fixed_show');
+            $('.wrap--fixed').addClass('wrap--fixed--js-show');
+            $('.wrap-full--full-fixed').addClass('wrap-full--full-fixed--js-show');
         } else {
-            $('.nav_wrap_full_fixed').removeClass('nav_wrap_full_fixed_show');
+            $('.wrap--fixed').removeClass('wrap--fixed--js-show');
+            $('.wrap-full--full-fixed').removeClass('wrap-full--full-fixed--js-show');
         }
     });
 
@@ -75,12 +77,12 @@ jQuery(document).ready(function($){
     /*
      * Scroll to top.
      */    
-    $(".back_top").hide();
+    $(".back-top").hide();
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
-            $('.back_top').fadeIn();
+            $('.back-top').fadeIn();
         } else {
-            $('.back_top').fadeOut();
+            $('.back-top').fadeOut();
         }
     });
 
@@ -88,7 +90,7 @@ jQuery(document).ready(function($){
     /*
      * Scroll body to 0.
      */
-    $('.back_top').click(function () {
+    $('.back-top').click(function () {
         $('body,html').animate({
             scrollTop: 0
         }, 600);
@@ -99,7 +101,7 @@ jQuery(document).ready(function($){
     /*
      * Internal scroll to.
      */         
-    $('.int_scroll').click(function () {
+    $('.int-scroll').click(function () {
         var e = $(this).attr('href');
         $('body,html').animate({
             scrollTop: $(e).offset().top-70

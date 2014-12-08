@@ -8,16 +8,15 @@
  */
 ?>
 
-	</div><!-- #content -->
+<footer class="main-footer wrap" role="contentinfo">
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'http://wordpress.org/', 'malinky-media' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'malinky-media' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( __( 'Theme: %1$s by %2$s.', 'malinky-media' ), 'Malinky Media', '<a href="http://www.malinkymedia.com" rel="designer">Craig Ramsay</a>' ); ?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+	<div class="col">
+		<div class="col-item col-item-full main-footer__copyright">
+			<?php echo bloginfo( 'name' ); ?> &copy; <?php echo date('Y'); ?>
+		</div>
+	</div>
+
+</footer><!-- .main-footer -->
 
 <script>
 (function(f,i,r,e,s,h,l){i['GoogleAnalyticsObject']=s;f[s]=f[s]||function(){

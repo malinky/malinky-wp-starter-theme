@@ -37,76 +37,75 @@
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<header class="main_header" role="banner">
+<header class="main-header" role="banner">
 
-	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'malinky-media' ); ?></a>
+	<!-- Main Navigation Desktop -->
+	<div class="wrap-full main-navigation-bar main-navigation-bar--bkg">
+		<div class="wrap">
 
-	<div class="nav_wrap_full main_navigation_bar main_navigation_bkg">
-		<div class="nav_wrap">
-
-		<div id="main_navigation_id" class="col ">
-			<div class="col_item col_item_full">
-				<nav class="main_navigation" role="navigation">
+		<div id="main-navigation-id" class="col">
+			<div class="col-item col-item-full">
+				<nav class="main-navigation" role="navigation">
 					<?php
 			        $args = array(
-			            'theme_location'    => 'main_navigation',
+			            'theme_location'    => 'primary_navigation',
 			            'container'   		=> 'false'
 			        );
 			        ?>
 					<?php wp_nav_menu( $args ); ?>
-				</nav><!-- .main_navigation -->
+				</nav><!-- .main-navigation -->
 			</div>
 		</div><!-- .col -->
 
-		</div><!-- .nav_wrap -->
-	</div><!-- .nav_wrap_full -->
+		</div><!-- .wrap -->
+	</div><!-- .wrap-full -->
 
-	<div class="nav_wrap_full_fixed main_navigation_bar_fixed">
-		<div class="nav_wrap">
+	<!-- Main Navigation Desktop Fixed -->
+	<div class="wrap-full wrap-full--full-fixed main-navigation-bar main-navigation-bar--bkg">
+		<div class="wrap">
 
-			<div id="main_navigation_fixed_id" class="col">
-				<div class="col_item col_item_full">
-					<nav class="main_navigation main_navigation_fixed" role="navigation">
+			<div id="main-navigation-fixed-id" class="col">
+				<div class="col-item col-item-full">
+					<nav class="main-navigation main-navigation--fixed" role="navigation">
 						<?php
 				        $args = array(
-				            'theme_location'    => 'main_navigation',
+				            'theme_location'    => 'primary_navigation',
 				            'container'   		=> 'false'
 				        );
 				        ?>
 						<?php wp_nav_menu( $args ); ?>
-					</nav><!-- .main_navigation -->
+					</nav><!-- .main-navigation -->
 				</div>
 			</div><!-- .col -->	
 
-		</div><!-- .nav_wrap -->
-	</div><!-- .nav_wrap_full -->
+		</div><!-- .wrap -->
+	</div><!-- .nav-wrap-full -->
 
-	<div class="nav_wrap_full mobile_navigation_bar">
+	<!-- Main Navigation Mobile -->
+	<div class="wrap-full mobile-navigation-bar">
 
-		<div id="mobile_navigation_id" class="col col--gutterless">
-			<div class="col_item col_item_4_10">
-				<a href="" class="mobile_navigation_image_font mobile_navigation_navicon"></a>
+		<div id="mobile-navigation-id" class="col col--gutterless">
+			<div class="col-item col-item-4-10">
+				<a href="" class="mobile-navigation-image-font mobile-navigation-navicon"></a>
 			</div><!--
-			--><div class="col_item col_item_6_10 mobile_navigation_icons">
-	    		<a href="" target="_blank" class="mobile_navigation_graphic"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/graphics/mobile_facebook.png" data-at2x="<?php echo get_stylesheet_directory_uri(); ?>/img/graphics/mobile_facebook@2x.png" alt="" /></a>   		    		
-	    		<a href="" target="_blank" class="mobile_navigation_image_font mobile_navigation_email "></a>
-	    		<a href="" target="_blank" class="mobile_navigation_image_font mobile_navigation_phone "></a>
+			--><div class="col-item col-item-6-10 col-item--align-right">
+	    		<a href="" target="_blank" class="mobile-navigation-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/graphics/mobile_facebook.png" data-at2x="<?php echo get_stylesheet_directory_uri(); ?>/img/graphics/mobile_facebook@2x.png" alt="" /></a>   		    		
+	    		<a href="" target="_blank" class="mobile-navigation-image-font mobile-navigation-email"></a>
+	    		<a href="" target="_blank" class="mobile-navigation-image-font mobile-navigation-phone"></a>
 	  		</div>
-			<div class="col_item col_item_full">
-				<nav class="mobile_navigation" role="navigation">
+			<div class="col-item col-item-full">
+				<nav class="mobile-navigation" role="navigation">
 					<?php
 			        $args = array(
-			            'theme_location'    => 'main_navigation',
+			            'theme_location'    => 'primary_navigation',
 			            'container'   		=> 'false',
 			        );
 			        ?>
 					<?php wp_nav_menu( $args ); ?>
-				</nav><!-- .main_navigation -->
+				</nav><!-- .main-navigation -->
 			</div>
 		</div><!-- .col -->
 
-	</div><!-- .nav_wrap_full -->
+	</div><!-- .wrap-full -->
 
-</header><!-- .main_header -->
-
-<div id="content" class="site-content">
+</header><!-- .main-header -->

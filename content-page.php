@@ -1,27 +1,27 @@
 <?php
 /**
- * The template used for displaying page content in page.php
- *
- * @package Malinky Media
+ * The template part for displaying all pages in page.php.
  */
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-	</header><!-- .entry-header -->
 
-	<div class="entry-content">
+	<header class="content-header">
+		<h1 class="content-header__title"><?php the_title(); ?></h1>
+	</header><!-- .content-header -->
+
+	<div class="content-main">
 		<?php the_content(); ?>
 		<?php
 			wp_link_pages( array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'malinky-media' ),
+				'before' => '<div class="page-links">' . __( 'Pages:', 'malinky' ),
 				'after'  => '</div>',
 			) );
 		?>
-	</div><!-- .entry-content -->
+	</div><!-- .content-main -->
 
-	<footer class="entry-footer">
-		<?php edit_post_link( __( 'Edit', 'malinky-media' ), '<span class="edit-link">', '</span>' ); ?>
-	</footer><!-- .entry-footer -->
+	<footer class="content-footer">
+		<?php edit_post_link( __( 'Edit', 'malinky' ), '<span class="edit-link">', '</span>' ); ?>
+	</footer><!-- .content-footer -->
+
 </article><!-- #post-## -->

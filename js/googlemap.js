@@ -10,7 +10,7 @@ function malinky_initialize()
         scrollwheel: false,
     };
 
-    var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
     /*
      * Marker.

@@ -1,45 +1,51 @@
 <?php
 /**
- * The template for displaying search results pages.
- *
- * @package Malinky Media
+ * The template for displaying search result pages.
  */
 
 get_header(); ?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+	<main role="main" class="wrap">
 
-		<?php if ( have_posts() ) : ?>
+	<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
-				<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'malinky-media' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-			</header><!-- .page-header -->
+		<div class="col">
+			<div class="col-item col-item-full">
+				<header class="content-header">
+					<h1 class="content-header__title"><?php printf( __( 'Search Results for: %s', 'malinky' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
+				</header><!-- .content-header -->
+			</div>
+		</div>		
 
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
+		<?php while ( have_posts() ) : the_post();
 
-				<?php
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'content', 'search' );
-				?>
+			/**
+			 * Run the loop for the search to output the results.
+			 * If you want to overload this in a child theme then include a file
+			 * called content-search.php and that will be used instead.
+			 */
+			?>
+			<div class="col">
+				<div class="col-item col-item-full">
+					<?php get_template_part( 'content', 'search' ); ?>
+				</div>
+			</div>				
 
-			<?php endwhile; ?>
+		<?php endwhile; //end loop.
 
-			<?php malinky_media_paging_nav(); ?>
+		malinky_paging_nav();
 
-		<?php else : ?>
+	else : ?>
 
-			<?php get_template_part( 'content', 'none' ); ?>
+		<div class="col">
+			<div class="col-item col-item-full">
+				<?php get_template_part( 'content', 'none' ); ?>
+			</div>
+		</div>				
 
-		<?php endif; ?>
+	<?php endif; ?>
 
-		</main><!-- #main -->
-	</section><!-- #primary -->
+	</main><!-- .main -->
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

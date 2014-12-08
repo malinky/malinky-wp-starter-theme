@@ -34,7 +34,7 @@ get_header(); ?>
 
 			<?php endwhile; ?>
 
-			<?php malinky_media_paging_nav(); ?>
+			<?php malinky_paging_nav(); ?>
 
 		<?php else : ?>
 

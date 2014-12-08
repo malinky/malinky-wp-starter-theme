@@ -1,29 +1,26 @@
 <?php
 /**
- * The template part for displaying results in search pages.
- *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
- *
- * @package Malinky Media
+ * The template part for displaying search result pages in search.php.
  */
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title( sprintf( '<h1 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h1>' ); ?>
 
-		<?php if ( 'post' == get_post_type() ) : ?>
-		<div class="entry-meta">
-			<?php malinky_media_posted_on(); ?>
-		</div><!-- .entry-meta -->
-		<?php endif; ?>
-	</header><!-- .entry-header -->
+	<header class="content-header">
+		<h2 class="content-header__title"><a href="<?php esc_url( get_permalink() ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+		<?php if ( get_post_type() == 'post' ) { ?>
+			<div class="content-header__meta">
+				<?php malinky_posted_on(); ?>
+			</div><!-- .content-header__meta -->
+		<?php } ?>
+	</header><!-- .content-header -->
 
-	<div class="entry-summary">
+	<div class="content-summary">
 		<?php the_excerpt(); ?>
-	</div><!-- .entry-summary -->
+	</div><!-- .content-summary -->
 
-	<footer class="entry-footer">
-		<?php malinky_media_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+	<footer class="content-footer">
+		<?php malinky_entry_footer(); ?>
+	</footer><!-- .content-footer -->
+	
 </article><!-- #post-## -->

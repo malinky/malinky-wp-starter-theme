@@ -1,8 +1,6 @@
 <?php
 /**
- * Malinky Media functions
- *
- * @package Malinky Media
+ * Functions
  */
 
 
@@ -23,7 +21,8 @@
  * Theme Setup
  * ------------------------------------------------------------------------ */
 
-if ( ! function_exists( 'malinky_media_setup' ) ) :
+if ( ! function_exists( 'malinky_setup' ) ) {
+
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
@@ -31,36 +30,99 @@ if ( ! function_exists( 'malinky_media_setup' ) ) :
 	 * runs before the init hook. The init hook is too late for some features, such
 	 * as indicating support for post thumbnails.
 	 */
-	function malinky_media_setup() {
+	function malinky_setup() {
 
-		/*
+		/**
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.
-		 * If you're building a theme based on Malinky Media, use a find and replace
-		 * to change 'malinky-media' to the name of your theme in all the template files
+		 * If you're building a theme based on Malinky Media, use a find and replace.
+		 * to change 'malinky' to the name of your theme in all the template files.
 		 *
 		 * @link http://codex.wordpress.org/Function_Reference/load_theme_textdomain
 		 */
-		load_theme_textdomain( 'malinky-media', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'malinky', get_template_directory() . '/languages' );
 
 
-		/*
-		 * Enable support for Post Thumbnails.
+		/* -------------------------------- *
+		 * Theme Support Section
+		 * -------------------------------- */
+
+		/**
+		 * Enable support for Post Formats. A Child Theme overwrites these if redefined.
+		 * Create different templates to display each of these content types.
 		 *
+		 * @link http://codex.wordpress.org/Post_Formats
+		 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Formats
+		 */
+		add_theme_support( 'post-formats', array(
+			'aside', 'image', 'video', 'audio', 'quote', 'link', 'gallery',
+		) );
+
+
+		/**
+		 * Enable support for Post Thumbnails. Is actually called Featured Image which can be attached to a post/page.
+		 *
+		 * @link http://codex.wordpress.org/Post_Thumbnails
 		 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
 		 */
 		add_theme_support( 'post-thumbnails' );
 
 
-		/*
+		/**
+		 * Enable support for Custom Background. This is then added to Appearance menu.
+ 		 *
+		 * @link http://codex.wordpress.org/Custom_Backgrounds
+		 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Custom_Background
+		 */
+		add_theme_support( 'custom-background' );
+
+
+		/**
+		 * Enable support for Custom Header. This is then added to Appearance menu.
+ 		 *
+		 * @link http://codex.wordpress.org/Custom_Headers
+		 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Custom_Header
+		 */
+		add_theme_support( 'custom-header' );
+
+
+		/**
+		 * Add RSS feed links.
+		 * These aren't added but if they are can also be removed from an action.
+		 * remove_action('wp_head', 'feed_links', 2);
+		 * remove_action('wp_head', 'feed_links_extra', 3);
+ 		 *
+		 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Feed_Links
+		 */
+		//add_theme_support( 'automatic-feed-links' );
+
+
+		/**
+		 * Enable support for HTML5 markup.
+		 */
+		add_theme_support( 'html5', array(
+			'comment-list', 'comment-form', 'search-form', 'gallery', 'caption'
+		) );
+
+		/**
+		 * Enable support for Title Tag. Don't understand this fully so disabled.
+		 */
+		//add_theme_support( 'title-tag' );
+
+
+		/* -------------------------------- *
+		 * Image Sizes Section
+		 * -------------------------------- */
+
+		/**
 		 * Featured image size.
 		 *
 		 * @link http://codex.wordpress.org/Function_Reference/set_post_thumbnail_size
 		 */
 		//set_post_thumbnail_size( $width, $height, $crop );
-		
+	
 
-		/*
+		/**
 		 * Additional image sizes.
 		 *
 		 * @link http://codex.wordpress.org/Function_Reference/add_image_size
@@ -68,57 +130,25 @@ if ( ! function_exists( 'malinky_media_setup' ) ) :
 		//add_image_size( $name, $width, $height, $crop );
 
 		
-		/*
+		/* -------------------------------- *
+		 * Other Section
+		 * -------------------------------- */
+
+		/**
 		 * Register theme navigations. This uses a main navigation and footer in two locations.
 		 *
 		 * @link http://codex.wordpress.org/Function_Reference/register_nav_menu
 		 */
 		register_nav_menus( array(
-			'main_navigation' 	=> __( 'Main Navigation', 'malinky-media' ),
-			'footer_navigation' => __( 'Footer Navigation', 'malinky-media' ),
+			'primary_navigation' 	=> __( 'Primary Navigation', 'malinky' ),
+			'footer_navigation' => __( 'Footer Navigation', 'malinky' ),
 		) );
-
-
-		/*
-		 * CHECK
-		 * Switch default core markup for search form, comment form, and comments
-		 * to output valid HTML5.
-		 */
-		add_theme_support( 'html5', array(
-			'search-form', 'comment-form', 'comment-list', 'gallery', 'caption',
-		) );
-
-
-		/*
-		 * CHECK
-		 * Enable support for Post Formats.
-		 * See http://codex.wordpress.org/Post_Formats
-		 */
-		add_theme_support( 'post-formats', array(
-			'aside', 'image', 'video', 'audio', 'quote', 'link', 'gallery',
-		) );
-
-
-		/*
-		 * CHECK
-		 * Set up the WordPress core custom background feature.
-		 */
-		add_theme_support( 'custom-background', apply_filters( 'malinky_media_custom_background_args', array(
-			'default-color' => 'ffffff',
-			'default-image' => '',
-		) ) );
-
-
-		/*
-		 * CHECK
-		 * This theme uses its own gallery styles.
-		 */
-		add_filter( 'use_default_gallery_style', '__return_false' );
 
 	}
-endif;
 
-add_action( 'after_setup_theme', 'malinky_media_setup' );
+}
+
+add_action( 'after_setup_theme', 'malinky_setup' );
 
 
 
@@ -130,7 +160,7 @@ add_action( 'after_setup_theme', 'malinky_media_setup' );
 /**
  * Load WP jQuery and jQuery migrate in the footer.
  */
-function malinky_media_init()
+function malinky_init()
 {
 	
 	if ( ! is_admin() ) {
@@ -157,7 +187,7 @@ function malinky_media_init()
 	}
 
 }
-add_action( 'init', 'malinky_media_init' );
+add_action( 'init', 'malinky_init' );
 
 
 
@@ -170,16 +200,16 @@ add_action( 'init', 'malinky_media_init' );
 /**
  * Enqueue frontend scripts
  */
-function malinky_media_scripts()
+function malinky_scripts()
 {
 
-	/*
+	/**
 	 * Stylesheet which includes normalize.
 	 */
-	wp_enqueue_style( 'malinky-media-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'malinky-style', get_stylesheet_uri() );
 
 
-	/*
+	/**
 	 * Dashicons font.
 	 *
 	 * @link https://developer.wordpress.org/resource/dashicons
@@ -187,124 +217,113 @@ function malinky_media_scripts()
 	wp_enqueue_style( 'dashicons' );
 
 
-	/*
+	/**
 	 * Font awesome font.
 	 *
 	 * @link http://fortawesome.github.io/Font-Awesome/
 	 */		
-	wp_register_style( 'malinky-media-font-awesome',
+	wp_register_style( 'malinky-font-awesome',
 					   '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css',
 						false,
 						NULL
 	);
-	wp_enqueue_style( 'malinky-media-font-awesome' );
+	wp_enqueue_style( 'malinky-font-awesome' );
 
 
-	/*
+	/**
 	 * Modernizr which includes html5shiv.
 	 *
 	 * @link http://modernizr.com/
 	 * @link https://github.com/aFarkas/html5shiv
 	 */
-	wp_register_script( 'malinky-media-modernizr-js',
+	wp_register_script( 'malinky-modernizr-js',
 						get_template_directory_uri() . '/js/modernizr-2.8.3.js',
 						false,
 						NULL
 	);
-	wp_enqueue_script( 'malinky-media-modernizr-js' );
+	wp_enqueue_script( 'malinky-modernizr-js' );
 
 
 	/*
 	 * Malinky Media related javascript and jQuery.
 	 */
-	wp_register_script( 'malinky-media-main-js',
+	wp_register_script( 'malinky-main-js',
 						get_template_directory_uri() . '/js/main.js',
 						array( 'jquery' ),
 						NULL,
 						true
 	);
-	wp_enqueue_script( 'malinky-media-main-js' );
+	wp_enqueue_script( 'malinky-main-js' );
 
 
-	/*
+	/**
 	 * Retina.
 	 *
 	 * @link http://imulus.github.io/retinajs/
 	 */
-	wp_register_script( 'malinky-media-retina-js',
+	wp_register_script( 'malinky-retina-js',
 						get_template_directory_uri() . '/js/retina.js',
 						false,
 						NULL,
 						true
 	);
-	wp_enqueue_script( 'malinky-media-retina-js' );
+	wp_enqueue_script( 'malinky-retina-js' );
 
 
-	/*
+	/**
 	 * Google Map Set Up.
 	 *
 	 * @link https://developers.google.com/maps/documentation/javascript/
 	 */
-	wp_register_script( 'malinky-media-googlemap-js',
+	wp_register_script( 'malinky-googlemap-js',
 						get_template_directory_uri() . '/js/googlemap.js',
 						false,
 						NULL,
 						true
 	);
-	wp_enqueue_script( 'malinky-media-googlemap-js' );
+	wp_enqueue_script( 'malinky-googlemap-js' );
 
 
-	/*
+	/**
 	 * Load Google maps API.
 	 * Uses malinky_initialize function which is in googlemap.js.
 	 * Remember to set API Key.
 	 *
 	 * @link https://developers.google.com/maps/documentation/javascript/tutorial
 	 */		
-	wp_register_script( 'malinky-media-googlemap-api-js',
-					   'https://maps.googleapis.com/maps/api/js?key=AIzaSyDSAift8RvCD1f4HioiWU8sOyD1qCsdduM&callback=malinky_initialize',
+	wp_register_script( 'malinky-googlemap-api-js',
+					   'https://maps.googleapis.com/maps/api/js?key=AIzaSyAAJgPDU4N6eWSgDP_D5t9wGWKw-2qP3ig&callback=malinky_initialize',
 						false,
 						NULL,
 						true
 	);
-	wp_enqueue_script( 'malinky-media-googlemap-api-js' );
+	wp_enqueue_script( 'malinky-googlemap-api-js' );
 
 
-	/*
+	/**
 	 * Load contact validation scripts.
 	 */
 	if ( is_page( 'contact' ) ) {
 
-		wp_register_script( 'malinky-media-validate-js',
+		wp_register_script( 'malinky-validate-js',
 							get_template_directory_uri() . '/js/jquery.validate.min.js',
 							false,
 							NULL,
 							true
 		);
-		wp_register_script( 'malinky-media-contact',
+		wp_register_script( 'malinky-contact',
 							get_template_directory_uri() . '/js/contact-validate.min.js',
 							array( 'plaay-validate-js' ),
 							NULL,
 							true
 		);
-		wp_enqueue_script( 'malinky-media-contact' );
+		wp_enqueue_script( 'malinky-contact' );
 
 	}
 
-
-	//wp_enqueue_script( 'malinky-media-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
-
-
-	//wp_enqueue_script( 'malinky-media-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
-
-
-	/*if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}*/
-
 }
 
-add_action( 'wp_enqueue_scripts', 'malinky_media_scripts' );
+add_action( 'wp_enqueue_scripts', 'malinky_scripts' );
 
 
 
@@ -319,20 +338,22 @@ add_action( 'wp_enqueue_scripts', 'malinky_media_scripts' );
  *
  * @link http://codex.wordpress.org/Function_Reference/register_sidebar
  */
-function malinky_media_widgets_init()
+function malinky_widgets_init()
 {
+
 	register_sidebar( array(
-		'name'          => __( 'Sidebar', 'malinky-media' ),
+		'name'          => __( 'Sidebar', 'malinky' ),
 		'id'            => 'sidebar-1',
-		'description'   => '',
+		'description'   => __( 'Main sidebar that appears on the left.', 'malinky' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
 		'before_title'  => '<h1 class="widget-title">',
 		'after_title'   => '</h1>',
 	) );
+
 }
 
-add_action( 'widgets_init', 'malinky_media_widgets_init' );
+add_action( 'widgets_init', 'malinky_widgets_init' );
 
 
 
@@ -347,29 +368,29 @@ add_action( 'widgets_init', 'malinky_media_widgets_init' );
  *
  * @return string
  */
-function malinky_media_login_logo_url()
+function malinky_login_logo_url()
 {
 	return esc_url ( site_url( '', 'http' ) );
 }
 
-add_filter( 'login_headerurl', 'malinky_media_login_logo_url' );
+add_filter( 'login_headerurl', 'malinky_login_logo_url' );
 
 
 /**
  * Remove shake on login.
  */
-function malinky_media_login_shake()
+function malinky_login_shake()
 {
     remove_action( 'login_head', 'wp_shake_js', 12 );
 }
 
-add_action( 'login_head', 'malinky_media_login_shake' );
+add_action( 'login_head', 'malinky_login_shake' );
 
 
 /**
  * Style login logo and page.
  */
-function malinky_media_login_screen()
+function malinky_login_screen()
 { ?>
     <style type="text/css">
     	body.login {
@@ -463,7 +484,7 @@ function malinky_media_login_screen()
     </style>
 <?php }
 
-add_action( 'login_enqueue_scripts', 'malinky_media_login_screen' );
+add_action( 'login_enqueue_scripts', 'malinky_login_screen' );
 
 
 
@@ -475,8 +496,6 @@ add_action( 'login_enqueue_scripts', 'malinky_media_login_screen' );
 
 remove_action('wp_head', 'wp_generator');
 remove_action('wp_head', 'wlwmanifest_link'); // Display the link to the Windows Live Writer manifest file.
-remove_action('wp_head', 'feed_links', 2); // Display the links to the general feeds: Post and Comment Feed
-remove_action('wp_head', 'feed_links_extra', 3); // Display the links to the extra feeds such as category feeds
 remove_action('wp_head', 'rsd_link'); // Display the link to the Really Simple Discovery service endpoint, EditURI link. xmlrpc.php
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
@@ -484,7 +503,7 @@ remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 /**
  * Add page slug to body class. Credit: Starkers Wordpress Theme.
  */
-function malinky_media_add_slug_to_body_class($classes)
+function malinky_add_slug_to_body_class($classes)
 {
 
     global $post;
@@ -512,13 +531,13 @@ function malinky_media_add_slug_to_body_class($classes)
 
 }
 
-add_filter( 'body_class', 'malinky_media_add_slug_to_body_class' ); // Add slug to body class (Starkers build)
+add_filter( 'body_class', 'malinky_add_slug_to_body_class' ); // Add slug to body class (Starkers build)
 
 
 /**
  * Remove wp_head() injected recent comment styles.
  */
-function malinky_media_remove_recent_comments_style()
+function malinky_remove_recent_comments_style()
 {
 
     global $wp_widget_factory;
@@ -532,7 +551,7 @@ function malinky_media_remove_recent_comments_style()
 
 }
 
-add_action('widgets_init', 'malinky_media_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
+add_action('widgets_init', 'malinky_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
 
 
 /**
@@ -564,7 +583,7 @@ show_admin_bar( false );
  *
  * @return string
  */
-function malinky_media_tree()
+function malinky_tree()
 {
 	$parent_post_name = '';
   	if( is_page() ) {
@@ -588,7 +607,7 @@ function malinky_media_tree()
  * @param int $length
  * @return string
  */
-function malinky_media_truncate_words( $text, $length )
+function malinky_truncate_words( $text, $length )
 {
    $length = abs( ( int) $length );
    if( strlen( $text ) > $length ) {
@@ -605,6 +624,143 @@ function malinky_media_truncate_words( $text, $length )
  * Template Tags
  * ------------------------------------------------------------------------ */
 
+if ( ! function_exists( 'malinky_posted_on' ) )
+{
+	/**
+	 * Prints HTML with meta information for the current post-date/time and author.
+	 */
+	function malinky_posted_on()
+	{
+
+		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+		}
+
+		$time_string = sprintf( $time_string,
+			esc_attr( get_the_date( 'c' ) ),
+			esc_html( get_the_date() ),
+			esc_attr( get_the_modified_date( 'c' ) ),
+			esc_html( get_the_modified_date() )
+		);
+
+		$posted_on = sprintf(
+			_x( 'Posted on %s', 'post date', 'malinky' ),
+			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+		);
+
+		$byline = sprintf(
+			_x( 'by %s', 'post author', 'malinky' ),
+			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+		);
+
+		echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>';
+
+	}
+
+}
+
+
+if ( ! function_exists( 'malinky_entry_footer' ) )
+{
+
+	/**
+	 * Prints HTML with meta information for the categories, tags and comments.
+	 */
+	function malinky_entry_footer()
+	{
+		// Hide category and tag text for pages.
+		if ( 'post' == get_post_type() ) {
+			/* translators: used between list items, there is a space after the comma */
+			$categories_list = get_the_category_list( __( ', ', 'malinky' ) );
+			if ( $categories_list && malinky_categorized_blog() ) {
+				printf( '<span class="cat-links">' . __( 'Posted in %1$s', 'malinky' ) . '</span>', $categories_list );
+			}
+
+			/* translators: used between list items, there is a space after the comma */
+			$tags_list = get_the_tag_list( '', __( ', ', 'malinky' ) );
+			if ( $tags_list ) {
+				printf( '<span class="tags-links">' . __( 'Tagged %1$s', 'malinky' ) . '</span>', $tags_list );
+			}
+		}
+
+		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+			echo '<span class="comments-link">';
+			comments_popup_link( __( 'Leave a comment', 'malinky' ), __( '1 Comment', 'malinky' ), __( '% Comments', 'malinky' ) );
+			echo '</span>';
+		}
+
+		edit_post_link( __( ' | Edit', 'malinky' ), '<span class="edit-link">', '</span>' );
+
+	}
+
+}
+
+
+if ( ! function_exists( 'malinky_post_nav' ) )
+{
+
+	/**
+	 * Display navigation to next/previous post when applicable.
+	 */
+	function malinky_post_nav()
+	{
+
+		// Don't print empty markup if there's nowhere to navigate.
+		$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
+		$next     = get_adjacent_post( false, '', false );
+
+		if ( ! $next && ! $previous ) return; ?>
+
+		<nav class="navigation post-navigation" role="navigation">
+			<div class="nav-links">
+				<?php
+					previous_post_link( '<div class="nav-previous">%link</div>', _x( '<span class="meta-nav">&larr;</span>&nbsp;%title', 'Previous post link', 'malinky' ) );
+					next_post_link(     '<div class="nav-next">%link</div>',     _x( '%title&nbsp;<span class="meta-nav">&rarr;</span>', 'Next post link',     'malinky' ) );
+				?>
+			</div><!-- .nav-links -->
+		</nav><!-- .navigation -->
+		<?php
+
+	}
+
+}
+
+
+if ( ! function_exists( 'malinky_paging_nav' ) )
+{
+
+	/**
+	 * Display navigation to next/previous set of posts when applicable.
+	 */
+	function malinky_paging_nav()
+	{
+
+		// Don't print empty markup if there's only one page.
+		if ( $GLOBALS['wp_query']->max_num_pages < 2 ) {
+			return;
+		}
+		?>
+		<nav class="navigation paging-navigation" role="navigation">
+			<h1 class="screen-reader-text"><?php _e( 'Posts navigation', 'malinky' ); ?></h1>
+			<div class="nav-links">
+
+				<?php if ( get_next_posts_link() ) : ?>
+				<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'malinky' ) ); ?></div>
+				<?php endif; ?>
+
+				<?php if ( get_previous_posts_link() ) : ?>
+				<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'malinky' ) ); ?></div>
+				<?php endif; ?>
+
+			</div><!-- .nav-links -->
+		</nav><!-- .navigation -->
+		<?php
+
+	}
+
+}
+
 
 
 
@@ -612,12 +768,6 @@ function malinky_media_truncate_words( $text, $length )
 /* ------------------------------------------------------------------------ *
  * CHECK
  * ------------------------------------------------------------------------ */
-
-/**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
-
 
 /**
  * Custom template tags for this theme.
@@ -635,9 +785,3 @@ require get_template_directory() . '/inc/extras.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
-
-
-/**
- * Load Jetpack compatibility file.
- */
-require get_template_directory() . '/inc/jetpack.php';

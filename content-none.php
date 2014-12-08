@@ -1,33 +1,32 @@
 <?php
 /**
- * The template part for displaying a message that posts cannot be found.
- *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
- *
- * @package Malinky Media
+ * The template part for no posts to display in archives.php, index.php and search.php
  */
 ?>
+<article>
 
-<section class="no-results not-found">
-	<header class="page-header">
-		<h1 class="page-title"><?php _e( 'Nothing Found', 'malinky-media' ); ?></h1>
-	</header><!-- .page-header -->
+	<header class="content-header">
+		<h1 class="content-header__title">Nothing Found</h1>
+	</header><!-- .content-header -->
 
-	<div class="page-content">
-		<?php if ( is_home() && current_user_can( 'publish_posts' ) ) : ?>
+	<div class="content-main">
 
-			<p><?php printf( __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'malinky-media' ), esc_url( admin_url( 'post-new.php' ) ) ); ?></p>
+		<?php if ( is_home() && current_user_can( 'publish_posts' ) ) { ?>
 
-		<?php elseif ( is_search() ) : ?>
+			<p><?php printf( __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'malinky' ), esc_url( admin_url( 'post-new.php' ) ) ); ?></p>
 
-			<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'malinky-media' ); ?></p>
+		<?php } elseif ( is_search() ) { ?>
+
+			<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'malinky' ); ?></p>
 			<?php get_search_form(); ?>
 
-		<?php else : ?>
+		<?php } else { ?>
 
-			<p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'malinky-media' ); ?></p>
+			<p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'malinky' ); ?></p>
 			<?php get_search_form(); ?>
 
-		<?php endif; ?>
-	</div><!-- .page-content -->
-</section><!-- .no-results -->
+		<?php } ?>
+
+	</div><!-- .content-main -->
+
+</article>
