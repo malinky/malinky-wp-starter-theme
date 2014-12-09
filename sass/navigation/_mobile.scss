@@ -1,0 +1,191 @@
+/*
+ * Holder for mobile navigation.
+ * The menu bar that is clicked to display the .mobile-navigation.
+ * 1. Set to 41px keeps the main section at 40px especially when used with a bottom border.
+ */
+.mobile-navigation-bar {
+    display: none;
+    position: fixed;
+    width: 100%; 
+    z-index: 9999;
+    background: #ccc;
+    height: 41px; /* 1 */
+    top: 0px;
+    border-bottom: 1px solid #fff;
+}
+
+/*
+ * The mobile menu that slides in or down.
+ * 1. Set to the same height as .mobile-navigation-bar.
+ */
+.mobile-navigation {    
+    position: fixed;
+    bottom: 0;
+    left: -100%;
+    overflow-y: auto;
+    width: 100%;
+    top: 41px; /* 1 */ 
+    background: #ccc;
+    padding: 0;
+    margin: 0;
+    -webkit-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    -moz-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    -o-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);    
+}
+
+.mobile-navigation-show {
+    left: 0;
+}
+
+/*
+ * Add to the body in js to ensure scrolling works correctly when the menu is longer than the page.
+ */
+.mobile-navigation-show-body {
+    overflow: hidden;
+}
+
+/*
+ * Mobile All Levels.
+ */
+.mobile-navigation ul {
+    list-style: none;
+    margin: 0;
+}
+
+/*
+ * Mobile First Level.
+ * 1. Remove margin previously set.
+ */
+.mobile-navigation ul li {
+    display: block;
+    margin: 0; /* 1 */
+    background: #ccc;
+    border-top: 1px solid #fff;
+}
+
+/*
+ * Remove double top border on first item if .mobile-navigation has a bottom border set.
+ */
+.mobile-navigation > ul > li:first-child {
+    border-top: none;
+}
+
+/*
+ * All Levels.
+ * Mobile navigation link style.
+ */
+.mobile-navigation ul li a:link,
+.mobile-navigation ul li a:visited {
+    display: block;
+    padding: 7px 0 7px 7px;
+    color: #fff;
+    text-decoration: none;
+}
+
+/*
+ * All Levels.
+ * Mobile navigation hover style.
+ */
+.mobile-navigation ul li a:hover {
+    color: #fff;
+    background: #666;
+}
+
+/*
+ * Mobile Second Level.
+ * Mobile navigation link style.
+ */ 
+.mobile-navigation ul ul li a:link,
+.mobile-navigation ul ul li a:visited
+{
+    display: block;
+    padding: 7px 0 7px 21px;
+    color: #fff;
+    text-decoration: none;
+}
+
+/*
+ * Mobile Third Level.
+ * Mobile navigation link style.
+ */
+.mobile-navigation ul ul ul li a:link,
+.mobile-navigation ul ul ul li a:visited
+{
+    display: block;
+    padding: 7px 0 7px 35px;
+    color: #fff;
+    text-decoration: none;
+}
+
+/*
+ * Overide <a> styles for image fonts (dashicons / font awesome).
+ */
+a.image-font {
+    text-decoration: none;
+} 
+
+/*
+ *  Position so sits in middle of navigation.
+ *  1. Set to same height of .mobile-navigation-bar. Also give full height clickable.
+ * .image-font__Element.
+ */
+.image-font__sizing {
+    font-size: 2.142857em; /* 30/14 */
+    color: #fff;  
+    display: inline-block;  
+    vertical-align: text-top;
+    height: 40px; /* 1 */
+    margin-right: 8px; 
+    -webkit-transition: color .1s ease-in 0;
+    transition: color .1s ease-in 0;
+}
+
+/*
+ * Use my own reference to the image fonts so I control all styling not their stylsheets.
+ * .image-font__Element.
+ */
+.image-font__dashicons {
+    font-family: 'dashicons';
+}
+
+/*
+ * Use my own reference to the image fonts so I control all styling not their stylsheets.
+ * .image-font__Element.
+ */
+.image-font__fontawesome {
+    font-family: 'FontAwesome';
+}
+
+/*
+ * Set the position for images instead of image fonts. Try and not use.
+ * Ensure graphic is 22px square and 44px square @2x.
+ 1. Set to same height of .mobile-navigation-bar. Also give full height clickable.
+ */
+a.mobile-navigation-image {
+    position: relative;
+    top: -2px;
+    display: inline-block;
+    line-height: 40px; /* 1 */
+    margin-right: 8px;    
+}
+
+@media screen and (max-width: 767px) {
+
+    .mobile-navigation-bar,
+    .main-navigation-bar-fixed {
+        display: block;
+    }
+
+    .main-navigation-bar,
+    .main-navigation-bar-fixed {
+        display: none;
+    }
+
+}
+
+.current-page-item > a,
+.current-menu-item > a,
+.current-page-ancestor > a {
+    text-decoration: underline;
+}

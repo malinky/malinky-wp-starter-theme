@@ -1,0 +1,45 @@
+
+.alignleft {
+    display: inline;
+    float: left;
+    margin: 0 21px 0 0;
+}
+
+.alignright {
+    display: inline;
+    float: right;
+    margin: 0 0 0 21px;
+}
+
+.aligncenter {
+    clear: both;
+    display: block;
+    margin: 0 auto;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440. H5BP.
+ */
+audio,
+canvas,
+img,
+video {
+    vertical-align: middle;
+}

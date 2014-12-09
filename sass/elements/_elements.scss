@@ -1,19 +1,65 @@
 hr {
-	background-color: $color__background-hr;
-	border: 0;
-	height: 1px;
-	margin-bottom: 1.5em;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #e5e5e5;
+  margin-bottom: 1em;
+  padding: 0;
 }
 
-@import "lists";
+hr.double {
+    border-top: 2px solid #e5e5e5;
+}
+
+ul,
+ol {
+    margin: 0 0 21px 1.5em;
+}
+
+ul {
+    list-style: disc;
+}
+
+ol {
+    list-style: decimal;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+li > ul,
+li > ol {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin: 0 0 21px 3em;
+}
 
 img {
-	height: auto; /* Make sure images are scaled correctly. */
-	max-width: 100%; /* Adhere to container width. */
+    vertical-align: middle;
+    max-width: 100%;
 }
+
+img.non-responsive {
+    max-width: none;
+} 
 
 figure {
-	margin: 0;
+    margin: 0;
 }
 
-@import "tables";
+table {
+    margin: 0 0 21px 0;
+    width: 100%;
+}
+
+th {
+    text-align: left;
+}

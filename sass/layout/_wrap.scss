@@ -1,0 +1,35 @@
+/*
+ * Used for a full width block.
+ */
+.wrap-full {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/*
+ * Used for inner of full width block or standalone non full width block.
+ */
+.wrap {
+    max-width: 990px;
+    margin: 0 auto;
+    padding: 0 5px; /* 1 */
+}
+
+/*
+ * Add color or image to full width background.
+ * .wrap--Modifier. 
+ */
+.wrap--bkg {
+
+}
+
+/*
+ * Nudge whole wrap to site below fixed navigation.
+ */
+@media screen and (max-width: 767px) {
+
+    .wrap-mobile {
+        margin-top: 40px;
+    }
+
+}

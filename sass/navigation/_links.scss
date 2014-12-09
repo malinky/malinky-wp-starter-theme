@@ -1,12 +1,21 @@
-a {
-	color: $color__link;
-
-	&:visited {
-		color: $color__link-visited;
-	}
-	&:hover,
-	&:focus,
-	&:active {
-		color: $color__link-hover;
-	}
+a,
+a:visited {
+    color: blue;
+    text-decoration: none;
 }
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: underline;
+}
+
+a.back-top {
+    position: fixed;
+    right: 30px;
+    bottom: 70px;
+    font-size: 3em; /* 42/14 */
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 9998;
+} 

@@ -1,0 +1,162 @@
+/*
+ * Used for fixed .main-navigation (not mobile).
+ * 1. Hide off screen set to same as height.
+ * .wrap-full--Modifier.
+ */
+.wrap-full--full-fixed {
+    position: fixed;
+    height: 41px; /* 1 */    
+    top: -41px; /* 1 */
+    z-index: 100000;
+}
+
+/*
+ * Class added via js to slide in fixed .main-navigation (not mobile).
+ * .wrap-full--Modifier--Modifier.
+ */
+.wrap-full--full-fixed--js-show {
+    top: 0;
+    -webkit-transition: top 0.5s;
+    transition: top 0.5s;
+}
+
+/*
+ * Holder for main navigation.
+ */
+.main-navigation-bar {
+}
+
+/*
+ * Add color or image to full width background.
+ * .main-navigation-bar--Modifier. 
+ */
+.main-navigation-bar--bkg {
+    background: #ccc;
+}
+
+/*
+ * 1. Set to height of navigation.
+ * 2. Set line-height of navigation for vertical centre.
+*/
+.main-navigation {
+    position: relative;
+    height: 70px;
+    line-height: 70px;
+    /*border-bottom: 2px solid #666;*/
+}
+
+/*
+ * Applied to <nav> .main-navigation for a fixed main-navigation (not on mobile).
+ * Overwrite any unwanted styles from .main-navigation as this is a Modifier..
+ * .main-navigation--Modifier.
+ */
+.main-navigation--fixed {
+    line-height: 40px;
+    border: none;
+}
+
+/*
+ * All Levels.
+ */
+.main-navigation ul {
+    list-style: none;
+    margin: 0;
+}
+
+/*
+ * All Levels.
+ * 1. Nudge hover down to bottom border.
+ */
+.main-navigation ul li {
+    display: inline-block;    
+    margin: 0 10px;
+    padding-bottom: 7px; /* 1 */
+}
+
+/*
+ * All Levels.
+ */
+.main-navigation ul li:first-child {
+    margin-left: 0;
+}
+
+/*
+ * All Levels.
+ * Main navigation link style.
+ * 1. Nudge hover down to bottom border.
+ */
+.main-navigation ul li a:link,
+.main-navigation ul li a:visited
+{
+    color: #666;
+    padding-bottom: 7px; /* 1 */
+}
+
+/*
+ * All Levels.
+ * Main navigation hover style.
+ */
+.main-navigation ul li a:hover {
+    text-decoration: underline;
+}
+
+/*
+ * Second and Third Level.
+ * This makes the dropdown boxed in.
+ * 1. Top margin needs settings to -ve value of border-bottom in .main-navigation if set.
+ * Can also set to -ve as below to merge dropdown into main nav.
+ * 2. Reset from .main-navigation.
+ */
+.main-navigation ul ul {
+    display: none;
+    position: absolute;
+    z-index: 999;
+    background: #fff;
+    border: 2px solid #ccc;
+    margin: -2px 0 0 0; /* 1 */
+    padding: 15px 0 0 15px;
+    line-height: initial; /* 2 */   
+}
+
+/*
+ * Second and Third Level Show.
+ */
+.main-navigation ul li:hover > ul {
+    display: block;
+}
+
+/*
+ * Second and Third Level.
+ */
+.main-navigation ul ul li
+{
+    display: block;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0 15px 15px 0;
+}
+
+/*
+ * Third Level Position.
+ */
+.main-navigation ul ul ul
+{
+    top: 0;
+    left: 100%;
+    margin-top: -2px;
+}
+
+/*
+ * Second and Third Level.
+ * Overide .main-navigation link style.
+ */
+.main-navigation ul ul a:link,
+.main-navigation ul ul a:visited {
+}
+
+/*
+ * Second and Third Level.
+ * Overide .main-navigation hover style.
+ */
+.main-navigation ul ul a:hover {
+}

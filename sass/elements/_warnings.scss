@@ -1,0 +1,25 @@
+.box {
+    border-radius: 5px;
+    padding: 5px;
+    margin: 21px 0;
+}
+
+.success,
+.success-permanent {
+    color: #0a942a; 
+    background: #ecfef0;
+    border: 1px solid #0A942A;
+}
+
+.error,
+.error-permanent {
+    color: #dc0000; 
+    background-color: #fff6f6;
+    border: 1px solid #dc0000;
+}
+
+.success-plain,
+.error-plain {
+    background: none;
+    border: none;
+}

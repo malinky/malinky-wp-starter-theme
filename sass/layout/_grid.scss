@@ -1,0 +1,477 @@
+/* 
+ * Remove first gutter. negates padding-left on .col-item.
+ */
+.col {
+    margin:0;   
+    padding:0;
+    margin-left: -24px;
+}
+
+/* 
+ * Add top and bottom padding to main .col creating space on page generally between <section>.
+ * .col--Modifier.
+ */
+.col--padding-20 {
+    padding: 40px; 0
+}
+
+/* 
+ * Add top and bottom padding to main .col creating space on page generally between <section>.
+ * .col--Modifier.
+ */
+.col--padding-40 {
+    padding: 40px 0;
+}
+
+/*
+ * When a .col will have vertical alignment from a col-item within it.
+ * Use this on the main .col that sets the overall height of the div.
+ * .col--Modifier.
+ */
+.col--relative {
+    position: relative;
+}
+
+/*
+ * Used on the inner div that will be aligned vertically.
+ * CHECK STANDALONE DIV.
+ */
+.col-relative-inner {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+/*
+ * Span for vertical alignment needs to be empty and before element to align.
+ * CHECK STANDALONE DIV.
+ */
+.vertical-align-outer {
+    height: 100%;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+/*
+ * No gutters or when a background colour is applied or when a background image is added to a whole .col.
+ * .col--Modifier.
+ */
+.col--gutterless,
+.col--bkg-color,
+.col--bkg-img {
+    margin-left: 0;
+}
+
+/*
+ * Removes gutters from all .col-item when .col is set with modifier .col--gutterless.
+ * .col--Modifier.
+ */
+.col--gutterless > .col-item {
+    padding-left: 0;
+}
+
+/*
+ * Can be used inside as a nested .col modifier or inside a .col-item as a standalone div to add background colour and padding.
+ * .col--Modifier.
+ * CHECK STANDALONE DIV. .col-bkg-color.
+ */
+.col--bkg-color,
+.col-bkg-color {
+    background: #f1f1f1;
+    padding: 10px 6px;
+}
+
+/*
+ * Ensures additional padding isn't added on first-child .col-item for both the .col modifier and standalone div version.
+ * .col--Modifier.
+  * CHECK STANDALONE DIV. .col-bkg-color > .col-item:first-child.
+ */
+.col--bkg-color > .col-item:first-child,
+.col--bkg-img > .col-item:first-child,
+.col-bkg-color > .col-item:first-child {
+    padding-left: 0;
+}
+
+/*
+ * Centre an .col.
+ * .col--Modifier.
+ */
+.col--align-center {
+    text-align: center;
+}
+
+/*
+ * Right align .col.
+ * .col--Modifier. 
+ */
+.col--align-right {
+    text-align: right;
+}
+
+/*
+ * When centering an .col make sure to pull the content back to the left.
+ * .col--Modifier.  
+ */
+.col--align-center > .col-item,
+.col--align-right > .col-item {
+    text-align: left;
+}
+
+/*
+ * .col--Modifier. 
+ */
+.col--margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+/*
+ * .col--Modifier. 
+ */
+.col--margin-bottom-40 {
+    margin-bottom: 40px;
+}
+ 
+/*
+ * 1. Instead of floating.
+ * 2. Gutter.
+ * 3. Align inline-block elements.
+ */
+.col-item {
+    display: inline-block; /* 1 */
+    padding-left: 24px; /* 2 */
+    vertical-align: top; /* 3 */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/*
+ * Align .col-item middle.
+ * .col-item--Modifier.
+ */
+.col-item--middle {
+    vertical-align: middle;
+}
+
+/*
+ * Align .col-item bottom.
+ * .col-item--Modifier.
+ */
+.col-item--bottom {
+    vertical-align: bottom;
+}
+
+/*
+ * Align .col-item left. Used to move centered or right align normally with medium-- small-- modifier.
+ * .col-item--Modifier.
+ */
+.col-item--align-left {
+    text-align: left;
+}
+
+/*
+ * Align .col-item center.
+ * .col-item--Modifier.
+ */
+.col-item--align-center {
+    text-align: center;
+}
+
+/*
+ * Align .col-item right.
+ * .col-item--Modifier.
+ */
+.col-item--align-right {
+    text-align: right;
+}
+
+/*
+ * .col-item--Modifier.
+ */
+.col-item--margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+/*
+ * .col-item--Modifier.
+ */
+.col-item--margin-bottom-40 {
+    margin-bottom: 4px;
+}
+
+.col-item-full { width: 100%; }
+
+.col-item-half { width: 50%; }
+
+.col-item-third { width: 33.333% }
+.col-item-two-third { width: 66.666%; }
+
+.col-item-quarter { width: 25%; }
+.col-item-three-quarter { width: 75%; }
+
+.col-item-1-5 { width: 20%; }
+.col-item-2-5 { width: 40%; }
+.col-item-3-5 { width: 60%; }
+.col-item-4-5 { width: 80%; }
+
+.col-item-1-6 { width: 16.666%; }
+.col-item-5-6 { width: 83.333%; }
+
+.col-item-1-8 { width: 12.5%; }
+.col-item-3-8 { width: 37.5%; }
+.col-item-5-8 { width: 62.5%; }
+.col-item-6-8 { width: 75%; }
+.col-item-7-8 { width: 87.5%; }
+
+.col-item-1-10 { width: 10%; }
+.col-item-2-10 { width: 20%; }
+.col-item-3-10 { width: 30%; }
+.col-item-4-10 { width: 40%; }
+.col-item-6-10 { width: 60%; }
+.col-item-7-10 { width: 70%; }
+.col-item-8-10 { width: 80%; }
+.col-item-9-10 { width: 90%; }
+
+@media only screen and (min-width: 768px) and (max-width: 989px) {
+
+    /* 
+     * Add top and bottom padding to main .col creating space on page generally between <section>.
+     * .col--Modifier--Modifier.
+     */
+    .col--padding-20--large {
+        padding: 40px; 0
+    }
+
+    /* 
+     * Add top and bottom padding to main .col creating space on page generally between <section>.
+     * .col--Modifier--Modifier. 
+     */
+    .col--padding-40--large {
+        padding: 40px 0;
+    }
+
+    .col-item-full--large { width: 100%; }
+
+    .col-item-half--large { width: 50%; }
+
+    .col-item-third--large { width: 33.333% }
+    .col-item-two-third--large { width: 66.666%; }
+
+    .col-item-quarter--large { width: 25%; }
+    .col-item-three-quarter--large { width: 75%; }
+
+    .col-item-1-5--large { width: 20%; }
+    .col-item-2-5--large { width: 40%; }
+    .col-item-3-5--large { width: 60%; }
+    .col-item-4-5--large { width: 80%; }
+
+    .col-item-1-6--large { width: 16.666%; }
+    .col-item-5-6--large { width: 83.333%; }
+
+    .col-item-1-8--large { width: 12.5%; }
+    .col-item-3-8--large { width: 37.5%; }
+    .col-item-5-8--large { width: 62.5%; }
+    .col-item-6-8--large { width: 75%; }
+    .col-item-7-8--large { width: 87.5%; }
+
+    .col-item-1-10--large { width: 10%; }
+    .col-item-2-10--large { width: 20%; }
+    .col-item-3-10--large { width: 30%; }
+    .col-item-4-10--large { width: 40%; }
+    .col-item-6-10--large { width: 60%; }
+    .col-item-7-10--large { width: 70%; }
+    .col-item-8-10--large { width: 80%; }
+    .col-item-9-10--large { width: 90%; }
+
+    /*
+     * See full size .col-item above for the below rules.
+     */
+    .col-item--middle--large {
+        vertical-align: middle;
+    }
+
+    .col-item--bottom--large {
+        vertical-align: bottom;
+    }
+
+    .col-item--align-left--large {
+        text-align: left;
+    }
+
+    .col-item--align-center--large {
+        text-align: center;
+    }
+
+    .col-item--align-right--large {
+        text-align: right;
+    }
+
+    .col-item--margin-bottom-20--large {
+        margin-bottom: 20px;
+    }
+
+    .col-item--margin-bottom-40--large {
+        margin-bottom: 40px;
+    }
+
+    /*
+     * Used to make an item full width when it isn't normally.
+     * Faux modifier as .full-width doesn't exist.
+     */
+    .full-width--large {
+        width: 100%;
+    }
+
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+
+    .col-item-full--medium { width: 100%; }
+
+    .col-item-half--medium { width: 50%; }
+
+    .col-item-third--medium { width: 33.333% }
+    .col-item-two-third--medium { width: 66.666%; }
+
+    .col-item-quarter--medium { width: 25%; }
+    .col-item-three-quarter--medium { width: 75%; }
+
+    .col-item-1-5--medium { width: 20%; }
+    .col-item-2-5--medium { width: 40%; }
+    .col-item-3-5--medium { width: 60%; }
+    .col-item-4-5--medium { width: 80%; }
+
+    .col-item-1-6--medium { width: 16.666%; }
+    .col-item-5-6--medium { width: 83.333%; }
+
+    .col-item-1-8--medium { width: 12.5%; }
+    .col-item-3-8--medium { width: 37.5%; }
+    .col-item-5-8--medium { width: 62.5%; }
+    .col-item-6-8--medium { width: 75%; }
+    .col-item-7-8--medium { width: 87.5%; }
+
+    .col-item-1-10--medium { width: 10%; }
+    .col-item-2-10--medium { width: 20%; }
+    .col-item-3-10--medium { width: 30%; }
+    .col-item-4-10--medium { width: 40%; }
+    .col-item-6-10--medium { width: 60%; }
+    .col-item-7-10--medium { width: 70%; }
+    .col-item-8-10--medium { width: 80%; }
+    .col-item-9-10--medium { width: 90%; }
+
+    /*
+     * See full size col-item above for the below rules.
+     */
+    .col-item--middle--medium {
+        vertical-align: middle;
+    }
+
+    .col-item--bottom--medium {
+        vertical-align: bottom;
+    }
+
+    .col-item--align-left--medium {
+        text-align: left;
+    }
+
+    .col-item--align-center--medium {
+        text-align: center;
+    }
+
+    .col-item--align-right--medium {
+        text-align: right;
+    }
+
+    .col-item--margin-bottom-20--medium {
+        margin-bottom: 20px;
+    }
+
+    .col-item--margin-bottom-40--medium {
+        margin-bottom: 40px;
+    }
+
+    /*
+     * Used to make an item full width when it isn't normally.
+     * Faux modifier as .full-width doesn't exist.
+     */
+    .full-width--medium {
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-width: 480px) {
+
+    .col-item-full--small { width: 100%; }
+
+    .col-item-half--small { width: 50%; }
+
+    .col-item-third--small { width: 33.333% }
+    .col-item-two-third--small { width: 66.666%; }
+
+    .col-item-quarter--small { width: 25%; }
+    .col-item-three-quarter--small { width: 75%; }
+
+    .col-item-1-5--small { width: 20%; }
+    .col-item-2-5--small { width: 40%; }
+    .col-item-3-5--small { width: 60%; }
+    .col-item-4-5--small { width: 80%; }
+
+    .col-item-1-6--small { width: 16.666%; }
+    .col-item-5-6--small { width: 83.333%; }
+
+    .col-item-1-8--small { width: 12.5%; }
+    .col-item-3-8--small { width: 37.5%; }
+    .col-item-5-8--small { width: 62.5%; }
+    .col-item-6-8--small { width: 75%; }
+    .col-item-7-8--small { width: 87.5%; }
+
+    .col-item-1-10--small { width: 10%; }
+    .col-item-2-10--small { width: 20%; }
+    .col-item-3-10--small { width: 30%; }
+    .col-item-4-10--small { width: 40%; }
+    .col-item-6-10--small { width: 60%; }
+    .col-item-7-10--small { width: 70%; }
+    .col-item-8-10--small { width: 80%; }
+    .col-item-9-10--small { width: 90%; }
+
+    /*
+     * See full size col-item above for the below rules.
+     */
+    .col-item--middle--small {
+        vertical-align: middle;
+    }
+
+    .col-item--bottom--small {
+        vertical-align: bottom;
+    }
+
+    .col-item--align-left--small {
+        text-align: left;
+    }
+
+    .col-item--align-center--small {
+        text-align: center;
+    }
+
+    .col-item--align-right--small {
+        text-align: right;
+    }
+
+    .col-item--margin-bottom-20--small {
+        margin-bottom: 20px;
+    }
+
+    .col-item--margin-bottom-40--small {
+        margin-bottom: 40px;
+    }
+
+    /*
+     * Used to make an item full width when it isn't normally.
+     * Faux modifier as .full-width doesn't exist.
+     */
+    .full-width--small {
+        width: 100%;
+    }  
+
+}
