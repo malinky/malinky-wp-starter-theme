@@ -4,17 +4,27 @@
 <!--[if gt IE 9]><!--> <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
 <head>
 
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
+    <meta charset="<?php bloginfo( 'charset' ); ?>">
 
-	<!-- Use latest ie engine --> 
+	<!-- Use latest IE engine --> 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 	<!-- Mobile viewport -->    
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<link rel="shortcut icon" href="<?php echo esc_url( site_url( 'favicon.ico' ) ); ?>" />
-	<link href="<?php echo esc_url( site_url( 'apple-touch-icon-precomposed.png' ) ); ?>" rel="apple-touch-icon-precomposed">
+	<!-- Icons for mobile for touch home screens and bookmarks. Remember to upload favicon.ico too! -->
+
+    <!-- Chrome and Android (192 x 192) -->
+    <meta name="application-name" content="<?php echo esc_attr( bloginfo( 'name' ) ); ?>">
+    <link rel="icon" sizes="192x192" href="<?php esc_url( site_url( 'chrome-touch-icon-192x192.png' ) ); ?>">
+
+    <!-- Safari on iOS (152 x 152) -->
+    <meta name="apple-mobile-web-app-title" content="<?php echo esc_attr( bloginfo( 'name' ) ); ?>">
+    <link rel="apple-touch-icon" href="<?php esc_url( site_url( 'apple-touch-icon.png' ) ); ?>">
+
+    <!-- IE on Win8 (144 x 144 + tile color) -->
+    <meta name="msapplication-TileImage" content="<?php esc_url( site_url( 'ms-touch-icon-144x144-precomposed.png' ) ); ?>">
+    <meta name="msapplication-TileColor" content="#3372DF">
 
 	<!-- Google Fonts -->
 
@@ -86,12 +96,11 @@
 
 		<div id="mobile-navigation-id" class="col col--gutterless">
 			<div class="col-item col-item-4-10">
-				<a href="" class="mobile-navigation-image-font mobile-navigation-navicon"></a>
+				<a href="" id="mobile-navigation-navicon" class="image-font"><span class="image-font__sizing image-font__dashicons dashicons-menu"></span></a>
 			</div><!--
 			--><div class="col-item col-item-6-10 col-item--align-right">
-	    		<a href="" target="_blank" class="mobile-navigation-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/graphics/mobile_facebook.png" data-at2x="<?php echo get_stylesheet_directory_uri(); ?>/img/graphics/mobile_facebook@2x.png" alt="" /></a>   		    		
-	    		<a href="" target="_blank" class="mobile-navigation-image-font mobile-navigation-email"></a>
-	    		<a href="" target="_blank" class="mobile-navigation-image-font mobile-navigation-phone"></a>
+	    		<a href="" target="_blank" class="image-font"><span class="image-font__sizing image-font__dashicons dashicons-email"></span></a>
+	    		<a href="" target="_blank" class="image-font"><span class="image-font__sizing image-font__fontawesome fa-phone"></span></a>
 	  		</div>
 			<div class="col-item col-item-full">
 				<nav class="mobile-navigation" role="navigation">

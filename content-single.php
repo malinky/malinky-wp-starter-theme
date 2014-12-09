@@ -1,6 +1,6 @@
 <?php
 /**
- * The template part for displaying all single posts in single.php
+ * The template part for displaying all single posts in single.php.
  */
 ?>
 

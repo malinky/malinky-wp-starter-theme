@@ -1,38 +1,32 @@
 <?php
 /**
- * @package Malinky Media
+ * The template part for displaying lists of posts when no post_format() is set.
  */
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title( sprintf( '<h1 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h1>' ); ?>
 
-		<?php if ( 'post' == get_post_type() ) : ?>
-		<div class="entry-meta">
-			<?php malinky_posted_on(); ?>
-		</div><!-- .entry-meta -->
-		<?php endif; ?>
-	</header><!-- .entry-header -->
+	<header class="content-header">
+		<h1 class="content-header__title"><a href="<?php esc_url( the_permalink() ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+		<?php if ( get_post_type() == 'post' ) { ?>
+			<div class="content-header__meta">
+				<?php malinky_posted_on(); ?>
+			</div><!-- .content-header__meta -->
+		<?php } ?>
+	</header><!-- .content-header -->
 
-	<div class="entry-content">
-		<?php
-			/* translators: %s: Name of current post */
-			the_content( sprintf(
-				__( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'malinky' ),
-				the_title( '<span class="screen-reader-text">"', '"</span>', false )
-			) );
-		?>
-
+	<div class="content-main">
+		<?php the_content(); ?>
 		<?php
 			wp_link_pages( array(
 				'before' => '<div class="page-links">' . __( 'Pages:', 'malinky' ),
 				'after'  => '</div>',
 			) );
 		?>
-	</div><!-- .entry-content -->
+	</div><!-- .content-main -->
 
-	<footer class="entry-footer">
+	<footer class="content-footer">
 		<?php malinky_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+	</footer><!-- .content-footer -->
+
 </article><!-- #post-## -->

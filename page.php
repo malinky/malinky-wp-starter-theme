@@ -5,27 +5,42 @@
 
 get_header(); ?>
 
-	<main role="main" class="wrap">
+<main role="main" class="wrap">
 
-	<?php while ( have_posts() ) : the_post(); ?>
+	<div class="col">
 
-		<div class="col">
-			<div class="col-item col-item-full">
-				<?php get_template_part( 'content', 'page' ); ?>
-			</div>
-		</div>
+		<div class="col-item col-item-7-10">
 
-		<?php if ( comments_open() || get_comments_number() ) { ?>
+		<?php while ( have_posts() ) : the_post(); ?>
+
 			<div class="col">
 				<div class="col-item col-item-full">
-					<?php comments_template(); ?>
+					<?php get_template_part( 'content', 'page' ); ?>
 				</div>
-			</div>					
-		<?php }
+			</div>
 
-	endwhile; //end loop. ?>
+			<?php if ( comments_open() || get_comments_number() ) { ?>
+				<div class="col">
+					<div class="col-item col-item-full">
+						<?php comments_template(); ?>
+					</div>
+				</div>					
+			<?php }
 
-	</main><!-- #main -->
+		endwhile; //end loop. ?>
+
+		</div><!--
+	
+		--><div class="col-item col-item-3-10">
+		
+			<?php get_sidebar(); ?>
+
+		</div>
+
+	</div><!-- .col -->
+	
+
+</main><!-- #main -->
 	
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

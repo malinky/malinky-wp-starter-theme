@@ -38,7 +38,7 @@ jQuery(document).ready(function($){
     /*
      * Toggle mobile navigation.
      */
-    $('.mobile-navigation-navicon').click(function() {
+    $('#mobile-navigation-navicon').click(function() {
 
         $('.mobile-navigation').toggleClass('mobile-navigation-show');
         $('body').toggleClass('mobile-navigation-show-body');
@@ -108,11 +108,5 @@ jQuery(document).ready(function($){
         }, 600);
         return false;
     });
-
-    if (!Modernizr.svg) {
-
-        $(".logo img").attr("src", "images/logo.png");
-        
-    }
 
 });

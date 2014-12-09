@@ -2005,48 +2005,41 @@ a.back-top {
 }
 
 /*
- * Overide <a> styles for image fonts (dashicons font awesome) and position so sits in middle of navigation.
- 1. Set to same height of .mobile-navigation-bar. Also give full height clickable.
+ * Overide <a> styles for image fonts (dashicons / font awesome).
  */
-a.mobile-navigation-image-font {
-    font-size: 2.142857em; /* 30/14 */
-    color: #fff;
+a.image-font {
     text-decoration: none;
-    display: inline-block;
-    vertical-align: middle;
-    height: 40px; /* 1 */
-    margin-right: 8px;
 } 
 
 /*
- * 3 bars.
- * Overide above rule for the navicon. This sits central on it's own and when next to a logo.
+ *  Position so sits in middle of navigation.
+ *  1. Set to same height of .mobile-navigation-bar. Also give full height clickable.
+ * .image-font__Element.
  */
-a.mobile-navigation-navicon {
-    vertical-align: baseline;
+.image-font__sizing {
+    font-size: 2.142857em; /* 30/14 */
+    color: #fff;  
+    display: inline-block;  
+    vertical-align: text-top;
+    height: 40px; /* 1 */
+    margin-right: 8px; 
+    -webkit-transition: color .1s ease-in 0;
+    transition: color .1s ease-in 0;
 }
 
 /*
- * 3 bars.
+ * Use my own reference to the image fonts so I control all styling not their stylsheets.
+ * .image-font__Element.
  */
-.mobile-navigation-navicon:before {
-    content: "\f333";
+.image-font__dashicons {
     font-family: 'dashicons';
 }
 
 /*
- * Email.
+ * Use my own reference to the image fonts so I control all styling not their stylsheets.
+ * .image-font__Element.
  */
-.mobile-navigation-email:before {
-    content: "\f465";
-    font-family: 'dashicons';
-}
-
-/*
- * Phone.
- */
-.mobile-navigation-phone:before {
-    content: "\f095";
+.image-font__fontawesome {
     font-family: 'FontAwesome';
 }
 

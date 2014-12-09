@@ -157,12 +157,26 @@ add_action( 'after_setup_theme', 'malinky_setup' );
  * Init
  * ------------------------------------------------------------------------ */
 
+/*function malinky_init() {}
+add_action( 'init', 'malinky_init' );*/
+
+
+
+
+
+/* ------------------------------------------------------------------------ *
+ * Front End Scripts
+ * ------------------------------------------------------------------------ */
+
 /**
- * Load WP jQuery and jQuery migrate in the footer.
+ * Enqueue frontend scripts
  */
-function malinky_init()
+function malinky_scripts()
 {
-	
+
+	/**
+	 * Load WP jQuery and jQuery migrate in the footer.
+	 */
 	if ( ! is_admin() ) {
 
 		wp_deregister_script( 'jquery' );
@@ -186,22 +200,6 @@ function malinky_init()
 
 	}
 
-}
-add_action( 'init', 'malinky_init' );
-
-
-
-
-
-/* ------------------------------------------------------------------------ *
- * Front End Scripts
- * ------------------------------------------------------------------------ */
-
-/**
- * Enqueue frontend scripts
- */
-function malinky_scripts()
-{
 
 	/**
 	 * Stylesheet which includes normalize.

@@ -5,33 +5,46 @@
 
 get_header(); ?>
 
-	<main role="main" class="wrap">
+<main role="main" class="wrap">
 
-	<?php while ( have_posts() ) : the_post(); ?>
+	<div class="col">
 
-		<div class="col">
-			<div class="col-item col-item-full">
-				<?php get_template_part( 'content', 'single' ); ?>
-			</div>
-		</div>
+		<div class="col-item col-item-7-10">
 
-		<div class="col">
-			<div class="col-item col-item-full">
-				<?php malinky_post_nav(); ?>
-			</div>
-		</div>
+		<?php while ( have_posts() ) : the_post(); ?>
 
-		<?php if ( comments_open() || get_comments_number() ) { ?>
 			<div class="col">
 				<div class="col-item col-item-full">
-					<?php comments_template(); ?>
+					<?php get_template_part( 'content', 'single' ); ?>
 				</div>
-			</div>					
-		<?php }
+			</div>
 
-	endwhile; //end loop. ?>
+			<div class="col">
+				<div class="col-item col-item-full">
+					<?php malinky_post_nav(); ?>
+				</div>
+			</div>
 
-	</main><!-- .main -->
+			<?php if ( comments_open() || get_comments_number() ) { ?>
+				<div class="col">
+					<div class="col-item col-item-full">
+						<?php comments_template(); ?>
+					</div>
+				</div>					
+			<?php }
 
-<?php get_sidebar(); ?>
+		endwhile; //end loop. ?>
+
+		</div><!--
+	
+		--><div class="col-item col-item-3-10">
+		
+			<?php get_sidebar(); ?>
+
+		</div>
+
+	</div><!-- .col -->
+
+</main><!-- .main -->
+
 <?php get_footer(); ?>

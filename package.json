@@ -1,0 +1,25 @@
+{
+  "name": "malinky-wp-starter-theme",
+  "version": "1.0.0",
+  "description": "Wordpress Starter Theme",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/malinky/malinky-wp-starter-theme.git"
+  },
+  "author": "Craig Ramsay",
+  "license": "GNU General Public License v2 or later",
+  "bugs": {
+    "url": "https://github.com/malinky/malinky-wp-starter-theme/issues"
+  },
+  "homepage": "https://github.com/malinky/malinky-wp-starter-theme",
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-concat": "^2.4.2",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^1.2.4",
+    "gulp-uglify": "^1.0.2"
+  }
+}
