@@ -12,7 +12,7 @@
  * .col--Modifier.
  */
 .col--padding-20 {
-    padding: 40px; 0
+    padding: 40px 0;
 }
 
 /* 
@@ -239,7 +239,7 @@
      * .col--Modifier--Modifier.
      */
     .col--padding-20--large {
-        padding: 40px; 0
+        padding: 40px 0;
     }
 
     /* 
@@ -326,6 +326,22 @@
 
 @media only screen and (min-width: 481px) and (max-width: 767px) {
 
+    /* 
+     * Add top and bottom padding to main .col creating space on page generally between <section>.
+     * .col--Modifier--Modifier.
+     */
+    .col--padding-20--medium {
+        padding: 40px 0;
+    }
+
+    /* 
+     * Add top and bottom padding to main .col creating space on page generally between <section>.
+     * .col--Modifier--Modifier. 
+     */
+    .col--padding-40--medium {
+        padding: 40px 0;
+    }
+
     .col-item-full--medium { width: 100%; }
 
     .col-item-half--medium { width: 50%; }
@@ -402,6 +418,22 @@
 
 @media only screen and (max-width: 480px) {
 
+    /* 
+     * Add top and bottom padding to main .col creating space on page generally between <section>.
+     * .col--Modifier--Modifier.
+     */
+    .col--padding-20--small {
+        padding: 40px 0;
+    }
+
+    /* 
+     * Add top and bottom padding to main .col creating space on page generally between <section>.
+     * .col--Modifier--Modifier. 
+     */
+    .col--padding-40--small {
+        padding: 40px 0;
+    }
+    
     .col-item-full--small { width: 100%; }
 
     .col-item-half--small { width: 50%; }

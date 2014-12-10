@@ -1,0 +1,2529 @@
+@charset "UTF-8";
+/*
+
+Theme Name: Malinky WP Starter Theme
+Theme URI: https://github.com/malinky/malinky-wp-starter-theme
+Author: Craig Ramsay
+Author URI: https://github.com/malinky
+Description: Malinky WP Starter Theme.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: malinky
+
+This theme has been based around a number of others which are outlined below:
+
+Underscores http://underscores.me/, (C) 2012-2014 Automattic, Inc.
+Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
+Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
+Blueprint http://www.blueprintcss.org/
+Harry Roberts http://csswizardry.com/ and his great CSS guidelines http://cssguidelin.es/
+HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/
+
+*/
+/*
+**********************************************************************
+CONTENTS
+**********************************************************************
+*/
+/*
+NORMALIZE
+NORMALIZE ADJUST
+GRID
+WRAP
+TYPOGRAPHY
+ELEMENTS
+WARNINGS
+FORMS
+BUTTONS
+LINKS
+MAIN NAVIGATION
+MOBILE NAVIGATION
+OTHER NAVIGATION
+FOOTER
+POSTS AND PAGES
+ALIGNMENT
+GOOGLE MAPS
+PRINT
+MEDIA QUERIES
+*/
+/*
+**********************************************************************
+NORMALIZE
+**********************************************************************
+*/
+/* normalize.css v3.0.2 | MIT License | git.io/normalize */
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+body {
+  margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline;
+  /* 2 */
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+ */
+[hidden],
+template {
+  display: none;
+}
+
+/* Links
+   ========================================================================== */
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+a {
+  background-color: transparent;
+}
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+b,
+strong {
+  font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
+img {
+  border: 0;
+}
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * Contain overflow in all browsers.
+ */
+pre {
+  overflow: auto;
+}
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* Forms
+   ========================================================================== */
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+  margin: 0;
+  /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+button {
+  overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+input {
+  line-height: normal;
+}
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+ *    (include `-moz` to future-proof).
+ */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  /* 2 */
+  box-sizing: content-box;
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+textarea {
+  overflow: auto;
+}
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+optgroup {
+  font-weight: bold;
+}
+
+/* Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+/*
+**********************************************************************
+NORMALIZE ADJUST
+**********************************************************************
+*/
+body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, dl, dd, ol, ul, form, fieldset, legend, figure, table, th, td, caption, hr {
+  margin: 0;
+  padding: 0;
+}
+
+/* 
+ * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ */
+html {
+  box-sizing: border-box;
+  /* 1 */
+}
+
+/* 
+ * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+button,
+input,
+select,
+textarea {
+  color: #666;
+}
+
+/*
+ * 1. Keeps page centered in all browsers regardless of content height.
+ */
+html {
+  font-size: 0.875em;
+  /*14/16*/
+  line-height: 1.3;
+  overflow-y: scroll;
+  /* 1 */
+  min-height: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+**********************************************************************
+GRID
+**********************************************************************
+*/
+/* 
+ * Remove first gutter. negates padding-left on .col-item.
+ */
+.col {
+  margin: 0;
+  padding: 0;
+  margin-left: -24px;
+}
+
+/* 
+ * Add top and bottom padding to main .col creating space on page generally between <section>.
+ * .col--Modifier.
+ */
+.col--padding-20 {
+  padding: 40px 0;
+}
+
+/* 
+ * Add top and bottom padding to main .col creating space on page generally between <section>.
+ * .col--Modifier.
+ */
+.col--padding-40 {
+  padding: 40px 0;
+}
+
+/*
+ * When a .col will have vertical alignment from a col-item within it.
+ * Use this on the main .col that sets the overall height of the div.
+ * .col--Modifier.
+ */
+.col--relative {
+  position: relative;
+}
+
+/*
+ * Used on the inner div that will be aligned vertically.
+ * CHECK STANDALONE DIV.
+ */
+.col-relative-inner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+/*
+ * Span for vertical alignment needs to be empty and before element to align.
+ * CHECK STANDALONE DIV.
+ */
+.vertical-align-outer {
+  height: 100%;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+/*
+ * No gutters or when a background colour is applied or when a background image is added to a whole .col.
+ * .col--Modifier.
+ */
+.col--gutterless,
+.col--bkg-color,
+.col--bkg-img {
+  margin-left: 0;
+}
+
+/*
+ * Removes gutters from all .col-item when .col is set with modifier .col--gutterless.
+ * .col--Modifier.
+ */
+.col--gutterless > .col-item {
+  padding-left: 0;
+}
+
+/*
+ * Can be used inside as a nested .col modifier or inside a .col-item as a standalone div to add background colour and padding.
+ * .col--Modifier.
+ * CHECK STANDALONE DIV. .col-bkg-color.
+ */
+.col--bkg-color,
+.col-bkg-color {
+  background: #f1f1f1;
+  padding: 10px 6px;
+}
+
+/*
+ * Ensures additional padding isn't added on first-child .col-item for both the .col modifier and standalone div version.
+ * .col--Modifier.
+  * CHECK STANDALONE DIV. .col-bkg-color > .col-item:first-child.
+ */
+.col--bkg-color > .col-item:first-child,
+.col--bkg-img > .col-item:first-child,
+.col-bkg-color > .col-item:first-child {
+  padding-left: 0;
+}
+
+/*
+ * Centre an .col.
+ * .col--Modifier.
+ */
+.col--align-center {
+  text-align: center;
+}
+
+/*
+ * Right align .col.
+ * .col--Modifier. 
+ */
+.col--align-right {
+  text-align: right;
+}
+
+/*
+ * When centering an .col make sure to pull the content back to the left.
+ * .col--Modifier.  
+ */
+.col--align-center > .col-item,
+.col--align-right > .col-item {
+  text-align: left;
+}
+
+/*
+ * .col--Modifier. 
+ */
+.col--margin-bottom-20 {
+  margin-bottom: 20px;
+}
+
+/*
+ * .col--Modifier. 
+ */
+.col--margin-bottom-40 {
+  margin-bottom: 40px;
+}
+
+/*
+ * 1. Instead of floating.
+ * 2. Gutter.
+ * 3. Align inline-block elements.
+ */
+.col-item {
+  display: inline-block;
+  /* 1 */
+  padding-left: 24px;
+  /* 2 */
+  vertical-align: top;
+  /* 3 */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/*
+ * Align .col-item middle.
+ * .col-item--Modifier.
+ */
+.col-item--middle {
+  vertical-align: middle;
+}
+
+/*
+ * Align .col-item bottom.
+ * .col-item--Modifier.
+ */
+.col-item--bottom {
+  vertical-align: bottom;
+}
+
+/*
+ * Align .col-item left. Used to move centered or right align normally with medium-- small-- modifier.
+ * .col-item--Modifier.
+ */
+.col-item--align-left {
+  text-align: left;
+}
+
+/*
+ * Align .col-item center.
+ * .col-item--Modifier.
+ */
+.col-item--align-center {
+  text-align: center;
+}
+
+/*
+ * Align .col-item right.
+ * .col-item--Modifier.
+ */
+.col-item--align-right {
+  text-align: right;
+}
+
+/*
+ * .col-item--Modifier.
+ */
+.col-item--margin-bottom-20 {
+  margin-bottom: 20px;
+}
+
+/*
+ * .col-item--Modifier.
+ */
+.col-item--margin-bottom-40 {
+  margin-bottom: 4px;
+}
+
+.col-item-full {
+  width: 100%;
+}
+
+.col-item-half {
+  width: 50%;
+}
+
+.col-item-third {
+  width: 33.333%;
+}
+
+.col-item-two-third {
+  width: 66.666%;
+}
+
+.col-item-quarter {
+  width: 25%;
+}
+
+.col-item-three-quarter {
+  width: 75%;
+}
+
+.col-item-1-5 {
+  width: 20%;
+}
+
+.col-item-2-5 {
+  width: 40%;
+}
+
+.col-item-3-5 {
+  width: 60%;
+}
+
+.col-item-4-5 {
+  width: 80%;
+}
+
+.col-item-1-6 {
+  width: 16.666%;
+}
+
+.col-item-5-6 {
+  width: 83.333%;
+}
+
+.col-item-1-8 {
+  width: 12.5%;
+}
+
+.col-item-3-8 {
+  width: 37.5%;
+}
+
+.col-item-5-8 {
+  width: 62.5%;
+}
+
+.col-item-6-8 {
+  width: 75%;
+}
+
+.col-item-7-8 {
+  width: 87.5%;
+}
+
+.col-item-1-10 {
+  width: 10%;
+}
+
+.col-item-2-10 {
+  width: 20%;
+}
+
+.col-item-3-10 {
+  width: 30%;
+}
+
+.col-item-4-10 {
+  width: 40%;
+}
+
+.col-item-6-10 {
+  width: 60%;
+}
+
+.col-item-7-10 {
+  width: 70%;
+}
+
+.col-item-8-10 {
+  width: 80%;
+}
+
+.col-item-9-10 {
+  width: 90%;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 989px) {
+  /* 
+   * Add top and bottom padding to main .col creating space on page generally between <section>.
+   * .col--Modifier--Modifier.
+   */
+  .col--padding-20--large {
+    padding: 40px 0;
+  }
+
+  /* 
+   * Add top and bottom padding to main .col creating space on page generally between <section>.
+   * .col--Modifier--Modifier. 
+   */
+  .col--padding-40--large {
+    padding: 40px 0;
+  }
+
+  .col-item-full--large {
+    width: 100%;
+  }
+
+  .col-item-half--large {
+    width: 50%;
+  }
+
+  .col-item-third--large {
+    width: 33.333%;
+  }
+
+  .col-item-two-third--large {
+    width: 66.666%;
+  }
+
+  .col-item-quarter--large {
+    width: 25%;
+  }
+
+  .col-item-three-quarter--large {
+    width: 75%;
+  }
+
+  .col-item-1-5--large {
+    width: 20%;
+  }
+
+  .col-item-2-5--large {
+    width: 40%;
+  }
+
+  .col-item-3-5--large {
+    width: 60%;
+  }
+
+  .col-item-4-5--large {
+    width: 80%;
+  }
+
+  .col-item-1-6--large {
+    width: 16.666%;
+  }
+
+  .col-item-5-6--large {
+    width: 83.333%;
+  }
+
+  .col-item-1-8--large {
+    width: 12.5%;
+  }
+
+  .col-item-3-8--large {
+    width: 37.5%;
+  }
+
+  .col-item-5-8--large {
+    width: 62.5%;
+  }
+
+  .col-item-6-8--large {
+    width: 75%;
+  }
+
+  .col-item-7-8--large {
+    width: 87.5%;
+  }
+
+  .col-item-1-10--large {
+    width: 10%;
+  }
+
+  .col-item-2-10--large {
+    width: 20%;
+  }
+
+  .col-item-3-10--large {
+    width: 30%;
+  }
+
+  .col-item-4-10--large {
+    width: 40%;
+  }
+
+  .col-item-6-10--large {
+    width: 60%;
+  }
+
+  .col-item-7-10--large {
+    width: 70%;
+  }
+
+  .col-item-8-10--large {
+    width: 80%;
+  }
+
+  .col-item-9-10--large {
+    width: 90%;
+  }
+
+  /*
+   * See full size .col-item above for the below rules.
+   */
+  .col-item--middle--large {
+    vertical-align: middle;
+  }
+
+  .col-item--bottom--large {
+    vertical-align: bottom;
+  }
+
+  .col-item--align-left--large {
+    text-align: left;
+  }
+
+  .col-item--align-center--large {
+    text-align: center;
+  }
+
+  .col-item--align-right--large {
+    text-align: right;
+  }
+
+  .col-item--margin-bottom-20--large {
+    margin-bottom: 20px;
+  }
+
+  .col-item--margin-bottom-40--large {
+    margin-bottom: 40px;
+  }
+
+  /*
+   * Used to make an item full width when it isn't normally.
+   * Faux modifier as .full-width doesn't exist.
+   */
+  .full-width--large {
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+  /* 
+   * Add top and bottom padding to main .col creating space on page generally between <section>.
+   * .col--Modifier--Modifier.
+   */
+  .col--padding-20--medium {
+    padding: 40px 0;
+  }
+
+  /* 
+   * Add top and bottom padding to main .col creating space on page generally between <section>.
+   * .col--Modifier--Modifier. 
+   */
+  .col--padding-40--medium {
+    padding: 40px 0;
+  }
+
+  .col-item-full--medium {
+    width: 100%;
+  }
+
+  .col-item-half--medium {
+    width: 50%;
+  }
+
+  .col-item-third--medium {
+    width: 33.333%;
+  }
+
+  .col-item-two-third--medium {
+    width: 66.666%;
+  }
+
+  .col-item-quarter--medium {
+    width: 25%;
+  }
+
+  .col-item-three-quarter--medium {
+    width: 75%;
+  }
+
+  .col-item-1-5--medium {
+    width: 20%;
+  }
+
+  .col-item-2-5--medium {
+    width: 40%;
+  }
+
+  .col-item-3-5--medium {
+    width: 60%;
+  }
+
+  .col-item-4-5--medium {
+    width: 80%;
+  }
+
+  .col-item-1-6--medium {
+    width: 16.666%;
+  }
+
+  .col-item-5-6--medium {
+    width: 83.333%;
+  }
+
+  .col-item-1-8--medium {
+    width: 12.5%;
+  }
+
+  .col-item-3-8--medium {
+    width: 37.5%;
+  }
+
+  .col-item-5-8--medium {
+    width: 62.5%;
+  }
+
+  .col-item-6-8--medium {
+    width: 75%;
+  }
+
+  .col-item-7-8--medium {
+    width: 87.5%;
+  }
+
+  .col-item-1-10--medium {
+    width: 10%;
+  }
+
+  .col-item-2-10--medium {
+    width: 20%;
+  }
+
+  .col-item-3-10--medium {
+    width: 30%;
+  }
+
+  .col-item-4-10--medium {
+    width: 40%;
+  }
+
+  .col-item-6-10--medium {
+    width: 60%;
+  }
+
+  .col-item-7-10--medium {
+    width: 70%;
+  }
+
+  .col-item-8-10--medium {
+    width: 80%;
+  }
+
+  .col-item-9-10--medium {
+    width: 90%;
+  }
+
+  /*
+   * See full size col-item above for the below rules.
+   */
+  .col-item--middle--medium {
+    vertical-align: middle;
+  }
+
+  .col-item--bottom--medium {
+    vertical-align: bottom;
+  }
+
+  .col-item--align-left--medium {
+    text-align: left;
+  }
+
+  .col-item--align-center--medium {
+    text-align: center;
+  }
+
+  .col-item--align-right--medium {
+    text-align: right;
+  }
+
+  .col-item--margin-bottom-20--medium {
+    margin-bottom: 20px;
+  }
+
+  .col-item--margin-bottom-40--medium {
+    margin-bottom: 40px;
+  }
+
+  /*
+   * Used to make an item full width when it isn't normally.
+   * Faux modifier as .full-width doesn't exist.
+   */
+  .full-width--medium {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  /* 
+   * Add top and bottom padding to main .col creating space on page generally between <section>.
+   * .col--Modifier--Modifier.
+   */
+  .col--padding-20--small {
+    padding: 40px 0;
+  }
+
+  /* 
+   * Add top and bottom padding to main .col creating space on page generally between <section>.
+   * .col--Modifier--Modifier. 
+   */
+  .col--padding-40--small {
+    padding: 40px 0;
+  }
+
+  .col-item-full--small {
+    width: 100%;
+  }
+
+  .col-item-half--small {
+    width: 50%;
+  }
+
+  .col-item-third--small {
+    width: 33.333%;
+  }
+
+  .col-item-two-third--small {
+    width: 66.666%;
+  }
+
+  .col-item-quarter--small {
+    width: 25%;
+  }
+
+  .col-item-three-quarter--small {
+    width: 75%;
+  }
+
+  .col-item-1-5--small {
+    width: 20%;
+  }
+
+  .col-item-2-5--small {
+    width: 40%;
+  }
+
+  .col-item-3-5--small {
+    width: 60%;
+  }
+
+  .col-item-4-5--small {
+    width: 80%;
+  }
+
+  .col-item-1-6--small {
+    width: 16.666%;
+  }
+
+  .col-item-5-6--small {
+    width: 83.333%;
+  }
+
+  .col-item-1-8--small {
+    width: 12.5%;
+  }
+
+  .col-item-3-8--small {
+    width: 37.5%;
+  }
+
+  .col-item-5-8--small {
+    width: 62.5%;
+  }
+
+  .col-item-6-8--small {
+    width: 75%;
+  }
+
+  .col-item-7-8--small {
+    width: 87.5%;
+  }
+
+  .col-item-1-10--small {
+    width: 10%;
+  }
+
+  .col-item-2-10--small {
+    width: 20%;
+  }
+
+  .col-item-3-10--small {
+    width: 30%;
+  }
+
+  .col-item-4-10--small {
+    width: 40%;
+  }
+
+  .col-item-6-10--small {
+    width: 60%;
+  }
+
+  .col-item-7-10--small {
+    width: 70%;
+  }
+
+  .col-item-8-10--small {
+    width: 80%;
+  }
+
+  .col-item-9-10--small {
+    width: 90%;
+  }
+
+  /*
+   * See full size col-item above for the below rules.
+   */
+  .col-item--middle--small {
+    vertical-align: middle;
+  }
+
+  .col-item--bottom--small {
+    vertical-align: bottom;
+  }
+
+  .col-item--align-left--small {
+    text-align: left;
+  }
+
+  .col-item--align-center--small {
+    text-align: center;
+  }
+
+  .col-item--align-right--small {
+    text-align: right;
+  }
+
+  .col-item--margin-bottom-20--small {
+    margin-bottom: 20px;
+  }
+
+  .col-item--margin-bottom-40--small {
+    margin-bottom: 40px;
+  }
+
+  /*
+   * Used to make an item full width when it isn't normally.
+   * Faux modifier as .full-width doesn't exist.
+   */
+  .full-width--small {
+    width: 100%;
+  }
+}
+/*
+**********************************************************************
+WRAP
+**********************************************************************
+*/
+/*
+ * Used for a full width block.
+ */
+.wrap-full {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/*
+ * Used for inner of full width block or standalone non full width block.
+ */
+.wrap {
+  max-width: 990px;
+  margin: 0 auto;
+  padding: 0 5px;
+  /* 1 */
+}
+
+/*
+ * Add color or image to full width background.
+ * .wrap--Modifier. 
+ */
+/*
+ * Nudge whole wrap to site below fixed navigation.
+ */
+@media screen and (max-width: 767px) {
+  .wrap-mobile {
+    margin-top: 40px;
+  }
+}
+/*
+**********************************************************************
+TYPOGRAPHY
+**********************************************************************
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+h1,
+.heading-1 {
+  font-size: 2em;
+  /* 28/14 */
+}
+
+h2,
+.heading-2 {
+  font-size: 1.714286em;
+  /* 24/14 */
+}
+
+h3,
+.heading-3 {
+  font-size: 1.428571em;
+  /* 20/14 */
+}
+
+h4,
+.heading-4 {
+  font-size: 1.285714em;
+  /* 18/14 */
+}
+
+h5,
+.heading-5 {
+  font-size: 1.142857em;
+  /* 16/14 */
+}
+
+h6,
+.heading-6 {
+  font-size: 1em;
+  /* 14/14 */
+}
+
+p {
+  margin-bottom: 21px;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+dfn,
+cite,
+em,
+i {
+  font-style: italic;
+}
+
+cite {
+  margin: 0 1.5em;
+}
+
+q {
+  font-style: italic;
+  quotes: "“" "”" "‘" "’";
+}
+
+q:before {
+  content: open-quote;
+}
+
+q:after {
+  content: close-quote;
+}
+
+blockquote {
+  margin: 0 1.5em;
+}
+
+address {
+  margin: 0 0 21px 0;
+}
+
+pre {
+  background: #eee;
+  font-family: "Courier 10 Pitch", Courier, monospace;
+  font-size: 1.142857em;
+  /* 16/14 */
+  line-height: 1.6;
+  margin-bottom: 21px;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1.6em;
+}
+
+code,
+kbd,
+tt,
+var {
+  font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+}
+
+abbr,
+acronym {
+  border-bottom: 1px dotted #666;
+  cursor: help;
+}
+
+mark,
+ins {
+  background: #fff9c0;
+  text-decoration: none;
+}
+
+sup,
+sub {
+  font-size: 0.857143em;
+  /* 12/14 */
+  height: 0;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  bottom: 1ex;
+}
+
+sub {
+  top: .5ex;
+}
+
+small {
+  font-size: 0.857143em;
+  /* 12/14 */
+}
+
+big {
+  font-size: 1.285714em;
+  /* 12/14 */
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+/*
+**********************************************************************
+ELEMENTS
+**********************************************************************
+*/
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #e5e5e5;
+  margin-bottom: 1em;
+  padding: 0;
+}
+
+hr.double {
+  border-top: 2px solid #e5e5e5;
+}
+
+ul,
+ol {
+  margin: 0 0 21px 1.5em;
+}
+
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+li > ul,
+li > ol {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin: 0 0 21px 3em;
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+img.non-responsive {
+  max-width: none;
+}
+
+figure {
+  margin: 0;
+}
+
+table {
+  margin: 0 0 21px 0;
+  width: 100%;
+}
+
+th {
+  text-align: left;
+}
+
+/*
+**********************************************************************
+WARNINGS
+**********************************************************************
+*/
+.box {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 21px 0;
+}
+
+.success,
+.success-permanent {
+  color: #0a942a;
+  background: #ecfef0;
+  border: 1px solid #0A942A;
+}
+
+.error,
+.error-permanent {
+  color: #dc0000;
+  background-color: #fff6f6;
+  border: 1px solid #dc0000;
+}
+
+.success-plain,
+.error-plain {
+  background: none;
+  border: none;
+}
+
+/*
+**********************************************************************
+FORMS
+**********************************************************************
+*/
+/*
+ * 1. Corrects font size not being inherited in all browsers.
+ * 2. Addresses margins set differently in IE6/7, F3/4, S5, Chrome.
+ * 3. Improves appearance and consistency in all browsers.
+ */
+input,
+select,
+textarea {
+  font-size: 100%;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+  vertical-align: baseline;
+  /* 3 */
+  margin-bottom: 21px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="tel"],
+input[type="search"] {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid #e5e5e5;
+  padding: 8px;
+  border-radius: 3px;
+  -webkit-appearance: none;
+}
+
+input[type="color"] {
+  display: block;
+}
+
+select,
+textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+}
+
+/*
+ * 1. Removes default vertical scrollbar in IE6/7/8/9.
+ * 2. Improves readability and alignment in all browsers.
+ * 3. Allow only vertical resizing of textareas. H5BP.
+ */
+textarea {
+  overflow: auto;
+  /* 1 */
+  vertical-align: top;
+  /* 2 */
+  resize: vertical;
+  /* 3 */
+  padding: 8px;
+}
+
+/*
+ * 1. Addresses excess padding in IE8/9.
+ */
+input[type="checkbox"],
+input[type="radio"] {
+  padding: 0;
+  /* 1 */
+  margin-right: 10px;
+}
+
+/*
+ * Wrap each checkbox or radio or wrap all elements for inline checkbox or radio.
+ */
+.checkbox-block {
+  display: block;
+}
+
+/*
+ * Use as class alongside .checkbox-block
+ */
+.checkbox-inline input {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+/*
+ * Used to ensure inline check box label is inline too, especially if text spans more than one line.
+ */
+.checkbox-inline label {
+  display: inline;
+}
+
+/*
+ * Addresses appearance set to searchfield in S5, Chrome.
+ */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  box-sizing: content-box;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+fieldset {
+  border: 2px solid #e5e5e5;
+  padding: 21px;
+  margin-bottom: 21px;
+}
+
+legend {
+  padding: 0 10px;
+}
+
+/*
+ * Corrects inner padding displayed oddly in S5, Chrome on OSX.
+ */
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-input-placeholder {
+  color: #999;
+}
+
+::-moz-placeholder {
+  color: #999;
+}
+
+:-ms-input-placeholder {
+  color: #999;
+}
+
+.field-error-icon {
+  float: right;
+  width: 30px;
+  height: 37px;
+}
+
+.field-error-tick {
+  background: url(http://dev.plaay.co.uk/img/graphics/tick.png) 0 50% no-repeat;
+}
+
+.field-error-cross {
+  background: url(http://dev.plaay.co.uk/img/graphics/cross.png) 0 50% no-repeat;
+}
+
+/*
+ * Specific to Wordpress Search widget
+ */
+input[type="search"].search-field {
+  display: inline-block;
+  width: auto;
+  max-width: none;
+  padding: 8px;
+  border-radius: 3px 0 0 3px;
+  border-top: 1px solid #e5e5e5;
+  border-right: none;
+  border-bottom: 1px solid #e5e5e5;
+  border-left: 1px solid #e5e5e5;
+}
+
+/*
+ * Specific to Wordpress Search widget
+ */
+.search-submit {
+  position: relative;
+  top: -1px;
+  left: -4px;
+  border-radius: 0 3px 3px 0;
+}
+
+/*
+**********************************************************************
+BUTTONS
+**********************************************************************
+*/
+/*
+ * 1. Corrects font size not being inherited in all browsers.
+ * 2. Overwrite line-height: normal previously set on input;
+ * 3. Addresses margins set differently in IE6/7, F3/4, S5, Chrome.
+ * 4. Manually set padding to overwrite user stylesheets.
+ * 5. Improves usability and consistency of cursor style between image-type 'input' and others.
+ * 6. Corrects inability to style clickable 'input' types in iOS.
+ */
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+button,
+.button {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  color: #fff;
+  background: #bf7b67;
+  border: none;
+  font-size: 100%;
+  /* 1 */
+  line-height: 1.3;
+  /* 2 */
+  margin: 0 0 21px 0;
+  /* 3 */
+  padding: 8px;
+  /* 4 */
+  cursor: pointer;
+  /* 5 */
+  -webkit-appearance: button;
+  /* 6 */
+}
+
+/*
+ * Style a.button links back to normal. See rule 6 above.
+ */
+.button {
+  -webkit-appearance: none;
+}
+
+/*
+ * Color used to ensure link style in button. Example when used with <a class="button">.
+ */
+input[type="button"]:visited,
+input[type="reset"]:visited,
+input[type="submit"]:visited,
+button:visited,
+.button:visited {
+  background: #bf7b67;
+  color: #fff;
+}
+
+/*
+ * Color used to ensure link style in button. Example when used with <a class="button">.
+ */
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover,
+button:hover,
+.button:hover {
+  background: #f69c2e;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+/*
+ * Color used to ensure link style in button. Example when used with <a class="button">.
+ */
+input[type="button"]:focus,
+input[type="reset"]:focus,
+input[type="submit"]:focus,
+button:focus,
+.button:focus,
+input[type="button"]:active,
+input[type="reset"]:active,
+input[type="submit"]:active,
+button:active,
+.button:active {
+  background: #f69c2e;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  outline: none;
+}
+
+button.full-width,
+.button.full-width {
+  width: 100%;
+}
+
+.round-button {
+  border-radius: 2px;
+}
+
+input[type="button"].bevelled-button,
+input[type="reset"].bevelled-button,
+input[type="submit"].bevelled-button,
+button.bevelled-button,
+.button.bevelled-button {
+  border: 1px solid;
+  border-color: #ccc #ccc #bbb;
+  border-radius: 3px;
+  background: #e6e6e6;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 15px 17px rgba(255, 255, 255, 0.5), inset 0 -5px 12px rgba(0, 0, 0, 0.05);
+  color: inherit;
+}
+
+input[type="button"]:hover.bevelled-button,
+input[type="reset"]:hover.bevelled-button,
+input[type="submit"]:hover.bevelled-button,
+button:hover.bevelled-button,
+.button:hover.bevelled-button {
+  border-color: #ccc #bbb #aaa;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 15px 17px rgba(255, 255, 255, 0.8), inset 0 -5px 12px rgba(0, 0, 0, 0.02);
+}
+
+input[type="button"]:focus.bevelled-button,
+input[type="reset"]:focus.bevelled-button,
+input[type="submit"]:focus.bevelled-button,
+button:focus.bevelled-button,
+.button:focus.bevelled-button,
+input[type="button"]:active.bevelled-button,
+input[type="reset"]:active.bevelled-button,
+input[type="submit"]:active.bevelled-button,
+button:active.bevelled-button,
+.button:active.bevelled-button {
+  border-color: #aaa #bbb #bbb;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.5), inset 0 2px 5px rgba(0, 0, 0, 0.15);
+  outline: none;
+}
+
+/*
+ * Specific to Wordpress Search widget
+ */
+input[type="submit"].search-submit {
+  margin: 0;
+}
+
+/*
+**********************************************************************
+LINKS
+**********************************************************************
+*/
+a,
+a:visited {
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:active {
+  text-decoration: underline;
+}
+
+a.back-top {
+  position: fixed;
+  right: 30px;
+  bottom: 70px;
+  font-size: 3em;
+  /* 42/14 */
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 9998;
+}
+
+/*
+**********************************************************************
+MAIN NAVIGATION
+**********************************************************************
+*/
+/*
+ * Used for fixed .main-navigation (not mobile).
+ * 1. Hide off screen set to same as height.
+ * .wrap-full--Modifier.
+ */
+.wrap-full--full-fixed {
+  position: fixed;
+  height: 41px;
+  /* 1 */
+  top: -41px;
+  /* 1 */
+  z-index: 100000;
+}
+
+/*
+ * Class added via js to slide in fixed .main-navigation (not mobile).
+ * .wrap-full--Modifier--Modifier.
+ */
+.wrap-full--full-fixed--js-show {
+  top: 0;
+  -webkit-transition: top 0.5s;
+  transition: top 0.5s;
+}
+
+/*
+ * Holder for main navigation.
+ */
+/*
+ * Add color or image to full width background.
+ * .main-navigation-bar--Modifier. 
+ */
+.main-navigation-bar--bkg {
+  background: #ccc;
+}
+
+/*
+ * 1. Set to height of navigation.
+ * 2. Set line-height of navigation for vertical centre.
+*/
+.main-navigation {
+  position: relative;
+  height: 70px;
+  line-height: 70px;
+  /*border-bottom: 2px solid #666;*/
+}
+
+/*
+ * Applied to <nav> .main-navigation for a fixed main-navigation (not on mobile).
+ * Overwrite any unwanted styles from .main-navigation as this is a Modifier..
+ * .main-navigation--Modifier.
+ */
+.main-navigation--fixed {
+  line-height: 40px;
+  border: none;
+}
+
+/*
+ * All Levels.
+ */
+.main-navigation ul {
+  list-style: none;
+  margin: 0;
+}
+
+/*
+ * All Levels.
+ * 1. Nudge hover down to bottom border.
+ */
+.main-navigation ul li {
+  display: inline-block;
+  margin: 0 10px;
+  padding-bottom: 7px;
+  /* 1 */
+}
+
+/*
+ * All Levels.
+ */
+.main-navigation ul li:first-child {
+  margin-left: 0;
+}
+
+/*
+ * All Levels.
+ * Main navigation link style.
+ * 1. Nudge hover down to bottom border.
+ */
+.main-navigation ul li a:link,
+.main-navigation ul li a:visited {
+  color: #666;
+  padding-bottom: 7px;
+  /* 1 */
+}
+
+/*
+ * All Levels.
+ * Main navigation hover style.
+ */
+.main-navigation ul li a:hover {
+  text-decoration: underline;
+}
+
+/*
+ * Second and Third Level.
+ * This makes the dropdown boxed in.
+ * 1. Top margin needs settings to -ve value of border-bottom in .main-navigation if set.
+ * Can also set to -ve as below to merge dropdown into main nav.
+ * 2. Reset from .main-navigation.
+ */
+.main-navigation ul ul {
+  display: none;
+  position: absolute;
+  z-index: 999;
+  background: #fff;
+  border: 2px solid #ccc;
+  margin: -2px 0 0 0;
+  /* 1 */
+  padding: 15px 0 0 15px;
+  line-height: initial;
+  /* 2 */
+}
+
+/*
+ * Second and Third Level Show.
+ */
+.main-navigation ul li:hover > ul {
+  display: block;
+}
+
+/*
+ * Second and Third Level.
+ */
+.main-navigation ul ul li {
+  display: block;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0 15px 15px 0;
+}
+
+/*
+ * Third Level Position.
+ */
+.main-navigation ul ul ul {
+  top: 0;
+  left: 100%;
+  margin-top: -2px;
+}
+
+/*
+ * Second and Third Level.
+ * Overide .main-navigation link style.
+ */
+/*
+ * Second and Third Level.
+ * Overide .main-navigation hover style.
+ */
+/*
+**********************************************************************
+MOBILE NAVIGATION
+**********************************************************************
+*/
+/*
+ * Holder for mobile navigation.
+ * The menu bar that is clicked to display the .mobile-navigation.
+ * 1. Set to 41px keeps the main section at 40px especially when used with a bottom border.
+ */
+.mobile-navigation-bar {
+  display: none;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  background: #ccc;
+  height: 41px;
+  /* 1 */
+  top: 0px;
+  border-bottom: 1px solid #fff;
+}
+
+/*
+ * The mobile menu that slides in or down.
+ * 1. Set to the same height as .mobile-navigation-bar.
+ */
+.mobile-navigation {
+  position: fixed;
+  bottom: 0;
+  left: -100%;
+  overflow-y: auto;
+  width: 100%;
+  top: 41px;
+  /* 1 */
+  background: #ccc;
+  padding: 0;
+  margin: 0;
+  -webkit-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  -moz-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  -o-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.mobile-navigation-show {
+  left: 0;
+}
+
+/*
+ * Add to the body in js to ensure scrolling works correctly when the menu is longer than the page.
+ */
+.mobile-navigation-show-body {
+  overflow: hidden;
+}
+
+/*
+ * Mobile All Levels.
+ */
+.mobile-navigation ul {
+  list-style: none;
+  margin: 0;
+}
+
+/*
+ * Mobile First Level.
+ * 1. Remove margin previously set.
+ */
+.mobile-navigation ul li {
+  display: block;
+  margin: 0;
+  /* 1 */
+  background: #ccc;
+  border-top: 1px solid #fff;
+}
+
+/*
+ * Remove double top border on first item if .mobile-navigation has a bottom border set.
+ */
+.mobile-navigation > ul > li:first-child {
+  border-top: none;
+}
+
+/*
+ * All Levels.
+ * Mobile navigation link style.
+ */
+.mobile-navigation ul li a:link,
+.mobile-navigation ul li a:visited {
+  display: block;
+  padding: 7px 0 7px 7px;
+  color: #fff;
+  text-decoration: none;
+}
+
+/*
+ * All Levels.
+ * Mobile navigation hover style.
+ */
+.mobile-navigation ul li a:hover {
+  color: #fff;
+  background: #666;
+}
+
+/*
+ * Mobile Second Level.
+ * Mobile navigation link style.
+ */
+.mobile-navigation ul ul li a:link,
+.mobile-navigation ul ul li a:visited {
+  display: block;
+  padding: 7px 0 7px 21px;
+  color: #fff;
+  text-decoration: none;
+}
+
+/*
+ * Mobile Third Level.
+ * Mobile navigation link style.
+ */
+.mobile-navigation ul ul ul li a:link,
+.mobile-navigation ul ul ul li a:visited {
+  display: block;
+  padding: 7px 0 7px 35px;
+  color: #fff;
+  text-decoration: none;
+}
+
+/*
+ * Overide <a> styles for image fonts (dashicons / font awesome).
+ */
+a.image-font {
+  text-decoration: none;
+}
+
+/*
+ *  Position so sits in middle of navigation.
+ *  1. Set to same height of .mobile-navigation-bar. Also give full height clickable.
+ * .image-font__Element.
+ */
+.image-font__sizing {
+  font-size: 2.142857em;
+  /* 30/14 */
+  color: #fff;
+  display: inline-block;
+  vertical-align: text-top;
+  height: 40px;
+  /* 1 */
+  margin-right: 8px;
+  -webkit-transition: color .1s ease-in 0;
+  transition: color .1s ease-in 0;
+}
+
+/*
+ * Use my own reference to the image fonts so I control all styling not their stylsheets.
+ * .image-font__Element.
+ */
+.image-font__dashicons {
+  font-family: 'dashicons';
+}
+
+/*
+ * Use my own reference to the image fonts so I control all styling not their stylsheets.
+ * .image-font__Element.
+ */
+.image-font__fontawesome {
+  font-family: 'FontAwesome';
+}
+
+/*
+ * Set the position for images instead of image fonts. Try and not use.
+ * Ensure graphic is 22px square and 44px square @2x.
+ 1. Set to same height of .mobile-navigation-bar. Also give full height clickable.
+ */
+a.mobile-navigation-image {
+  position: relative;
+  top: -2px;
+  display: inline-block;
+  line-height: 40px;
+  /* 1 */
+  margin-right: 8px;
+}
+
+@media screen and (max-width: 767px) {
+  .mobile-navigation-bar,
+  .main-navigation-bar-fixed {
+    display: block;
+  }
+
+  .main-navigation-bar,
+  .main-navigation-bar-fixed {
+    display: none;
+  }
+}
+.current-page-item > a,
+.current-menu-item > a,
+.current-page-ancestor > a {
+  text-decoration: underline;
+}
+
+/*
+**********************************************************************
+OTHER NAVIGATION
+**********************************************************************
+*/
+.comment-navigation .nav-previous,
+.paging-navigation .nav-previous,
+.post-navigation .nav-previous {
+  float: left;
+  width: 50%;
+}
+
+.comment-navigation .nav-next,
+.paging-navigation .nav-next,
+.post-navigation .nav-next {
+  float: right;
+  text-align: right;
+  width: 50%;
+}
+
+/*
+**********************************************************************
+FOOTER
+**********************************************************************
+*/
+/*
+ * .main-footer__Element.
+ */
+/*
+**********************************************************************
+POSTS AND PAGES
+**********************************************************************
+*/
+/*
+ * .content-header-Element.
+ */
+/*
+ * .content-header-Element.
+ */
+/*
+**********************************************************************
+ALIGNMENT
+**********************************************************************
+*/
+.alignleft {
+  display: inline;
+  float: left;
+  margin: 0 21px 0 0;
+}
+
+.alignright {
+  display: inline;
+  float: right;
+  margin: 0 0 0 21px;
+}
+
+.aligncenter {
+  clear: both;
+  display: block;
+  margin: 0 auto;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440. H5BP.
+ */
+audio,
+canvas,
+img,
+video {
+  vertical-align: middle;
+}
+
+/*
+**********************************************************************
+CLEARINGS
+**********************************************************************
+*/
+/*
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+/*
+**********************************************************************
+GOOGLE MAPS
+**********************************************************************
+*/
+/*
+ * Google maps.
+ */
+#map-canvas {
+  max-width: 100%;
+  height: 500px;
+}
+
+/*
+ * Sort out zoom controls.
+ */
+.gm-style img {
+  max-width: none;
+}
+
+/*
+**********************************************************************
+PRINT
+**********************************************************************
+*/
+/*
+ * Inlined to avoid required HTTP connection: h5bp.com/r. H5BP.
+ */
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    /* Black prints faster: h5bp.com/s */
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  /*
+   * Don't show links for images, or javascript/internal links
+   */
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+    /* h5bp.com/t */
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: 0.5cm;
+  }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
+/*
+**********************************************************************
+MEDIA QUERIES
+**********************************************************************
+*/
+/*@import "media-queries/media-queries";*/
+
+
+
+/*# sourceMappingURL=sourcemaps/style.css.map */

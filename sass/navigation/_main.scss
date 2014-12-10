@@ -31,7 +31,7 @@
  * .main-navigation-bar--Modifier. 
  */
 .main-navigation-bar--bkg {
-    background: #ccc;
+    background: $color-background-navigation;
 }
 
 /*
@@ -88,7 +88,7 @@
 .main-navigation ul li a:link,
 .main-navigation ul li a:visited
 {
-    color: #666;
+    color: $color-text-navigation;
     padding-bottom: 7px; /* 1 */
 }
 
@@ -111,8 +111,8 @@
     display: none;
     position: absolute;
     z-index: 999;
-    background: #fff;
-    border: 2px solid #ccc;
+    background: $color-background-navigation-dropdown;
+    border: 2px solid $color-border-navigation;
     margin: -2px 0 0 0; /* 1 */
     padding: 15px 0 0 15px;
     line-height: initial; /* 2 */   

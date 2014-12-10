@@ -165,7 +165,7 @@ add_action( 'init', 'malinky_init' );*/
 
 
 /* ------------------------------------------------------------------------ *
- * Front End Scripts
+ * Front End Scripts Local
  * ------------------------------------------------------------------------ */
 
 /**
@@ -226,6 +226,11 @@ function malinky_scripts()
 						NULL
 	);
 	wp_enqueue_style( 'malinky-font-awesome' );
+
+
+	/* -------------------------------- *
+	 * Local
+	 * -------------------------------- */
 
 
 	/**
@@ -318,6 +323,22 @@ function malinky_scripts()
 		wp_enqueue_script( 'malinky-contact' );
 
 	}
+
+
+	/* -------------------------------- *
+	 * Dev
+	 * -------------------------------- */
+
+	/*
+	 * googlemap.js, main.js, owlslider-setup.js, retina.js
+	 */
+	wp_register_script( 'malinky-scripts-min-js',
+						get_template_directory_uri() . '/dev/js/scripts.min.js',
+						array( 'jquery' ),
+						NULL,
+						true
+	);
+	wp_enqueue_script( 'malinky-scripts-min-js' );
 
 }
 
