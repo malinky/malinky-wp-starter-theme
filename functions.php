@@ -165,14 +165,18 @@ add_action( 'init', 'malinky_init' );*/
 
 
 /* ------------------------------------------------------------------------ *
- * Front End Scripts Local
+ * Front End Scripts
  * ------------------------------------------------------------------------ */
 
 /**
- * Enqueue frontend scripts
+ * Enqueue frontend scripts.
  */
 function malinky_scripts()
 {
+
+	/* -------------------------------- *
+	 * Local && Dev && Prod
+	 * -------------------------------- */
 
 	/**
 	 * Load WP jQuery and jQuery migrate in the footer.
@@ -228,67 +232,8 @@ function malinky_scripts()
 	wp_enqueue_style( 'malinky-font-awesome' );
 
 
-	/* -------------------------------- *
-	 * Local
-	 * -------------------------------- */
-
-
 	/**
-	 * Modernizr which includes html5shiv.
-	 *
-	 * @link http://modernizr.com/
-	 * @link https://github.com/aFarkas/html5shiv
-	 */
-	wp_register_script( 'malinky-modernizr-js',
-						get_template_directory_uri() . '/js/modernizr-2.8.3.js',
-						false,
-						NULL
-	);
-	wp_enqueue_script( 'malinky-modernizr-js' );
-
-
-	/*
-	 * Malinky Media related javascript and jQuery.
-	 */
-	wp_register_script( 'malinky-main-js',
-						get_template_directory_uri() . '/js/main.js',
-						array( 'jquery' ),
-						NULL,
-						true
-	);
-	wp_enqueue_script( 'malinky-main-js' );
-
-
-	/**
-	 * Retina.
-	 *
-	 * @link http://imulus.github.io/retinajs/
-	 */
-	wp_register_script( 'malinky-retina-js',
-						get_template_directory_uri() . '/js/retina.js',
-						false,
-						NULL,
-						true
-	);
-	wp_enqueue_script( 'malinky-retina-js' );
-
-
-	/**
-	 * Google Map Set Up.
-	 *
-	 * @link https://developers.google.com/maps/documentation/javascript/
-	 */
-	wp_register_script( 'malinky-googlemap-js',
-						get_template_directory_uri() . '/js/googlemap.js',
-						false,
-						NULL,
-						true
-	);
-	wp_enqueue_script( 'malinky-googlemap-js' );
-
-
-	/**
-	 * Load Google maps API.
+	 * Load Google maps API. (Script actually enqueued in Local/Dev/Prod below).
 	 * Uses malinky_initialize function which is in googlemap.js.
 	 * Remember to set API Key.
 	 *
@@ -303,42 +248,99 @@ function malinky_scripts()
 	wp_enqueue_script( 'malinky-googlemap-api-js' );
 
 
-	/**
-	 * Load contact validation scripts.
-	 */
-	if ( is_page( 'contact' ) ) {
+	if ( WP_ENV == 'local' ) {
 
-		wp_register_script( 'malinky-validate-js',
-							get_template_directory_uri() . '/js/jquery.validate.min.js',
+		/* -------------------------------- *
+		 * Local
+		 * -------------------------------- */
+
+		/**
+		 * Modernizr which includes html5shiv.
+		 *
+		 * @link http://modernizr.com/
+		 * @link https://github.com/aFarkas/html5shiv
+		 */
+		wp_register_script( 'malinky-modernizr-js',
+							get_template_directory_uri() . '/js/modernizr-2.8.3.js',
+							false,
+							NULL
+		);
+		wp_enqueue_script( 'malinky-modernizr-js' );
+
+
+		/*
+		 * Malinky Media related javascript and jQuery.
+		 */
+		wp_register_script( 'malinky-main-js',
+							get_template_directory_uri() . '/js/main.js',
+							array( 'jquery' ),
+							NULL,
+							true
+		);
+		wp_enqueue_script( 'malinky-main-js' );
+
+
+		/**
+		 * Retina.
+		 *
+		 * @link http://imulus.github.io/retinajs/
+		 */
+		wp_register_script( 'malinky-retina-js',
+							get_template_directory_uri() . '/js/retina.js',
 							false,
 							NULL,
 							true
 		);
-		wp_register_script( 'malinky-contact',
-							get_template_directory_uri() . '/js/contact-validate.min.js',
-							array( 'plaay-validate-js' ),
+		wp_enqueue_script( 'malinky-retina-js' );
+
+
+		/**
+		 * Google Map Set Up.
+		 *
+		 * @link https://developers.google.com/maps/documentation/javascript/
+		 */
+		wp_register_script( 'malinky-googlemap-js',
+							get_template_directory_uri() . '/js/googlemap.js',
+							false,
 							NULL,
 							true
 		);
-		wp_enqueue_script( 'malinky-contact' );
+		wp_enqueue_script( 'malinky-googlemap-js' );
 
 	}
 
 
-	/* -------------------------------- *
-	 * Dev
-	 * -------------------------------- */
+	if ( WP_ENV == 'dev' ) {
 
-	/*
-	 * googlemap.js, main.js, owlslider-setup.js, retina.js
-	 */
-	wp_register_script( 'malinky-scripts-min-js',
-						get_template_directory_uri() . '/dev/js/scripts.min.js',
-						array( 'jquery' ),
-						NULL,
-						true
-	);
-	wp_enqueue_script( 'malinky-scripts-min-js' );
+		/* -------------------------------- *
+		 * Dev
+		 * -------------------------------- */
+
+		/**
+		 * Modernizr which includes html5shiv.
+		 *
+		 * @link http://modernizr.com/
+		 * @link https://github.com/aFarkas/html5shiv
+		 */
+		wp_register_script( 'malinky-modernizr-min-js',
+							get_template_directory_uri() . '/js/modernizr-2.8.3.min.js',
+							false,
+							NULL
+		);
+		wp_enqueue_script( 'malinky-modernizr-min-js' );
+
+		/*
+		 * googlemap.js, main.js, owlslider-setup.js, retina.js
+		 */
+		wp_register_script( 'malinky-scripts-min-js',
+							get_template_directory_uri() . '/js/scripts.min.js',
+							array( 'jquery' ),
+							NULL,
+							true
+		);
+		wp_enqueue_script( 'malinky-scripts-min-js' );
+
+	}
 
 }
 
