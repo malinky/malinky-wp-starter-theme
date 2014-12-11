@@ -5,8 +5,8 @@
  */
 .wrap-full--full-fixed {
     position: fixed;
-    height: 41px; /* 1 */    
-    top: -41px; /* 1 */
+    height: $navigation-fixed-height; /* 1 */    
+    top: -$navigation-fixed-height; /* 1 */
     z-index: 100000;
 }
 
@@ -40,8 +40,8 @@
 */
 .main-navigation {
     position: relative;
-    height: 70px;
-    line-height: 70px;
+    height: $navigation-height;
+    line-height: $navigation-height;
     /*border-bottom: 2px solid #666;*/
 }
 
@@ -51,7 +51,7 @@
  * .main-navigation--Modifier.
  */
 .main-navigation--fixed {
-    line-height: 40px;
+    line-height: $navigation-fixed-height;
     border: none;
 }
 
@@ -70,7 +70,7 @@
 .main-navigation ul li {
     display: inline-block;    
     margin: 0 10px;
-    padding-bottom: 7px; /* 1 */
+    padding-bottom: $navigation-dropdown-nudge; /* 1 */
 }
 
 /*
@@ -89,7 +89,7 @@
 .main-navigation ul li a:visited
 {
     color: $navigation-link-color;
-    padding-bottom: 7px; /* 1 */
+    padding-bottom: $navigation-dropdown-nudge /* 1 */
 }
 
 /*
@@ -97,6 +97,7 @@
  * Main navigation hover style.
  */
 .main-navigation ul li a:hover {
+    color: $navigation-link-color-hover;
     text-decoration: underline;
 }
 

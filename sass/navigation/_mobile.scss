@@ -8,8 +8,8 @@
     position: fixed;
     width: 100%; 
     z-index: 9999;
-    background: $navigation-background-color;
-    height: 41px; /* 1 */
+    background: $navigation-mobile-background-color;
+    height: $navigation-mobile-height; /* 1 */
     top: 0px;
     border-bottom: $navigation-mobile-seperator;
 }
@@ -24,7 +24,7 @@
     left: -100%;
     overflow-y: auto;
     width: 100%;
-    top: 41px; /* 1 */ 
+    top: $navigation-mobile-height; /* 1 */ 
     padding: 0;
     margin: 0;
     -webkit-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
@@ -78,7 +78,7 @@
 .mobile-navigation ul li a:visited {
     display: block;
     padding: 7px 0 7px 7px;
-    color: $navigation-mobile-text-color;
+    color: $navigation-mobile-link-color;
     text-decoration: none;
 }
 
@@ -117,15 +117,13 @@ a.image-font {
 
 /*
  *  Position so sits in middle of navigation.
- *  1. Set to same height of .mobile-navigation-bar. Also give full height clickable.
  * .image-font__Element.
  */
 .image-font__sizing {
     font-size: 2.142857em; /* 30/14 */
-    color: $navigation-mobile-text-color;  
+    color: $navigation-mobile-link-color;  
     display: inline-block;  
     vertical-align: text-top;
-    height: 40px; /* 1 */
     margin-right: 8px; 
     -webkit-transition: color .1s ease-in 0;
     transition: color .1s ease-in 0;
@@ -145,19 +143,6 @@ a.image-font {
  */
 .image-font__fontawesome {
     font-family: 'FontAwesome';
-}
-
-/*
- * Set the position for images instead of image fonts. Try and not use.
- * Ensure graphic is 22px square and 44px square @2x.
- 1. Set to same height of .mobile-navigation-bar. Also give full height clickable.
- */
-a.mobile-navigation-image {
-    position: relative;
-    top: -2px;
-    display: inline-block;
-    line-height: 40px; /* 1 */
-    margin-right: 8px;    
 }
 
 @media screen and (max-width: 767px) {

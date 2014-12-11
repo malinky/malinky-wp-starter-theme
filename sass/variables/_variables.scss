@@ -1,18 +1,26 @@
-$color-background-button: #bf7b67;
-$color-background-button-hover: #f69c2e;
-$color-text-button: #fff;
+$link-color: blue;
+$link-color-hover: blue;
 
-$color-border: #e5e5e5;
-
-$color-link: blue;
-
-
+$navigation-height: 70px;
+$navigation-fixed-height: 41px;
+$navigation-dropdown-nudge: 7px;
+$navigation-mobile-height: 41px;
 
 $navigation-background-color: #ccc;
 $navigation-link-color: #666;
+$navigation-link-color-hover: #666;
 $navigation-dropdown-background-color: #fff;
 $navigation-dropdown-border: 2px solid #ccc;
 
+$navigation-mobile-background-color: #ccc;
 $navigation-mobile-background-color-hover: #666;
+$navigation-mobile-link-color: #fff;
 $navigation-mobile-seperator: 1px solid #fff;
-$navigation-mobile-text-color: #fff;
+
+$button-background-color: #bf7b67;
+$button-background-color-hover: #f69c2e;
+$button-text-color: #fff;
+
+$form-placeholder-color: #999;
+
+$border-color: #e5e5e5;

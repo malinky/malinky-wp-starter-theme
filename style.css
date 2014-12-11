@@ -1318,10 +1318,11 @@ WRAP
  */
 /*
  * Nudge whole wrap to site below fixed navigation.
+ * Always added along side .wrap (usually from <main>).
  */
 @media screen and (max-width: 767px) {
   .wrap-mobile {
-    margin-top: 40px;
+    margin-top: 41px;
   }
 }
 /*
@@ -1739,20 +1740,6 @@ input[type="search"]::-webkit-search-decoration {
   color: #999;
 }
 
-.field-error-icon {
-  float: right;
-  width: 30px;
-  height: 37px;
-}
-
-.field-error-tick {
-  background: url(http://dev.plaay.co.uk/img/graphics/tick.png) 0 50% no-repeat;
-}
-
-.field-error-cross {
-  background: url(http://dev.plaay.co.uk/img/graphics/cross.png) 0 50% no-repeat;
-}
-
 /*
  * Specific to Wordpress Search widget
  */
@@ -1936,6 +1923,7 @@ a:visited {
 a:hover,
 a:focus,
 a:active {
+  color: blue;
   text-decoration: underline;
 }
 
@@ -2007,7 +1995,7 @@ MAIN NAVIGATION
  * .main-navigation--Modifier.
  */
 .main-navigation--fixed {
-  line-height: 40px;
+  line-height: 41px;
   border: none;
 }
 
@@ -2046,7 +2034,6 @@ MAIN NAVIGATION
 .main-navigation ul li a:visited {
   color: #666;
   padding-bottom: 7px;
-  /* 1 */
 }
 
 /*
@@ -2054,6 +2041,7 @@ MAIN NAVIGATION
  * Main navigation hover style.
  */
 .main-navigation ul li a:hover {
+  color: #666;
   text-decoration: underline;
 }
 
@@ -2238,7 +2226,6 @@ a.image-font {
 
 /*
  *  Position so sits in middle of navigation.
- *  1. Set to same height of .mobile-navigation-bar. Also give full height clickable.
  * .image-font__Element.
  */
 .image-font__sizing {
@@ -2247,8 +2234,6 @@ a.image-font {
   color: #fff;
   display: inline-block;
   vertical-align: text-top;
-  height: 40px;
-  /* 1 */
   margin-right: 8px;
   -webkit-transition: color .1s ease-in 0;
   transition: color .1s ease-in 0;
@@ -2268,20 +2253,6 @@ a.image-font {
  */
 .image-font__fontawesome {
   font-family: 'FontAwesome';
-}
-
-/*
- * Set the position for images instead of image fonts. Try and not use.
- * Ensure graphic is 22px square and 44px square @2x.
- 1. Set to same height of .mobile-navigation-bar. Also give full height clickable.
- */
-a.mobile-navigation-image {
-  position: relative;
-  top: -2px;
-  display: inline-block;
-  line-height: 40px;
-  /* 1 */
-  margin-right: 8px;
 }
 
 @media screen and (max-width: 767px) {

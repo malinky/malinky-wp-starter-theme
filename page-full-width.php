@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-<main role="main" class="wrap">
+<main role="main" class="wrap wrap-mobile">
 
 	<?php while ( have_posts() ) : the_post(); ?>
 

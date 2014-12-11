@@ -30,7 +30,7 @@ input[type="search"] {
     display: block;
     width: 100%;
     max-width: 100%;
-    border: 1px solid $color-border;
+    border: 1px solid $border-color;
     padding: 8px;
     border-radius: 3px;
     -webkit-appearance: none;
@@ -61,7 +61,7 @@ textarea {
     display: block;
     width: 100%;
     max-width: 100%;
-    border: 1px solid $color-border;
+    border: 1px solid $border-color;
     border-radius: 3px;
 }
 
@@ -122,7 +122,7 @@ label {
 }
 
 fieldset {
-    border: 2px solid $color-border;
+    border: 2px solid $border-color;
     padding: 21px;
     margin-bottom: 21px;
 }
@@ -139,29 +139,15 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 ::-webkit-input-placeholder {
-    color: #999;
+    color: $form-placeholder-color;
 }
 
 ::-moz-placeholder {
-    color: #999;  
+    color: $form-placeholder-color;  
 }
 
 :-ms-input-placeholder {  
-    color: #999;  
-}
-
-.field-error-icon {
-    float: right;
-    width: 30px;
-    height: 37px;
-}
-
-.field-error-tick {
-    background: url(http://dev.plaay.co.uk/img/graphics/tick.png) 0 50% no-repeat;
-}
-
-.field-error-cross {
-    background: url(http://dev.plaay.co.uk/img/graphics/cross.png) 0 50% no-repeat;
+    color: $form-placeholder-color;  
 }
 
 /*
@@ -173,10 +159,10 @@ input[type="search"].search-field {
     max-width: none;
     padding: 8px;
     border-radius: 3px 0 0 3px;
-    border-top: 1px solid $color-border;
+    border-top: 1px solid $border-color;
     border-right: none;
-    border-bottom: 1px solid $color-border;
-    border-left: 1px solid $color-border;	
+    border-bottom: 1px solid $border-color;
+    border-left: 1px solid $border-color;	
 }
 
 /*

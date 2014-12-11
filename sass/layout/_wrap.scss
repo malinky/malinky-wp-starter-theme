@@ -25,11 +25,12 @@
 
 /*
  * Nudge whole wrap to site below fixed navigation.
+ * Always added along side .wrap (usually from <main>).
  */
 @media screen and (max-width: 767px) {
 
     .wrap-mobile {
-        margin-top: 40px;
+        margin-top: $navigation-mobile-height;
     }
 
 }

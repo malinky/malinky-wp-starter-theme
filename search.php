@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-<main role="main" class="wrap">
+<main role="main" class="wrap wrap-mobile">
 
 	<div class="col">
 
