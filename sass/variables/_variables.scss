@@ -6,10 +6,13 @@ $color-border: #e5e5e5;
 
 $color-link: blue;
 
-$color-background-navigation: #ccc;
-$color-background-navigation-dropdown: #fff;
-$color-background-navigation-mobile-hover: #666;
-$color-border-navigation: #ccc;
-$color-border-navigation-mobile: #fff;
-$color-text-navigation: #666;
-$color-text-navigation-mobile: #fff;
+
+
+$navigation-background-color: #ccc;
+$navigation-link-color: #666;
+$navigation-dropdown-background-color: #fff;
+$navigation-dropdown-border: 2px solid #ccc;
+
+$navigation-mobile-background-color-hover: #666;
+$navigation-mobile-seperator: 1px solid #fff;
+$navigation-mobile-text-color: #fff;

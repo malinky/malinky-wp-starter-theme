@@ -8,10 +8,10 @@
     position: fixed;
     width: 100%; 
     z-index: 9999;
-    background: $color-background-navigation;
+    background: $navigation-background-color;
     height: 41px; /* 1 */
     top: 0px;
-    border-bottom: 1px solid $color-border-navigation-mobile;
+    border-bottom: $navigation-mobile-seperator;
 }
 
 /*
@@ -25,7 +25,6 @@
     overflow-y: auto;
     width: 100%;
     top: 41px; /* 1 */ 
-    background: $color-background-navigation;
     padding: 0;
     margin: 0;
     -webkit-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
@@ -60,8 +59,8 @@
 .mobile-navigation ul li {
     display: block;
     margin: 0; /* 1 */
-    background: $color-background-navigation;
-    border-top: 1px solid $color-border-navigation-mobile;
+    background: $navigation-background-color;
+    border-top: $navigation-mobile-seperator;
 }
 
 /*
@@ -79,7 +78,7 @@
 .mobile-navigation ul li a:visited {
     display: block;
     padding: 7px 0 7px 7px;
-    color: $color-text-navigation-mobile;
+    color: $navigation-mobile-text-color;
     text-decoration: none;
 }
 
@@ -88,8 +87,7 @@
  * Mobile navigation hover style.
  */
 .mobile-navigation ul li a:hover {
-    color: $color-text-navigation-mobile;
-    background: $color-background-navigation-mobile-hover;
+    background: $navigation-mobile-background-color-hover;
 }
 
 /*
@@ -97,12 +95,8 @@
  * Mobile navigation link style.
  */ 
 .mobile-navigation ul ul li a:link,
-.mobile-navigation ul ul li a:visited
-{
-    display: block;
-    padding: 7px 0 7px 21px;
-    color: $color-text-navigation-mobile;
-    text-decoration: none;
+.mobile-navigation ul ul li a:visited {
+    padding-left: 21px;
 }
 
 /*
@@ -110,12 +104,8 @@
  * Mobile navigation link style.
  */
 .mobile-navigation ul ul ul li a:link,
-.mobile-navigation ul ul ul li a:visited
-{
-    display: block;
-    padding: 7px 0 7px 35px;
-    color: $color-text-navigation-mobile;
-    text-decoration: none;
+.mobile-navigation ul ul ul li a:visited {
+    padding-left: 35px;
 }
 
 /*
@@ -132,7 +122,7 @@ a.image-font {
  */
 .image-font__sizing {
     font-size: 2.142857em; /* 30/14 */
-    color: $color-text-navigation-mobile;  
+    color: $navigation-mobile-text-color;  
     display: inline-block;  
     vertical-align: text-top;
     height: 40px; /* 1 */

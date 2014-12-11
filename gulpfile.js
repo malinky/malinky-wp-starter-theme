@@ -1,21 +1,24 @@
 /* ------------------------------------------------------------------------ *
  * Gulp Packages
  * ------------------------------------------------------------------------ */
- 
-var gulp 		= require('gulp'); 
 
-var concat 		= require('gulp-concat');
+var gulp        = require('gulp'); 
+
+var concat      = require('gulp-concat');
 var del         = require('del');
+var rename      = require('gulp-rename');
 var runSequence = require('run-sequence');
-var sass 		= require('gulp-ruby-sass');
-var sourcemaps 	= require('gulp-sourcemaps');
-var uglify 		= require('gulp-uglify');
+var sass        = require('gulp-ruby-sass');
+var sourcemaps  = require('gulp-sourcemaps');
+var uglify      = require('gulp-uglify');
 
 /*
 https://github.com/wearefractal/gulp-concat
 https://www.npmjs.com/package/gulp-concat
 https://github.com/sindresorhus/del
 https://www.npmjs.com/package/del
+https://github.com/hparra/gulp-rename
+https://www.npmjs.com/package/gulp-rename
 https://github.com/OverZealous/run-sequence
 https://www.npmjs.com/package/run-sequence
 https://github.com/sindresorhus/gulp-ruby-sass/tree/rw/1.0
@@ -85,10 +88,31 @@ gulp.task('default', ['sass', 'watch']);
  * Concat and minify JS to scripts.js
  * ------------------------------------------------------------------------ */
 
-gulp.task('dev-move', function() {
-    return gulp.src(['*', '**', '!dev{,/**}', '!prod{,/**}', '!gulpfile.js', '!node_modules{,/**}', '!package.json', ])
+/**
+ * Delete all contents of dev folder.
+ */
+gulp.task('dev-clean', function (cb) {
+    del('dev/*', cb);
+});
+
+
+/**
+  * Move root .php and .css files (which is all that need moving from root of theme).
+  */
+gulp.task('dev-move-files', function() {
+    return gulp.src('*.php')
         .pipe(gulp.dest('dev'));
 });
+
+
+/**
+  * Move root directories and their contents.
+  */
+gulp.task('dev-move-dir', function() {
+    return gulp.src(['inc/**/*', 'js/**/*', 'languages/**/*', 'sass/**/*'], { base: './'} )
+        .pipe(gulp.dest('dev'));
+});
+
 
 /**
  * Compile our SASS.
@@ -99,13 +123,14 @@ gulp.task('dev-move', function() {
  *
  */
 gulp.task('dev-sass', function() {
-    return sass('dev/sass', { sourcemap: true, style: 'compressed' })
+    return sass('sass', { sourcemap: true, style: 'compressed' })
 	    .on('error', function (err) {
 	      console.error('SASS Error - ', err.message);
 	   	})
 	    .pipe(sourcemaps.write('sourcemaps', {includeContent: false, sourceRoot: '../sass'}))
-	    .pipe(gulp.dest('devs'));
+	    .pipe(gulp.dest('dev'));
 });
+
 
 /**
  * Concat (rename) and minify our JS.
@@ -116,7 +141,7 @@ gulp.task('dev-sass', function() {
  * Don't minimize respond.js as it's only loaded in IE8 from header and it breaks during minification.
  */
 gulp.task('dev-scripts', function() {
-    return gulp.src(['dev/js/*.js', '!dev/js/modernizr-2.8.3.js', '!dev/js/respond.js'])
+    return gulp.src(['js/*.js', '!js/modernizr-2.8.3.js', '!js/respond.js'])
 		.pipe(sourcemaps.init())
 		.pipe(concat('scripts.min.js'))
         .pipe(uglify())
@@ -124,16 +149,31 @@ gulp.task('dev-scripts', function() {
         .pipe(gulp.dest('dev/js'));
 });
 
+
 /**
- * Delete all contents of dev folder.
+ * Minify modernizr.js.
+ *
+ * Always use concat before uglify else source map isn't generated correctly.
  */
-gulp.task('dev-clean', function (cb) {
-  del('dev/*', cb);
+gulp.task('dev-scripts-modernizer', function() {
+    return gulp.src(['js/modernizr-2.8.3.js'])
+        .pipe(sourcemaps.init())
+        .pipe(concat('modernizr-2.8.3.min.js'))
+        .pipe(uglify())
+        .pipe(sourcemaps.write('../sourcemaps', {includeContent: false, sourceRoot: '../js'}))
+        .pipe(gulp.dest('dev/js'));
 });
+
 
 /**
  * Set up dev task.
  */
 gulp.task('dev', function() {
-  	runSequence('dev-clean'/*, 'dev-move', 'dev-sass', 'dev-scripts'*/);
+  	runSequence('dev-clean', 
+                'dev-move-files', 
+                'dev-move-dir', 
+                'dev-sass', 
+                'dev-scripts', 
+                'dev-scripts-modernizer'
+            );
 })
