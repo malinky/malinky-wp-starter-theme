@@ -1,9 +1,11 @@
 /* ------------------------------------------------------------------------ *
  * Gulp Packages
  * ------------------------------------------------------------------------ */
+ 
 var gulp 		= require('gulp'); 
 
 var concat 		= require('gulp-concat');
+var del         = require('del');
 var runSequence = require('run-sequence');
 var sass 		= require('gulp-ruby-sass');
 var sourcemaps 	= require('gulp-sourcemaps');
@@ -12,6 +14,8 @@ var uglify 		= require('gulp-uglify');
 /*
 https://github.com/wearefractal/gulp-concat
 https://www.npmjs.com/package/gulp-concat
+https://github.com/sindresorhus/del
+https://www.npmjs.com/package/del
 https://github.com/OverZealous/run-sequence
 https://www.npmjs.com/package/run-sequence
 https://github.com/sindresorhus/gulp-ruby-sass/tree/rw/1.0
@@ -121,8 +125,15 @@ gulp.task('dev-scripts', function() {
 });
 
 /**
+ * Delete all contents of dev folder.
+ */
+gulp.task('dev-clean', function (cb) {
+  del('dev/*', cb);
+});
+
+/**
  * Set up dev task.
  */
 gulp.task('dev', function() {
-  	runSequence('dev-move', 'dev-sass', 'dev-scripts');
+  	runSequence('dev-clean'/*, 'dev-move', 'dev-sass', 'dev-scripts'*/);
 })
