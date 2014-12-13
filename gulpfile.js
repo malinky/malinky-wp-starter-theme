@@ -35,9 +35,10 @@ https://github.com/terinjokes/gulp-uglify/issues/56
 
 
 /* ------------------------------------------------------------------------ *
- * Copy SASS into child theme.
+ * Copy parent files into child.
+ * Run from parent theme directory.
  * 
- * gulp child-theme
+ * gulp child-theme-setup
  *
  * Grab all folders and files in parent SASS folder.
  * Exclude style.scss file as this is already in the child theme and
@@ -47,10 +48,27 @@ https://github.com/terinjokes/gulp-uglify/issues/56
 /**
  * Copy parent SASS into child theme.
  */
-gulp.task('child-theme', function() {
-    return gulp.src(['../malinky-wp-starter-theme/sass/**', '!../malinky-wp-starter-theme/sass/style.scss'])
-    .pipe(gulp.dest('./sass'));
+gulp.task('child-theme-sass', function() {
+    return gulp.src(['sass/**', '!sass/style.scss'])
+    .pipe(gulp.dest('../malinky-wp-starter-theme-child/sass'));
 });
+
+/**
+ * Copy other files into child theme.
+ */
+gulp.task('child-theme-files', function() {
+    return gulp.src(['gulpfile.js', 'package.json'])
+    .pipe(gulp.dest('../malinky-wp-starter-theme-child'));
+});
+
+/**
+ * Run child-theme-setup task.
+ */
+gulp.task('child-theme-setup', function() {
+    runSequence('child-theme-sass', 
+                'child-theme-files'
+            );
+})
 
 
 
