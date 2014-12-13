@@ -24,6 +24,8 @@
  * Holder for main navigation.
  */
 .main-navigation-bar {
+    font-family: $navigation-font-family;
+    font-size: $navigation-font-size;    
 }
 
 /*
@@ -51,6 +53,7 @@
  * .main-navigation--Modifier.
  */
 .main-navigation--fixed {
+    height: $navigation-fixed-height;
     line-height: $navigation-fixed-height;
     border: none;
 }

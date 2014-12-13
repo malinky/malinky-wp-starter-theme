@@ -62,6 +62,7 @@ jQuery(document).ready(function($){
 
     /*
      * Show fixed main navigation on scroll.
+     * Scroll top should be no less than $navigation-height in SASS.
      */    
     $(window).scroll(function () {
         if ($(this).scrollTop() > 80) {

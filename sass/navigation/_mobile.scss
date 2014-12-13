@@ -4,6 +4,7 @@
  * 1. Set to 41px keeps the main section at 40px especially when used with a bottom border.
  */
 .mobile-navigation-bar {
+    font-family: $navigation-font-family;
     display: none;
     position: fixed;
     width: 100%; 
