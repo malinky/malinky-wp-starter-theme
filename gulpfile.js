@@ -140,14 +140,29 @@ gulp.task('dev-sass', function() {
  * sourceRoot sets the path where the source files are hosted relative to the source map.
  * This makes things appear in the correct folders when viewing through developer tools.
  *
- * Don't minimize respond.js as it's only loaded in IE8 from header and it breaks during minification.
+ * Don't minimize google maps as it's loaded on it's on and wp_localize_script with php settings if applicable.
+ * Don't minimize moderinzer seperatley as it is loaded in the header.
+ * Don't minimize respond.js as it's only loaded in IE8 from the footer.
  */
 gulp.task('dev-scripts', function() {
-    return gulp.src(['js/*.js', '!js/modernizr-2.8.3.js', '!js/respond.js'])
+    return gulp.src(['js/*.js', '!googlemap.js', '!js/modernizr-2.8.3.js', '!js/respond.js'])
 		.pipe(sourcemaps.init())
 		.pipe(concat('scripts.min.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write('../sourcemaps', {includeContent: false, sourceRoot: '../js'}))
+        .pipe(gulp.dest('dev/js'));
+});
+
+
+/**
+ * Minify googlemap.js
+ *
+ * Always use concat before uglify else source map isn't generated correctly.
+ */
+gulp.task('dev-scripts-google-map', function() {
+    return gulp.src(['js/googlemap.js'])
+        .pipe(concat('googlemap.min.js'))
+        .pipe(uglify())
         .pipe(gulp.dest('dev/js'));
 });
 
@@ -188,7 +203,8 @@ gulp.task('dev', function() {
                 'dev-move-dir', 
                 'dev-sass', 
                 'dev-scripts', 
-                'dev-scripts-modernizer',
+                'dev-scripts-google-map', 
+                'dev-scripts-modernizer', 
                 'dev-scripts-respond'
             );
 })
@@ -252,11 +268,26 @@ gulp.task('prod-sass', function() {
 /**
  * Concat (rename) and minify our JS.
  *
- * Don't minimize respond.js as it's only loaded in IE8 from header and it breaks during minification.
+ * Don't minimize google maps as it's loaded on it's on and wp_localize_script with php settings if applicable.
+ * Don't minimize moderinzer seperatley as it is loaded in the header.
+ * Don't minimize respond.js as it's only loaded in IE8 from the footer.
  */
 gulp.task('prod-scripts', function() {
-    return gulp.src(['js/*.js', '!js/modernizr-2.8.3.js', '!js/respond.js'])
+    return gulp.src(['js/*.js', '!googlemap.js', '!js/modernizr-2.8.3.js', '!js/respond.js'])
         .pipe(concat('scripts.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('prod/js'));
+});
+
+
+/**
+ * Minify googlemap.js
+ *
+ * Always use concat before uglify else source map isn't generated correctly.
+ */
+gulp.task('prod-scripts-google-map', function() {
+    return gulp.src(['js/googlemap.js'])
+        .pipe(concat('googlemap.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('prod/js'));
 });
@@ -296,6 +327,7 @@ gulp.task('prod', function() {
                 'prod-move-dir', 
                 'prod-sass', 
                 'prod-scripts', 
+                'prod-scripts-google-map', 
                 'prod-scripts-modernizer',
                 'prod-scripts-respond'
             );

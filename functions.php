@@ -12,6 +12,7 @@
  * Login Screen
  * Setup Actions and Filters
  * Template Tags
+ * Settings Plugin
  * ------------------------------------------------------------------------ */
 
 
@@ -222,32 +223,12 @@ function malinky_scripts()
 	 *
 	 * @link http://fortawesome.github.io/Font-Awesome/
 	 */		
-	wp_register_style( 'malinky-font-awesome',
-					   '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css',
-						false,
-						NULL
+	wp_register_style( 'malinky-font-awesome', 
+					   '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', 
+					   false, 
+					   NULL
 	);
 	wp_enqueue_style( 'malinky-font-awesome' );
-
-
-	if ( is_page( 'contact-us' ) ) {
-
-		/**
-		 * Load Google maps API. (Script actually enqueued in Local/Dev/Prod below).
-		 * Uses malinky_initialize function which is in googlemap.js.
-		 * Remember to set API Key.
-		 *
-		 * @link https://developers.google.com/maps/documentation/javascript/tutorial
-		 */		
-		wp_register_script( 'malinky-googlemap-api-js',
-						   'https://maps.googleapis.com/maps/api/js?key=AIzaSyAAJgPDU4N6eWSgDP_D5t9wGWKw-2qP3ig&callback=malinky_initialize',
-							false,
-							NULL,
-							true
-		);
-		wp_enqueue_script( 'malinky-googlemap-api-js' );
-	
-	}
 
 
 	if ( WP_ENV == 'local' ) {
@@ -323,27 +304,13 @@ function malinky_scripts()
 		);
 		wp_enqueue_script( 'malinky-retina-js' );
 
-
-		/**
-		 * Google Map Set Up.
-		 *
-		 * @link https://developers.google.com/maps/documentation/javascript/
-		 */
-		wp_register_script( 'malinky-googlemap-js',
-							get_template_directory_uri() . '/js/googlemap.js',
-							false,
-							NULL,
-							true
-		);
-		wp_enqueue_script( 'malinky-googlemap-js' );
-
 	}
 
 
 	if ( WP_ENV == 'dev' || WP_ENV == 'prod' ) {
 
 		/* -------------------------------- *
-		 * Dev and Prod
+		 * Dev && Prod
 		 * -------------------------------- */
 
 		/**
@@ -372,6 +339,103 @@ function malinky_scripts()
 		wp_enqueue_script( 'malinky-scripts-min-js' );
 
 	}
+
+
+	/* -------------------------------- *
+	 * Google Maps Local && Dev && Prod
+	 * -------------------------------- */
+
+	/**
+	 * Google Map Set Up.
+	 * If there are settings in admin.
+	 * Localize them and then they are directly available as json in googlemap.js.
+	 */
+	$google_map_settings = get_option( '_000004_google_map_settings' );
+	
+	if ( $google_map_settings['show_google_map'] ) {
+
+		/* --------------- *
+		 * Local
+		 * No API Key
+		 * --------------- */
+		if ( WP_ENV == 'local' ) {
+
+			/**
+			 * Google Map Set Up.
+			 * 
+			 * Settings can be accessed from googlemap.js with google_map_settings.SETTING_KEY
+			 *
+			 * @link https://developers.google.com/maps/documentation/javascript/
+			 */
+			wp_register_script( 'malinky-googlemap-js',
+								get_template_directory_uri() . '/js/googlemap.js',
+								false,
+								NULL,
+								true
+			);
+			wp_localize_script( 'malinky-googlemap-js', 'google_map_settings', $google_map_settings );
+			wp_enqueue_script( 'malinky-googlemap-js' );
+
+
+			/**
+			 * Load Google maps API without key.
+			 * Uses malinky_initialize function which is in googlemap.js.
+			 * Remember to set API Key.
+			 *
+			 * @link https://developers.google.com/maps/documentation/javascript/tutorial
+			 */
+			wp_register_script( 'malinky-googlemap-api-js', 
+								'https://maps.googleapis.com/maps/api/js?callback=malinky_initialize', 
+								false, 
+								NULL, 
+								true
+			);
+
+		}
+
+
+		/* --------------- *
+		 * Dev && Prod
+		 * API Key
+		 * --------------- */
+
+		if ( WP_ENV == 'dev' || WP_ENV == 'prod' ) {
+
+			/**
+			 * Google Map Set Up.
+			 * 
+			 * Settings can be accessed from googlemap.js with google_map_settings.SETTING_KEY
+			 *
+			 * @link https://developers.google.com/maps/documentation/javascript/
+			 */
+			wp_register_script( 'malinky-googlemap-min-js',
+								get_template_directory_uri() . '/js/googlemap.min.js',
+								false,
+								NULL,
+								true
+			);
+			wp_localize_script( 'malinky-googlemap-min-js', 'google_map_settings', $google_map_settings );
+			wp_enqueue_script( 'malinky-googlemap-min-js' );
+
+			/**
+			 * Load Google maps API without key.
+			 * Uses malinky_initialize function which is in googlemap.js.
+			 * Remember to set API Key.
+			 *
+			 * @link https://developers.google.com/maps/documentation/javascript/tutorial
+			 */
+			wp_register_script( 'malinky-googlemap-api-js', 
+						'https://maps.googleapis.com/maps/api/js?key=' . $google_map_settings['api_key'] . 'callback=malinky_initialize', 
+						false, 
+						NULL, 
+						true
+			);
+
+		}
+
+		wp_enqueue_script( 'malinky-googlemap-api-js' );
+
+	}	
 
 }
 
@@ -671,8 +735,7 @@ function malinky_tree()
 }
 
 
-if ( ! function_exists( 'malinky_truncate_words' ) )
-{
+if ( ! function_exists( 'malinky_truncate_words' ) ) {
 
 	/**
 	 * Truncate a string.
@@ -693,8 +756,7 @@ if ( ! function_exists( 'malinky_truncate_words' ) )
 }
 
 
-if ( ! function_exists( 'malinky_content_meta' ) )
-{
+if ( ! function_exists( 'malinky_content_meta' ) ) {
 	/**
 	 * Posted and updated dates and author name / link.
 	 *
@@ -739,8 +801,7 @@ if ( ! function_exists( 'malinky_content_meta' ) )
 }
 
 
-if ( ! function_exists( 'malinky_content_footer' ) )
-{
+if ( ! function_exists( 'malinky_content_footer' ) ) {
 
 	/**
 	 * Post categories, tags and edit link.
@@ -775,8 +836,7 @@ if ( ! function_exists( 'malinky_content_footer' ) )
 }
 
 
-if ( ! function_exists( 'malinky_posts_pagination' ) )
-{
+if ( ! function_exists( 'malinky_posts_pagination' ) ) {
 
 	/**
 	 * Display navigation to next/previous set of posts when applicable.
@@ -810,8 +870,7 @@ if ( ! function_exists( 'malinky_posts_pagination' ) )
 }
 
 
-if ( ! function_exists( 'malinky_post_pagination' ) )
-{
+if ( ! function_exists( 'malinky_post_pagination' ) ) {
 
 	/**
 	 * Display navigation to next/previous post when applicable.
@@ -942,5 +1001,289 @@ if ( ! function_exists( 'malinky_archive_description' ) ) {
 		}
 
 	}
+
+}
+
+
+
+
+
+/* ------------------------------------------------------------------------ *
+ * Settings Plugin
+ * ------------------------------------------------------------------------ */
+
+if ( class_exists( 'Malinky_Settings_Plugin' ) ) {
+
+	global $settings_object;
+
+	$master_args = array(
+		0 => array(
+			'malinky_settings_page_title' 			=> 'Site Settings',
+			'malinky_settings_menu_title' 			=> 'Site Settings',
+			'malinky_settings_page_parent_slug'		=> 'options-general.php',
+			'malinky_settings_page_tabs'			=> array(),
+			'malinky_settings_capability' 			=> 'manage_options',
+			'malinky_settings_sections' 			=> array(
+				array(
+					'section_title' 	=> 'Contact Information',
+					'section_intro' 	=> '',
+				),
+				array(
+					'section_title' 	=> 'Contact Form Email Settings',
+					'section_intro' 	=> '',
+				),
+				array(
+					'section_title' 	=> 'Google Analytics Setting',
+					'section_intro' 	=> '',
+				),
+				array(
+					'section_title' 	=> 'Google Map Settings',
+					'section_intro' 	=> '',
+				)				
+			),
+			'malinky_settings_fields' 			=> array(
+				array(
+					'option_group_name' 		=> 'Contact Information',
+					'option_title' 				=> 'Address',
+					'option_field_type' 		=> 'editor_field',
+					'option_field_type_options' => array(
+					),
+					'option_section' 			=> 'Contact Information',
+					'option_validation' 		=> '',
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),			
+				array(
+					'option_group_name' 		=> 'Contact Information',
+					'option_title' 				=> 'Email Address',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),
+					'option_section' 			=> 'Contact Information',
+					'option_validation' 		=> array(
+						'email'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Contact Information',
+					'option_title' 				=> 'Phone Number',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Contact Information',
+					'option_validation' 		=> array(
+						'phone'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Contact Information',
+					'option_title' 				=> 'Mobile Number',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Contact Information',
+					'option_validation' 		=> array(
+						'phone'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Contact Form Email Settings',
+					'option_title' 				=> 'Email Address',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Contact Form Email Settings',
+					'option_validation' 		=> array(
+						'email'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Contact Form Email Settings',
+					'option_title' 				=> 'Email Password',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Contact Form Email Settings',
+					'option_validation' 		=> '',
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Contact Form Email Settings',
+					'option_title' 				=> 'Email Host',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Contact Form Email Settings',
+					'option_validation' 		=> array(
+						'text'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Contact Form Email Settings',
+					'option_title' 				=> 'Email Port',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Contact Form Email Settings',
+					'option_validation' 		=> array(
+						'numbers'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> '',
+					'option_title' 				=> 'Google Analytics',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Google Analytics Setting',
+					'option_validation' 		=> array(
+						'googleua'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Google Map Settings',
+					'option_title' 				=> 'Show Google Map',
+					'option_field_type' 		=> 'checkbox_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Google Map Settings',
+					'option_validation' 		=> '',
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Google Map Settings',
+					'option_title' 				=> 'API Key',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Google Map Settings',
+					'option_validation' 		=> array(
+						'text'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),				
+				array(
+					'option_group_name' 		=> 'Google Map Settings',
+					'option_title' 				=> 'Lat',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Google Map Settings',
+					'option_validation' 		=> array(
+						'text'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Google Map Settings',
+					'option_title' 				=> 'Long',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Google Map Settings',
+					'option_validation' 		=> array(
+						'text'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Google Map Settings',
+					'option_title' 				=> 'Zoom',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Google Map Settings',
+					'option_validation' 		=> array(
+						'numbers'
+					),
+					'option_placeholder'		=> '14',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Google Map Settings',
+					'option_title' 				=> 'Show Address',
+					'option_field_type' 		=> 'checkbox_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Google Map Settings',
+					'option_validation' 		=> '',
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				)					
+			)
+		)
+	);
+
+	foreach ($master_args as $k => $v) {
+		$settings_object = 'malinky_settings_plugin_' . $k;
+		$settings_object = new Malinky_Settings_Plugin($master_args[$k]);
+	}
+
+	echo $settings_object->malinky_settings_get_option_functions($settings_object->all_option_names);
+	print_r($settings_object->all_option_names);
 
 }

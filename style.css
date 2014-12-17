@@ -2497,6 +2497,7 @@ GOOGLE MAPS
 #map-canvas {
   max-width: 100%;
   height: 500px;
+  margin-bottom: 20px;
 }
 
 /*
