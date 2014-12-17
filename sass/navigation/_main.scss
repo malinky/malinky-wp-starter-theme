@@ -7,7 +7,7 @@
     position: fixed;
     height: $navigation-fixed-height; /* 1 */    
     top: -$navigation-fixed-height; /* 1 */
-    z-index: 100000;
+    z-index: 9999;
 }
 
 /*
@@ -25,7 +25,8 @@
  */
 .main-navigation-bar {
     font-family: $navigation-font-family;
-    font-size: $navigation-font-size;    
+    font-size: $navigation-font-size;  
+    margin-bottom: $navigation-margin-bottom;  
 }
 
 /*
@@ -33,7 +34,7 @@
  * .main-navigation-bar--Modifier. 
  */
 .main-navigation-bar--bkg {
-    background: $navigation-background-color;
+    background: $navigation-bar-background-color;
 }
 
 /*
@@ -72,7 +73,7 @@
  */
 .main-navigation ul li {
     display: inline-block;    
-    margin: 0 10px;
+    margin: 0 0 0 20px;
     padding-bottom: $navigation-dropdown-nudge; /* 1 */
 }
 
@@ -92,7 +93,7 @@
 .main-navigation ul li a:visited
 {
     color: $navigation-link-color;
-    padding-bottom: $navigation-dropdown-nudge /* 1 */
+    padding-bottom: $navigation-dropdown-nudge; /* 1 */
 }
 
 /*
@@ -156,6 +157,7 @@
  */
 .main-navigation ul ul a:link,
 .main-navigation ul ul a:visited {
+    color: $navigation-dropdown-link-color;
 }
 
 /*
@@ -163,4 +165,5 @@
  * Overide .main-navigation hover style.
  */
 .main-navigation ul ul a:hover {
+    color: $navigation-dropdown-link-color-hover;
 }

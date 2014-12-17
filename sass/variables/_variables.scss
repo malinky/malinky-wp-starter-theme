@@ -1,29 +1,57 @@
 $font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $text-color: #666;
 
-$link-color: blue;
-$link-color-hover: blue;
+$link-color: #f47b20;
+$link-color-hover: #f47b20;
 
-$navigation-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$navigation-font-size: 1.285714em; /* 18/14 */
-$navigation-height: 70px;
+/*
+ * Main and fixed navigation.
+ * 1. Nudge content below navigation. Also used to nudge mobile navigation in _wrap.scss.
+ * 2. Should be more scrollTop in main.js (80px).
+ */
+$navigation-margin-bottom: 20px; /* 1 */
+$navigation-height: 100px; /* 2 */
 $navigation-fixed-height: 41px;
+$navigation-bar-background-color: #f47b20;
+$navigation-link-color: #fff;
+$navigation-link-color-hover: #fff;
+$navigation-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$navigation-font-size: 1.142857em; /* 16/14 */
+
+/*
+ * Dropdown navigation.
+ */
 $navigation-dropdown-nudge: 7px;
-$navigation-mobile-height: 41px;
-
-$navigation-background-color: #ccc;
-$navigation-link-color: #666;
-$navigation-link-color-hover: #666;
 $navigation-dropdown-background-color: #fff;
-$navigation-dropdown-border: 2px solid #ccc;
+$navigation-dropdown-border: 2px solid #f47b20;
+$navigation-dropdown-link-color: #f47b20;
+$navigation-dropdown-link-color-hover: #f47b20;
 
-$navigation-mobile-background-color: #ccc;
-$navigation-mobile-background-color-hover: #666;
-$navigation-mobile-link-color: #fff;
+/*
+ * Mobile navigation.
+ * 1. Fixed mobile navigation bar .mobile-navigation-bar.
+ * 2. Usually color of icon fonts on fixed mobile navigation bar. No hover as tends to be touch screen.
+ * 3. Mobile navigation that slides in.
+ * 4. Backgrounds of the links that slide in.
+ * 5. Text color of the links that slide in.
+ */
+$navigation-mobile-height: 41px;
+$navigation-mobile-bar-background-color: #f47b20; /* 1 */
+$navigation-mobile-bar-link-color: #fff; /* 2 */
+$navigation-mobile-background-color: #f47b20; /* 3 */
+$navigation-mobile-link-background-color: #f47b20; /* 4 */
+$navigation-mobile-link-background-color-hover: #9c0009; /* 4 */
+$navigation-mobile-link-color: #fff; /* 5 */
+$navigation-mobile-link-color-hover: #fff; /* 5 */
+$navigation-mobile-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$navigation-mobile-font-size: 1em; /* 14/14 */
 $navigation-mobile-seperator: 1px solid #fff;
 
-$button-background-color: #bf7b67;
-$button-background-color-hover: #f69c2e;
+$footer-background-color: #f47b20;
+$footer-border: 5px solid #f47b20;
+
+$button-background-color: #f47b20;
+$button-background-color-hover: #9c0009;
 $button-text-color: #fff;
 
 $form-placeholder-color: #999;

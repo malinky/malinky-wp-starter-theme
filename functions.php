@@ -10,10 +10,8 @@
  * Front End Scripts
  * Widgets
  * Login Screen
- * Wordpress Setup Actions and Filters
- * Template Function
+ * Setup Actions and Filters
  * Template Tags
- * CHECK
  * ------------------------------------------------------------------------ */
 
 
@@ -195,7 +193,7 @@ function malinky_scripts()
 		wp_enqueue_script( 'jquery' );
 
 		wp_register_script( 'jquery-migrate',
-							'/wp-includes/js/jquery/jquery-migrate.js',
+							'/wp-includes/js/jquery/jquery-migrate.min.js',
 							false,
 							NULL,
 							true
@@ -232,20 +230,24 @@ function malinky_scripts()
 	wp_enqueue_style( 'malinky-font-awesome' );
 
 
-	/**
-	 * Load Google maps API. (Script actually enqueued in Local/Dev/Prod below).
-	 * Uses malinky_initialize function which is in googlemap.js.
-	 * Remember to set API Key.
-	 *
-	 * @link https://developers.google.com/maps/documentation/javascript/tutorial
-	 */		
-	wp_register_script( 'malinky-googlemap-api-js',
-					   'https://maps.googleapis.com/maps/api/js?key=AIzaSyAAJgPDU4N6eWSgDP_D5t9wGWKw-2qP3ig&callback=malinky_initialize',
-						false,
-						NULL,
-						true
-	);
-	wp_enqueue_script( 'malinky-googlemap-api-js' );
+	if ( is_page( 'contact-us' ) ) {
+
+		/**
+		 * Load Google maps API. (Script actually enqueued in Local/Dev/Prod below).
+		 * Uses malinky_initialize function which is in googlemap.js.
+		 * Remember to set API Key.
+		 *
+		 * @link https://developers.google.com/maps/documentation/javascript/tutorial
+		 */		
+		wp_register_script( 'malinky-googlemap-api-js',
+						   'https://maps.googleapis.com/maps/api/js?key=AIzaSyAAJgPDU4N6eWSgDP_D5t9wGWKw-2qP3ig&callback=malinky_initialize',
+							false,
+							NULL,
+							true
+		);
+		wp_enqueue_script( 'malinky-googlemap-api-js' );
+	
+	}
 
 
 	if ( WP_ENV == 'local' ) {
@@ -281,6 +283,34 @@ function malinky_scripts()
 
 
 		/**
+		 * Owl Carousel.
+		 *
+		 * @link http://owlgraphic.com/
+		 */
+		wp_register_script( 'malinky-owl-carousel-js',
+							get_template_directory_uri() . '/js/owl-carousel.js',
+							false,
+							NULL,
+							true
+		);
+		wp_enqueue_script( 'malinky-owl-carousel-js' );	
+
+
+		/**
+		 * Owl Carousel Setup.
+		 *
+		 * @link http://owlgraphic.com/
+		 */
+		wp_register_script( 'malinky-owl-carousel-setup-js',
+							get_template_directory_uri() . '/js/owl-carousel-setup.js',
+							false,
+							NULL,
+							true
+		);
+		wp_enqueue_script( 'malinky-owl-carousel-setup-js' );
+
+
+		/**
 		 * Retina.
 		 *
 		 * @link http://imulus.github.io/retinajs/
@@ -310,10 +340,10 @@ function malinky_scripts()
 	}
 
 
-	if ( WP_ENV == 'dev' ) {
+	if ( WP_ENV == 'dev' || WP_ENV == 'prod' ) {
 
 		/* -------------------------------- *
-		 * Dev
+		 * Dev and Prod
 		 * -------------------------------- */
 
 		/**
@@ -329,8 +359,9 @@ function malinky_scripts()
 		);
 		wp_enqueue_script( 'malinky-modernizr-min-js' );
 
+
 		/*
-		 * googlemap.js, main.js, owlslider-setup.js, retina.js
+		 * googlemap.js, main.js, owl-carousel.js, owl-carousel-setup.js, retina.js
 		 */
 		wp_register_script( 'malinky-scripts-min-js',
 							get_template_directory_uri() . '/js/scripts.min.js',
@@ -414,94 +445,70 @@ add_action( 'login_head', 'malinky_login_shake' );
 function malinky_login_screen()
 { ?>
     <style type="text/css">
-    	body.login {
-    		background: #FFFFFF url(<?php echo esc_url( site_url( 'img/graphics/nav_bkg.png', 'https' ) ); ?>) repeat;
-    	}
         body.login div#login h1 a {
-            background-image: url(<?php echo esc_url( site_url( 'img/graphics/logo@2x.png', 'https' ) ); ?>);
+            background-image: url(<?php echo esc_url( site_url( 'img/graphics/logo.png', 'https' ) ); ?>);
             background-size: 255px;
             width: auto;
         }
-        .login h1 a {
+        body.login form {
+			border: 1px solid #e5e5e5;
+			box-shadow: none;
+        }
+        body.login form .input {
+        	background: none;
+        }
+        body.login h1 a {
         	background-size: auto;
         }
-        html.ie8 body.login div#login h1 a {
+        html.lt-ie9 body.login div#login h1 a {
             background-image: url(<?php echo esc_url( site_url( 'img/graphics/logo.png', 'https' ) ); ?>);
         }
-        .wp-core-ui .button.button-large {
+        body.login .button.button-large {
         	height: auto;
         	line-height: normal;
 		    padding: 10px;
         }        
-        .wp-core-ui .button-primary {
+        body.login .button-primary {
 		    width: auto;
 		    height: auto;
 		    display: inline-block;
-		    padding: 10px;
 		    background: #9e4381;
 		    border: none;
-		    color: #FFFFFF;
-		    -webkit-border-radius: 5px;
-		    -moz-border-radius: 5px;
-		    border-radius: 5px;
-		    font-weight: normal;   
-		    line-height: normal;
-		    margin-left: 4px;
-		    text-shadow: none;
+		    border-radius: 0;
 		    box-shadow: none;
-		    font-size: 1.076923em;		
         }
-        .wp-core-ui .button-primary:hover {
+        body.login .button-primary:hover {
     		background: #852b68;
     		text-shadow: none;
+    		box-shadow: none;
         }        
-        .login #nav {
+        body.login #nav {
         	text-shadow: none;
 			padding: 26px 24px;
 			background: #FFFFFF;
 			border: 1px solid #e5e5e5;
-			/*-webkit-box-shadow: rgba(200,200,200,.7) 0 4px 10px -1px;
-			box-shadow: rgba(200,200,200,.7) 0 4px 10px -1px;*/
-			-webkit-box-shadow: none;
 			box-shadow: none;
 			text-align: center;
 		}
-		.login #nav a {
+		body.login #nav a {
 		    width: auto;
 		    height: auto;
 		    display: block;
 		    padding: 10px;
 		    background: #9e4381;
 		    border: none;
-		    color: #FFFFFF !important;
-		    -webkit-border-radius: 5px;
-		    -moz-border-radius: 5px;
-		    border-radius: 5px;
-		    font-weight: normal;   
-		    line-height: normal;
-		    margin-left: 0px;
-		    text-decoration: none;
-		    font-size: 1.076923em;		    
+		    color: #fff;
+		    border-radius: none;
 		}
-		.login #nav a:hover {
-			color: #FFFFFF !important;
-			/*background: #2072a1;*/
+		body.login #nav a:hover {
+			color: #fff;
 			background: #852b68;
-			text-shadow: none;
+    		text-shadow: none;
+    		box-shadow: none;
 		}
-		.login #nav a:first-child {
-			/*background: #f49316;*/
-			background: #9e4381;
+		body.login #login #backtoblog a:hover {
+			color: #999;
 		}
-		.login #nav a:first-child:hover {
-			/*background: #e48306;*/
-			background: #852b68;
-		}
-		.mobile #login #nav,
-		.mobile #login #backtoblog {
-			margin-left: 0;
-		}
-	
     </style>
 <?php }
 
@@ -512,7 +519,7 @@ add_action( 'login_enqueue_scripts', 'malinky_login_screen' );
 
 
 /* ------------------------------------------------------------------------ *
- * Wordpress Setup Actions and Filters
+ * Setup Actions and Filters
  * ------------------------------------------------------------------------ */
 
 remove_action('wp_head', 'wp_generator');
@@ -591,6 +598,7 @@ if ( ! isset( $content_width ) ) {
  */
 show_admin_bar( false );
 
+
 /**
  * Allow SVG into media uploader.
  */
@@ -605,11 +613,40 @@ function malinky_mime_types( $mimes )
 add_filter('upload_mimes', 'malinky_mime_types');
 
 
+/**
+ * Replace [...] from automatic excerpts.
+ */
+function malinky_excerpt( $more )
+{
+
+	return '...';
+
+}
+
+add_filter( 'excerpt_more', 'malinky_excerpt' );
+
+
+if ( ! function_exists( 'malinky_read_more_text' ) )
+{
+
+	/**
+	 * Return read more text for use in the_content and manually after the_excerpt().
+	 */
+	function malinky_read_more_text()
+	{
+
+		return '<span class="content-summary__more-link">Read More...</span>';
+
+	}
+
+}
+
+
 
 
 
 /* ------------------------------------------------------------------------ *
- * Template Functions
+ * Template Tags
  * ------------------------------------------------------------------------ */
 
 /**
@@ -634,187 +671,276 @@ function malinky_tree()
 }
 
 
-/**
- * Truncate a string.
- *
- * @param string $text
- * @param int $length
- * @return string
- */
-function malinky_truncate_words( $text, $length )
+if ( ! function_exists( 'malinky_truncate_words' ) )
 {
-   $length = abs( ( int) $length );
-   if( strlen( $text ) > $length ) {
-      $text = preg_replace( "/^(.{1,$length})(\s.*|$)/s", '\\1...', $text );
-   }
-   return $text;
+
+	/**
+	 * Truncate a string.
+	 *
+	 * @param string $text
+	 * @param int $length
+	 * @return string
+	 */
+	function malinky_truncate_words( $text, $length )
+	{
+	   $length = abs( ( int) $length );
+	   if( strlen( $text ) > $length ) {
+	      $text = preg_replace( "/^(.{1,$length})(\s.*|$)/s", '\\1...', $text );
+	   }
+	   return $text;
+	}
+
 }
 
 
-
-
-
-/* ------------------------------------------------------------------------ *
- * Template Tags
- * ------------------------------------------------------------------------ */
-
-if ( ! function_exists( 'malinky_posted_on' ) )
+if ( ! function_exists( 'malinky_content_meta' ) )
 {
 	/**
-	 * Prints HTML with meta information for the current post-date/time and author.
+	 * Posted and updated dates and author name / link.
+	 *
+	 * @param bool $show_author Set to false to hide author details.
 	 */
-	function malinky_posted_on()
+	function malinky_content_meta( $show_author = true )
 	{
 
-		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
-		}
+		$posted_time = '';
+		$updated_string = '';
+		$author = '';
 
-		$time_string = sprintf( $time_string,
+		$posted_time = sprintf( 
+			'<time class="content-header__meta__date--published" datetime="%1$s">%2$s</time>', 
 			esc_attr( get_the_date( 'c' ) ),
-			esc_html( get_the_date() ),
-			esc_attr( get_the_modified_date( 'c' ) ),
-			esc_html( get_the_modified_date() )
+			esc_html( get_the_date() )
 		);
 
-		$posted_on = sprintf(
-			_x( 'Posted on %s', 'post date', 'malinky' ),
-			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
-		);
+		$posted_string = 'Posted on ' . $posted_time;
 
-		$byline = sprintf(
-			_x( 'by %s', 'post author', 'malinky' ),
-			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
-		);
+		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
 
-		echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>';
+			$updated_time = sprintf( 
+				'<time class="content-header__meta__date--updated" datetime="%1$s">%2$s</time>', 
+				esc_attr( get_the_modified_date( 'c' ) ),
+				esc_html( get_the_modified_date() )
+			);
+
+			$updated_string = ', Updated on ' . $updated_time;
+
+		}
+
+		$author = '<a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a>';
+
+		if ( ! $show_author )
+			return '<span class="content-header__meta__date">' . $posted_string . $updated_string . '</span>';
+
+		return '<span class="content-header__meta__date">' . $posted_string . $updated_string . '</span><span class="byline"> by ' . $author . '</span>';
 
 	}
 
 }
 
 
-if ( ! function_exists( 'malinky_entry_footer' ) )
+if ( ! function_exists( 'malinky_content_footer' ) )
 {
 
 	/**
-	 * Prints HTML with meta information for the categories, tags and comments.
+	 * Post categories, tags and edit link.
 	 */
-	function malinky_entry_footer()
+	function malinky_content_footer()
 	{
-		// Hide category and tag text for pages.
-		if ( 'post' == get_post_type() ) {
-			/* translators: used between list items, there is a space after the comma */
-			$categories_list = get_the_category_list( __( ', ', 'malinky' ) );
-			if ( $categories_list && malinky_categorized_blog() ) {
-				printf( '<span class="cat-links">' . __( 'Posted in %1$s', 'malinky' ) . '</span>', $categories_list );
+
+		$categories = '';
+		$tags = '';
+
+		//Only show for posts.
+		if ( get_post_type() == 'post' ) {
+
+			$categories_list = get_the_category_list( ', ' );
+			if ( $categories_list ) {
+				$categories = sprintf( '<span class="content-footer__cat-link">Posted in %1$s</span>', $categories_list );
 			}
 
-			/* translators: used between list items, there is a space after the comma */
-			$tags_list = get_the_tag_list( '', __( ', ', 'malinky' ) );
+			$tags_list = get_the_tag_list( '', ', ' );
 			if ( $tags_list ) {
-				printf( '<span class="tags-links">' . __( 'Tagged %1$s', 'malinky' ) . '</span>', $tags_list );
+				$tags = sprintf( '<span class="content-footer__tag-link">Tagged with %1$s</span>', $tags_list );
 			}
+
 		}
 
-		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-			echo '<span class="comments-link">';
-			comments_popup_link( __( 'Leave a comment', 'malinky' ), __( '1 Comment', 'malinky' ), __( '% Comments', 'malinky' ) );
-			echo '</span>';
-		}
+		$edit_link = sprintf('<span class="content-footer__edit-link"><a href="%1$s">Edit</a></span>', esc_url( get_edit_post_link() ) );
 
-		edit_post_link( __( ' | Edit', 'malinky' ), '<span class="edit-link">', '</span>' );
+		return $categories . ' ' . $tags . ' ' . $edit_link;
 
 	}
 
 }
 
 
-if ( ! function_exists( 'malinky_post_nav' ) )
-{
-
-	/**
-	 * Display navigation to next/previous post when applicable.
-	 */
-	function malinky_post_nav()
-	{
-
-		// Don't print empty markup if there's nowhere to navigate.
-		$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
-		$next     = get_adjacent_post( false, '', false );
-
-		if ( ! $next && ! $previous ) return; ?>
-
-		<nav class="navigation post-navigation" role="navigation">
-			<div class="nav-links">
-				<?php
-					previous_post_link( '<div class="nav-previous">%link</div>', _x( '<span class="meta-nav">&larr;</span>&nbsp;%title', 'Previous post link', 'malinky' ) );
-					next_post_link(     '<div class="nav-next">%link</div>',     _x( '%title&nbsp;<span class="meta-nav">&rarr;</span>', 'Next post link',     'malinky' ) );
-				?>
-			</div><!-- .nav-links -->
-		</nav><!-- .navigation -->
-		<?php
-
-	}
-
-}
-
-
-if ( ! function_exists( 'malinky_paging_nav' ) )
+if ( ! function_exists( 'malinky_posts_pagination' ) )
 {
 
 	/**
 	 * Display navigation to next/previous set of posts when applicable.
 	 */
-	function malinky_paging_nav()
+	function malinky_posts_pagination()
 	{
 
-		// Don't print empty markup if there's only one page.
+		//Return if only 1 page
 		if ( $GLOBALS['wp_query']->max_num_pages < 2 ) {
 			return;
+		} ?>
+
+		<nav class="col posts-pagination" role="navigation">
+
+			<div class="col-item col-item-half posts-pagination__link posts-pagination__link--older">
+				<?php if ( get_next_posts_link() ) { ?>
+						<?php next_posts_link( 'Older Posts' ); ?>
+				<?php } ?>
+			</div><!--
+
+			--><div class="col-item col-item-half col-item--align-right posts-pagination__link posts-pagination__link--newer">
+				<?php if ( get_previous_posts_link() ) { ?>
+						<?php previous_posts_link( 'Newer Posts' ); ?>
+				<?php } ?>			
+			</div>
+
+		</nav><!-- .posts-pagination -->
+
+	<?php }
+
+}
+
+
+if ( ! function_exists( 'malinky_post_pagination' ) )
+{
+
+	/**
+	 * Display navigation to next/previous post when applicable.
+	 */
+	function malinky_post_pagination()
+	{
+
+		//Return if no navigation.
+		$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
+		$next     = get_adjacent_post( false, '', false );
+
+		if ( ! $next && ! $previous ) return; ?>
+
+		<nav class="col post-pagination" role="navigation">
+
+			<div class="col-item col-item-half post-pagination__link post-pagination__link--older">
+				<?php previous_post_link( '%link', '%title' ); ?>
+			</div><!--
+
+			--><div class="col-item col-item-half col-item--align-right post-pagination__link post-pagination__link--newer">
+				<?php next_post_link( '%link', '%title' ); ?>
+			</div>
+
+		</nav><!-- .post-pagination -->
+		
+	<?php }
+
+}
+
+
+if ( ! function_exists( 'malinky_archive_title' ) ) {
+
+	/**
+	 * Shim for `the_archive_title()`.
+	 *
+	 * Display the archive title based on the queried object.
+	 *
+	 * @todo Remove this function when WordPress 4.3 is released.
+	 *
+	 * @param string $before Optional. Content to prepend to the title. Default empty.
+	 * @param string $after  Optional. Content to append to the title. Default empty.
+	 */
+	function malinky_archive_title( $before = '', $after = '' )
+	{
+
+		if ( is_category() ) {
+			$title = sprintf( __( 'Category: %s', 'malinky' ), single_cat_title( '', false ) );
+		} elseif ( is_tag() ) {
+			$title = sprintf( __( 'Tag: %s', 'malinky' ), single_tag_title( '', false ) );
+		} elseif ( is_author() ) {
+			$title = sprintf( __( 'Author: %s', 'malinky' ), '<span class="vcard">' . get_the_author() . '</span>' );
+		} elseif ( is_year() ) {
+			$title = sprintf( __( 'Year: %s', 'malinky' ), get_the_date( _x( 'Y', 'yearly archives date format', 'malinky' ) ) );
+		} elseif ( is_month() ) {
+			$title = sprintf( __( 'Month: %s', 'malinky' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'malinky' ) ) );
+		} elseif ( is_day() ) {
+			$title = sprintf( __( 'Day: %s', 'malinky' ), get_the_date( _x( 'F j, Y', 'daily archives date format', 'malinky' ) ) );
+		} elseif ( is_tax( 'post_format', 'post-format-aside' ) ) {
+			$title = _x( 'Asides', 'post format archive title', 'malinky' );
+		} elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) {
+			$title = _x( 'Galleries', 'post format archive title', 'malinky' );
+		} elseif ( is_tax( 'post_format', 'post-format-image' ) ) {
+			$title = _x( 'Images', 'post format archive title', 'malinky' );
+		} elseif ( is_tax( 'post_format', 'post-format-video' ) ) {
+			$title = _x( 'Videos', 'post format archive title', 'malinky' );
+		} elseif ( is_tax( 'post_format', 'post-format-quote' ) ) {
+			$title = _x( 'Quotes', 'post format archive title', 'malinky' );
+		} elseif ( is_tax( 'post_format', 'post-format-link' ) ) {
+			$title = _x( 'Links', 'post format archive title', 'malinky' );
+		} elseif ( is_tax( 'post_format', 'post-format-status' ) ) {
+			$title = _x( 'Statuses', 'post format archive title', 'malinky' );
+		} elseif ( is_tax( 'post_format', 'post-format-audio' ) ) {
+			$title = _x( 'Audio', 'post format archive title', 'malinky' );
+		} elseif ( is_tax( 'post_format', 'post-format-chat' ) ) {
+			$title = _x( 'Chats', 'post format archive title', 'malinky' );
+		} elseif ( is_post_type_archive() ) {
+			$title = sprintf( __( 'Archives: %s', 'malinky' ), post_type_archive_title( '', false ) );
+		} elseif ( is_tax() ) {
+			$tax = get_taxonomy( get_queried_object()->taxonomy );
+			/* translators: 1: Taxonomy singular name, 2: Current taxonomy term */
+			$title = sprintf( __( '%1$s: %2$s', 'malinky' ), $tax->labels->singular_name, single_term_title( '', false ) );
+		} else {
+			$title = __( 'Archives', 'malinky' );
 		}
-		?>
-		<nav class="navigation paging-navigation" role="navigation">
-			<div class="nav-links">
 
-				<?php if ( get_next_posts_link() ) : ?>
-				<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'malinky' ) ); ?></div>
-				<?php endif; ?>
+		/**
+		 * Filter the archive title.
+		 *
+		 * @param string $title Archive title to be displayed.
+		 */
+		$title = apply_filters( 'get_the_archive_title', $title );
 
-				<?php if ( get_previous_posts_link() ) : ?>
-				<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'malinky' ) ); ?></div>
-				<?php endif; ?>
-
-			</div><!-- .nav-links -->
-		</nav><!-- .navigation -->
-		<?php
+		if ( ! empty( $title ) ) {
+			echo $before . $title . $after;
+		}
 
 	}
 
 }
 
 
+if ( ! function_exists( 'malinky_archive_description' ) ) {
 
+	/**
+	 * Shim for `the_archive_description()`.
+	 *
+	 * Display category, tag, or term description.
+	 *
+	 * @todo Remove this function when WordPress 4.3 is released.
+	 *
+	 * @param string $before Optional. Content to prepend to the description. Default empty.
+	 * @param string $after  Optional. Content to append to the description. Default empty.
+	 */
+	function malinky_archive_description( $before = '', $after = '' )
+	{
 
+		$description = apply_filters( 'get_the_archive_description', term_description() );
 
-/* ------------------------------------------------------------------------ *
- * CHECK
- * ------------------------------------------------------------------------ */
+		if ( ! empty( $description ) ) {
+			/**
+			 * Filter the archive description.
+			 *
+			 * @see term_description()
+			 *
+			 * @param string $description Archive description to be displayed.
+			 */
+			echo $before . $description . $after;
+		}
 
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
+	}
 
-
-/**
- * Custom functions that act independently of the theme templates.
- */
-require get_template_directory() . '/inc/extras.php';
-
-
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer.php';
+}

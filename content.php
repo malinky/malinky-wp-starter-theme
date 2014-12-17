@@ -7,26 +7,25 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<header class="content-header">
-		<h1 class="content-header__title"><a href="<?php esc_url( the_permalink() ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+		<h2 class="content-header__title"><a href="<?php esc_url( the_permalink() ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 		<?php if ( get_post_type() == 'post' ) { ?>
 			<div class="content-header__meta">
-				<?php malinky_posted_on(); ?>
+				<?php echo malinky_content_meta(); ?>
 			</div><!-- .content-header__meta -->
 		<?php } ?>
 	</header><!-- .content-header -->
 
-	<div class="content-main">
-		<?php the_content(); ?>
-		<?php
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'malinky' ),
-				'after'  => '</div>',
-			) );
-		?>
-	</div><!-- .content-main -->
+	<div class="content-summary">
+		<?php if ( ! has_excerpt() ) {
+			the_content( malinky_read_more_text() );
+		} else {
+			the_excerpt();
+			printf( '<a href="%1$s" class="more-link">%2$s</a>', esc_url( get_permalink() ), malinky_read_more_text() );
+		} ?>
+	</div><!-- .content-summary -->
 
 	<footer class="content-footer">
-		<?php malinky_entry_footer(); ?>
+		<?php echo malinky_content_footer(); ?>
 	</footer><!-- .content-footer -->
-
+	
 </article><!-- #post-## -->

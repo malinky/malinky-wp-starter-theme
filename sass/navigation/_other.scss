@@ -12,3 +12,12 @@
   text-align: right;
   width: 50%;
 }
+
+.current_page_item,
+.current-menu-item,
+.current-page-ancestor,
+.current_page_item > a,
+.current-menu-item > a,
+.current-page-ancestor > a {
+    text-decoration: underline;
+}

@@ -15,19 +15,14 @@ get_header(); ?>
 
 				<div class="col">
 					<div class="col-item col-item-full">
-						<header class="content-header">
-							<h1 class="content-header__title"><?php printf( __( 'Search Results for: %s', 'malinky' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
+						<header class="content-introduction">
+							<h1 class="content-introduction__title"><?php printf( 'Search Results for: %s', get_search_query() ); ?></h1>
 						</header><!-- .content-header -->
 					</div>
-				</div>		
+				</div>
 
 				<?php while ( have_posts() ) : the_post();
 
-					/**
-					 * Run the loop for the search to output the results.
-					 * If you want to overload this in a child theme then include a file
-					 * called content-search.php and that will be used instead.
-					 */
 					?>
 					<div class="col">
 						<div class="col-item col-item-full">
@@ -37,7 +32,7 @@ get_header(); ?>
 
 				<?php endwhile; //end loop.
 
-				malinky_paging_nav();
+				malinky_posts_pagination();
 
 			else : ?>
 

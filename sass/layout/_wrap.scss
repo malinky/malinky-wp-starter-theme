@@ -24,13 +24,13 @@
 }
 
 /*
- * Nudge whole wrap to site below fixed navigation.
- * Always added along side .wrap (usually from <main>).
+ * Nudge content below fixed navigation.
+ * Always added alongside .wrap (usually from <main>).
  */
 @media screen and (max-width: 767px) {
 
     .wrap-mobile {
-        margin-top: $navigation-mobile-height;
+        margin-top: $navigation-mobile-height + $navigation-margin-bottom;
     }
 
 }

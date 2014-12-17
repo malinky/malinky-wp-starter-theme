@@ -4,12 +4,13 @@
  * 1. Set to 41px keeps the main section at 40px especially when used with a bottom border.
  */
 .mobile-navigation-bar {
-    font-family: $navigation-font-family;
+    font-family: $navigation-mobile-font-family;
+    font-size: $navigation-mobile-font-size;
     display: none;
     position: fixed;
     width: 100%; 
-    z-index: 9999;
-    background: $navigation-mobile-background-color;
+    z-index: 9997;
+    background: $navigation-mobile-bar-background-color;
     height: $navigation-mobile-height; /* 1 */
     top: 0px;
     border-bottom: $navigation-mobile-seperator;
@@ -18,6 +19,7 @@
 /*
  * The mobile menu that slides in or down.
  * 1. Set to the same height as .mobile-navigation-bar.
+ * 2. This sets a colour on the whole of mobile navigation slide in.
  */
 .mobile-navigation {    
     position: fixed;
@@ -31,7 +33,8 @@
     -webkit-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     -moz-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     -o-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);    
+    transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    background: $navigation-mobile-background-color; /* 2 */
 }
 
 .mobile-navigation-show {
@@ -60,12 +63,11 @@
 .mobile-navigation ul li {
     display: block;
     margin: 0; /* 1 */
-    background: $navigation-background-color;
     border-top: $navigation-mobile-seperator;
 }
 
 /*
- * Remove double top border on first item if .mobile-navigation has a bottom border set.
+ * Remove double top border on first menu item (specific).
  */
 .mobile-navigation > ul > li:first-child {
     border-top: none;
@@ -79,6 +81,7 @@
 .mobile-navigation ul li a:visited {
     display: block;
     padding: 7px 0 7px 7px;
+    background: $navigation-mobile-link-background-color;    
     color: $navigation-mobile-link-color;
     text-decoration: none;
 }
@@ -88,7 +91,8 @@
  * Mobile navigation hover style.
  */
 .mobile-navigation ul li a:hover {
-    background: $navigation-mobile-background-color-hover;
+    background: $navigation-mobile-link-background-color-hover;
+    color: $navigation-mobile-link-color-hover;
 }
 
 /*
@@ -122,7 +126,7 @@ a.image-font {
  */
 .image-font__sizing {
     font-size: 2.142857em; /* 30/14 */
-    color: $navigation-mobile-link-color;  
+    color: $navigation-mobile-bar-link-color;  
     display: inline-block;  
     vertical-align: text-top;
     margin-right: 8px; 
@@ -158,10 +162,4 @@ a.image-font {
         display: none;
     }
 
-}
-
-.current-page-item > a,
-.current-menu-item > a,
-.current-page-ancestor > a {
-    text-decoration: underline;
 }

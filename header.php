@@ -29,13 +29,7 @@
 	<!-- Google Fonts -->
 
 	<!-- Meta -->
-	<meta name="description" content="">
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
-
-	<!--https://github.com/scottjehl/Respond-->
-	<!--[if lt IE 9]>
-	<script src="<?php echo get_template_directory_uri(); ?>/js/respond.js"></script>
-	<![endif]-->
 
 	<?php wp_head(); ?>
 

@@ -12,7 +12,7 @@ get_header(); ?>
 		<div class="col-item col-item-7-10">
 
 			<header class="content-header">
-				<h1 class="content-header__title"><?php _e( 'Oops! That page can&rsquo;t be found.', 'malinky' ); ?></h1>
+				<h1 class="content-header__title">Oops! That page can&rsquo;t be found</h1>
 			</header><!-- .content-header -->
 
 		</div><!--

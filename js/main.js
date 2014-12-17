@@ -38,7 +38,7 @@ jQuery(document).ready(function($){
     /*
      * Toggle mobile navigation.
      */
-    $('#mobile-navigation-navicon').click(function() {
+    $('#mobile-navigation-navicon').click(function(event) {
 
         $('.mobile-navigation').toggleClass('mobile-navigation-show');
         $('body').toggleClass('mobile-navigation-show-body');
@@ -62,7 +62,7 @@ jQuery(document).ready(function($){
 
     /*
      * Show fixed main navigation on scroll.
-     * Scroll top should be no less than $navigation-height in SASS.
+     * Scroll top should be no less than $navigation-height in SASS (120px).
      */    
     $(window).scroll(function () {
         if ($(this).scrollTop() > 80) {
@@ -109,5 +109,18 @@ jQuery(document).ready(function($){
         }, 600);
         return false;
     });
+
+
+    /*
+     * SVG Fallback
+     */
+    if (!Modernizr.svg) {
+        
+        $("img").each(function() {
+            var src = $(this).attr("src");
+            $(this).attr("src", src.replace(/\.svg$/i, ".png"));
+        });
+
+    }    
 
 });

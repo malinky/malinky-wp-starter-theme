@@ -2,8 +2,10 @@
 /**
  * The template for displaying blog posts index page (use this instead of relying on index.php).
  * 
- * This will be the front (home) page of the website if Front page displays = Your latest posts in Settings -> Reading Settings.
- * Or blog posts index page when Front page displays = A static page = Posts page in Settings -> Reading Settings.
+ * This will be the front (home) page of the website if Front page displays = Your latest posts in Settings -> Reading Settings
+ * Only if front-page.php doesn't exist as that takes precedence.
+ *
+ * Or set Front page displays = A static page. (Remember to remove front-page.php from theme).
  */
 
 get_header(); ?>
@@ -14,38 +16,29 @@ get_header(); ?>
 
 		<div class="col-item col-item-7-10">
 
-		<?php while ( have_posts() ) : the_post(); ?>
+			<?php if ( have_posts() ) { ?>
 
-			<div class="col">
-				<div class="col-item col-item-full">
+				<?php while ( have_posts() ) : the_post(); ?>
 
-					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+					<div class="col">
+						<div class="col-item col-item-full">
+							<?php get_template_part( 'content', get_post_format() ); ?>
+						</div>
+					</div>
 
-						<header class="content-header">
-							<h2 class="content-header__title"><a href="<?php esc_url( the_permalink() ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-							<?php if ( get_post_type() == 'post' ) { ?>
-								<div class="content-header__meta">
-									<?php malinky_posted_on(); ?>
-								</div><!-- .content-header__meta -->
-							<?php } ?>
-						</header><!-- .content-header -->
+				<?php endwhile; //end loop.
 
-						<div class="content-summary">
-							<?php the_excerpt(); ?>
-						</div><!-- .content-summary -->
+				malinky_posts_pagination();
 
-						<footer class="content-footer">
-							<?php malinky_entry_footer(); ?>
-						</footer><!-- .content-footer -->
-						
-					</article><!-- #post-## -->
+			} else { ?>
 
-				</div>
-			</div>	
+					<div class="col">
+						<div class="col-item col-item-full">
+							<?php get_template_part( 'content', 'none' ); ?>
+						</div>
+					</div>				
 
-		<?php endwhile; //end loop.
-
-		malinky_paging_nav(); ?>
+			<?php } ?>
 
 		</div><!--
 			

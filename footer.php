@@ -18,16 +18,26 @@
 
 </footer><!-- .main-footer -->
 
+<?php if ( WP_ENV == 'prod' ) { ?>
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
-(function(f,i,r,e,s,h,l){i['GoogleAnalyticsObject']=s;f[s]=f[s]||function(){
-(f[s].q=f[s].q||[]).push(arguments)},f[s].l=1*new Date();h=i.createElement(r),
-l=i.getElementsByTagName(r)[0];h.async=1;h.src=e;l.parentNode.insertBefore(h,l)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-XXXXXXXX-XX', 'yourdomain.com');
-ga('send', 'pageview');
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+    function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+    e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+    e.src='//www.google-analytics.com/analytics.js';
+    r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create',"<?php echo get_option( '_000003_google_analytics' ); ?>",'auto');ga('send','pageview');
 </script>
+
+<?php } ?>
 		
 <?php wp_footer(); ?>
 
+<!--https://github.com/scottjehl/Respond-->
+<!--[if lt IE 9]>
+<script src="<?php echo get_template_directory_uri(); ?>/js/respond.js"></script>
+<![endif]-->
+	
 </body>
 </html>
