@@ -4,7 +4,8 @@
 function malinky_initialize()
 {
 
-    console.log(google_map_settings);
+    //If not map-canvas element.
+    if (!document.getElementById('map-canvas')) return;
 
     var mapOptions = {
         center: { lat: parseFloat(google_map_settings.lat), lng: parseFloat(google_map_settings.long) },
