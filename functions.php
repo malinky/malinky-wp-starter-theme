@@ -1076,32 +1076,32 @@ function malinky_mce_insert_formats( $init_array )
 		array(  
 			'title' => 'Heading 1 Style',
     		'block' => 'p',
-    		'classes' => 'heading_1'
+    		'classes' => 'heading-1'
 		),
 		array(  
 			'title' => 'Heading 2 Style',
     		'block' => 'p',
-    		'classes' => 'heading_2'
+    		'classes' => 'heading-2'
 		),
 		array(  
 			'title' => 'Heading 3 Style',
     		'block' => 'p',
-    		'classes' => 'heading_3'
+    		'classes' => 'heading-3'
 		),
 		array(  
 			'title' => 'Heading 4 Style',
     		'block' => 'p',
-    		'classes' => 'heading_4'
+    		'classes' => 'heading-4'
 		),
 		array(  
 			'title' => 'Heading 5 Style',
     		'block' => 'p',
-    		'classes' => 'heading_5'
+    		'classes' => 'heading-5'
 		),						
 		array(  
 			'title' => 'Heading 6 Style',
     		'block' => 'p',
-    		'classes' => 'heading_6'
+    		'classes' => 'heading-6'
 		)							
 	);
 
@@ -1126,12 +1126,12 @@ function malinky_mce_quicktags()
     if ( wp_script_is( 'quicktags' ) ) { ?>
 
 	    <script type="text/javascript">
-		    QTags.addButton( 'mm_heading1', 'mm_heading1', '<p class="heading_1">', '</p>', '', 'Heading 1 Style' );
-		    QTags.addButton( 'mm_heading2', 'mm_heading2', '<p class="heading_2">', '</p>', '', 'Heading 2 Style' );
-		    QTags.addButton( 'mm_heading3', 'mm_heading3', '<p class="heading_3">', '</p>', '', 'Heading 3 Style' );
-		    QTags.addButton( 'mm_heading4', 'mm_heading4', '<p class="heading_4">', '</p>', '', 'Heading 4 Style' );
-		    QTags.addButton( 'mm_heading5', 'mm_heading5', '<p class="heading_5">', '</p>', '', 'Heading 5 Style' );
-		    QTags.addButton( 'mm_heading6', 'mm_heading6', '<p class="heading_6">', '</p>', '', 'Heading 6 Style' );
+		    QTags.addButton( 'mm_heading1', 'mm_heading1', '<p class="heading-1">', '</p>', '', 'Heading 1 Style' );
+		    QTags.addButton( 'mm_heading2', 'mm_heading2', '<p class="heading-2">', '</p>', '', 'Heading 2 Style' );
+		    QTags.addButton( 'mm_heading3', 'mm_heading3', '<p class="heading-3">', '</p>', '', 'Heading 3 Style' );
+		    QTags.addButton( 'mm_heading4', 'mm_heading4', '<p class="heading-4">', '</p>', '', 'Heading 4 Style' );
+		    QTags.addButton( 'mm_heading5', 'mm_heading5', '<p class="heading-5">', '</p>', '', 'Heading 5 Style' );
+		    QTags.addButton( 'mm_heading6', 'mm_heading6', '<p class="heading-6">', '</p>', '', 'Heading 6 Style' );
 	    </script>
 
 	<?php
@@ -1540,6 +1540,8 @@ function malinky_contact_form_shortcode()
 	$message 	= isset( $_POST['malinky_message'] ) ? $_POST['malinky_message'] : '';
 	?>
 
+	<?php ob_start(); ?>
+
 	<div class="col contact-form">
 		<div class="col-item col-item-full">
 
@@ -1584,6 +1586,8 @@ function malinky_contact_form_shortcode()
 		</div>
 	</div>
 
+	<?php return ob_get_clean(); ?>
+	
 <?php
 }
 
