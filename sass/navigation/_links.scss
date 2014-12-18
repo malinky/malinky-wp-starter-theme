@@ -11,12 +11,18 @@ a:active {
     text-decoration: underline;
 }
 
-a.back-top {
+.back-top {
     position: fixed;
     right: 30px;
     bottom: 70px;
-    font-size: 3em; /* 42/14 */
+    font-size: 5em; /* 70/14 */
     text-decoration: none;
     cursor: pointer;
     z-index: 9998;
+    color: $back-to-top-color;
 } 
+
+.back-top:hover {
+    text-decoration: none;
+    color: $back-to-top-color-hover;
+}

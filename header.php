@@ -17,14 +17,14 @@
 
     <!-- Chrome and Android (192 x 192) -->
     <meta name="application-name" content="<?php echo esc_attr( bloginfo( 'name' ) ); ?>">
-    <link rel="icon" sizes="192x192" href="<?php esc_url( site_url( 'chrome-touch-icon-192x192.png' ) ); ?>">
+    <link rel="icon" sizes="192x192" href="<?php esc_url( echo site_url( 'chrome-touch-icon-192x192.png' ) ); ?>">
 
     <!-- Safari on iOS (152 x 152) -->
     <meta name="apple-mobile-web-app-title" content="<?php echo esc_attr( bloginfo( 'name' ) ); ?>">
-    <link rel="apple-touch-icon" href="<?php esc_url( site_url( 'apple-touch-icon.png' ) ); ?>">
+    <link rel="apple-touch-icon" href="<?php esc_url( echo site_url( 'apple-touch-icon.png' ) ); ?>">
 
     <!-- IE on Win8 (144 x 144 + tile color) -->
-    <meta name="msapplication-TileImage" content="<?php esc_url( site_url( 'ms-touch-icon-144x144-precomposed.png' ) ); ?>">
+    <meta name="msapplication-TileImage" content="<?php echo esc_url( site_url( 'ms-touch-icon-144x144-precomposed.png' ) ); ?>">
     <meta name="msapplication-TileColor" content="#3372DF">
 
 	<!-- Google Fonts -->

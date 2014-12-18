@@ -29,6 +29,8 @@
 
 </footer><!-- .main-footer -->
 
+<a class="back-top image-font__fontawesome fa-angle-up"></a>
+
 <?php if ( WP_ENV == 'prod' ) { ?>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
