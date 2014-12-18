@@ -12,7 +12,7 @@
  * Login Screen
  * Setup Actions and Filters
  * Template Tags
- * Shortcodes
+ * MCE
  * Settings Plugin
  * Contact Form Plugin
  * ------------------------------------------------------------------------ */
@@ -1043,6 +1043,103 @@ if ( ! function_exists( 'malinky_archive_description' ) ) {
 	}
 
 }
+
+
+
+
+
+/* ------------------------------------------------------------------------ *
+ * Tiny MCE
+ * ------------------------------------------------------------------------ */
+
+/**
+ * Callback function to insert 'styleselect' into the $buttons array.
+ */
+function malinky_mce_insert_formats_dropdown( $buttons )
+{
+
+	array_unshift( $buttons, 'styleselect' );
+	return $buttons;
+
+}
+
+add_filter('mce_buttons_2', 'malinky_mce_insert_formats_dropdown');
+
+
+/**
+ * Callback function to filter the MCE settings and insert formats into the new dropdown.
+ */
+function malinky_mce_insert_formats( $init_array )
+{  
+
+	$style_formats = array(  
+		array(  
+			'title' => 'Heading 1 Style',
+    		'block' => 'p',
+    		'classes' => 'heading_1'
+		),
+		array(  
+			'title' => 'Heading 2 Style',
+    		'block' => 'p',
+    		'classes' => 'heading_2'
+		),
+		array(  
+			'title' => 'Heading 3 Style',
+    		'block' => 'p',
+    		'classes' => 'heading_3'
+		),
+		array(  
+			'title' => 'Heading 4 Style',
+    		'block' => 'p',
+    		'classes' => 'heading_4'
+		),
+		array(  
+			'title' => 'Heading 5 Style',
+    		'block' => 'p',
+    		'classes' => 'heading_5'
+		),						
+		array(  
+			'title' => 'Heading 6 Style',
+    		'block' => 'p',
+    		'classes' => 'heading_6'
+		)							
+	);
+
+	/*
+	 * Insert the array, JSON ENCODED, into 'style_formats'.
+	 */
+	$init_array['style_formats'] = json_encode( $style_formats );  
+	
+	return $init_array;
+  
+} 
+
+add_filter( 'tiny_mce_before_init', 'malinky_mce_insert_formats' );
+
+
+/**
+ * Add the above formats to the quicktag buttons in the Text/HTML editor.
+ */ 
+function malinky_mce_quicktags()
+{
+
+    if ( wp_script_is( 'quicktags' ) ) { ?>
+
+	    <script type="text/javascript">
+		    QTags.addButton( 'mm_heading1', 'mm_heading1', '<p class="heading_1">', '</p>', '', 'Heading 1 Style' );
+		    QTags.addButton( 'mm_heading2', 'mm_heading2', '<p class="heading_2">', '</p>', '', 'Heading 2 Style' );
+		    QTags.addButton( 'mm_heading3', 'mm_heading3', '<p class="heading_3">', '</p>', '', 'Heading 3 Style' );
+		    QTags.addButton( 'mm_heading4', 'mm_heading4', '<p class="heading_4">', '</p>', '', 'Heading 4 Style' );
+		    QTags.addButton( 'mm_heading5', 'mm_heading5', '<p class="heading_5">', '</p>', '', 'Heading 5 Style' );
+		    QTags.addButton( 'mm_heading6', 'mm_heading6', '<p class="heading_6">', '</p>', '', 'Heading 6 Style' );
+	    </script>
+
+	<?php
+    }
+
+}
+
+add_action( 'admin_print_footer_scripts', 'malinky_mce_quicktags' );
 
 
 

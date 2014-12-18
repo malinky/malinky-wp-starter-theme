@@ -46,6 +46,7 @@ HEADER
 POSTS AND PAGES
 ALIGNMENT
 GOOGLE MAPS
+CONTACT FORM
 PRINT
 MEDIA QUERIES
 */
@@ -2219,8 +2220,11 @@ MOBILE NAVIGATION
 
 /*
  * Remove double top border on first menu item (specific).
+ * This works when a menu is set from admin and when no menu is set and Wordpress defaults to one.
+ * The second rules accounts for a default wordpress menu which adds .menu wrapper to the ul.
  */
-.mobile-navigation > ul > li:first-child {
+.mobile-navigation > ul > li:first-child,
+.mobile-navigation > .menu > ul > li:first-child {
   border-top: none;
 }
 
@@ -2228,8 +2232,8 @@ MOBILE NAVIGATION
  * All Levels.
  * Mobile navigation link style.
  */
-.mobile-navigation ul li a:link,
-.mobile-navigation ul li a:visited {
+.mobile-navigation a:link,
+.mobile-navigation a:visited {
   display: block;
   padding: 7px 0 7px 7px;
   background: #f47b20;
@@ -2241,7 +2245,7 @@ MOBILE NAVIGATION
  * All Levels.
  * Mobile navigation hover style.
  */
-.mobile-navigation ul li a:hover {
+.mobile-navigation a:hover {
   background: #9c0009;
   color: #fff;
 }
@@ -2264,11 +2268,29 @@ MOBILE NAVIGATION
   padding-left: 35px;
 }
 
+@media screen and (max-width: 767px) {
+  .mobile-navigation-bar,
+  .main-navigation-bar-fixed {
+    display: block;
+  }
+
+  .main-navigation-bar,
+  .main-navigation-bar-fixed {
+    display: none;
+  }
+}
+/*
+**********************************************************************
+OTHER NAVIGATION
+**********************************************************************
+*/
 /*
  * Overide <a> styles for image fonts (dashicons / font awesome).
  */
-a.image-font {
+.image-font {
+  display: inline-block;
   text-decoration: none;
+  vertical-align: inherit;
 }
 
 /*
@@ -2280,7 +2302,6 @@ a.image-font {
   /* 30/14 */
   color: #fff;
   display: inline-block;
-  vertical-align: text-top;
   margin-right: 8px;
   -webkit-transition: color .1s ease-in 0;
   transition: color .1s ease-in 0;
@@ -2302,22 +2323,6 @@ a.image-font {
   font-family: 'FontAwesome';
 }
 
-@media screen and (max-width: 767px) {
-  .mobile-navigation-bar,
-  .main-navigation-bar-fixed {
-    display: block;
-  }
-
-  .main-navigation-bar,
-  .main-navigation-bar-fixed {
-    display: none;
-  }
-}
-/*
-**********************************************************************
-OTHER NAVIGATION
-**********************************************************************
-*/
 .comment-navigation .nav-previous,
 .paging-navigation .nav-previous,
 .post-navigation .nav-previous {
@@ -2333,13 +2338,25 @@ OTHER NAVIGATION
   width: 50%;
 }
 
-.current_page_item,
-.current-menu-item,
-.current-page-ancestor,
+/*
+ * Set active links
+ */
 .current_page_item > a,
+.current_page_ancestor > a,
 .current-menu-item > a,
-.current-page-ancestor > a {
+.current-menu-ancestor > a {
   text-decoration: underline;
+}
+
+/*
+ * Set moible-navigation active links.
+ * Need to me more specific as these overwrite a number of styles.
+ * Ignore ancestors so main pages aren't highlighted active when in a sub page.
+ */
+.mobile-navigation .current_page_item > a,
+.mobile-navigation .current-menu-item > a {
+  background: #9c0009;
+  color: #fff;
 }
 
 /*
@@ -2358,6 +2375,10 @@ PAGINATION
 HEADER
 **********************************************************************
 */
+.logo {
+  display: inline-block;
+}
+
 /*
 **********************************************************************
 FOOTER
@@ -2370,9 +2391,20 @@ FOOTER
   border-top: 5px solid #f47b20;
 }
 
-/*
- * .main-footer__Element.
- */
+.footer-navigation ul {
+  list-style: none;
+  margin: 0;
+}
+
+.footer-navigation ul li {
+  display: inline-block;
+  margin: 0 0 0 20px;
+}
+
+.footer-navigation ul li:first-child {
+  margin-left: 0;
+}
+
 /*
 **********************************************************************
 POSTS
@@ -2507,6 +2539,11 @@ GOOGLE MAPS
   max-width: none;
 }
 
+/*
+**********************************************************************
+CONTACT FORM
+**********************************************************************
+*/
 /*
 **********************************************************************
 PRINT

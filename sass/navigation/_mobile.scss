@@ -68,8 +68,11 @@
 
 /*
  * Remove double top border on first menu item (specific).
+ * This works when a menu is set from admin and when no menu is set and Wordpress defaults to one.
+ * The second rules accounts for a default wordpress menu which adds .menu wrapper to the ul.
  */
-.mobile-navigation > ul > li:first-child {
+.mobile-navigation > ul > li:first-child,
+.mobile-navigation > .menu > ul > li:first-child {
     border-top: none;
 }
 
@@ -77,8 +80,8 @@
  * All Levels.
  * Mobile navigation link style.
  */
-.mobile-navigation ul li a:link,
-.mobile-navigation ul li a:visited {
+.mobile-navigation a:link,
+.mobile-navigation a:visited {
     display: block;
     padding: 7px 0 7px 7px;
     background: $navigation-mobile-link-background-color;    
@@ -90,7 +93,7 @@
  * All Levels.
  * Mobile navigation hover style.
  */
-.mobile-navigation ul li a:hover {
+.mobile-navigation a:hover {
     background: $navigation-mobile-link-background-color-hover;
     color: $navigation-mobile-link-color-hover;
 }
@@ -111,43 +114,6 @@
 .mobile-navigation ul ul ul li a:link,
 .mobile-navigation ul ul ul li a:visited {
     padding-left: 35px;
-}
-
-/*
- * Overide <a> styles for image fonts (dashicons / font awesome).
- */
-a.image-font {
-    text-decoration: none;
-} 
-
-/*
- *  Position so sits in middle of navigation.
- * .image-font__Element.
- */
-.image-font__sizing {
-    font-size: 2.142857em; /* 30/14 */
-    color: $navigation-mobile-bar-link-color;  
-    display: inline-block;  
-    vertical-align: text-top;
-    margin-right: 8px; 
-    -webkit-transition: color .1s ease-in 0;
-    transition: color .1s ease-in 0;
-}
-
-/*
- * Use my own reference to the image fonts so I control all styling not their stylsheets.
- * .image-font__Element.
- */
-.image-font__dashicons {
-    font-family: 'dashicons';
-}
-
-/*
- * Use my own reference to the image fonts so I control all styling not their stylsheets.
- * .image-font__Element.
- */
-.image-font__fontawesome {
-    font-family: 'FontAwesome';
 }
 
 @media screen and (max-width: 767px) {

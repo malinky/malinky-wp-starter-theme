@@ -54,7 +54,7 @@
 					<?php
 			        $args = array(
 			            'theme_location'    => 'primary_navigation',
-			            'container'   		=> 'false'
+			            'container'   		=> false
 			        );
 			        ?>
 					<?php wp_nav_menu( $args ); ?>
@@ -75,7 +75,7 @@
 						<?php
 				        $args = array(
 				            'theme_location'    => 'primary_navigation',
-				            'container'   		=> 'false'
+				            'container'   		=> false
 				        );
 				        ?>
 						<?php wp_nav_menu( $args ); ?>
@@ -102,7 +102,7 @@
 					<?php
 			        $args = array(
 			            'theme_location'    => 'primary_navigation',
-			            'container'   		=> 'false',
+			            'container'   		=> false
 			        );
 			        ?>
 					<?php wp_nav_menu( $args ); ?>

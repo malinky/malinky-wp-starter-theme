@@ -1,3 +1,41 @@
+/*
+ * Overide <a> styles for image fonts (dashicons / font awesome).
+ */
+.image-font {
+    display: inline-block;
+    text-decoration: none;
+    vertical-align: inherit;    
+} 
+
+/*
+ *  Position so sits in middle of navigation.
+ * .image-font__Element.
+ */
+.image-font__sizing {
+    font-size: 2.142857em; /* 30/14 */
+    color: $navigation-mobile-bar-link-color;  
+    display: inline-block;
+    margin-right: 8px; 
+    -webkit-transition: color .1s ease-in 0;
+    transition: color .1s ease-in 0;
+}
+
+/*
+ * Use my own reference to the image fonts so I control all styling not their stylsheets.
+ * .image-font__Element.
+ */
+.image-font__dashicons {
+    font-family: 'dashicons';
+}
+
+/*
+ * Use my own reference to the image fonts so I control all styling not their stylsheets.
+ * .image-font__Element.
+ */
+.image-font__fontawesome {
+    font-family: 'FontAwesome';
+}
+
 .comment-navigation .nav-previous,
 .paging-navigation .nav-previous,
 .post-navigation .nav-previous {
@@ -13,11 +51,25 @@
   width: 50%;
 }
 
-.current_page_item,
-.current-menu-item,
-.current-page-ancestor,
+/*
+ * Set active links
+ */
 .current_page_item > a,
+.current_page_ancestor > a,
 .current-menu-item > a,
-.current-page-ancestor > a {
+.current-menu-ancestor > a {
     text-decoration: underline;
+}
+
+/*
+ * Set moible-navigation active links.
+ * Need to me more specific as these overwrite a number of styles.
+ * Ignore ancestors so main pages aren't highlighted active when in a sub page.
+ */
+.mobile-navigation .current_page_item > a,
+/*.mobile-navigation .current_page_ancestor > a,*/
+.mobile-navigation .current-menu-item > a,
+/*.mobile-navigation .current-menu-ancestor > a*/ {
+    background: $navigation-mobile-link-background-color-hover;
+    color: $navigation-mobile-link-color-hover;
 }
