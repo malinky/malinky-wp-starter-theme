@@ -47,6 +47,7 @@ HEADER
 POSTS AND PAGES
 ALIGNMENT
 GOOGLE MAPS
+CONTACT FORM
 PRINT
 MEDIA QUERIES
 */
@@ -230,6 +231,14 @@ GOOGLE MAPS
 */
 
 @import "modules/google-maps";
+
+/*
+**********************************************************************
+CONTACT FORM
+**********************************************************************
+*/
+
+@import "modules/contact-form";
 
 /*
 **********************************************************************

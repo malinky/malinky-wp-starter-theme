@@ -1,3 +1,4 @@
+<?php malinky_contact_form_header() ?>
 <!DOCTYPE html>
 <!--[if IE 8]>         <html class="no-js lt-ie10 lt-ie9" <?php language_attributes(); ?>> <![endif]-->
 <!--[if IE 9]>         <html class="no-js lt-ie10" <?php language_attributes(); ?>> <![endif]-->
