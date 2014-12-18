@@ -353,97 +353,100 @@ function malinky_scripts()
 	 * Localize them and then they are directly available as json in googlemap.js.
 	 */
 	$google_map_settings = get_option( '_000004_google_map_settings' );
-	
-	if ( $google_map_settings['show_google_map'] ) {
 
-		/* --------------- *
-		 * Local
-		 * No API Key
-		 * --------------- */
-		if ( WP_ENV == 'local' ) {
+		/*
+		 * Check it exists (isn't false) then if on the correct page.
+		 */
+		if ( ! empty ( $google_map_settings['show_google_map'] ) && $google_map_settings['show_google_map'] ) {
 
-			/**
-			 * Google Map Set Up.
-			 * 
-			 * Settings can be accessed from googlemap.js with google_map_settings.SETTING_KEY
-			 *
-			 * @link https://developers.google.com/maps/documentation/javascript/
-			 */
-			wp_register_script( 'malinky-googlemap-js',
-								get_template_directory_uri() . '/js/googlemap.js',
-								false,
-								NULL,
-								true
-			);
-			wp_localize_script( 'malinky-googlemap-js', 'google_map_settings', $google_map_settings );
-			wp_enqueue_script( 'malinky-googlemap-js' );
+			/* --------------- *
+			 * Local
+			 * No API Key
+			 * --------------- */
+			if ( WP_ENV == 'local' ) {
+
+				/**
+				 * Google Map Set Up.
+				 * 
+				 * Settings can be accessed from googlemap.js with google_map_settings.SETTING_KEY
+				 *
+				 * @link https://developers.google.com/maps/documentation/javascript/
+				 */
+				wp_register_script( 'malinky-googlemap-js',
+									get_template_directory_uri() . '/js/googlemap.js',
+									false,
+									NULL,
+									true
+				);
+				wp_localize_script( 'malinky-googlemap-js', 'google_map_settings', $google_map_settings );
+				wp_enqueue_script( 'malinky-googlemap-js' );
 
 
-			/**
-			 * Load Google maps API without key.
-			 * Uses malinky_initialize function which is in googlemap.js.
-			 * Remember to set API Key.
-			 *
-			 * @link https://developers.google.com/maps/documentation/javascript/tutorial
-			 */
-			wp_register_script( 'malinky-googlemap-api-js', 
-								'https://maps.googleapis.com/maps/api/js?callback=malinky_initialize', 
-								false, 
-								NULL, 
-								true
-			);
+				/**
+				 * Load Google maps API without key.
+				 * Uses malinky_initialize function which is in googlemap.js.
+				 * Remember to set API Key.
+				 *
+				 * @link https://developers.google.com/maps/documentation/javascript/tutorial
+				 */
+				wp_register_script( 'malinky-googlemap-api-js', 
+									'https://maps.googleapis.com/maps/api/js?callback=malinky_initialize', 
+									false, 
+									NULL, 
+									true
+				);
+
+			}
+
+
+			/* --------------- *
+			 * Dev && Prod
+			 * API Key
+			 * --------------- */
+
+			if ( WP_ENV == 'dev' || WP_ENV == 'prod' ) {
+
+				/**
+				 * Google Map Set Up.
+				 * 
+				 * Settings can be accessed from googlemap.js with google_map_settings.SETTING_KEY
+				 *
+				 * @link https://developers.google.com/maps/documentation/javascript/
+				 */
+				wp_register_script( 'malinky-googlemap-min-js',
+									get_template_directory_uri() . '/js/googlemap.min.js',
+									false,
+									NULL,
+									true
+				);
+				wp_localize_script( 'malinky-googlemap-min-js', 'google_map_settings', $google_map_settings );
+				wp_enqueue_script( 'malinky-googlemap-min-js' );
+
+
+				/*
+				 * Get my default API Key if one isn't set.
+				 */
+				$google_map_settings['api_key'] == '' ? 'AIzaSyBC4B2o5cX8GuFyKrh1CpwtdVz7-j5ccOg' : $google_map_settings['api_key'];
+
+				/**
+				 * Load Google maps API without key.
+				 * Uses malinky_initialize function which is in googlemap.js.
+				 * Remember to set API Key.
+				 *
+				 * @link https://developers.google.com/maps/documentation/javascript/tutorial
+				 */
+				wp_register_script( 'malinky-googlemap-api-js', 
+							'https://maps.googleapis.com/maps/api/js?key=' . $google_map_settings['api_key'] . 'callback=malinky_initialize', 
+							false, 
+							NULL, 
+							true
+				);
+
+			}
+
+			wp_enqueue_script( 'malinky-googlemap-api-js' );
 
 		}
-
-
-		/* --------------- *
-		 * Dev && Prod
-		 * API Key
-		 * --------------- */
-
-		if ( WP_ENV == 'dev' || WP_ENV == 'prod' ) {
-
-			/**
-			 * Google Map Set Up.
-			 * 
-			 * Settings can be accessed from googlemap.js with google_map_settings.SETTING_KEY
-			 *
-			 * @link https://developers.google.com/maps/documentation/javascript/
-			 */
-			wp_register_script( 'malinky-googlemap-min-js',
-								get_template_directory_uri() . '/js/googlemap.min.js',
-								false,
-								NULL,
-								true
-			);
-			wp_localize_script( 'malinky-googlemap-min-js', 'google_map_settings', $google_map_settings );
-			wp_enqueue_script( 'malinky-googlemap-min-js' );
-
-
-			/*
-			 * Get my default API Key if one isn't set.
-			 */
-			$google_map_settings['api_key'] == '' ? 'AIzaSyBC4B2o5cX8GuFyKrh1CpwtdVz7-j5ccOg' : $google_map_settings['api_key'];
-
-			/**
-			 * Load Google maps API without key.
-			 * Uses malinky_initialize function which is in googlemap.js.
-			 * Remember to set API Key.
-			 *
-			 * @link https://developers.google.com/maps/documentation/javascript/tutorial
-			 */
-			wp_register_script( 'malinky-googlemap-api-js', 
-						'https://maps.googleapis.com/maps/api/js?key=' . $google_map_settings['api_key'] . 'callback=malinky_initialize', 
-						false, 
-						NULL, 
-						true
-			);
-
-		}
-
-		wp_enqueue_script( 'malinky-googlemap-api-js' );
-
-	}	
 
 }
 
@@ -724,19 +727,27 @@ if ( ! function_exists( 'malinky_read_more_text' ) )
 /**
  * Get all page names (page_title).
  *
+ * @param str $default Add a default option if page names are to be used in a dropdown.
  * @return array
  */
-function malinky_get_page_names()
+function malinky_get_page_names( $default )
 {
 
+	$malinky_all_pages = '';
+	$malinky_page_titles = '';
+	
 	$args = array(
 		'hierarchical' => 0
 	);
+
+	if ( $default )
+		$malinky_page_titles[] = $default;
 
 	$malinky_all_pages = get_pages( $args );
 	foreach ( $malinky_all_pages as $key => $value ) {
 		$malinky_page_titles[] = $malinky_all_pages[$key]->post_title;
 	}
+
 	return $malinky_page_titles;
 
 }
@@ -1058,7 +1069,7 @@ if ( class_exists( 'Malinky_Settings_Plugin' ) ) {
 					'section_intro' 	=> '',
 				),
 				array(
-					'section_title' 	=> 'Contact Form Email Settings',
+					'section_title' 	=> 'Contact Form Settings',
 					'section_intro' 	=> '',
 				),
 				array(
@@ -1182,11 +1193,11 @@ if ( class_exists( 'Malinky_Settings_Plugin' ) ) {
 					)
 				),											
 				array(
-					'option_group_name' 		=> 'Contact Form Email Settings',
+					'option_group_name' 		=> 'Contact Form Settings',
 					'option_title' 				=> 'Contact Form Page',
 					'option_field_type' 		=> 'select_field',
-					'option_field_type_options' => malinky_get_page_names(),
-					'option_section' 			=> 'Contact Form Email Settings',
+					'option_field_type_options' => malinky_get_page_names( 'Disabled' ),
+					'option_section' 			=> 'Contact Form Settings',
 					'option_validation' 		=> array(
 						'text'
 					),
@@ -1195,14 +1206,30 @@ if ( class_exists( 'Malinky_Settings_Plugin' ) ) {
 					'option_default'			=> array(
 						''
 					)
-				),				
+				),
 				array(
-					'option_group_name' 		=> 'Contact Form Email Settings',
+					'option_group_name' 		=> 'Contact Form Settings',
+					'option_title' 				=> 'Contacted Message',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),
+					'option_section' 			=> 'Contact Form Settings',
+					'option_validation' 		=> array(
+						'text'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> 'If left blank will display: Thanks for contacting us, we will be in touch as soon as possible.',
+					'option_default'			=> array(
+						''
+					)
+				),								
+				array(
+					'option_group_name' 		=> 'Contact Form Settings',
 					'option_title' 				=> 'Email Address',
 					'option_field_type' 		=> 'text_field',
 					'option_field_type_options' => array(
 					),			
-					'option_section' 			=> 'Contact Form Email Settings',
+					'option_section' 			=> 'Contact Form Settings',
 					'option_validation' 		=> array(
 						'email'
 					),
@@ -1213,12 +1240,12 @@ if ( class_exists( 'Malinky_Settings_Plugin' ) ) {
 					)
 				),
 				array(
-					'option_group_name' 		=> 'Contact Form Email Settings',
+					'option_group_name' 		=> 'Contact Form Settings',
 					'option_title' 				=> 'Email Password',
 					'option_field_type' 		=> 'text_field',
 					'option_field_type_options' => array(
 					),			
-					'option_section' 			=> 'Contact Form Email Settings',
+					'option_section' 			=> 'Contact Form Settings',
 					'option_validation' 		=> array(),
 					'option_placeholder'		=> '',
 					'option_description'		=> '',
@@ -1227,12 +1254,12 @@ if ( class_exists( 'Malinky_Settings_Plugin' ) ) {
 					)
 				),
 				array(
-					'option_group_name' 		=> 'Contact Form Email Settings',
+					'option_group_name' 		=> 'Contact Form Settings',
 					'option_title' 				=> 'Email Host',
 					'option_field_type' 		=> 'text_field',
 					'option_field_type_options' => array(
 					),			
-					'option_section' 			=> 'Contact Form Email Settings',
+					'option_section' 			=> 'Contact Form Settings',
 					'option_validation' 		=> array(
 						'text'
 					),
@@ -1243,12 +1270,12 @@ if ( class_exists( 'Malinky_Settings_Plugin' ) ) {
 					)
 				),
 				array(
-					'option_group_name' 		=> 'Contact Form Email Settings',
+					'option_group_name' 		=> 'Contact Form Settings',
 					'option_title' 				=> 'Email Port',
 					'option_field_type' 		=> 'text_field',
 					'option_field_type_options' => array(
 					),			
-					'option_section' 			=> 'Contact Form Email Settings',
+					'option_section' 			=> 'Contact Form Settings',
 					'option_validation' 		=> array(
 						'numbers'
 					),
@@ -1419,16 +1446,28 @@ function malinky_contact_form_shortcode()
 	<div class="col contact-form">
 		<div class="col-item col-item-full">
 
+			<?php if ( isset( $_GET['contact'] ) && $_GET['contact'] == 'success' ) { ?>
+				
+				<?php
+				$contact_form_page = get_option( '_000002_contact_form_settings' );
+				?>
+
+				<div class="box success">
+					<?php echo empty( $contact_form_page['contacted_message'] ) ? 'Thanks for contacting us, we will be in touch as soon as possible.' : $contact_form_page['contacted_message']; ?>
+				</div>
+
+			<?php } ?>
+
 			<form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" method="post" role="form">
 
-				<label for="malinky_name">Name</label>
+				<label for="malinky_name">Name*</label>
 				<input type="text" name="malinky_name" id="malinky_name" placeholder="" value="<?php echo esc_attr( wp_unslash( $name ) ); ?>" required>
 				<?php if (isset($malinky_error_messages['name_error'][0])) echo '<p class="box error">' . $malinky_error_messages['name_error'][0] . '</p>'; ?>
 
 				<label for="malinky_company">Company</label>
 				<input type="text" name="malinky_company" id="malinky_company" placeholder="" value="<?php echo esc_attr( wp_unslash( $company ) ); ?>">
 
-				<label for="malinky_email">Email</label>
+				<label for="malinky_email">Email*</label>
 				<input type="email" name="malinky_email" id="malinky_email" placeholder="" value="<?php echo esc_attr( wp_unslash( $email ) ); ?>" required>
 				<?php if (isset($malinky_error_messages['email_error'][0])) echo '<p class="box error">' . $malinky_error_messages['email_error'][0] . '</p>'; ?>
 				
@@ -1436,7 +1475,7 @@ function malinky_contact_form_shortcode()
 				<input type="tel" name="malinky_phone" id="malinky_phone" value="<?php echo esc_attr( wp_unslash( $phone ) ); ?>">
 				<?php if (isset($malinky_error_messages['phone_error'][0])) echo '<p class="box error">' . $malinky_error_messages['phone_error'][0] . '</p>'; ?>
 
-				<label for="malinky_message">Your Message</label>
+				<label for="malinky_message">Message*</label>
 				<textarea name="malinky_message" id="malinky_message" rows="10" cols="30" required><?php echo esc_textarea( wp_unslash( $message ) ); ?></textarea>
 				<?php if (isset($malinky_error_messages['message_error'][0])) echo '<p class="box error">' . $malinky_error_messages['message_error'][0] . '</p>'; ?>
 				<?php wp_nonce_field( 'malinky_process_contact_form', 'malinky_process_contact_form_nonce' ); ?>
@@ -1460,28 +1499,31 @@ add_shortcode( 'malinky-contact-form', 'malinky_contact_form_shortcode' );
 function malinky_contact_form_header()
 {
 
-	$contact_form_page = get_option( '_000002_contact_form_email_settings' );
+	$contact_form_page = get_option( '_000002_contact_form_settings' );
+	
+	/*
+	 * Check it exists (isn't false) then if on the correct page.
+	 */
+	if ( ! empty( $contact_form_page['contact_form_page'] ) && is_page( $contact_form_page['contact_form_page'] ) ) {
 
-		if ( is_page( $contact_form_page['contact_form_page'] ) ) {
+		$error_messages 	= array();
+		$name 				= isset( $_POST['malinky_name'] ) ? $_POST['malinky_name'] : '';
+		$company			= isset( $_POST['malinky_company'] ) ? $_POST['malinky_company'] : '';
+		$email 				= isset( $_POST['malinky_email'] ) ? $_POST['malinky_email'] : '';
+		$phone 				= isset( $_POST['malinky_phone'] ) ? $_POST['malinky_phone'] : '';	
+		$message 			= isset( $_POST['malinky_message'] ) ? $_POST['malinky_message'] : '';
 
-			$error_messages 	= array();
-			$name 				= isset( $_POST['malinky_name'] ) ? $_POST['malinky_name'] : '';
-			$company			= isset( $_POST['malinky_company'] ) ? $_POST['malinky_company'] : '';
-			$email 				= isset( $_POST['malinky_email'] ) ? $_POST['malinky_email'] : '';
-			$phone 				= isset( $_POST['malinky_phone'] ) ? $_POST['malinky_phone'] : '';	
-			$message 			= isset( $_POST['malinky_message'] ) ? $_POST['malinky_message'] : '';
-
-			if ( ! empty( $_POST['submit_contact'] ) ) {	
-				$errors = malinky_contact_form_process( $name, $company, $email, $phone, $message );
-				if ( is_wp_error( $errors ) ) {
-					global $malinky_error_messages;
-					$malinky_error_messages = $errors->errors;
-				} else {
-					$success = $errors;
-				}
+		if ( ! empty( $_POST['submit_contact'] ) ) {	
+			$errors = malinky_contact_form_process( $name, $company, $email, $phone, $message );
+			if ( is_wp_error( $errors ) ) {
+				global $malinky_error_messages;
+				$malinky_error_messages = $errors->errors;
+			} else {
+				$success = $errors;
 			}
-
 		}
+
+	}
 
 }
 
@@ -1543,8 +1585,8 @@ function malinky_contact_form_process( $name, $company, $email, $phone, $message
 	//send registration email
 	malinky_contact_form_email( $sanitized_name, $sanitized_company, $sanitized_email, $sanitized_phone, $sanitized_message );
 
-	wp_safe_redirect( 'thanks' );
-	exit();
+	global $post;
+	wp_safe_redirect( $post->post_name . '?contact=success', 303 );
 
 }
 

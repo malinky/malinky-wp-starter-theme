@@ -123,4 +123,11 @@ jQuery(document).ready(function($){
 
     }    
 
+
+    /*
+     * Fade out success and error messages.
+     * Use success-permanent and error-permanent otherwise.
+     */
+    $('.success, .error').delay(3000).fadeOut(800);
+
 });
