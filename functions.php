@@ -1134,6 +1134,54 @@ if ( class_exists( 'Malinky_Settings_Plugin' ) ) {
 					)
 				),
 				array(
+					'option_group_name' 		=> 'Contact Information',
+					'option_title' 				=> 'Facebook Account',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Contact Information',
+					'option_validation' 		=> array(
+						'url'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Contact Information',
+					'option_title' 				=> 'Twitter Account',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Contact Information',
+					'option_validation' 		=> array(
+						'url'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Contact Information',
+					'option_title' 				=> 'Google Plus Account',
+					'option_field_type' 		=> 'text_field',
+					'option_field_type_options' => array(
+					),			
+					'option_section' 			=> 'Contact Information',
+					'option_validation' 		=> array(
+						'url'
+					),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),											
+				array(
 					'option_group_name' 		=> 'Contact Form Email Settings',
 					'option_title' 				=> 'Contact Form Page',
 					'option_field_type' 		=> 'select_field',
