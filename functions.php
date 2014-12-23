@@ -357,7 +357,7 @@ function malinky_scripts()
 		/*
 		 * Check it exists (isn't false) then if on the correct page.
 		 */
-		if ( ! empty ( $google_map_settings['show_google_map'] ) && $google_map_settings['show_google_map'] ) {
+		if ( ! empty ( $google_map_settings['google_map_page'] ) && is_page( $google_map_settings['google_map_page'] ) ) {
 
 			/* --------------- *
 			 * Local
@@ -436,7 +436,7 @@ function malinky_scripts()
 				 * @link https://developers.google.com/maps/documentation/javascript/tutorial
 				 */
 				wp_register_script( 'malinky-googlemap-api-js', 
-							'https://maps.googleapis.com/maps/api/js?key=' . $google_map_settings['api_key'] . 'callback=malinky_initialize', 
+							'https://maps.googleapis.com/maps/api/js?key=' . $google_map_settings['api_key'] . '&callback=malinky_initialize', 
 							false, 
 							NULL, 
 							true
@@ -1102,7 +1102,12 @@ function malinky_mce_insert_formats( $init_array )
 			'title' => 'Heading 6 Style',
     		'block' => 'p',
     		'classes' => 'heading-6'
-		)							
+		),
+		array(
+			'title' => 'Text No Margin',
+    		'selector' => 'p, h1, h2, h3, h4, h5, h6',
+    		'classes' => 'no-margin'
+		)						
 	);
 
 	/*
@@ -1400,14 +1405,15 @@ if ( class_exists( 'Malinky_Settings_Plugin' ) ) {
 				),
 				array(
 					'option_group_name' 		=> 'Google Map Settings',
-					'option_title' 				=> 'Show Google Map',
-					'option_field_type' 		=> 'checkbox_field',
-					'option_field_type_options' => array(
-					),			
+					'option_title' 				=> 'Google Map Page',
+					'option_field_type' 		=> 'select_field',
+					'option_field_type_options' => malinky_get_page_names( 'Disabled' ),
 					'option_section' 			=> 'Google Map Settings',
-					'option_validation' 		=> array(),
+					'option_validation' 		=> array(
+						'text'
+					),
 					'option_placeholder'		=> '',
-					'option_description'		=> 'If checked add [malinky-google-map] shortcode in any page.',
+					'option_description'		=> 'Select the page that the [malinky-contact-form] shortcode has been added to.',
 					'option_default'			=> array(
 						''
 					)
@@ -1478,10 +1484,24 @@ if ( class_exists( 'Malinky_Settings_Plugin' ) ) {
 				),
 				array(
 					'option_group_name' 		=> 'Google Map Settings',
-					'option_title' 				=> 'Show Address',
+					'option_title' 				=> 'Show Address Label',
 					'option_field_type' 		=> 'checkbox_field',
 					'option_field_type_options' => array(
 					),			
+					'option_section' 			=> 'Google Map Settings',
+					'option_validation' 		=> array(),
+					'option_placeholder'		=> '',
+					'option_description'		=> '',
+					'option_default'			=> array(
+						''
+					)
+				),
+				array(
+					'option_group_name' 		=> 'Google Map Settings',
+					'option_title' 				=> 'Address Label',
+					'option_field_type' 		=> 'editor_field',
+					'option_field_type_options' => array(
+					),
 					'option_section' 			=> 'Google Map Settings',
 					'option_validation' 		=> array(),
 					'option_placeholder'		=> '',
@@ -1511,8 +1531,21 @@ if ( class_exists( 'Malinky_Settings_Plugin' ) ) {
 function malinky_google_map_shortcode()
 {
 
-	return '<div id="map-canvas"></div>';
+	$google_map_settings = get_option( '_000004_google_map_settings' );
+	
+	/*
+	 * Check it exists (isn't false) then if on the correct page.
+	 */
+	if ( ! empty( $google_map_settings['google_map_page'] ) && is_page( $google_map_settings['google_map_page'] ) ) {
 
+		ob_start(); ?>
+
+		<div id="map-canvas"></div>
+
+		<?php return ob_get_clean();
+
+	}
+		
 }
 
 add_shortcode( 'malinky-google-map', 'malinky_google_map_shortcode' );
@@ -1538,57 +1571,64 @@ function malinky_contact_form_shortcode()
 	$email 		= isset( $_POST['malinky_email'] ) ? $_POST['malinky_email'] : '';
 	$phone 		= isset( $_POST['malinky_phone'] ) ? $_POST['malinky_phone'] : '';	
 	$message 	= isset( $_POST['malinky_message'] ) ? $_POST['malinky_message'] : '';
-	?>
 
-	<?php ob_start(); ?>
+	$contact_form_page = get_option( '_000002_contact_form_settings' );
 
-	<div class="col contact-form">
-		<div class="col-item col-item-full">
+	/*
+	 * Check it exists (isn't false) then if on the correct page.
+	 */
+	if ( ! empty( $contact_form_page['contact_form_page'] ) && is_page( $contact_form_page['contact_form_page'] ) ) {
 
-			<?php if ( isset( $_GET['contact'] ) && $_GET['contact'] == 'success' ) { ?>
-				
-				<?php
-				$contact_form_page = get_option( '_000002_contact_form_settings' );
-				?>
+		ob_start(); ?>
 
-				<div class="box success">
-					<?php echo empty( $contact_form_page['contacted_message'] ) ? 'Thanks for contacting us, we will be in touch as soon as possible.' : $contact_form_page['contacted_message']; ?>
-				</div>
+		<div class="col contact-form">
+			<div class="col-item col-item-full">
 
-			<?php } ?>
+				<?php if ( isset( $_GET['contact'] ) && $_GET['contact'] == 'success' ) { ?>
+					
+					<?php
+					$contact_form_page = get_option( '_000002_contact_form_settings' );
+					?>
 
-			<form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" method="post" role="form">
+					<div class="box success">
+						<?php echo empty( $contact_form_page['contacted_message'] ) ? 'Thanks for contacting us, we will be in touch as soon as possible.' : $contact_form_page['contacted_message']; ?>
+					</div>
 
-				<label for="malinky_name">Name*</label>
-				<input type="text" name="malinky_name" id="malinky_name" placeholder="" value="<?php echo esc_attr( wp_unslash( $name ) ); ?>" required>
-				<?php if (isset($malinky_error_messages['name_error'][0])) echo '<p class="box error">' . $malinky_error_messages['name_error'][0] . '</p>'; ?>
+				<?php } ?>
 
-				<label for="malinky_company">Company</label>
-				<input type="text" name="malinky_company" id="malinky_company" placeholder="" value="<?php echo esc_attr( wp_unslash( $company ) ); ?>">
+				<form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" method="post" role="form">
 
-				<label for="malinky_email">Email*</label>
-				<input type="email" name="malinky_email" id="malinky_email" placeholder="" value="<?php echo esc_attr( wp_unslash( $email ) ); ?>" required>
-				<?php if (isset($malinky_error_messages['email_error'][0])) echo '<p class="box error">' . $malinky_error_messages['email_error'][0] . '</p>'; ?>
-				
-				<label for="malinky_phone">Phone</label>
-				<input type="tel" name="malinky_phone" id="malinky_phone" value="<?php echo esc_attr( wp_unslash( $phone ) ); ?>">
-				<?php if (isset($malinky_error_messages['phone_error'][0])) echo '<p class="box error">' . $malinky_error_messages['phone_error'][0] . '</p>'; ?>
+					<label for="malinky_name">Name*</label>
+					<input type="text" name="malinky_name" id="malinky_name" placeholder="" value="<?php echo esc_attr( wp_unslash( $name ) ); ?>" required>
+					<?php if (isset($malinky_error_messages['name_error'][0])) echo '<p class="box error">' . $malinky_error_messages['name_error'][0] . '</p>'; ?>
 
-				<label for="malinky_message">Message*</label>
-				<textarea name="malinky_message" id="malinky_message" rows="10" cols="30" required><?php echo esc_textarea( wp_unslash( $message ) ); ?></textarea>
-				<?php if (isset($malinky_error_messages['message_error'][0])) echo '<p class="box error">' . $malinky_error_messages['message_error'][0] . '</p>'; ?>
-				<?php wp_nonce_field( 'malinky_process_contact_form', 'malinky_process_contact_form_nonce' ); ?>
-				
-				<input type="submit" value="Submit" name="submit_contact" class="alignright">
+					<label for="malinky_company">Company</label>
+					<input type="text" name="malinky_company" id="malinky_company" placeholder="" value="<?php echo esc_attr( wp_unslash( $company ) ); ?>">
 
-			</form>
+					<label for="malinky_email">Email*</label>
+					<input type="email" name="malinky_email" id="malinky_email" placeholder="" value="<?php echo esc_attr( wp_unslash( $email ) ); ?>" required>
+					<?php if (isset($malinky_error_messages['email_error'][0])) echo '<p class="box error">' . $malinky_error_messages['email_error'][0] . '</p>'; ?>
+					
+					<label for="malinky_phone">Phone</label>
+					<input type="tel" name="malinky_phone" id="malinky_phone" value="<?php echo esc_attr( wp_unslash( $phone ) ); ?>">
+					<?php if (isset($malinky_error_messages['phone_error'][0])) echo '<p class="box error">' . $malinky_error_messages['phone_error'][0] . '</p>'; ?>
 
+					<label for="malinky_message">Message*</label>
+					<textarea name="malinky_message" id="malinky_message" rows="10" cols="30" required><?php echo esc_textarea( wp_unslash( $message ) ); ?></textarea>
+					<?php if (isset($malinky_error_messages['message_error'][0])) echo '<p class="box error">' . $malinky_error_messages['message_error'][0] . '</p>'; ?>
+					<?php wp_nonce_field( 'malinky_process_contact_form', 'malinky_process_contact_form_nonce' ); ?>
+					
+					<input type="submit" value="Submit" name="submit_contact" class="alignright">
+
+				</form>
+
+			</div>
 		</div>
-	</div>
 
-	<?php return ob_get_clean(); ?>
-	
-<?php
+		<?php return ob_get_clean();
+
+	}
+
 }
 
 add_shortcode( 'malinky-contact-form', 'malinky_contact_form_shortcode' );

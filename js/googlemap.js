@@ -23,7 +23,7 @@ function malinky_initialize()
         map: map,
     });
 
-    if (google_map_settings.show_address == true) {
+    if (google_map_settings.show_address_label == true) {
 
         //Reopen info window when marker is clicked.
         google.maps.event.addDomListener(marker, "click", function() {
@@ -33,7 +33,7 @@ function malinky_initialize()
         /*
          * Info window.
          */
-        var contentString = '<div style="width: 210px; padding-right: 10px; font-size: 13px;">Print Bureau Team<br />3 Ruston Road<br />Grantham<br />Lincolnshire<br />NG31 9SW</div>';
+        var contentString = '<div style="width: 180px; padding-right: 10px; font-size: 13px;">' + google_map_settings.address_label + '</div>';
         var infowindow = new google.maps.InfoWindow( {
             content: contentString
         });
