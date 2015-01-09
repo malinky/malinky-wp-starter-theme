@@ -1,0 +1,184 @@
+/*
+ * Used for fixed .main-navigation (not mobile).
+ * 1. Hide off screen set to same as height and the bottom border if there is one.
+ * .wrap-full--Modifier.
+ */
+.wrap-full--full-fixed {
+    position: fixed;
+    top: (-$navigation-fixed-height - $navigation-bar-border-width); /* 1 */
+    z-index: 9999;
+}
+
+/*
+ * Class added via js to slide in fixed .main-navigation (not mobile).
+ * .wrap-full--Modifier--Modifier.
+ */
+.wrap-full--full-fixed--js-show {
+    top: 0;
+    -webkit-transition: top 0.5s;
+    transition: top 0.5s;
+}
+
+/*
+ * Holder for main navigation.
+ */
+.main-navigation-bar {
+    max-width: 1190px;
+    font-family: $navigation-font-family;
+    font-size: $navigation-font-size;  
+    margin-bottom: $navigation-margin-bottom;  
+    border-bottom: $navigation-bar-border-width solid $navigation-bar-border-color;
+}
+
+/*
+ * Add color or image to full width background.
+ * .main-navigation-bar--Modifier. 
+ */
+.main-navigation-bar--bkg {
+    background: $navigation-bar-background-color;
+}
+
+/*
+ * 1. Set to height of navigation.
+ * 2. Set line-height of navigation for vertical centre.
+*/
+.main-navigation {
+    position: relative;
+    height: $navigation-height;
+    line-height: $navigation-height;
+    /*border-bottom: 2px solid #666;*/
+}
+
+/*
+ * Applied to <nav> .main-navigation for a fixed main-navigation (not on mobile).
+ * Overwrite any unwanted styles from .main-navigation as this is a Modifier..
+ * .main-navigation--Modifier.
+ */
+.main-navigation--fixed {
+    height: $navigation-fixed-height;
+    line-height: $navigation-fixed-height;
+    border: none;
+}
+
+/*
+ * All Levels.
+ * 1. Part of centered nav.
+ */
+.main-navigation ul {
+    text-align: center; /* 1 */
+    list-style: none;
+    margin: 0;
+}
+
+/*
+ * All Levels.
+ * 1. Used to position dropdown against.
+ * 2. Part of centered nav.
+ * 4. Remove spacing created with inline-block links. Would rather us commenting but difficult with wp_nav_menu.
+ */
+.main-navigation li {
+    position: relative; /* 1 */
+    display: inline; /* 2 */
+    margin-left: -4px; /* 4 */
+}
+
+/*
+ * All Levels.
+ */
+.main-navigation li:first-child {
+    margin-left: 0;
+}
+
+/*
+ * All Levels.
+ * Main navigation link style.
+ * 1. Part of centered nav.
+ * 2. Nudge hover down to bottom border.
+ * 3. Should be same colour as hover to blend in.
+ */
+.main-navigation a:link,
+.main-navigation a:visited
+{
+    display: inline-block; /* 1 */
+    padding: 0 10px 0 10px; /* 2 */
+    color: $navigation-link-color;
+    border-right: 1px solid $navigation-bar-link-background-color-hover; /* 3 */
+}
+
+/*
+ * All Levels.
+ * Main navigation hover style.
+ */
+.main-navigation a:hover,
+.main-navigation a:active {
+    background: $navigation-bar-link-background-color-hover;
+    color: $navigation-link-color-hover;
+    text-decoration: none;
+}
+
+/*
+ * Second and Third Level.
+ * This makes the dropdown boxed in.
+ * 1. Border top set to cover .main-navigation-bar border bottom that has been set. Using a top margin
+ * causes a problem with a gap between the navigation and dropdown. Ensure border width matches that in .main-navigation-bar.
+ * Can also set to -ve as below to merge dropdown into main nav.
+ * 2. Reset from .main-navigation.
+ * 3. Neutralise centered .main-navigation ul.
+ */
+.main-navigation ul ul {
+    display: none;
+    position: absolute;
+    left: 0;
+    z-index: 999;
+    background: $navigation-dropdown-background-color;
+    border-top: $navigation-bar-border-width solid $navigation-bar-border-color;  /* 1 */
+    line-height: initial; /* 2 */
+    text-align: left; /* 3 */
+}
+
+/*
+ * Second and Third Level Show.
+ */
+.main-navigation ul li:hover > ul {
+    display: block;
+}
+
+/*
+ * Second and Third Level.
+ */
+.main-navigation ul ul li
+{
+    display: block;
+    white-space: nowrap;
+    margin: 0;
+}
+
+/*
+ * Third Level Position.
+ */
+.main-navigation ul ul ul
+{
+    top: 0;
+    left: 100%;
+    margin-top: -2px;
+}
+
+/*
+ * Second and Third Level.
+ * Overide .main-navigation link style.
+ */
+.main-navigation ul ul a:link,
+.main-navigation ul ul a:visited {
+    display: block;
+    color: $navigation-dropdown-link-color;
+    border-right: none;
+    padding: 15px;
+}
+
+/*
+ * Second and Third Level.
+ * Overide .main-navigation hover style.
+ */
+.main-navigation ul ul a:hover {
+    color: $navigation-dropdown-link-color-hover;
+}

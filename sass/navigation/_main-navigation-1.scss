@@ -1,12 +1,11 @@
 /*
  * Used for fixed .main-navigation (not mobile).
- * 1. Hide off screen set to same as height.
+ * 1. Hide off screen set to same as height and the bottom border if there is one.
  * .wrap-full--Modifier.
  */
 .wrap-full--full-fixed {
-    position: fixed;
-    height: $navigation-fixed-height; /* 1 */    
-    top: -$navigation-fixed-height; /* 1 */
+    position: fixed;   
+    top: (-$navigation-fixed-height - $navigation-bar-border-width); /* 1 */
     z-index: 9999;
 }
 
@@ -26,7 +25,8 @@
 .main-navigation-bar {
     font-family: $navigation-font-family;
     font-size: $navigation-font-size;  
-    margin-bottom: $navigation-margin-bottom;  
+    margin-bottom: $navigation-margin-bottom;
+    border-bottom: $navigation-bar-border-width solid $navigation-bar-border-color;
 }
 
 /*
@@ -45,7 +45,6 @@
     position: relative;
     height: $navigation-height;
     line-height: $navigation-height;
-    /*border-bottom: 2px solid #666;*/
 }
 
 /*
@@ -71,7 +70,7 @@
  * All Levels.
  * 1. Nudge hover down to bottom border.
  */
-.main-navigation ul li {
+.main-navigation li {
     display: inline-block;    
     margin: 0 0 0 20px;
     padding-bottom: $navigation-dropdown-nudge; /* 1 */
@@ -80,7 +79,7 @@
 /*
  * All Levels.
  */
-.main-navigation ul li:first-child {
+.main-navigation li:first-child {
     margin-left: 0;
 }
 
@@ -89,8 +88,8 @@
  * Main navigation link style.
  * 1. Nudge hover down to bottom border.
  */
-.main-navigation ul li a:link,
-.main-navigation ul li a:visited
+.main-navigation a:link,
+.main-navigation a:visited
 {
     color: $navigation-link-color;
     padding-bottom: $navigation-dropdown-nudge; /* 1 */
@@ -100,7 +99,7 @@
  * All Levels.
  * Main navigation hover style.
  */
-.main-navigation ul li a:hover {
+.main-navigation a:hover {
     color: $navigation-link-color-hover;
     text-decoration: underline;
 }
@@ -108,8 +107,7 @@
 /*
  * Second and Third Level.
  * This makes the dropdown boxed in.
- * 1. Top margin needs settings to -ve value of border-bottom in .main-navigation if set.
- * Can also set to -ve as below to merge dropdown into main nav.
+ * 1. Top margin needs settings to -ve value of the width of the dropdown border if there is one.
  * 2. Reset from .main-navigation.
  */
 .main-navigation ul ul {
@@ -117,8 +115,8 @@
     position: absolute;
     z-index: 999;
     background: $navigation-dropdown-background-color;
-    border: $navigation-dropdown-border;
-    margin: -2px 0 0 0; /* 1 */
+    border: $navigation-dropdown-border-width solid $navigation-dropdown-border-color;
+    margin: -$navigation-dropdown-border-width 0 0 0; /* 1 */
     padding: 15px 0 0 15px;
     line-height: initial; /* 2 */   
 }

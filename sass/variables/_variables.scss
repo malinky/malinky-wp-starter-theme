@@ -5,27 +5,22 @@ $link-color: #f47b20;
 $link-color-hover: #f47b20;
 
 /*
- * Main and fixed navigation.
- * 1. Nudge content below navigation. Also used to nudge mobile navigation in _wrap.scss.
- * 2. Should be more scrollTop in main.js (80px).
+ * Main Navigation 1.
+ * Comment either Main Navigation 1 or Main Navigation 2 out.
+ * This contains text links on a solid background, full width.
+ * Ensure @import "navigation/main-navigation-1" is in style.scss
  */
-$navigation-margin-bottom: 20px; /* 1 */
-$navigation-height: 100px; /* 2 */
-$navigation-fixed-height: 41px;
-$navigation-bar-background-color: #f47b20;
-$navigation-link-color: #fff;
-$navigation-link-color-hover: #fff;
-$navigation-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$navigation-font-size: 1.142857em; /* 16/14 */
+
+@import "variables/variables-main-navigation_1";
 
 /*
- * Dropdown navigation.
+ * Main Navigation 2.
+ * Comment either Main Navigation 1 or Main Navigation 2 out.
+ * This contains solid block color links, full width.
+ * Ensure @import "navigation/main-navigation-2" is in style.scss
  */
-$navigation-dropdown-nudge: 7px;
-$navigation-dropdown-background-color: #fff;
-$navigation-dropdown-border: 2px solid #f47b20;
-$navigation-dropdown-link-color: #f47b20;
-$navigation-dropdown-link-color-hover: #f47b20;
+
+/* @import "variables/variables-main-navigation_2"; */
 
 /*
  * Mobile navigation.

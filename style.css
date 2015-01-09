@@ -52,6 +52,12 @@ PRINT
 MEDIA QUERIES
 */
 /*
+ * Main Navigation 1.
+ * Comment either Main Navigation 1 or Main Navigation 2 out.
+ * This contains text links on a solid background, full width.
+ * Ensure @import "navigation/main-navigation-1" is in style.scss
+ */
+/*
  * Main and fixed navigation.
  * 1. Nudge content below navigation. Also used to nudge mobile navigation in _wrap.scss.
  * 2. Should be more scrollTop in main.js (80px).
@@ -62,6 +68,13 @@ MEDIA QUERIES
 /*
  * Dropdown navigation.
  */
+/*
+ * Main Navigation 2.
+ * Comment either Main Navigation 1 or Main Navigation 2 out.
+ * This contains solid block color links, full width.
+ * Ensure @import "navigation/main-navigation-2" is in style.scss
+ */
+/* @import "variables/variables-main-navigation_2"; */
 /*
  * Mobile navigation.
  * 1. Fixed mobile navigation bar .mobile-navigation-bar.
@@ -1972,19 +1985,17 @@ a:active {
 
 /*
 **********************************************************************
-MAIN NAVIGATION
+MAIN NAVIGATION 1 - Either Main Navigation 1 or Main Navigation 2
 **********************************************************************
 */
 /*
  * Used for fixed .main-navigation (not mobile).
- * 1. Hide off screen set to same as height.
+ * 1. Hide off screen set to same as height and the bottom border if there is one.
  * .wrap-full--Modifier.
  */
 .wrap-full--full-fixed {
   position: fixed;
-  height: 41px;
-  /* 1 */
-  top: -41px;
+  top: -42px;
   /* 1 */
   z-index: 9999;
 }
@@ -2006,6 +2017,7 @@ MAIN NAVIGATION
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.14286em;
   margin-bottom: 20px;
+  border-bottom: 1px solid #666;
 }
 
 /*
@@ -2024,7 +2036,6 @@ MAIN NAVIGATION
   position: relative;
   height: 100px;
   line-height: 100px;
-  /*border-bottom: 2px solid #666;*/
 }
 
 /*
@@ -2050,7 +2061,7 @@ MAIN NAVIGATION
  * All Levels.
  * 1. Nudge hover down to bottom border.
  */
-.main-navigation ul li {
+.main-navigation li {
   display: inline-block;
   margin: 0 0 0 20px;
   padding-bottom: 7px;
@@ -2060,7 +2071,7 @@ MAIN NAVIGATION
 /*
  * All Levels.
  */
-.main-navigation ul li:first-child {
+.main-navigation li:first-child {
   margin-left: 0;
 }
 
@@ -2069,8 +2080,8 @@ MAIN NAVIGATION
  * Main navigation link style.
  * 1. Nudge hover down to bottom border.
  */
-.main-navigation ul li a:link,
-.main-navigation ul li a:visited {
+.main-navigation a:link,
+.main-navigation a:visited {
   color: #fff;
   padding-bottom: 7px;
   /* 1 */
@@ -2080,7 +2091,7 @@ MAIN NAVIGATION
  * All Levels.
  * Main navigation hover style.
  */
-.main-navigation ul li a:hover {
+.main-navigation a:hover {
   color: #fff;
   text-decoration: underline;
 }
@@ -2088,8 +2099,7 @@ MAIN NAVIGATION
 /*
  * Second and Third Level.
  * This makes the dropdown boxed in.
- * 1. Top margin needs settings to -ve value of border-bottom in .main-navigation if set.
- * Can also set to -ve as below to merge dropdown into main nav.
+ * 1. Top margin needs settings to -ve value of the width of the dropdown border if there is one.
  * 2. Reset from .main-navigation.
  */
 .main-navigation ul ul {
@@ -2148,6 +2158,12 @@ MAIN NAVIGATION
   color: #f47b20;
 }
 
+/*
+**********************************************************************
+MAIN NAVIGATION 2 - Either Main Navigation 1 or Main Navigation 2
+**********************************************************************
+*/
+/* @import "navigation/main-navigation-2"; */
 /*
 **********************************************************************
 MOBILE NAVIGATION
