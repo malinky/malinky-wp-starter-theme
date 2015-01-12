@@ -3,7 +3,7 @@ jQuery(document).ready(function($){
     /*
      * Start Owl slider.
      */
-    $("#owl-slider-home-id").owlCarousel({
+    $("#owl-carousel-id").owlCarousel({
  
     // Most important owl features
     items : 1,
