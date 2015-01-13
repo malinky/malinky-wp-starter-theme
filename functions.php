@@ -1045,6 +1045,35 @@ if ( ! function_exists( 'malinky_archive_description' ) ) {
 }
 
 
+if ( ! function_exists( 'malinky_static_page_for_posts' ) ) {
+
+	/**
+	 * Show title and content from the blog home when set as a static page, usually in home.php template.
+	 */
+	function malinky_static_page_for_posts()
+	{
+
+		global $post;
+		$blog_home_id = get_option( 'page_for_posts' );
+		
+		if ( $blog_home_id ) {
+
+		    $post = get_page( $blog_home_id );
+		    setup_postdata( $post );
+		    ?>
+
+	        <h1><?php the_title(); ?></h1>
+	        <?php the_content(); ?>
+		    
+		    <?php rewind_posts();
+
+		}
+
+	}
+
+}
+
+
 
 
 
