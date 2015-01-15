@@ -145,6 +145,75 @@ if ( ! function_exists( 'malinky_setup' ) ) {
 			'footer_navigation' => __( 'Footer Navigation', 'malinky' ),
 		) );
 
+		/**
+		 * Include server side device detection.
+		 *
+		 * @link http://mobiledetect.net/
+		 * @link https://github.com/serbanghita/Mobile-Detect/
+		 */
+		if ( ! is_admin() ) {
+
+			if ( WP_ENV == 'local' ) {
+
+			    require_once(ABSPATH . '/malinky-includes/Mobile_Detect.php');
+
+			} elseif ( WP_ENV == 'dev' ) {
+
+			    require_once(ABSPATH . '../malinky-includes/Mobile_Detect.php');    
+
+			} else {
+
+			    require_once(ABSPATH . '../malinky-includes/Mobile_Detect.php');
+
+			}
+
+			global $malinky_mobile_detect;
+			$malinky_mobile_detect = new Mobile_Detect();
+
+			function malinky_is_phone()
+			{
+				global $malinky_mobile_detect;
+				if ( $malinky_mobile_detect->isMobile() && ! $malinky_mobile_detect->isTablet() )
+					return true;
+			}
+
+			function malinky_is_phone_tablet()
+			{
+				global $malinky_mobile_detect;
+				if ( $malinky_mobile_detect->isMobile() || $malinky_mobile_detect->isTablet() )
+					return true;
+			}	
+
+			function malinky_is_phone_computer()
+			{
+				global $malinky_mobile_detect;
+				if ( ! $malinky_mobile_detect->isTablet() )
+					return true;
+			}						
+
+			function malinky_is_tablet()
+			{
+				global $malinky_mobile_detect;
+				if ( $malinky_mobile_detect->isTablet() )
+					return true;
+			}
+
+			function malinky_is_tablet_computer()
+			{
+				global $malinky_mobile_detect;
+				if ( $malinky_mobile_detect->isTablet() || ! $malinky_mobile_detect->isMobile() )
+					return true;
+			}			
+
+			function malinky_is_computer()
+			{
+				global $malinky_mobile_detect;
+				if ( ! $malinky_mobile_detect->isMobile() && ! $malinky_mobile_detect->isTablet() )
+					return true;
+			}	
+
+		}
+
 	}
 
 }
