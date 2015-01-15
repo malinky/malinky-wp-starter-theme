@@ -802,7 +802,7 @@ if ( ! function_exists( 'malinky_content_meta' ) ) {
 	 *
 	 * @param bool $show_author Set to false to hide author details.
 	 */
-	function malinky_content_meta( $show_author = true )
+	function malinky_content_meta( $show_updated = true, $show_author = true )
 	{
 
 		$posted_time = '';
@@ -815,20 +815,22 @@ if ( ! function_exists( 'malinky_content_meta' ) ) {
 			esc_html( get_the_date() )
 		);
 
-		$posted_string = 'Posted on ' . $posted_time;
+		$posted_string = 'Completed on ' . $posted_time;
 
-		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+		if ( $show_updated ) {
+			if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
 
-			$updated_time = sprintf( 
-				'<time class="content-header__meta__date--updated" datetime="%1$s">%2$s</time>', 
-				esc_attr( get_the_modified_date( 'c' ) ),
-				esc_html( get_the_modified_date() )
-			);
+				$updated_time = sprintf( 
+					'<time class="content-header__meta__date--updated" datetime="%1$s">%2$s</time>', 
+					esc_attr( get_the_modified_date( 'c' ) ),
+					esc_html( get_the_modified_date() )
+				);
 
-			$updated_string = ', Updated on ' . $updated_time;
+				$updated_string = ', Updated on ' . $updated_time;
 
+			}
 		}
-
+		
 		$author = '<a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a>';
 
 		if ( ! $show_author )
@@ -846,30 +848,37 @@ if ( ! function_exists( 'malinky_content_footer' ) ) {
 	/**
 	 * Post categories, tags and edit link.
 	 */
-	function malinky_content_footer()
+	function malinky_content_footer( $show_categories = true, $show_tags = true , $show_edit_link = true )
 	{
 
 		$categories = '';
 		$tags = '';
+		$edit_link = '';
 
 		//Only show for posts.
 		if ( get_post_type() == 'post' ) {
 
-			$categories_list = get_the_category_list( ', ' );
-			if ( $categories_list ) {
-				$categories = sprintf( '<span class="content-footer__cat-link">Posted in %1$s</span>', $categories_list );
+			if ( $show_categories ) {
+				$categories_list = get_the_category_list( ', ' );
+				if ( $categories_list ) {
+					$categories = sprintf( '<span class="content-footer__cat-link">Posted in %1$s</span> ', $categories_list );
+				}
 			}
 
-			$tags_list = get_the_tag_list( '', ', ' );
-			if ( $tags_list ) {
-				$tags = sprintf( '<span class="content-footer__tag-link">Tagged with %1$s</span>', $tags_list );
+			if ( $show_tags ) {
+				$tags_list = get_the_tag_list( '', ', ' );
+				if ( $tags_list ) {
+					$tags = sprintf( '<span class="content-footer__tag-link">Tagged as %1$s</span> ', $tags_list );
+				}
 			}
 
 		}
 
-		$edit_link = sprintf('<span class="content-footer__edit-link"><a href="%1$s">Edit</a></span>', esc_url( get_edit_post_link() ) );
+		if ( $show_edit_link ) {
+			$edit_link = sprintf( '<span class="content-footer__edit-link"><a href="%1$s">Edit</a></span> ', esc_url( get_edit_post_link() ) );
+		}
 
-		return $categories . ' ' . $tags . ' ' . $edit_link;
+		return $categories . $tags . $edit_link;
 
 	}
 
