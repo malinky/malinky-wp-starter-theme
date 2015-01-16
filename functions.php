@@ -930,21 +930,21 @@ if ( ! function_exists( 'malinky_content_footer' ) ) {
 			if ( $show_categories ) {
 				$categories_list = get_the_category_list( ', ' );
 				if ( $categories_list ) {
-					$categories = sprintf( '<span class="content-footer__cat-link">Posted in %1$s</span> ', $categories_list );
+					$categories = sprintf( '<span class="content-footer__cat-link">Posted in %1$s</span>. ', $categories_list );
 				}
 			}
 
 			if ( $show_tags ) {
 				$tags_list = get_the_tag_list( '', ', ' );
 				if ( $tags_list ) {
-					$tags = sprintf( '<span class="content-footer__tag-link">Tagged as %1$s</span> ', $tags_list );
+					$tags = sprintf( '<span class="content-footer__tag-link">Tagged as %1$s</span>. ', $tags_list );
 				}
 			}
 
 		}
 
 		if ( $show_edit_link ) {
-			$edit_link = sprintf( '<span class="content-footer__edit-link"><a href="%1$s">Edit</a></span> ', esc_url( get_edit_post_link() ) );
+			$edit_link = sprintf( '<span class="content-footer__edit-link"><a href="%1$s">Edit</a></span>', esc_url( get_edit_post_link() ) );
 		}
 
 		return $categories . $tags . $edit_link;

@@ -199,6 +199,17 @@
     margin-bottom: 40px;
 }
 
+/*
+ * Hide / Show.
+ */
+.col-item--hide {
+    display: none;
+}
+
+.col-item--show {
+    display: inline-block;
+}
+
 .col-item-full { width: 100%; }
 
 .col-item-half { width: 50%; }
@@ -315,6 +326,17 @@
     }
 
     /*
+     * Hide / Show.
+     */
+    .col-item--hide--large {
+        display: none;
+    }
+
+    .col-item--show--large {
+        display: inline-block;
+    }
+
+    /*
      * Used to make an item full width when it isn't normally.
      * Faux modifier as .full-width doesn't exist.
      */
@@ -405,6 +427,18 @@
     .col-item--margin-bottom-40--medium {
         margin-bottom: 40px;
     }
+
+    /*
+     * Hide / Show.
+     */
+    .col-item--hide--medium {
+        display: none;
+    }
+
+    .col-item--show--medium {
+        display: inline-block;
+    }
+
 
     /*
      * Used to make an item full width when it isn't normally.
@@ -498,6 +532,17 @@
         margin-bottom: 40px;
     }
 
+    /*
+     * Hide / Show.
+     */
+    .col-item--hide--small {
+        display: none;
+    }
+
+    .col-item--show--small {
+        display: inline-block;
+    }
+    
     /*
      * Used to make an item full width when it isn't normally.
      * Faux modifier as .full-width doesn't exist.
