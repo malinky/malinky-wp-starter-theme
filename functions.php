@@ -12,6 +12,7 @@
  * Login Screen
  * Setup Actions and Filters
  * Template Tags
+ * Template Functions
  * MCE
  * Settings Plugin
  * Contact Form Plugin
@@ -89,9 +90,6 @@ if ( ! function_exists( 'malinky_setup' ) ) {
 
 		/**
 		 * Add RSS feed links.
-		 * These aren't added but if they are can also be removed from an action.
-		 * remove_action('wp_head', 'feed_links', 2);
-		 * remove_action('wp_head', 'feed_links_extra', 3);
  		 *
 		 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Feed_Links
 		 */
@@ -670,7 +668,8 @@ remove_action('wp_head', 'wp_generator');
 remove_action('wp_head', 'wlwmanifest_link'); // Display the link to the Windows Live Writer manifest file.
 remove_action('wp_head', 'rsd_link'); // Display the link to the Really Simple Discovery service endpoint, EditURI link. xmlrpc.php
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
-
+remove_action('wp_head', 'feed_links', 2);
+remove_action('wp_head', 'feed_links_extra', 3);
 
 /**
  * Add page slug to body class. Credit: Starkers Wordpress Theme.
@@ -962,8 +961,10 @@ if ( ! function_exists( 'malinky_posts_pagination' ) ) {
 	function malinky_posts_pagination()
 	{
 
+		global $wp_query;
+
 		//Return if only 1 page
-		if ( $GLOBALS['wp_query']->max_num_pages < 2 ) {
+		if ( $wp_query->max_num_pages < 2 ) {
 			return;
 		} ?>
 
@@ -1146,6 +1147,41 @@ if ( ! function_exists( 'malinky_static_page_for_posts' ) ) {
 		    <?php rewind_posts();
 
 		}
+
+	}
+
+}
+
+
+
+
+
+/* ------------------------------------------------------------------------ *
+ * Template Functions
+ * ------------------------------------------------------------------------ */
+
+if ( ! function_exists( 'malinky_is_blog_page' ) ) {
+
+	/**
+	 * Check if current page is the blog home page, archive or single.
+	 * Archive includes category, tag, date, author pages.
+	 * The function excludes CPT to just use native blog/posts.
+	 *
+	 * @param bool $single Whether to include is_single()
+	 *
+	 * @return bool
+	 */
+	function malinky_is_blog_page( $single = true )
+	{
+
+	    global $post;
+
+	    $post_type = get_post_type($post);
+
+	    if ( ! $single ) 
+	    	return ( ( is_home() || is_archive() ) && ( $post_type == 'post' ) );
+
+	    return ( ( is_home() || is_archive() || is_single() ) && ( $post_type == 'post' ) );
 
 	}
 

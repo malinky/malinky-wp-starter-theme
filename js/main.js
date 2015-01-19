@@ -78,7 +78,6 @@ jQuery(document).ready(function($){
     /*
      * Scroll to top.
      */    
-    $(".back-top").hide();
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
             $('.back-top').fadeIn();
