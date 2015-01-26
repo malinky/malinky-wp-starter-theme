@@ -1127,24 +1127,30 @@ if ( ! function_exists( 'malinky_archive_description' ) ) {
 if ( ! function_exists( 'malinky_static_page_for_posts' ) ) {
 
 	/**
-	 * Show title and content from the blog home when set as a static page, usually in home.php template.
+	 * Show title or content from the blog home when set as a static page, usually in home.php template.
+	 *
+	 * @param str $return The data to return either 'title' or 'description'
+	 *
+	 * @return str
 	 */
-	function malinky_static_page_for_posts()
+	function malinky_static_page_for_posts( $return = 'title' )
 	{
 
 		global $post;
+
+		$return_content = '';
 		$blog_home_id = get_option( 'page_for_posts' );
 		
 		if ( $blog_home_id ) {
 
 		    $post = get_page( $blog_home_id );
 		    setup_postdata( $post );
-		    ?>
 
-	        <h1><?php the_title(); ?></h1>
-	        <?php the_content(); ?>
+		    $return_content = $return == 'description' ? get_the_content() : get_the_title();
 		    
-		    <?php rewind_posts();
+		    rewind_posts();
+
+		    return $return_content;
 
 		}
 
