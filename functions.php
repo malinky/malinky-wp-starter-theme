@@ -1913,7 +1913,7 @@ function malinky_contact_form_email( $sanitized_name, $sanitized_company, $sanit
 
 	include_once( ABSPATH . WPINC . '/class-phpmailer.php' );
 
-	$email_settings = get_option( '_000002_contact_form_setting' );
+	$email_settings = get_option( '_000002_contact_form_settings' );
 
 	if ( ! $email_settings ) return;
 	
@@ -1927,13 +1927,13 @@ function malinky_contact_form_email( $sanitized_name, $sanitized_company, $sanit
 	$mail->Password   	= $email_settings['email_password'];
 	$mail->SMTPSecure 	= 'ssl';	
 
-	$mail->AddAddress( get_option( 'admin_email' ), bloginfo( 'name' ) );
+	$mail->AddAddress( get_option( 'admin_email' ), get_bloginfo( 'name' ) );
 
-	$mail->SetFrom( get_option( 'admin_email' ), bloginfo( 'name' ) );
+	$mail->SetFrom( get_option( 'admin_email' ), get_bloginfo( 'name' ) );
 
 	$mail->IsHTML(true);
 
-	$mail->Subject 	= bloginfo( 'name' ) . ' Contact Form Message';
+	$mail->Subject 	= get_bloginfo( 'name' ) . ' Contact Form Message';
 	$mail->Body    	= '<p>Name: ' . $sanitized_name . '</p>';
 	$mail->Body    .= '<p>Company: ' . $sanitized_email . '</p>';
 	$mail->Body    .= '<p>Email: ' . $sanitized_email . '</p>';
