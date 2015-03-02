@@ -46,11 +46,6 @@
 <?php } ?>
 		
 <?php wp_footer(); ?>
-
-<!--https://github.com/scottjehl/Respond-->
-<!--[if lt IE 9]>
-<script src="<?php echo get_template_directory_uri(); ?>/js/respond.js"></script>
-<![endif]-->
 	
 </body>
 </html>

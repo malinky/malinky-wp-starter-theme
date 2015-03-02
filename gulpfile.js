@@ -4,19 +4,26 @@
 
 var gulp        = require('gulp'); 
 
-var concat      = require('gulp-concat');
-var del         = require('del');
-var rename      = require('gulp-rename');
-var runSequence = require('run-sequence');
-var sass        = require('gulp-ruby-sass');
-var sourcemaps  = require('gulp-sourcemaps');
-var uglify      = require('gulp-uglify');
+var autoprefixer    = require('gulp-autoprefixer');
+var concat          = require('gulp-concat');
+var del             = require('del');
+var minifyCSS       = require('gulp-minify-css');
+var rename          = require('gulp-rename');
+var runSequence     = require('run-sequence');
+var sass            = require('gulp-ruby-sass');
+var sourcemaps      = require('gulp-sourcemaps');
+var uglify          = require('gulp-uglify');
 
 /*
+https://github.com/sindresorhus/gulp-autoprefixer
+https://www.npmjs.com/package/gulp-autoprefixer
+Browser List for Autoprefixer https://github.com/ai/browserslist
 https://github.com/wearefractal/gulp-concat
 https://www.npmjs.com/package/gulp-concat
 https://github.com/sindresorhus/del
 https://www.npmjs.com/package/del
+https://github.com/jonathanepollack/gulp-minify-css
+https://www.npmjs.com/package/gulp-minify-css
 https://github.com/hparra/gulp-rename
 https://www.npmjs.com/package/gulp-rename
 https://github.com/OverZealous/run-sequence
@@ -31,9 +38,6 @@ https://github.com/terinjokes/gulp-uglify/issues/56
 */
 
 
-
-
-
 /* ------------------------------------------------------------------------ *
  * Local
  * 
@@ -45,17 +49,16 @@ https://github.com/terinjokes/gulp-uglify/issues/56
  * ------------------------------------------------------------------------ */
 
 /**
- * Compile our SASS.
+ * Compile our SASS, autoprefix and create sourcemap.
  * Doesn't support globs hence the return sass rather than gulp.src.
  *
  * sourceRoot sets the path where the source files are hosted relative to the source map.
  * This makes things appear in the correct folders when viewing through developer tools.
  */
-gulp.task('sass', function() {
+gulp.task('styles', function() {
     return sass('sass', { sourcemap: true, style: 'expanded' })
-    .on('error', function (err) {
-      console.error('SASS Error - ', err.message);
-   	})
+    .on('error', function (err) {console.error('SASS Error - ', err.message);})
+    .pipe(autoprefixer({browsers: ['last 5 versions']}))
     .pipe(sourcemaps.write('sourcemaps', {includeContent: false, sourceRoot: '../sass'}))
     .pipe(gulp.dest('./'));
 });
@@ -65,17 +68,18 @@ gulp.task('sass', function() {
  * Watch files for changes.
  */
 gulp.task('watch', function() {
-    gulp.watch('sass/**/*.scss', ['sass']);
+    gulp.watch('sass/**/*.scss', ['styles']);
 });
 
 
 /**
  * Set up default (local) task.
  */
-gulp.task('default', ['sass', 'watch']);
-
-
-
+gulp.task('default', function() {
+    runSequence('styles', 
+                'watch'
+    );
+})
 
 
 /* ------------------------------------------------------------------------ *
@@ -85,15 +89,15 @@ gulp.task('default', ['sass', 'watch']);
  *
  * Move all applicable files and folders.
  * This includes sass and all js for debugging with sourcemaps.
- * Compile SASS again, overwriting locally moved style.css to compress CSS.
- * Concat and minify JS to scripts.js
+ * Compile SASS, compress and autoprefix.
+ * Concat and minify JS to scripts.min.js
  * ------------------------------------------------------------------------ */
 
 /**
  * Delete all contents of dev folder.
  */
 gulp.task('dev-clean', function (cb) {
-    del('dev/*', cb);
+    del('../dev/*', {force:true}, cb);
 });
 
 
@@ -101,8 +105,8 @@ gulp.task('dev-clean', function (cb) {
   * Move root .php files.
   */
 gulp.task('dev-move-files', function() {
-    return gulp.src(['*.php', '!test-styles-forms.php', '!test-styles-image-alignment.php', '!test-styles-typography.php'])
-        .pipe(gulp.dest('dev'));
+    return gulp.src(['*.php', 'screenshot.png', '!test-styles-forms.php', '!test-styles-image-alignment.php', '!test-styles-typography.php'])
+        .pipe(gulp.dest('../dev'));
 });
 
 
@@ -112,25 +116,23 @@ gulp.task('dev-move-files', function() {
   */
 gulp.task('dev-move-dir', function() {
     return gulp.src(['img/**', 'js/**', 'languages/**', 'sass/**'], { base: './'} )
-        .pipe(gulp.dest('dev'));
+        .pipe(gulp.dest('../dev'));
 });
 
 
 /**
- * Compile our SASS.
+ * Compile our SASS, autoprefix and create sourcemap.
  * Doesn't support globs hence the return sass rather than gulp.src.
  *
  * sourceRoot sets the path where the source files are hosted relative to the source map.
  * This makes things appear in the correct folders when viewing through developer tools.
- *
  */
-gulp.task('dev-sass', function() {
+gulp.task('dev-styles', function() {
     return sass('sass', { sourcemap: true, style: 'compressed' })
-	    .on('error', function (err) {
-	      console.error('SASS Error - ', err.message);
-	   	})
-	    .pipe(sourcemaps.write('sourcemaps', {includeContent: false, sourceRoot: '../sass'}))
-	    .pipe(gulp.dest('dev'));
+    .on('error', function (err) {console.error('SASS Error - ', err.message);})
+    .pipe(autoprefixer({browsers: ['last 5 versions']}))
+    .pipe(sourcemaps.write('sourcemaps', {includeContent: false, sourceRoot: '../sass'}))
+    .pipe(gulp.dest('../dev'));
 });
 
 
@@ -140,17 +142,16 @@ gulp.task('dev-sass', function() {
  * sourceRoot sets the path where the source files are hosted relative to the source map.
  * This makes things appear in the correct folders when viewing through developer tools.
  *
- * Don't minimize google maps as it's loaded on it's own and wp_localize_script with php settings if applicable.
- * Don't minimize moderinzer seperatley as it is loaded in the header.
+ * Don't minimize modernizer seperatley as it is loaded in the header.
  * Don't minimize respond.js as it's only loaded in IE8 from the footer.
  */
 gulp.task('dev-scripts', function() {
-    return gulp.src(['js/*.js', '!js/googlemap.js', '!js/modernizr-2.8.3.js', '!js/respond.js'])
-		.pipe(sourcemaps.init())
-		.pipe(concat('scripts.min.js'))
+    return gulp.src(['js/*.js', '!js/googlemap.js', '!js/html5shiv.js', '!js/modernizr-2.8.3.js', '!js/respond.js'])
+        .pipe(sourcemaps.init())
+        .pipe(concat('scripts.min.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write('../sourcemaps', {includeContent: false, sourceRoot: '../js'}))
-        .pipe(gulp.dest('dev/js'));
+        .pipe(gulp.dest('../dev/js'));
 });
 
 
@@ -160,10 +161,10 @@ gulp.task('dev-scripts', function() {
  * Always use concat before uglify else source map isn't generated correctly.
  */
 gulp.task('dev-scripts-google-map', function() {
-    return gulp.src(['js/googlemap.js'])
+    return gulp.src('js/googlemap.js')
         .pipe(concat('googlemap.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('dev/js'));
+        .pipe(gulp.dest('../dev/js'));
 });
 
 
@@ -178,19 +179,19 @@ gulp.task('dev-scripts-modernizer', function() {
         .pipe(concat('modernizr-2.8.3.min.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write('../sourcemaps', {includeContent: false, sourceRoot: '../js'}))
-        .pipe(gulp.dest('dev/js'));
+        .pipe(gulp.dest('../dev/js'));
 });
 
 
 /**
- * Minify respond.js
+ * Minify respond.js and htmlshiv.js
  *
  * No concat just uglify and keep the same name.
  */
-gulp.task('dev-scripts-respond', function() {
-    return gulp.src(['js/respond.js'])
+gulp.task('dev-scripts-ltie10', function() {
+    return gulp.src(['js/respond.js', 'js/html5shiv.js'])
         .pipe(uglify())
-        .pipe(gulp.dest('dev/js'));
+        .pipe(gulp.dest('../dev/js'));
 });
 
 
@@ -198,19 +199,16 @@ gulp.task('dev-scripts-respond', function() {
  * Set up dev task.
  */
 gulp.task('dev', function() {
-  	runSequence('dev-clean', 
+    runSequence('dev-clean', 
                 'dev-move-files', 
                 'dev-move-dir', 
-                'dev-sass', 
+                'dev-styles',  
                 'dev-scripts', 
                 'dev-scripts-google-map', 
                 'dev-scripts-modernizer', 
-                'dev-scripts-respond'
+                'dev-scripts-ltie10'
             );
 })
-
-
-
 
 
 /* ------------------------------------------------------------------------ *
@@ -219,16 +217,16 @@ gulp.task('dev', function() {
  * gulp prod
  *
  * Move all applicable files and folders.
- * This includes sass and all js for debugging with sourcemaps.
- * Compile SASS again, overwriting locally moved style.css to compress CSS.
- * Concat and minify JS to scripts.js
+ * Don't move js and css. Just the minimized versions are used in live no sourcemaps.
+ * Compile SASS, compress and autoprefix.
+ * Concat and minify JS to scripts.min.js
  * ------------------------------------------------------------------------ */
 
 /**
  * Delete all contents of prod folder.
  */
 gulp.task('prod-clean', function (cb) {
-    del('prod/*', cb);
+    del('../prod/*', {force:true}, cb);
 });
 
 
@@ -236,32 +234,29 @@ gulp.task('prod-clean', function (cb) {
   * Move root .php files
   */
 gulp.task('prod-move-files', function() {
-    return gulp.src(['*.php', '!test-styles-forms.php', '!test-styles-image-alignment.php', '!test-styles-typography.php'])
-        .pipe(gulp.dest('prod'));
+    return gulp.src(['*.php', 'screenshot.png', '!test-styles-forms.php', '!test-styles-image-alignment.php', '!test-styles-typography.php'])
+        .pipe(gulp.dest('../prod'));
 });
 
 
 /**
   * Move root directories and their contents.
-  * Not js and SASS as we just need minified version as no sourcemaps are used in prod.
   */
 gulp.task('prod-move-dir', function() {
     return gulp.src(['img/**', 'languages/**'], { base: './'} )
-        .pipe(gulp.dest('prod'));
+        .pipe(gulp.dest('../prod'));
 });
 
 
 /**
- * Compile our SASS.
- *
+ * Compile our SASS, autoprefix.
  * Doesn't support globs hence the return sass rather than gulp.src.
  */
-gulp.task('prod-sass', function() {
+gulp.task('prod-styles', function() {
     return sass('sass', { sourcemap: true, style: 'compressed' })
-        .on('error', function (err) {
-          console.error('SASS Error - ', err.message);
-        })
-        .pipe(gulp.dest('prod'));
+    .on('error', function (err) {console.error('SASS Error - ', err.message);})
+    .pipe(autoprefixer({browsers: ['last 5 versions']}))
+    .pipe(gulp.dest('../prod'));
 });
 
 
@@ -273,10 +268,10 @@ gulp.task('prod-sass', function() {
  * Don't minimize respond.js as it's only loaded in IE8 from the footer.
  */
 gulp.task('prod-scripts', function() {
-    return gulp.src(['js/*.js', '!js/googlemap.js', '!js/modernizr-2.8.3.js', '!js/respond.js'])
+    return gulp.src(['js/*.js', '!js/googlemap.js', '!js/html5shiv.js', '!js/modernizr-2.8.3.js', '!js/respond.js'])
         .pipe(concat('scripts.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('prod/js'));
+        .pipe(gulp.dest('../prod/js'));
 });
 
 
@@ -286,10 +281,10 @@ gulp.task('prod-scripts', function() {
  * Always use concat before uglify else source map isn't generated correctly.
  */
 gulp.task('prod-scripts-google-map', function() {
-    return gulp.src(['js/googlemap.js'])
+    return gulp.src('js/googlemap.js')
         .pipe(concat('googlemap.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('prod/js'));
+        .pipe(gulp.dest('../prod/js'));
 });
 
 
@@ -299,22 +294,22 @@ gulp.task('prod-scripts-google-map', function() {
  * Always use concat before uglify else source map isn't generated correctly.
  */
 gulp.task('prod-scripts-modernizer', function() {
-    return gulp.src(['js/modernizr-2.8.3.js'])
+    return gulp.src('js/modernizr-2.8.3.js')
         .pipe(concat('modernizr-2.8.3.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('prod/js'));
+        .pipe(gulp.dest('../prod/js'));
 });
 
 
 /**
- * Minify respond.js
+ * Minify respond.js and htmlshiv.js.
  *
  * No concat just uglify and keep the same name.
  */
-gulp.task('prod-scripts-respond', function() {
-    return gulp.src(['js/respond.js'])
+gulp.task('dev-scripts-ltie10', function() {
+    return gulp.src(['js/respond.js', 'js/html5shiv.js'])
         .pipe(uglify())
-        .pipe(gulp.dest('prod/js'));
+        .pipe(gulp.dest('../prod/js'));
 });
 
 
@@ -325,11 +320,11 @@ gulp.task('prod', function() {
     runSequence('prod-clean', 
                 'prod-move-files', 
                 'prod-move-dir', 
-                'prod-sass', 
+                'prod-styles', 
                 'prod-scripts', 
                 'prod-scripts-google-map', 
                 'prod-scripts-modernizer',
-                'prod-scripts-respond'
+                'prod-scripts-ltie10'
             );
 })
 
