@@ -280,14 +280,6 @@ function malinky_scripts()
 
 
 	/**
-	 * Dashicons font.
-	 *
-	 * @link https://developer.wordpress.org/resource/dashicons
-	 */
-	wp_enqueue_style( 'dashicons' );
-
-
-	/**
 	 * Font awesome font.
 	 *
 	 * @link http://fortawesome.github.io/Font-Awesome/
@@ -588,7 +580,7 @@ function malinky_login_screen()
 { ?>
     <style type="text/css">
         body.login div#login h1 a {
-            background-image: url(<?php echo esc_url( site_url( 'img/graphics/logo.png', 'https' ) ); ?>);
+            background-image: url(<?php echo get_template_directory_uri(); ?>/img/logo_mobile.png);
             background-size: 255px;
             width: auto;
         }
@@ -603,7 +595,7 @@ function malinky_login_screen()
         	background-size: auto;
         }
         html.lt-ie9 body.login div#login h1 a {
-            background-image: url(<?php echo esc_url( site_url( 'img/graphics/logo.png', 'https' ) ); ?>);
+            background-image: url(<?php echo get_template_directory_uri(); ?>/img/logo_mobile.png);
         }
         body.login .button.button-large {
         	height: auto;
@@ -843,6 +835,23 @@ function malinky_tree()
 }
 
 
+/**
+ * Get a page ID from the slug.
+ *
+ * @param string $post_slug
+ * @return int
+ */
+function malinky_id_by_slug( $post_slug )
+{
+    $post = get_page_by_path( $post_slug );
+    if ( $post ) {
+        return $post->ID;
+    } else {
+        return null;
+    }
+}
+
+
 if ( ! function_exists( 'malinky_truncate_words' ) ) {
 
 	/**
@@ -870,7 +879,7 @@ if ( ! function_exists( 'malinky_content_meta' ) ) {
 	 *
 	 * @param bool $show_author Set to false to hide author details.
 	 */
-	function malinky_content_meta( $show_updated = true, $show_author = true )
+	function malinky_content_meta( $show_updated = true, $show_author = true, $show_date_only = false )
 	{
 
 		$posted_time = '';
@@ -878,18 +887,20 @@ if ( ! function_exists( 'malinky_content_meta' ) ) {
 		$author = '';
 
 		$posted_time = sprintf( 
-			'<time class="content-header__meta__date--published" datetime="%1$s">%2$s</time>', 
+			'<time class="content-header__meta__date--published" datetime="%1$s" itemprop="datePublished">%2$s</time>', 
 			esc_attr( get_the_date( 'c' ) ),
-			esc_html( get_the_date() )
+			esc_html( get_the_date( 'F Y') )
 		);
 
-		$posted_string = 'Completed on ' . $posted_time;
+		if ( $show_date_only ) return $posted_time;
+		
+		$posted_string = 'Completed in ' . $posted_time;
 
 		if ( $show_updated ) {
 			if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
 
 				$updated_time = sprintf( 
-					'<time class="content-header__meta__date--updated" datetime="%1$s">%2$s</time>', 
+					'<time class="content-header__meta__date--updated" datetime="%1$s" itemprop="dateModified">%2$s</time>', 
 					esc_attr( get_the_modified_date( 'c' ) ),
 					esc_html( get_the_modified_date() )
 				);
@@ -898,7 +909,7 @@ if ( ! function_exists( 'malinky_content_meta' ) ) {
 
 			}
 		}
-		
+
 		$author = '<a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a>';
 
 		if ( ! $show_author )
@@ -953,6 +964,35 @@ if ( ! function_exists( 'malinky_content_footer' ) ) {
 }
 
 
+if ( ! function_exists( 'malinky_content_hatom_footer' ) ) {
+
+	/**
+	 * Cretae author, published and updated tags for use in htaom feed in google structured data.
+	 * Stops errors and warnings being generated.
+	 * Use on pages that wouldn't naturally show any of the above.
+	 * Set to display: none;
+	 */
+	function malinky_content_hatom_footer( $author = true, $published = true, $updated = true )
+	{
+
+		$malinky_hatom = '';
+
+		if ( $author )
+			$malinky_hatom .= '<span class="vcard author"><span class="fn">' . esc_html( get_bloginfo( 'name') ) . '</span></span>';
+
+		if ( $published )
+			$malinky_hatom .= '<span class="date published">' . esc_html ( get_the_date('c') ) . '</span>';
+
+		if ( $updated )
+			$malinky_hatom .= '<span class="date updated">' . esc_html ( get_the_modified_date('c') ) . '</span>';
+
+		return '<span style="display: none">' . $malinky_hatom . '</span>';
+	
+	}
+
+}
+
+
 if ( ! function_exists( 'malinky_posts_pagination' ) ) {
 
 	/**
@@ -968,18 +1008,18 @@ if ( ! function_exists( 'malinky_posts_pagination' ) ) {
 			return;
 		} ?>
 
-		<nav class="col posts-pagination" role="navigation">
+		<nav class="col col--gutterless posts-pagination" role="navigation">
 
-			<div class="col-item col-item-half posts-pagination__link posts-pagination__link--older">
-				<?php if ( get_next_posts_link() ) { ?>
-						<?php next_posts_link( 'Older Posts' ); ?>
-				<?php } ?>
-			</div><!--
-
-			--><div class="col-item col-item-half col-item--align-right posts-pagination__link posts-pagination__link--newer">
+			<div class="col-item col-item-half posts-pagination__link posts-pagination__link--newer">
 				<?php if ( get_previous_posts_link() ) { ?>
 						<?php previous_posts_link( 'Newer Posts' ); ?>
 				<?php } ?>			
+			</div><!--
+
+			--><div class="col-item col-item-half col-item--align-right posts-pagination__link posts-pagination__link--older">
+				<?php if ( get_next_posts_link() ) { ?>
+						<?php next_posts_link( 'Older Posts' ); ?>
+				<?php } ?>
 			</div>
 
 		</nav><!-- .posts-pagination -->
@@ -993,24 +1033,40 @@ if ( ! function_exists( 'malinky_post_pagination' ) ) {
 
 	/**
 	 * Display navigation to next/previous post when applicable.
+	 * This is amended from the master in malinky wordpress starter theme.
+	 * It now only searches current single category and uses a ACF field for the link text if available.
 	 */
 	function malinky_post_pagination()
 	{
 
 		//Return if no navigation.
-		$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
-		$next     = get_adjacent_post( false, '', false );
+		$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( true, '', true );
+		$next     = get_adjacent_post( true, '', false );
 
-		if ( ! $next && ! $previous ) return; ?>
+		if ( ! $next && ! $previous ) return;
 
-		<nav class="col post-pagination" role="navigation">
+		if ( $previous ) {
+			$previous_title = get_field( 'title', $previous->ID ) != '' ? get_field( 'title', $previous->ID ) : '%title';
+		} else {
+			$previous_title = '%title';
+		}
+
+		if ( $next ) {
+			$next_title = get_field( 'title', $next->ID ) != '' ? get_field( 'title', $next->ID ) : '%title';
+		} else {
+			$next_title = '%title';
+		}
+		
+		?>
+
+		<nav class="col col--gutterless post-pagination" role="navigation">
 
 			<div class="col-item col-item-half post-pagination__link post-pagination__link--older">
-				<?php previous_post_link( '%link', '%title' ); ?>
+				<?php previous_post_link( '%link', $previous_title, true ); ?>
 			</div><!--
 
 			--><div class="col-item col-item-half col-item--align-right post-pagination__link post-pagination__link--newer">
-				<?php next_post_link( '%link', '%title' ); ?>
+				<?php next_post_link( '%link', $next_title, true ); ?>
 			</div>
 
 		</nav><!-- .post-pagination -->
@@ -1036,17 +1092,17 @@ if ( ! function_exists( 'malinky_archive_title' ) ) {
 	{
 
 		if ( is_category() ) {
-			$title = sprintf( __( 'Category: %s', 'malinky' ), single_cat_title( '', false ) );
+			$title = sprintf( __( '%s', 'malinky' ), single_cat_title( '', false ) );
 		} elseif ( is_tag() ) {
-			$title = sprintf( __( 'Tag: %s', 'malinky' ), single_tag_title( '', false ) );
+			$title = sprintf( __( '%s Projects', 'malinky' ), single_tag_title( '', false ) );
 		} elseif ( is_author() ) {
 			$title = sprintf( __( 'Author: %s', 'malinky' ), '<span class="vcard">' . get_the_author() . '</span>' );
 		} elseif ( is_year() ) {
-			$title = sprintf( __( 'Year: %s', 'malinky' ), get_the_date( _x( 'Y', 'yearly archives date format', 'malinky' ) ) );
+			$title = sprintf( __( '%s Projects', 'malinky' ), get_the_date( _x( 'Y', 'yearly archives date format', 'malinky' ) ) );
 		} elseif ( is_month() ) {
-			$title = sprintf( __( 'Month: %s', 'malinky' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'malinky' ) ) );
+			$title = sprintf( __( '%s Projects', 'malinky' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'malinky' ) ) );
 		} elseif ( is_day() ) {
-			$title = sprintf( __( 'Day: %s', 'malinky' ), get_the_date( _x( 'F j, Y', 'daily archives date format', 'malinky' ) ) );
+			$title = sprintf( __( '%s Projects', 'malinky' ), get_the_date( _x( 'F j, Y', 'daily archives date format', 'malinky' ) ) );
 		} elseif ( is_tax( 'post_format', 'post-format-aside' ) ) {
 			$title = _x( 'Asides', 'post format archive title', 'malinky' );
 		} elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) {
@@ -1066,14 +1122,18 @@ if ( ! function_exists( 'malinky_archive_title' ) ) {
 		} elseif ( is_tax( 'post_format', 'post-format-chat' ) ) {
 			$title = _x( 'Chats', 'post format archive title', 'malinky' );
 		} elseif ( is_post_type_archive() ) {
-			$title = sprintf( __( 'Archives: %s', 'malinky' ), post_type_archive_title( '', false ) );
+			$title = sprintf( __( '%s', 'malinky' ), post_type_archive_title( '', false ) );
 		} elseif ( is_tax() ) {
 			$tax = get_taxonomy( get_queried_object()->taxonomy );
 			/* translators: 1: Taxonomy singular name, 2: Current taxonomy term */
-			$title = sprintf( __( '%1$s: %2$s', 'malinky' ), $tax->labels->singular_name, single_term_title( '', false ) );
+			//$title = sprintf( __( '%1$s: %2$s', 'malinky' ), $tax->labels->singular_name, single_term_title( '', false ) );
+			/* translators: 1: Current taxonomy term */
+			$title = sprintf( __( '%1$s', 'malinky' ), single_term_title( '', false ) );
 		} else {
 			$title = __( 'Archives', 'malinky' );
 		}
+
+		$title = ucwords( $title );
 
 		/**
 		 * Filter the archive title.
@@ -1103,7 +1163,7 @@ if ( ! function_exists( 'malinky_archive_description' ) ) {
 	 * @param string $before Optional. Content to prepend to the description. Default empty.
 	 * @param string $after  Optional. Content to append to the description. Default empty.
 	 */
-	function malinky_archive_description( $before = '', $after = '' )
+	function malinky_archive_description( $before = '', $after = '', $is_cpt = false , $cpt = '')
 	{
 
 		$description = apply_filters( 'get_the_archive_description', term_description() );
@@ -1118,6 +1178,12 @@ if ( ! function_exists( 'malinky_archive_description' ) ) {
 			 */
 			echo $before . $description . $after;
 		}
+
+		if ( $is_cpt ) {
+			$obj = get_post_type_object( $cpt );
+			echo $obj->description;
+		}
+		
 
 	}
 
@@ -1190,6 +1256,76 @@ if ( ! function_exists( 'malinky_is_blog_page' ) ) {
 	    return ( ( is_home() || is_archive() || is_single() ) && ( $post_type == 'post' ) );
 
 	}
+
+}
+
+
+if ( ! function_exists( 'malinky_cpt_menu_item_classes' ) ) {
+
+	/**
+	 * Add current_page_parent class to Custom Post Type menu items.
+	 * Works on a CPT archive, single or custom taxonomy and multiple CPT at once.
+	 * Custom taxonomy must be in the CPT.
+	 *
+	 * Removes current_page_parent class when on one of the above from the Posts page that has been set set in Settings->Reading.
+	 *
+	 * Thanks to https://gist.github.com/jjeaton/5522014 for a start.
+	 *
+	 * @param array  $classes CSS classes for the menu item
+	 * @param object $item    WP_Post object for current menu item
+	 */
+	function malinky_cpt_menu_item_classes( $classes, $item )
+	{
+
+		/*
+		 * Get array of all custom post types, not builtin.
+		 */
+		$custom_post_types = get_post_types( array( '_builtin' => false ) );
+
+		if ( get_query_var( 'post_type' ) || get_query_var( 'taxonomy' ) ) {
+			/*
+			 * Remove current_page_parent from the Posts page that has been set in Settings->Reading.
+			 * Comparison is done on the post ID.
+			 */
+			if( $item->object_id == get_option( 'page_for_posts' ) ) {
+				$classes = array_diff( $classes, array( 'current_page_parent' ) );
+			}
+
+		}
+
+		if ( get_query_var( 'post_type' ) ) {
+
+			/*
+			 * Add current_page_parent.
+			 * Where the $item->object (which is the post type of the menu item) is in $custom_post_types.
+			 * And where $item->object is equal to the current post type.
+			 */
+			if ( in_array( $item->object, $custom_post_types ) && $item->object == get_query_var( 'post_type' ) ) {
+				$classes[] = 'current_page_parent';
+			}
+
+		}
+
+		if ( get_query_var( 'taxonomy' ) ) {
+
+			/*
+			 * Add current_page_parent.
+			 * First where the $item->object (which is the post type of the menu item) is a custom post type.
+			 * Then if the current taxonomy is attached to the found custom post type.
+			 */		
+			if ( $post_type_object = get_post_type_object( $item->object ) ) {
+				if ( in_array( get_query_var( 'taxonomy' ), $post_type_object->taxonomies ) ) {
+					$classes[] = 'current_page_parent';
+				}
+			}
+
+		}
+
+		return $classes;
+
+	}
+
+	add_filter( 'nav_menu_css_class', 'malinky_cpt_menu_item_classes', 10, 2 );
 
 }
 
