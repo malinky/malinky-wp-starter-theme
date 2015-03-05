@@ -99,11 +99,11 @@
 
 		<div id="mobile-navigation-id" class="col col--gutterless">
 			<div class="col-item col-item-4-10">
-				<a href="" id="mobile-navigation-navicon" class="image-font"><span class="image-font__sizing image-font__dashicons dashicons-menu"></span></a>
+				<a href="" id="mobile-navigation-navicon" class="image-font"><span class="image-font__sizing image-font__fontawesome fa-bars"></span></a>
 			</div><!--
 			--><div class="col-item col-item-6-10 col-item--align-right">
-	    		<a href="mailto:" target="_blank" class="image-font"><span class="image-font__sizing image-font__dashicons dashicons-email"></span></a>
-	    		<a href="tel:" target="_blank" class="image-font"><span class="image-font__sizing image-font__fontawesome fa-phone"></span></a>
+	    		<a href="mailto:" class="image-font"><span class="image-font__sizing image-font__fontawesome fa-envelope"></span></a>
+	    		<a href="tel:" class="image-font"><span class="image-font__sizing image-font__fontawesome fa-phone"></span></a>
 	  		</div>
 			<div class="col-item col-item-full">
 				<nav class="mobile-navigation" role="navigation">

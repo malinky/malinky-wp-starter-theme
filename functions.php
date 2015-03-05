@@ -533,8 +533,8 @@ function malinky_widgets_init()
 		'description'   => __( 'Main sidebar that appears on the left.', 'malinky' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
-		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</h1>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
 	) );
 
 }
@@ -1392,7 +1392,17 @@ function malinky_mce_insert_formats( $init_array )
 			'title' => 'Text No Margin',
     		'selector' => 'p, h1, h2, h3, h4, h5, h6',
     		'classes' => 'no-margin'
-		)						
+		),
+		array(
+			'title' => 'List',
+    		'selector' => 'ul, ol',
+    		'classes' => 'list-content'
+		),
+		array(
+			'title' => 'List 2 Column',
+    		'selector' => 'ul, ol',
+    		'classes' => 'list-two-column'
+		)							
 	);
 
 	/*

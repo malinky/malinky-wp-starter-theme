@@ -38,12 +38,12 @@ WARNINGS
 FORMS
 BUTTONS
 LINKS
+HEADER
 MAIN NAVIGATION
 MOBILE NAVIGATION
 OTHER NAVIGATION
 PAGINATION
 FOOTER
-HEADER
 POSTS AND PAGES
 ALIGNMENT
 GOOGLE MAPS
@@ -138,6 +138,15 @@ LINKS
 
 /*
 **********************************************************************
+HEADER
+**********************************************************************
+*/
+
+@import "site/header";
+
+
+/*
+**********************************************************************
 MAIN NAVIGATION 1 - Either Main Navigation 1 or Main Navigation 2
 **********************************************************************
 */
@@ -175,14 +184,6 @@ PAGINATION
 */
 
 @import "navigation/pagination";
-
-/*
-**********************************************************************
-HEADER
-**********************************************************************
-*/
-
-@import "site/header";
 
 /*
 **********************************************************************

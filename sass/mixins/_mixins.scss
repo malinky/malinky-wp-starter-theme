@@ -1,0 +1,3 @@
+@mixin transition-button-hover($property: all, $duration: 0.25s, $timing: ease-in-out) {
+	transition: $property $duration $timing;
+}

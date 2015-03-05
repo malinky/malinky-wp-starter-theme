@@ -99,9 +99,11 @@
  * All Levels.
  * Main navigation hover style.
  */
-.main-navigation a:hover {
+.main-navigation a:hover,
+.main-navigation a:focus,
+.main-navigation a:active {
     color: $navigation-link-color-hover;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /*

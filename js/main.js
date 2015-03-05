@@ -48,12 +48,15 @@ jQuery(document).ready(function($){
     });
 
 
-    /*
-     * IE Issues.
-     */
     if ($('html').hasClass('lt-ie9')) {  
-    
-    };
+        /*
+         * SVG Fallback
+         */
+        $("img").each(function() {
+            var src = $(this).attr("src");
+            $(this).attr("src", src.replace(/\.svg$/i, ".png"));
+        });
+    }
 
     if ($('html').hasClass('lt-ie10')) {  
     

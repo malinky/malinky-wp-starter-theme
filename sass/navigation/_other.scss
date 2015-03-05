@@ -4,7 +4,7 @@
 .image-font {
     display: inline-block;
     text-decoration: none;
-    vertical-align: inherit;    
+    vertical-align: middle;   
 } 
 
 /*
@@ -12,12 +12,21 @@
  * .image-font__Element.
  */
 .image-font__sizing {
-    font-size: 2.142857em; /* 30/14 */
+    text-align: center;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 1.857142em; /* 26/14 */
     color: $navigation-mobile-bar-link-color;  
     display: inline-block;
-    margin-right: 8px; 
-    -webkit-transition: color .1s ease-in 0;
-    transition: color .1s ease-in 0;
+    transition: color 0.1s ease-in 0;
+}
+
+/*
+ * If text accompanies an image font, like Twitter logo on contact page
+ */
+.image-font__label {
+    margin-left: 10px;
 }
 
 /*
@@ -34,6 +43,26 @@
  */
 .image-font__fontawesome {
     font-family: 'FontAwesome';
+}
+
+.image-font__twitter {
+    background: #1bb2e9;
+}
+
+.image-font__facebook {
+    background: #3c599b;
+}
+
+.image-font__google {
+    background: #dd4c39;
+}
+
+.image-font__linkedin {
+    background: #0274b3;
+}
+
+#mobile-navigation-navicon {
+    margin-left: 8px;
 }
 
 .comment-navigation .nav-previous,
@@ -54,10 +83,12 @@
 /*
  * Set active links
  */
-.current_page_item > a,
-.current_page_ancestor > a,
-.current-menu-item > a,
-.current-menu-ancestor > a {
+.main-navigation .current_page_item > a,
+.main-navigation .current_page_ancestor > a,
+.main-navigation .current-menu-item > a,
+.main-navigation .current-menu-ancestor > a,
+.main-navigation .current_page_parent > a,
+.main-navigation .current-post-ancestor > a {
     text-decoration: underline;
 }
 

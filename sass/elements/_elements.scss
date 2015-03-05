@@ -34,6 +34,36 @@ li > ol {
     margin-bottom: 0;
 }
 
+.list-content {
+    list-style-type: none;
+    margin: 0 0 $text-margin-bottom 0;
+    padding: 0;
+}
+
+.list-content li {
+    margin-bottom: 3px;
+}
+
+.list-content li:before {
+    margin-right: 8px;
+    content: "\f105";
+    font-family: "FontAwesome";
+    font-weight: bold;
+    color: $text-color;
+}
+
+.list-two-column {
+    column-count: 2;
+}
+
+@media screen and (max-width: 480px) {
+
+  .list-two-column {
+      column-count: 1;      
+  }
+
+}
+
 dt {
     font-weight: bold;
 }

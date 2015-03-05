@@ -306,7 +306,7 @@ gulp.task('prod-scripts-modernizer', function() {
  *
  * No concat just uglify and keep the same name.
  */
-gulp.task('dev-scripts-ltie10', function() {
+gulp.task('prod-scripts-ltie10', function() {
     return gulp.src(['js/respond.js', 'js/html5shiv.js'])
         .pipe(uglify())
         .pipe(gulp.dest('../prod/js'));
