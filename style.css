@@ -37,12 +37,12 @@ WARNINGS
 FORMS
 BUTTONS
 LINKS
+HEADER
 MAIN NAVIGATION
 MOBILE NAVIGATION
 OTHER NAVIGATION
 PAGINATION
 FOOTER
-HEADER
 POSTS AND PAGES
 ALIGNMENT
 GOOGLE MAPS
@@ -287,7 +287,6 @@ figure {
  * Address differences between Firefox and other browsers.
  */
 hr {
-  -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
 }
@@ -428,8 +427,6 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
   /* 2 */
   box-sizing: content-box;
 }
@@ -707,8 +704,6 @@ GRID
   /* 2 */
   vertical-align: top;
   /* 3 */
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -764,6 +759,17 @@ GRID
  */
 .col-item--margin-bottom-40 {
   margin-bottom: 40px;
+}
+
+/*
+ * Hide / Show.
+ */
+.col-item--hide {
+  display: none;
+}
+
+.col-item--show {
+  display: inline-block;
 }
 
 .col-item-full {
@@ -1015,6 +1021,17 @@ GRID
   }
 
   /*
+   * Hide / Show.
+   */
+  .col-item--hide--large {
+    display: none;
+  }
+
+  .col-item--show--large {
+    display: inline-block;
+  }
+
+  /*
    * Used to make an item full width when it isn't normally.
    * Faux modifier as .full-width doesn't exist.
    */
@@ -1171,6 +1188,17 @@ GRID
   }
 
   /*
+   * Hide / Show.
+   */
+  .col-item--hide--medium {
+    display: none;
+  }
+
+  .col-item--show--medium {
+    display: inline-block;
+  }
+
+  /*
    * Used to make an item full width when it isn't normally.
    * Faux modifier as .full-width doesn't exist.
    */
@@ -1324,6 +1352,17 @@ GRID
 
   .col-item--margin-bottom-40--small {
     margin-bottom: 40px;
+  }
+
+  /*
+   * Hide / Show.
+   */
+  .col-item--hide--small {
+    display: none;
+  }
+
+  .col-item--show--small {
+    display: inline-block;
   }
 
   /*
@@ -1577,6 +1616,37 @@ li > ol {
   margin-bottom: 0;
 }
 
+.list-content {
+  list-style-type: none;
+  margin: 0 0 21px 0;
+  padding: 0;
+}
+
+.list-content li {
+  margin-bottom: 3px;
+}
+
+.list-content li:before {
+  margin-right: 8px;
+  content: "\f105";
+  font-family: "FontAwesome";
+  font-weight: bold;
+  color: #666;
+}
+
+.list-two-column {
+  -webkit-column-count: 2;
+     -moz-column-count: 2;
+          column-count: 2;
+}
+
+@media screen and (max-width: 480px) {
+  .list-two-column {
+    -webkit-column-count: 1;
+       -moz-column-count: 1;
+            column-count: 1;
+  }
+}
 dt {
   font-weight: bold;
 }
@@ -1967,9 +2037,11 @@ a:active {
 }
 
 .back-top {
+  display: none;
   position: fixed;
   right: 30px;
   bottom: 70px;
+  line-height: 40px;
   font-size: 5em;
   /* 70/14 */
   text-decoration: none;
@@ -1981,6 +2053,15 @@ a:active {
 .back-top:hover {
   text-decoration: none;
   color: #000;
+}
+
+/*
+**********************************************************************
+HEADER
+**********************************************************************
+*/
+.logo {
+  display: inline-block;
 }
 
 /*
@@ -2091,9 +2172,11 @@ MAIN NAVIGATION 1 - Either Main Navigation 1 or Main Navigation 2
  * All Levels.
  * Main navigation hover style.
  */
-.main-navigation a:hover {
+.main-navigation a:hover,
+.main-navigation a:focus,
+.main-navigation a:active {
   color: #fff;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 /*
@@ -2204,8 +2287,6 @@ MOBILE NAVIGATION
   padding: 0;
   margin: 0;
   -webkit-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-  -moz-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-  -o-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
   transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
   background: #f47b20;
   /* 2 */
@@ -2313,7 +2394,7 @@ OTHER NAVIGATION
 .image-font {
   display: inline-block;
   text-decoration: none;
-  vertical-align: inherit;
+  vertical-align: middle;
 }
 
 /*
@@ -2321,13 +2402,20 @@ OTHER NAVIGATION
  * .image-font__Element.
  */
 .image-font__sizing {
-  font-size: 2.142857em;
-  /* 30/14 */
+  text-align: center;
+  font-size: 1.857142em;
+  /* 26/14 */
   color: #fff;
   display: inline-block;
-  margin-right: 8px;
-  -webkit-transition: color .1s ease-in 0;
-  transition: color .1s ease-in 0;
+  -webkit-transition: color 0.1s ease-in 0;
+          transition: color 0.1s ease-in 0;
+}
+
+/*
+ * If text accompanies an image font, like Twitter logo on contact page
+ */
+.image-font__label {
+  margin-left: 10px;
 }
 
 /*
@@ -2344,6 +2432,32 @@ OTHER NAVIGATION
  */
 .image-font__fontawesome {
   font-family: 'FontAwesome';
+}
+
+.image-font__twitter {
+  background: #1bb2e9;
+}
+
+.image-font__facebook {
+  background: #3c599b;
+}
+
+.image-font__google {
+  background: #dd4c39;
+}
+
+.image-font__linkedin {
+  background: #0274b3;
+}
+
+.navicon-menu {
+  margin-left: 8px;
+  line-height: 41px;
+}
+
+.navicon-contact {
+  margin-right: 8px;
+  line-height: 41px;
 }
 
 .comment-navigation .nav-previous,
@@ -2364,10 +2478,12 @@ OTHER NAVIGATION
 /*
  * Set active links
  */
-.current_page_item > a,
-.current_page_ancestor > a,
-.current-menu-item > a,
-.current-menu-ancestor > a {
+.main-navigation .current_page_item > a,
+.main-navigation .current_page_ancestor > a,
+.main-navigation .current-menu-item > a,
+.main-navigation .current-menu-ancestor > a,
+.main-navigation .current_page_parent > a,
+.main-navigation .current-post-ancestor > a {
   text-decoration: underline;
 }
 
@@ -2393,15 +2509,6 @@ PAGINATION
 /*
  * Used for pagination when a single post is displayed.
  */
-/*
-**********************************************************************
-HEADER
-**********************************************************************
-*/
-.logo {
-  display: inline-block;
-}
-
 /*
 **********************************************************************
 FOOTER
@@ -2603,9 +2710,6 @@ OWL CAROUSEL
 
 .owl-carousel .owl-wrapper-outer.autoHeight {
   -webkit-transition: height 500ms ease-in-out;
-  -moz-transition: height 500ms ease-in-out;
-  -ms-transition: height 500ms ease-in-out;
-  -o-transition: height 500ms ease-in-out;
   transition: height 500ms ease-in-out;
 }
 
@@ -2670,8 +2774,6 @@ OWL CAROUSEL
   margin: 5px;
   padding: 3px 10px;
   font-size: 12px;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
   border-radius: 30px;
   background: #869791;
   filter: Alpha(Opacity=50);
@@ -2704,8 +2806,6 @@ OWL CAROUSEL
   filter: Alpha(Opacity=50);
   /*IE7 fix*/
   opacity: 0.5;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
   border-radius: 20px;
   background: #f47b20;
 }
@@ -2724,8 +2824,6 @@ OWL CAROUSEL
   color: #FFF;
   padding: 2px 10px;
   font-size: 12px;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
   border-radius: 30px;
 }
 
