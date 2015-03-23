@@ -6,6 +6,8 @@
 .wrap-full--full-fixed {
     position: fixed;
     top: (-$navigation-fixed-height - $navigation-bar-border-width); /* 1 */
+    left: 0;
+    right: 0;    
     z-index: 9999;
 }
 
