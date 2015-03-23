@@ -59,24 +59,31 @@ button:hover,
 }
 
 /*
- * Color used to ensure link style in button. Example when used with <a class="button">.
+ * :focus and :active seperated.
+ * We want the background color to return to normal when a mouse click is released.
  */
 input[type="button"]:focus,
 input[type="reset"]:focus,
 input[type="submit"]:focus,
 button:focus,
-.button:focus,
+.button:focus {
+  color: #fff;
+  text-decoration: none;  
+}
+
+/*
+ * Color used to ensure link style in button. Example when used with <a class="button">.
+ */
 input[type="button"]:active,
 input[type="reset"]:active,
 input[type="submit"]:active,
 button:active,
 .button:active {
-    background: $button-background-color-hover;
-    text-decoration: none;
-    cursor: pointer;
-    color: $button-text-color;
-    outline: none;
+  color: #fff;    
+  background: #9c0009;
+  text-decoration: none;
 }
+
 
 button.full-width,
 .button.full-width {

@@ -28,7 +28,9 @@ get_header(); ?>
 
 					<div class="col malinky-ajax-paging-content">
 						<div class="col-item col-item-full">
-							<?php get_template_part( 'content', get_post_format() ); ?>
+							<div class="malinky-ajax-paging-content">
+								<?php get_template_part( 'content', get_post_format() ); ?>
+							</div>
 						</div>
 					</div>	
 
