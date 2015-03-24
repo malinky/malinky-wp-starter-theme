@@ -1,0 +1,40 @@
+/* Chrome, Opera > 12.1, Opera Mobile >= 24, Safari  */
+@-webkit-keyframes malinky-fade-in {
+    from {
+        opacity: 0; 
+    }
+    to   {
+        opacity: 1;
+    }
+}
+
+/* Firefox > 15 */
+@-moz-keyframes malinky-fade-in {
+    from {
+    	opacity: 0; 
+    }
+    to   {
+    	opacity: 1;
+    }
+}
+
+@keyframes malinky-fade-in {
+    from {
+    	opacity: 0; 
+    }
+    to   {
+    	opacity: 1;
+    }
+}
+
+.malinky-fade-in {
+    animation: malinky-fade-in 0.3s ease-in 0.15s backwards;
+}
+
+.malinky-fade-in-no-delay {
+    animation: malinky-fade-in 0.3s ease-in backwards;
+}
+
+.malinky-fade-in-long-delay {
+    animation: malinky-fade-in 0.3s ease-in 0.5s backwards;
+}

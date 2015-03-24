@@ -210,6 +210,20 @@
     display: inline-block;
 }
 
+/*
+ * Vertical divider in center of div.
+ * Use with col-item-1-10 and col-item--align-center for best results.
+ * Need to apply col--relative to parent .col.
+ */
+.col-item--vertical-divider:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: $brand-color-light-green;
+}
+ 
 .col-item-full { width: 100%; }
 
 .col-item-half { width: 50%; }

@@ -777,6 +777,20 @@ if ( ! function_exists( 'malinky_read_more_text' ) )
 }
 
 
+/**
+ * Remove hentry from post class for pages.
+ */
+function malinky_remove_hentry( $classes )
+{
+    if ( is_page() ) {
+        $classes = array_diff( $classes, array( 'hentry' ) );
+    }
+    return $classes;
+}
+
+add_filter( 'post_class','malinky_remove_hentry' );
+
+
 
 
 
