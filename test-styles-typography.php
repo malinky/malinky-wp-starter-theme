@@ -16,18 +16,18 @@ get_header(); ?>
 
 <h2>Heading Classes (All displayed using a p tag)</h2>
 
-<p class="heading_1">Heading one class</p>
-<p class="heading_2">Heading two class</p>
-<p class="heading_3">Heading three class</p>
-<p class="heading_4">Heading four class</p>
-<p class="heading_5">Heading five class</p>
-<p class="heading_6">Heading six class</p>
+<p class="heading-1">Heading one class</p>
+<p class="heading-2">Heading two class</p>
+<p class="heading-3">Heading three class</p>
+<p class="heading-4">Heading four class</p>
+<p class="heading-5">Heading five class</p>
+<p class="heading-6">Heading six class</p>
 
 <h2>Paragraph</h2>
 
 <p>This is a normal paragraph.</p>
 
-<p class="no_margin">This is a normal paragraph with no margin bottom.</p>
+<p class="no-margin">This is a normal paragraph with no margin bottom.</p>
 <p>Next paragrah</p>
 
 <h2>Bold and Italics</h2>
@@ -36,7 +36,7 @@ get_header(); ?>
 <p><strong>Strong tag.</strong></p>
 <p><i>Italics tag.</i></p>
 <p><em>Emphasis tag.</em></p>
-<p class="bold_text">Bold text class.</p>
+<p class="bold-text">Bold text class.</p>
 
 <h2>Blockquotes</h2>
 
@@ -232,15 +232,15 @@ United States</address>
 
 <p class="box success">This is a boxed success messsage.</p>
 
-<p class="box success_permanent">This is a permanent boxed success messsage.</p>
+<p class="box success-permanent">This is a permanent boxed success messsage.</p>
 
-<p class="success success_plain">This is a plain text success messsage.</p>
+<p class="success success-plain">This is a plain text success messsage.</p>
 
 <p class="box error">This is a boxed error messsage.</p>
 
-<p class="box error_permanent">This is a permanent boxed error messsage.</p>
+<p class="box error-permanent">This is a permanent boxed error messsage.</p>
 
-<p class="error error_plain">This is a plain text error messsage.</p>
+<p class="error error-plain">This is a plain text error messsage.</p>
 
 <h2>Horizontal Rule</h2>
 

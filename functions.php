@@ -157,7 +157,7 @@ if ( ! function_exists( 'malinky_setup' ) ) {
 
 			} elseif ( WP_ENV == 'dev' ) {
 
-			    require_once(ABSPATH . '../malinky-includes/Mobile_Detect.php');    
+			    require_once(ABSPATH . '../../malinky-includes/Mobile_Detect.php');    
 
 			} else {
 

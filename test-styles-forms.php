@@ -159,7 +159,7 @@ The cat was playing in the garden.
 
 <h2>Button Full Width</h2>
 
-<button class="full_width">Clicky</button>
+<button class="full-width">Clicky</button>
 
 <h2>a Class Button</h2>
 
@@ -167,63 +167,63 @@ The cat was playing in the garden.
 
 <h2>a Class Button Full Width</h2>
 
-<a href="#" class="button full_width">Clicky</a>
+<a href="#" class="button full-width">Clicky</a>
 
 <h2>Input Button (Round)</h2>
 
-<input type="button" onclick="alert('Hello World!')" value="Clicky" class="round_button">
+<input type="button" onclick="alert('Hello World!')" value="Clicky" class="round-button">
 
 <h2>Input Reset (Round)</h2>
 
-<input type="reset" value="Reset" class="round_button">
+<input type="reset" value="Reset" class="round-button">
 
 <h2>Input Submit (Round)</h2>
 
-<input type="submit" value="Clicky" class="round_button">
+<input type="submit" value="Clicky" class="round-button">
 
 <h2>Button (Round)</h2>
 
-<button class="round_button">Clicky</button>
+<button class="round-button">Clicky</button>
 
 <h2>Button Full Width (Round)</h2>
 
-<button class="full_width round_button">Clicky</button>
+<button class="full-width round-button">Clicky</button>
 
 <h2>a Class Button (Round)</h2>
 
-<a href="#" class="button round_button">Clicky</a>
+<a href="#" class="button round-button">Clicky</a>
 
 <h2>a Class Button Full Width (Round)</h2>
 
-<a href="#" class="button full_width round_button">Clicky</a>
+<a href="#" class="button full-width round-button">Clicky</a>
 
 <h2>Input Button (Bevelled)</h2>
 
-<input type="button" onclick="alert('Hello World!')" value="Clicky" class="bevelled_button">
+<input type="button" onclick="alert('Hello World!')" value="Clicky" class="bevelled-button">
 
 <h2>Input Reset (Bevelled)</h2>
 
-<input type="reset" value="Reset" class="bevelled_button">
+<input type="reset" value="Reset" class="bevelled-button">
 
 <h2>Input Submit (Bevelled)</h2>
 
-<input type="submit" value="Clicky" class="bevelled_button">
+<input type="submit" value="Clicky" class="bevelled-button">
 
 <h2>Button (Bevelled)</h2>
 
-<button class="bevelled_button">Clicky</button>
+<button class="bevelled-button">Clicky</button>
 
 <h2>Button Full Width (Bevelled)</h2>
 
-<button class="full_width bevelled_button">Clicky</button>
+<button class="full-width bevelled-button">Clicky</button>
 
 <h2>a Class Button (Bevelled)</h2>
 
-<a href="#" class="button bevelled_button">Clicky</a>
+<a href="#" class="button bevelled-button">Clicky</a>
 
 <h2>a Class Button Full Width (Bevelled)</h2>
 
-<a href="#" class="button full_width bevelled_button">Clicky</a>
+<a href="#" class="button full-width bevelled-button">Clicky</a>
 
 </form>
 
