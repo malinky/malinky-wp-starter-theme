@@ -33,6 +33,10 @@
 	<!-- Meta -->
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 
+	<?php if ( WP_ENV == 'dev' ) { ?>
+		<meta name="robots" content="noindex,nofollow">
+	<?php } ?>
+	
 	<?php wp_head(); ?>
 
 	<!--https://github.com/scottjehl/Respond-->
