@@ -153,15 +153,15 @@ if ( ! function_exists( 'malinky_setup' ) ) {
 
 			if ( WP_ENV == 'local' ) {
 
-			    require_once(ABSPATH . '/malinky-includes/Mobile_Detect.php');
+			    require_once(ABSPATH . '../malinky-includes/Mobile_Detect.php');
 
 			} elseif ( WP_ENV == 'dev' ) {
 
-			    require_once(ABSPATH . '../../malinky-includes/Mobile_Detect.php');    
+			    require_once(ABSPATH . '../../../malinky-includes/Mobile_Detect.php');    
 
 			} else {
 
-			    require_once(ABSPATH . '../malinky-includes/Mobile_Detect.php');
+			    require_once(ABSPATH . '../../malinky-includes/Mobile_Detect.php');
 
 			}
 
@@ -273,30 +273,30 @@ function malinky_scripts()
 	}
 
 
-	/**
-	 * Stylesheet which includes normalize.
-	 */
-	wp_enqueue_style( 'malinky-style', get_stylesheet_uri() );
-
-
-	/**
-	 * Font awesome font.
-	 *
-	 * @link http://fortawesome.github.io/Font-Awesome/
-	 */		
-	wp_register_style( 'malinky-font-awesome', 
-					   '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', 
-					   false, 
-					   NULL
-	);
-	wp_enqueue_style( 'malinky-font-awesome' );
-
-
 	if ( WP_ENV == 'local' ) {
 
 		/* -------------------------------- *
 		 * Local
 		 * -------------------------------- */
+
+		/**
+		 * Stylesheet which includes normalize.
+		 */
+		wp_enqueue_style( 'malinky-style', get_stylesheet_uri() );
+
+
+		/**
+		 * Font awesome font.
+		 *
+		 * @link http://fortawesome.github.io/Font-Awesome/
+		 */		
+		wp_register_style( 'malinky-font-awesome', 
+						   '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', 
+						   false, 
+						   NULL
+		);
+		wp_enqueue_style( 'malinky-font-awesome' );
+
 
 		/**
 		 * Modernizr which includes html5shiv.
@@ -351,20 +351,6 @@ function malinky_scripts()
 		);
 		wp_enqueue_script( 'malinky-owl-carousel-setup-js' );
 
-
-		/**
-		 * Retina.
-		 *
-		 * @link http://imulus.github.io/retinajs/
-		 */
-		wp_register_script( 'malinky-retina-js',
-							get_template_directory_uri() . '/js/retina.js',
-							false,
-							NULL,
-							true
-		);
-		wp_enqueue_script( 'malinky-retina-js' );
-
 	}
 
 
@@ -389,7 +375,7 @@ function malinky_scripts()
 
 
 		/*
-		 * googlemap.js, main.js, owl-carousel.js, owl-carousel-setup.js, retina.js
+		 * googlemap.js, main.js, owl-carousel.js, owl-carousel-setup.js
 		 */
 		wp_register_script( 'malinky-scripts-min-js',
 							get_template_directory_uri() . '/js/scripts.min.js',
@@ -510,6 +496,26 @@ function malinky_scripts()
 }
 
 add_action( 'wp_enqueue_scripts', 'malinky_scripts' );
+
+
+/**
+ * Filter to amend the script tags that are loaded.
+ * Currently adding async to the Google Map script tag.
+ */
+function malinky_javascript_loader( $tag, $handle, $src )
+{
+	
+	if ( is_admin() ) return $tag;
+
+	if ( $handle == 'malinky-googlemap-api-js' ) {
+		$tag = str_replace('src=', 'async src=', $tag);
+	}
+
+	return $tag;
+
+}
+
+add_filter( 'script_loader_tag', 'malinky_javascript_loader', 10, 3 );
 
 
 
@@ -863,6 +869,56 @@ function malinky_id_by_slug( $post_slug )
     } else {
         return null;
     }
+}
+
+
+if ( ! function_exists( 'malinky_acf_image_array' ) ) {
+
+	/**
+	 * Output an image URL from ACF that is added as an image_array.
+	 * Check for get_field and get_sub_field.
+	 *
+	 * @param string $malinky_acf_field_name ACF field name
+	 * @param string $image_size image_size to output
+	 * @return str
+	 */
+	function malinky_acf_image_array( $malinky_acf_field_name, $image_size = '' )
+	{
+		$malinky_acf_hero_shot = get_field( $malinky_acf_field_name );
+		
+		if ( ! $malinky_acf_hero_shot ) {
+			$malinky_acf_hero_shot = get_sub_field( $malinky_acf_field_name );
+		}
+
+		if ( ! $malinky_acf_hero_shot ) return;
+
+		if ( $image_size ) {
+			$malinky_acf_hero_shot = $malinky_acf_hero_shot['sizes'][ $image_size ];
+		} else {
+			$malinky_acf_hero_shot = $malinky_acf_hero_shot['url'];
+		}
+		
+		return $malinky_acf_hero_shot;
+	}
+
+}
+
+
+if ( ! function_exists( 'malinky_image_url' ) ) {
+
+	/**
+	 * Output an image URL based on the attachment id and size.
+	 *
+	 * @param string $attachment_id The attachment id
+	 * @param string $attachment_size The attachment image_size to output
+	 * @return str
+	 */
+	function malinky_image_url( $attachment_id, $attachment_size )
+	{
+		$malinky_attachment = wp_get_attachment_image_src( $attachment_id, $attachment_size );
+		if ($malinky_attachment) return $malinky_attachment[0];
+	}
+
 }
 
 

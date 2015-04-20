@@ -1,0 +1,23 @@
+{
+  "name": "malinky-wp-starter-theme",
+  "version": "1.0.0",
+  "authors": [
+    "Craig Ramsay"
+  ],
+  "description": "Wordpress Starter Theme",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/malinky/malinky-wp-starter-theme",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fontawesome": "~4.3.0"
+  }
+}
