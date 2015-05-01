@@ -562,7 +562,7 @@ add_action( 'widgets_init', 'malinky_widgets_init' );
  */
 function malinky_login_logo_url()
 {
-	return esc_url ( site_url( '', 'http' ) );
+	return esc_url ( home_url( '', 'http' ) );
 }
 
 add_filter( 'login_headerurl', 'malinky_login_logo_url' );
