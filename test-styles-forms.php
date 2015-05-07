@@ -9,14 +9,14 @@ get_header(); ?>
 
 <h2>Checkboxes</h2>
 
-<div class="checkbox_block">
+<div class="checkbox-block">
 <input type="checkbox" name="vehicle" value="bike" id="bike"><label for="bike">Checkbox 1</label>
 </div>
-<div class="checkbox_block">
+<div class="checkbox-block">
 <input type="checkbox" name="vehicle" value="car" id="car"><label for="car">Checkbox 2</label>
 </div>
 
-<div class="checkbox_block checkbox_inline">
+<div class="checkbox-block checkbox-inline">
 <input type="checkbox" name="vehicle2" value="bike2" id="bike2"><label for="bike2">Checkbox 1</label>
 <input type="checkbox" name="vehicle2" value="car2" id="car2"><label for="car2">Checkbox 2</label>
 </div>
@@ -28,14 +28,14 @@ get_header(); ?>
 
 <h2>Radio</h2>
 
-<div class="checkbox_block">
+<div class="checkbox-block">
 <input type="radio" name="sex" value="male" id="male" checked><label for="male">Radio 1</label>
 </div>
-<div class="checkbox_block">
+<div class="checkbox-block">
 <input type="radio" name="sex" value="female" id="female" ><label for="female">Radio 2</label>
 </div>
 
-<div class="checkbox_block checkbox_inline">
+<div class="checkbox-block checkbox-inline">
 <input type="radio" name="sex2" value="male2" id="male2" checked><label for="male2">Radio 1</label>
 <input type="radio" name="sex2" value="female2" id="female2"><label for="female2">Radio 2</label>
 </div>

@@ -36,7 +36,8 @@ input[type="submit"],
  */
 input[type="button"]:visited,
 input[type="reset"]:visited,
-input[type="submit"]:visited
+input[type="submit"]:visited,
+button:visited,
 .button:visited {
     background: $button-background-color;
     color: $button-text-color;
@@ -47,7 +48,8 @@ input[type="submit"]:visited
  */
 input[type="button"]:hover,
 input[type="reset"]:hover,
-input[type="submit"]:hover
+input[type="submit"]:hover,
+button:hover,
 .button:hover {
     background: $button-background-color-hover;
     text-decoration: none;
@@ -61,7 +63,8 @@ input[type="submit"]:hover
  */
 input[type="button"]:focus,
 input[type="reset"]:focus,
-input[type="submit"]:focus
+input[type="submit"]:focus,
+button:focus,
 .button:focus {
   color: #fff;
   text-decoration: none;  
@@ -73,9 +76,10 @@ input[type="submit"]:focus
 input[type="button"]:active,
 input[type="reset"]:active,
 input[type="submit"]:active,
+button:active,
 .button:active {
   color: #fff;    
-  background: #9c0009;
+  background: $button-background-color-hover;
   text-decoration: none;
 }
 
@@ -132,7 +136,7 @@ button:active.bevelled-button,
  * Specific to Wordpress Search widget
  */
 input[type="search"].search-field {
-    display: block;
+    display: inline-block;
     width: auto;
     max-width: none;
     padding: 8px;
@@ -143,13 +147,19 @@ input[type="search"].search-field {
     border-left: 1px solid $border-color;   
 }
 
+/*
+ * Specific to Wordpress Search widget.
+ */
 .search-submit {
     position: relative;
-    top: -1px;
+    top: -2px;
     left: -4px;
-    border-radius: 0 3px 3px 0;
 }
 
+/*
+ * Specific to Wordpress Search widget.
+ */
 input[type="submit"].search-submit {
     margin: 0;
+    line-height: initial;
 }

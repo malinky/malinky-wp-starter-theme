@@ -102,6 +102,13 @@ input[type="radio"] {
 }
 
 /*
+ * Don't adjust first checkbox.
+ */
+.checkbox-inline input:first-child {
+    margin-left: 0;
+}
+
+/*
  * Used to ensure inline check box label is inline too, especially if text spans more than one line.
  */
 .checkbox-inline label {
