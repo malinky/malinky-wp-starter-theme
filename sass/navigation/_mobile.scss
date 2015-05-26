@@ -42,9 +42,10 @@
 }
 
 /*
- * Add to the body in js to ensure scrolling works correctly when the menu is longer than the page.
+ * Add to the html, body in js to ensure scrolling works correctly when the menu is longer than the page.
+ * This disables scrolling of the page underneath the mobile-navigation.
  */
-.mobile-navigation-show-body {
+.mobile-navigation-show-overflow {
     overflow: hidden;
 }
 

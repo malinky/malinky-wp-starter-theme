@@ -29,7 +29,7 @@
 
 </footer><!-- .main-footer -->
 
-<a class="back-top image-font__fontawesome fa-angle-up"></a>
+<a class="back-top fa-angle-up"></a>
 
 <?php if ( WP_ENV == 'prod' ) { ?>
 

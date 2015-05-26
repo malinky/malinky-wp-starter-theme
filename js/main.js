@@ -41,7 +41,7 @@ jQuery(document).ready(function($){
     $('#mobile-navigation-navicon').click(function(event) {
 
         $('.mobile-navigation').toggleClass('mobile-navigation-show');
-        $('body').toggleClass('mobile-navigation-show-body');
+        $('html, body').toggleClass('mobile-navigation-show-overflow');
 
         event.preventDefault();
 
