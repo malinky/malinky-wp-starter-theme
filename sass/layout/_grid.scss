@@ -7,22 +7,6 @@
     margin-left: -24px;
 }
 
-/* 
- * Add top and bottom padding to main .col creating space on page generally between <section>.
- * .col--Modifier.
- */
-.col--padding-20 {
-    padding: 40px 0;
-}
-
-/* 
- * Add top and bottom padding to main .col creating space on page generally between <section>.
- * .col--Modifier.
- */
-.col--padding-40 {
-    padding: 40px 0;
-}
-
 /*
  * When a .col will have vertical alignment from a col-item within it.
  * Use this on the main .col that sets the overall height of the div.
@@ -53,42 +37,13 @@
 }
 
 /*
- * No gutters or when a background colour is applied or when a background image is added to a whole .col.
+ * No gutters. Can also be used when a background color or image is applied to the .col.
  * .col--Modifier.
  */
-.col--gutterless,
-.col--bkg-color,
-.col--bkg-img {
+.col--gutterless {
     margin-left: 0;
 }
-
-/*
- * Removes gutters from all .col-item when .col is set with modifier .col--gutterless.
- * .col--Modifier.
- */
 .col--gutterless > .col-item {
-    padding-left: 0;
-}
-
-/*
- * Can be used inside as a nested .col modifier or inside a .col-item as a standalone div to add background colour and padding.
- * .col--Modifier.
- * CHECK STANDALONE DIV. .col-bkg-color.
- */
-.col--bkg-color,
-.col-bkg-color {
-    background: #f1f1f1;
-    padding: 10px 6px;
-}
-
-/*
- * Ensures additional padding isn't added on first-child .col-item for both the .col modifier and standalone div version.
- * .col--Modifier.
-  * CHECK STANDALONE DIV. .col-bkg-color > .col-item:first-child.
- */
-.col--bkg-color > .col-item:first-child,
-.col--bkg-img > .col-item:first-child,
-.col-bkg-color > .col-item:first-child {
     padding-left: 0;
 }
 
@@ -99,6 +54,9 @@
 .col--align-center {
     text-align: center;
 }
+.col--align-center > .col-item {
+    text-align: left;
+}
 
 /*
  * Right align .col.
@@ -107,41 +65,93 @@
 .col--align-right {
     text-align: right;
 }
-
-/*
- * When centering an .col make sure to pull the content back to the left.
- * .col--Modifier.  
- */
-.col--align-center > .col-item,
 .col--align-right > .col-item {
     text-align: left;
 }
 
 /*
+ * Make .col gutters wider.
  * .col--Modifier. 
+ */
+.col--wide {
+    margin-left: -48px;
+}
+.col--wide > .col-item {
+    padding-left: 48px;
+}
+
+/*
+ * Make .col gutters narrower.
+ * .col--Modifier. 
+ */
+.col--narrow {
+    margin-left: -12px;
+}
+.col--narrow > .col-item {
+    padding-left: 12px;
+}
+
+/* 
+ * Add bottom margin to .cols.
+ * .col--Modifier.
  */
 .col--margin-bottom-20 {
     margin-bottom: 20px;
 }
-
-/*
- * .col--Modifier. 
- */
 .col--margin-bottom-40 {
     margin-bottom: 40px;
 }
- 
+.col--margin-bottom-60 {
+    margin-bottom: 60px;
+}
+
+/* 
+ * Add padding to .cols.
+ * .col--Modifier.
+ */
+.col--padding-20 {
+    padding: 20px 0;
+}
+.col--padding-40 {
+    padding: 40px 0;
+}
+.col--padding-60 {
+    padding: 60px 0;
+}
+
+/*
+ * Used to position an image to the right of text on larger screens and back to above on smaller.
+ * Done by adjusting the order.
+ * 1. Flow direction
+ * 2. Wrap into rows if they don't fit on a line. Used once breakpoint is reached to move onto seperate lines.
+ * 3. Vertically align flex items. .col-item--middle takes care of this on non flex items.
+ */
+.col-image-flex {
+    display: flex;
+    flex-direction: row; /* 1 */
+    flex-wrap: wrap; /* 2 */
+    align-items: center; /* 3 */
+}
+@media only screen and (min-width: 768px) {
+
+    .col-image-flex > .col-item:first-child {
+        order: 2;
+        align-self: flex-start;
+    }
+
+}
+
 /*
  * 1. Instead of floating.
  * 2. Gutter.
- * 3. Align inline-block elements.
+ * 3. all .col-items are full width unless specified. Mobile First.
+ * 4. Align inline-block elements.
  */
 .col-item {
     display: inline-block; /* 1 */
     padding-left: 24px; /* 2 */
-    vertical-align: top; /* 3 */
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+    width: 100%; /* 3 */
+    vertical-align: top; /* 4 */
     box-sizing: border-box;
 }
 
@@ -186,20 +196,6 @@
 }
 
 /*
- * .col-item--Modifier.
- */
-.col-item--margin-bottom-20 {
-    margin-bottom: 20px;
-}
-
-/*
- * .col-item--Modifier.
- */
-.col-item--margin-bottom-40 {
-    margin-bottom: 40px;
-}
-
-/*
  * Hide / Show.
  */
 .col-item--hide {
@@ -211,9 +207,9 @@
 }
 
 /*
- * Vertical divider in center of div.
- * Use with col-item-1-10 and col-item--align-center for best results.
- * Need to apply col--relative to parent .col.
+ * Vertical divider.
+ * Use with col-item-1-10 and col-item--align-center for best results. Also consider .col--narrow.
+ * Need to apply .col--relative to parent .col.
  */
 .col-item--vertical-divider:before {
     content: "";
@@ -221,7 +217,7 @@
     top: 0;
     bottom: 0;
     width: 1px;
-    background: red;
+    background: $border-color;
 }
  
 .col-item-full { width: 100%; }
@@ -257,22 +253,185 @@
 .col-item-8-10 { width: 80%; }
 .col-item-9-10 { width: 90%; }
 
-@media only screen and (min-width: 768px) and (max-width: 989px) {
+@media only screen and (min-width: 990px) {
 
-    /* 
-     * Add top and bottom padding to main .col creating space on page generally between <section>.
-     * .col--Modifier--Modifier.
+    /*
+     * Make .col gutters wider.
+     * .col--Modifier. 
      */
-    .col--padding-20--large {
-        padding: 40px 0;
+    .col--wide--xlarge {
+        margin-left: -48px;
+    }
+    .col--wide--xlarge > .col-item {
+        padding-left: 48px;
+    }
+
+    /*
+     * Make .col gutters narrower.
+     * .col--Modifier. 
+     */
+    .col--narrow--xlarge {
+        margin-left: -12px;
+    }
+    .col--narrow--xlarge > .col-item {
+        padding-left: 12px;
     }
 
     /* 
-     * Add top and bottom padding to main .col creating space on page generally between <section>.
-     * .col--Modifier--Modifier. 
+     * Add bottom margin to .cols.
+     * .col--Modifier--Modifier.
      */
+    .col--margin-bottom-20--xlarge {
+        margin-bottom: 20px;
+    }
+    .col--margin-bottom-40--xlarge {
+        margin-bottom: 40px;
+    }
+    .col--margin-bottom-60--xlarge {
+        margin-bottom: 60px;
+    }
+
+    /* 
+     * Add padding to .cols.
+     * .col--Modifier--Modifier.
+     */
+    .col--padding-20--xlarge {
+        padding: 20px 0;
+    }
+    .col--padding-40--xlarge {
+        padding: 40px 0;
+    }
+    .col--padding-60--xlarge {
+        padding: 60px 0;
+    }
+
+    .col-item-full--xlarge { width: 100%; }
+
+    .col-item-half--xlarge { width: 50%; }
+
+    .col-item-third--xlarge { width: 33.333% }
+    .col-item-two-third--xlarge { width: 66.666%; }
+
+    .col-item-quarter--xlarge { width: 25%; }
+    .col-item-three-quarter--xlarge { width: 75%; }
+
+    .col-item-1-5--xlarge { width: 20%; }
+    .col-item-2-5--xlarge { width: 40%; }
+    .col-item-3-5--xlarge { width: 60%; }
+    .col-item-4-5--xlarge { width: 80%; }
+
+    .col-item-1-6--xlarge { width: 16.666%; }
+    .col-item-5-6--xlarge { width: 83.333%; }
+
+    .col-item-1-8--xlarge { width: 12.5%; }
+    .col-item-3-8--xlarge { width: 37.5%; }
+    .col-item-5-8--xlarge { width: 62.5%; }
+    .col-item-6-8--xlarge { width: 75%; }
+    .col-item-7-8--xlarge { width: 87.5%; }
+
+    .col-item-1-10--xlarge { width: 10%; }
+    .col-item-2-10--xlarge { width: 20%; }
+    .col-item-3-10--xlarge { width: 30%; }
+    .col-item-4-10--xlarge { width: 40%; }
+    .col-item-6-10--xlarge { width: 60%; }
+    .col-item-7-10--xlarge { width: 70%; }
+    .col-item-8-10--xlarge { width: 80%; }
+    .col-item-9-10--xlarge { width: 90%; }
+
+    /*
+     * See full size .col-item above for the below rules.
+     */
+    .col-item--middle--xlarge {
+        vertical-align: middle;
+    }
+
+    .col-item--bottom--xlarge {
+        vertical-align: bottom;
+    }
+
+    .col-item--align-left--xlarge {
+        text-align: left;
+    }
+
+    .col-item--align-center--xlarge {
+        text-align: center;
+    }
+
+    .col-item--align-right--xlarge {
+        text-align: right;
+    }
+
+    /*
+     * Hide / Show.
+     */
+    .col-item--hide--xlarge {
+        display: none;
+    }
+
+    .col-item--show--xlarge {
+        display: inline-block;
+    }
+
+    /*
+     * Used to make an item full width when it isn't normally.
+     * Faux modifier as .full-width doesn't exist.
+     */
+    .full-width--xlarge {
+        width: 100%;
+    }
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 989px) {
+
+    /*
+     * Make .col gutters wider.
+     * .col--Modifier. 
+     */
+    .col--wide--large {
+        margin-left: -48px;
+    }
+    .col--wide--large > .col-item {
+        padding-left: 48px;
+    }
+
+    /*
+     * Make .col gutters narrower.
+     * .col--Modifier. 
+     */
+    .col--narrow--large {
+        margin-left: -12px;
+    }
+    .col--narrow--large > .col-item {
+        padding-left: 12px;
+    }
+
+    /* 
+     * Add bottom margin to .cols.
+     * .col--Modifier--Modifier.
+     */
+    .col--margin-bottom-20--large {
+        margin-bottom: 20px;
+    }
+    .col--margin-bottom-40--large {
+        margin-bottom: 40px;
+    }
+    .col--margin-bottom-60--large {
+        margin-bottom: 60px;
+    }
+
+    /* 
+     * Add padding to .cols.
+     * .col--Modifier--Modifier.
+     */
+    .col--padding-20--large {
+        padding: 20px 0;
+    }
     .col--padding-40--large {
         padding: 40px 0;
+    }
+    .col--padding-60--large {
+        padding: 60px 0;
     }
 
     .col-item-full--large { width: 100%; }
@@ -331,14 +490,6 @@
         text-align: right;
     }
 
-    .col-item--margin-bottom-20--large {
-        margin-bottom: 20px;
-    }
-
-    .col-item--margin-bottom-40--large {
-        margin-bottom: 40px;
-    }
-
     /*
      * Hide / Show.
      */
@@ -360,22 +511,56 @@
 
 }
 
-@media only screen and (min-width: 481px) and (max-width: 767px) {
+@media only screen and (min-width: 481px) and (max-width: 767px) { 
 
-    /* 
-     * Add top and bottom padding to main .col creating space on page generally between <section>.
-     * .col--Modifier--Modifier.
+    /*
+     * Make .col gutters wider.
+     * .col--Modifier. 
      */
-    .col--padding-20--medium {
-        padding: 40px 0;
+    .col--wide--medium {
+        margin-left: -48px;
+    }
+    .col--wide--medium > .col-item {
+        padding-left: 48px;
+    }
+
+    /*
+     * Make .col gutters narrower.
+     * .col--Modifier. 
+     */
+    .col--narrow--medium {
+        margin-left: -12px;
+    }
+    .col--narrow--medium > .col-item {
+        padding-left: 12px;
     }
 
     /* 
-     * Add top and bottom padding to main .col creating space on page generally between <section>.
-     * .col--Modifier--Modifier. 
+     * Add bottom margin to .cols.
+     * .col--Modifier--Modifier.
      */
+    .col--margin-bottom-20--medium {
+        margin-bottom: 20px;
+    }
+    .col--margin-bottom-40--medium {
+        margin-bottom: 40px;
+    }
+    .col--margin-bottom-60--medium {
+        margin-bottom: 60px;
+    }
+
+    /* 
+     * Add padding to .cols.
+     * .col--Modifier--Modifier.
+     */
+    .col--padding-20--medium {
+        padding: 20px 0;
+    }
     .col--padding-40--medium {
         padding: 40px 0;
+    }
+    .col--padding-60--medium {
+        padding: 60px 0;
     }
 
     .col-item-full--medium { width: 100%; }
@@ -434,14 +619,6 @@
         text-align: right;
     }
 
-    .col-item--margin-bottom-20--medium {
-        margin-bottom: 20px;
-    }
-
-    .col-item--margin-bottom-40--medium {
-        margin-bottom: 40px;
-    }
-
     /*
      * Hide / Show.
      */
@@ -453,7 +630,6 @@
         display: inline-block;
     }
 
-
     /*
      * Used to make an item full width when it isn't normally.
      * Faux modifier as .full-width doesn't exist.
@@ -464,24 +640,58 @@
 
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 480px) { 
+
+    /*
+     * Make .col gutters wider.
+     * .col--Modifier. 
+     */
+    .col--wide--small {
+        margin-left: -48px;
+    }
+    .col--wide--small > .col-item {
+        padding-left: 48px;
+    }
+
+    /*
+     * Make .col gutters narrower.
+     * .col--Modifier. 
+     */
+    .col--narrow--small {
+        margin-left: -12px;
+    }
+    .col--narrow--small > .col-item {
+        padding-left: 12px;
+    }
+    
+    /* 
+     * Add bottom margin to .cols.
+     * .col--Modifier--Modifier.
+     */
+    .col--margin-bottom-20--small {
+        margin-bottom: 20px;
+    }
+    .col--margin-bottom-40--small {
+        margin-bottom: 40px;
+    }
+    .col--margin-bottom-60--small {
+        margin-bottom: 60px;
+    }
 
     /* 
-     * Add top and bottom padding to main .col creating space on page generally between <section>.
+     * Add padding to .cols.
      * .col--Modifier--Modifier.
      */
     .col--padding-20--small {
-        padding: 40px 0;
+        padding: 20px 0;
     }
-
-    /* 
-     * Add top and bottom padding to main .col creating space on page generally between <section>.
-     * .col--Modifier--Modifier. 
-     */
     .col--padding-40--small {
         padding: 40px 0;
     }
-    
+    .col--padding-60--small {
+        padding: 60px 0;
+    }
+
     .col-item-full--small { width: 100%; }
 
     .col-item-half--small { width: 50%; }
@@ -536,15 +746,7 @@
 
     .col-item--align-right--small {
         text-align: right;
-    }
-
-    .col-item--margin-bottom-20--small {
-        margin-bottom: 20px;
-    }
-
-    .col-item--margin-bottom-40--small {
-        margin-bottom: 40px;
-    }
+    } 
 
     /*
      * Hide / Show.
