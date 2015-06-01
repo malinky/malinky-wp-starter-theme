@@ -139,7 +139,8 @@ if ( ! function_exists( 'malinky_setup' ) ) {
 		 * @link http://codex.wordpress.org/Function_Reference/register_nav_menu
 		 */
 		register_nav_menus( array(
-			'primary_navigation' 	=> __( 'Primary Navigation', 'malinky' ),
+			'main_navigation' 	=> __( 'Main Navigation', 'malinky' ),
+			'mobile_navigation' 	=> __( 'Mobile Navigation', 'malinky' ),
 			'footer_navigation' => __( 'Footer Navigation', 'malinky' ),
 		) );
 
@@ -586,7 +587,7 @@ function malinky_login_screen()
 { ?>
     <style type="text/css">
         body.login div#login h1 a {
-            background-image: url(<?php echo get_template_directory_uri(); ?>/img/logo_mobile.png);
+            background-image: url(<?php echo get_template_directory_uri(); ?>/img/mobile.png);
             background-size: 255px;
             width: auto;
         }
@@ -601,7 +602,7 @@ function malinky_login_screen()
         	background-size: auto;
         }
         html.lt-ie9 body.login div#login h1 a {
-            background-image: url(<?php echo get_template_directory_uri(); ?>/img/logo_mobile.png);
+            background-image: url(<?php echo get_template_directory_uri(); ?>/img/mobile.png);
         }
         body.login .button.button-large {
         	height: auto;
@@ -617,7 +618,9 @@ function malinky_login_screen()
 		    border-radius: 0;
 		    box-shadow: none;
         }
-        body.login .button-primary:hover {
+        body.login .button-primary:hover,
+        body.login .button-primary:focus,
+        body.login .button-primary:active {
     		background: #852b68;
     		text-shadow: none;
     		box-shadow: none;
@@ -640,7 +643,9 @@ function malinky_login_screen()
 		    color: #fff;
 		    border-radius: none;
 		}
-		body.login #nav a:hover {
+		body.login #nav a:hover,
+		body.login #nav a:focus,
+		body.login #nav a:active {
 			color: #fff;
 			background: #852b68;
     		text-shadow: none;
