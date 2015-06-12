@@ -256,6 +256,28 @@
 @media only screen and (min-width: 990px) {
 
     /*
+     * Centre an .col.
+     * .col--Modifier.
+     */
+    .col--align-center--xlarge {
+        text-align: center;
+    }
+    .col--align-center--xlarge > .col-item {
+        text-align: left;
+    }
+
+    /*
+     * Right align .col.
+     * .col--Modifier. 
+     */
+    .col--align-right--xlarge {
+        text-align: right;
+    }
+    .col--align-right--xlarge > .col-item {
+        text-align: left;
+    }
+
+    /*
      * Make .col gutters wider.
      * .col--Modifier. 
      */
@@ -383,6 +405,28 @@
 }
 
 @media only screen and (min-width: 768px) and (max-width: 989px) {
+
+    /*
+     * Centre an .col.
+     * .col--Modifier.
+     */
+    .col--align-center--large {
+        text-align: center;
+    }
+    .col--align-center--large > .col-item {
+        text-align: left;
+    }
+
+    /*
+     * Right align .col.
+     * .col--Modifier. 
+     */
+    .col--align-right--large {
+        text-align: right;
+    }
+    .col--align-right--large > .col-item {
+        text-align: left;
+    }
 
     /*
      * Make .col gutters wider.
@@ -514,6 +558,28 @@
 @media only screen and (min-width: 481px) and (max-width: 767px) { 
 
     /*
+     * Centre an .col.
+     * .col--Modifier.
+     */
+    .col--align-center--medium {
+        text-align: center;
+    }
+    .col--align-center--medium > .col-item {
+        text-align: left;
+    }
+
+    /*
+     * Right align .col.
+     * .col--Modifier. 
+     */
+    .col--align-right--medium {
+        text-align: right;
+    }
+    .col--align-right--medium > .col-item {
+        text-align: left;
+    }
+
+    /*
      * Make .col gutters wider.
      * .col--Modifier. 
      */
@@ -642,6 +708,28 @@
 
 @media only screen and (max-width: 480px) { 
 
+    /*
+     * Centre an .col.
+     * .col--Modifier.
+     */
+    .col--align-center--small {
+        text-align: center;
+    }
+    .col--align-center--small > .col-item {
+        text-align: left;
+    }
+
+    /*
+     * Right align .col.
+     * .col--Modifier. 
+     */
+    .col--align-right--small {
+        text-align: right;
+    }
+    .col--align-right--small > .col-item {
+        text-align: left;
+    }
+    
     /*
      * Make .col gutters wider.
      * .col--Modifier. 
