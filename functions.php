@@ -909,19 +909,34 @@ if ( ! function_exists( 'malinky_acf_image_array' ) ) {
 }
 
 
-if ( ! function_exists( 'malinky_image_url' ) ) {
+if ( ! function_exists( 'malinky_wp_image' ) ) {
 
 	/**
-	 * Output an image URL based on the attachment id and size.
+	 * Output image based on the attachment id, size and return value.
+	 * If the attachment size doesn't exist wordpress returns the original.
 	 *
-	 * @param string $attachment_id The attachment id
-	 * @param string $attachment_size The attachment image_size to output
+	 * @param int 		$attachment_id 		The attachment id
+	 * @param string 	$attachment_size 	The attachment image_size to output
+	 * @param string 	$return 			Either url, width or height.
 	 * @return str
 	 */
-	function malinky_image_url( $attachment_id, $attachment_size )
+	function malinky_wp_image( $attachment_id, $attachment_size = '', $return = 'url' )
 	{
 		$malinky_attachment = wp_get_attachment_image_src( $attachment_id, $attachment_size );
-		if ($malinky_attachment) return $malinky_attachment[0];
+		
+		if ( $malinky_attachment ) {
+			switch ( $return ) {
+				case 'url':
+					return $malinky_attachment[0];
+					break;
+				case 'width':
+					return $malinky_attachment[1];
+					break;				
+				case 'height':
+					return $malinky_attachment[2];
+					break;
+			}
+		}
 	}
 
 }
