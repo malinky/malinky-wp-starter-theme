@@ -31,6 +31,8 @@ https://github.com/jonathanepollack/gulp-minify-css
 https://www.npmjs.com/package/gulp-minify-css
 https://github.com/hparra/gulp-rename
 https://www.npmjs.com/package/gulp-rename
+https://github.com/lazd/gulp-replace
+https://www.npmjs.com/package/gulp-replace
 https://github.com/jedrichards/rsyncwrapper
 https://github.com/OverZealous/run-sequence
 https://www.npmjs.com/package/run-sequence
