@@ -1047,7 +1047,7 @@ if ( ! function_exists( 'malinky_content_footer' ) ) {
 			$edit_link = sprintf( '<span class="content-footer__edit-link"><a href="%1$s">Edit</a></span>', esc_url( get_edit_post_link() ) );
 		}
 
-		return $categories . $tags . $edit_link;
+		return apply_filters( 'malinky_content_footer', $categories . $tags . $edit_link );
 
 	}
 
