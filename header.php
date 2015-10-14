@@ -40,6 +40,7 @@
 			//Load critical path CSS, replacing img/ with absolute urls.
 			$critical_css = file_get_contents(get_template_directory() . '/style-critical.css');
 			$critical_css = str_replace('url(img/', 'url(' . get_template_directory_uri() . '/img/', $critical_css);
+			$critical_css = str_replace('url(fonts/', 'url(' . get_template_directory_uri() . '/fonts/', $critical_css);
 			echo $critical_css;
 			?>
 		</style>
@@ -105,6 +106,24 @@
 		<meta name="robots" content="noindex,nofollow">
 	<?php } ?>
 
+	<?php if ( WP_ENV == 'prod' ) { ?>
+
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', "<?php echo get_field( 'malinky_settings_contact_google_analytics', 'option' ); ?>"]);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+
+	<?php } ?>
+	
 	<?php wp_head(); ?>
 
 	<!--https://github.com/scottjehl/Respond-->
@@ -193,3 +212,5 @@
 	</div><!-- .wrap-full -->
 
 </header><!-- .main-header -->
+
+<main role="main" class="wrap wrap-mobile">

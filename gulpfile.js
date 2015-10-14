@@ -6,7 +6,6 @@ var gulp            = require('gulp');
 
 var autoprefixer    = require('gulp-autoprefixer');
 var concat          = require('gulp-concat');
-var cssUrlAdjuster  = require('gulp-css-url-adjuster');
 var del             = require('del');
 var minifyCSS       = require('gulp-minify-css');
 var rename          = require('gulp-rename');
@@ -23,8 +22,6 @@ https://www.npmjs.com/package/gulp-autoprefixer
 Browser List for Autoprefixer https://github.com/ai/browserslist
 https://github.com/wearefractal/gulp-concat
 https://www.npmjs.com/package/gulp-concat
-https://github.com/casualrelaxation/gulp-css-url-adjuster
-https://www.npmjs.com/package/gulp-css-url-adjuster
 https://github.com/sindresorhus/del
 https://www.npmjs.com/package/del
 https://github.com/jonathanepollack/gulp-minify-css
@@ -179,9 +176,9 @@ gulp.task('default', function() {
 
 
 /* ------------------------------------------------------------------------ *
- * Dev
+ * Dist
  * 
- * gulp dev
+ * gulp dist
  *
  * Move all applicable files and folders.
  * This includes sass and all js for debugging with sourcemaps.
@@ -190,38 +187,38 @@ gulp.task('default', function() {
  * ------------------------------------------------------------------------ */
 
 /**
- * Delete all contents of dev folder.
+ * Delete all contents of dist folder.
  */
-gulp.task('dev-clean', function (cb) {
-    del('../dev/*', {force:true}, cb);
+gulp.task('dist-clean', function (cb) {
+    del('../dist/*', {force:true}, cb);
 });
 
 
 /**
   * Move root .php files.
   */
-gulp.task('dev-move-files', function() {
+gulp.task('dist-move-files', function() {
     return gulp.src(['*.php', 'screenshot.png', 'style-critical.css', '!test-styles-forms.php', '!test-styles-image-alignment.php', '!test-styles-typography.php'])
-        .pipe(gulp.dest('../dev'));
+        .pipe(gulp.dest('../dist'));
 });
 
 
 /**
   * Move fontawesome fonts.
   */
-gulp.task('dev-move-fontawesome-fonts', function() {
-    return gulp.src('bower_components/fontawesome/fonts/**')
-        .pipe(gulp.dest('../dev/fonts'));
+gulp.task('dist-move-fontawesome-fonts', function() {
+    return gulp.src('node_modules/font-awesome/fonts/**')
+        .pipe(gulp.dest('../dist/fonts'));
 });
 
 
 /**
   * Move root directories and their contents.
-  * Move js and SASS to be used with root maps on dev.
+  * Move js and SASS to be used with sourcemaps.
   */
-gulp.task('dev-move-dir', function() {
-    return gulp.src(['img/**', 'js/**', 'languages/**', 'sass/**'], { base: './'} )
-        .pipe(gulp.dest('../dev'));
+gulp.task('dist-move-dir', function() {
+    return gulp.src(['functions/**', 'img/**', 'js/**', 'languages/**', 'sass/**'], { base: './'} )
+        .pipe(gulp.dest('../dist'));
 });
 
 
@@ -232,43 +229,40 @@ gulp.task('dev-move-dir', function() {
  * sourceRoot sets the path where the source files are hosted relative to the source map.
  * This makes things appear in the correct folders when viewing through developer tools.
  */
-gulp.task('dev-styles', function() {
+gulp.task('dist-styles', function() {
     return sass('sass', { sourcemap: true, style: 'compressed' })
     .on('error', function (err) {console.error('SASS Error - ', err.message);})
     .pipe(autoprefixer({browsers: ['last 5 versions']}))
     .pipe(sourcemaps.write('sourcemaps', {includeContent: false, sourceRoot: '../sass'}))
-    .pipe(gulp.dest('../dev'));
+    .pipe(gulp.dest('../dist'));
 });
 
 
 /**
  * Pull in the plugin styles into main style.css.
- * Add to the compiled sass from dev-styles.
- * Sourcemap still works for SASS gnerated styles. The plugins don't use sourcemaps or SASS.
+ * Add to the compiled sass from dist-styles.
+ * Sourcemap still works for SASS generated styles. The plugins don't use sourcemaps or SASS.
  * Also replace ..img/ path with img/.
  * Mainly uses loader.gif and is in the theme directory.
  */
-gulp.task('dev-concat-plugin-styles', function() {
-    return gulp.src([   '../dev/style.css', 
-                        'bower_components/fontawesome/css/font-awesome.min.css'])
+gulp.task('dist-concat-plugin-styles', function() {
+    return gulp.src([   '../dist/style.css', 
+                        'node_modules/font-awesome/css/font-awesome.min.css'])
         .pipe(concat('style.css'))
-        .pipe(cssUrlAdjuster({
-            replace:  ['../','']
-        }))
-        .pipe(minifyCSS())
-        .pipe(gulp.dest('../dev'));
+        .pipe(replace('../', ''))
+        .pipe(gulp.dest('../dist'));
 });
 
 
 /**
  * Cache buster for the inline and async references to styles.css in header.php
  */
-gulp.task('dev-css-cache-buster', function() {
-    return gulp.src('../dev/header.php')
+gulp.task('dist-css-cache-buster', function() {
+    return gulp.src('../dist/header.php')
         .pipe(replace(/style.css/g, function() {
             return 'style.' + Date.now() + '.css';        
         }))
-        .pipe(gulp.dest('../dev'));
+        .pipe(gulp.dest('../dist'));
 })
 
 
@@ -278,16 +272,15 @@ gulp.task('dev-css-cache-buster', function() {
  * sourceRoot sets the path where the source files are hosted relative to the source map.
  * This makes things appear in the correct folders when viewing through developer tools.
  *
- * Don't minimize modernizer seperatley as it is loaded in the header.
  * Don't minimize respond.js as it's only loaded in IE8 from the footer.
  */
-gulp.task('dev-scripts', function() {
-    return gulp.src(['js/*.js', '!js/googlemap.js', '!js/html5shiv.js', '!js/modernizr-2.8.3.js', '!js/respond.js'])
+gulp.task('dist-scripts', function() {
+    return gulp.src(['js/packery.pkgd.min.js', 'js/*.js', 'node_modules/jquery-lazyload/jquery.lazyload.js', '!js/googlemap.js', '!js/html5shiv.js', '!js/respond.js'])
         .pipe(sourcemaps.init())
         .pipe(concat('scripts.min.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write('../sourcemaps', {includeContent: false, sourceRoot: '../js'}))
-        .pipe(gulp.dest('../dev/js'));
+        .pipe(gulp.dest('../dist/js'));
 });
 
 
@@ -296,26 +289,11 @@ gulp.task('dev-scripts', function() {
  *
  * Always use concat before uglify else source map isn't generated correctly.
  */
-gulp.task('dev-scripts-google-map', function() {
+gulp.task('dist-scripts-google-map', function() {
     return gulp.src('js/googlemap.js')
         .pipe(concat('googlemap.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('../dev/js'));
-});
-
-
-/**
- * Minify modernizr.js.
- *
- * Always use concat before uglify else source map isn't generated correctly.
- */
-gulp.task('dev-scripts-modernizer', function() {
-    return gulp.src(['js/modernizr-2.8.3.js'])
-        .pipe(sourcemaps.init())
-        .pipe(concat('modernizr-2.8.3.min.js'))
-        .pipe(uglify())
-        .pipe(sourcemaps.write('../sourcemaps', {includeContent: false, sourceRoot: '../js'}))
-        .pipe(gulp.dest('../dev/js'));
+        .pipe(gulp.dest('../dist/js'));
 });
 
 
@@ -324,208 +302,21 @@ gulp.task('dev-scripts-modernizer', function() {
  *
  * No concat just uglify and keep the same name.
  */
-gulp.task('dev-scripts-ltie10', function() {
+gulp.task('dist-scripts-ltie10', function() {
     return gulp.src(['js/respond.js', 'js/html5shiv.js'])
         .pipe(uglify())
-        .pipe(gulp.dest('../dev/js'));
+        .pipe(gulp.dest('../dist/js'));
 });
 
 
 /**
- * Dev deploy
+ * Dist deploy
  *
  * Deploy the theme folder.
  */
-gulp.task('dev-deploy', function() {
+gulp.task('dist-deploy', function() {
     rsync({
-        src: "../dev/",
-        dest: "CPANEL@DOMAIN:/home/CPANEL/public_html/dev/wp-content/themes/THEMENAME",
-        ssh: true,
-        recursive: true,
-        deleteAll: true,
-        exclude: ['.DS_Store'],
-        args: ["--verbose"]
-    },function (error,stdout,stderr,cmd) {
-        if ( error ) {
-            console.log(error.message);
-        } else {
-            console.log(stdout);
-            console.log("Deployment Complete");
-        }
-    })
-})
-
-
-/**
- * Set up dev task.
- */
-gulp.task('dev', function() {
-    runSequence('dev-clean', 
-                'dev-move-files', 
-                'dev-move-fontawesome-fonts',                 
-                'dev-move-dir', 
-                'dev-styles', 
-                'dev-concat-plugin-styles', 
-                'dev-css-cache-buster',           
-                'dev-scripts', 
-                'dev-scripts-google-map', 
-                'dev-scripts-modernizer', 
-                'dev-scripts-ltie10', 
-                'dev-deploy'                
-            );
-})
-
-
-/* ------------------------------------------------------------------------ *
- * Prod
- * 
- * gulp prod
- *
- * Move all applicable files and folders.
- * Don't move js and css. Just the minimized versions are used in live no sourcemaps.
- * Compile SASS, compress and autoprefix.
- * Concat and minify JS to scripts.min.js
- * ------------------------------------------------------------------------ */
-
-/**
- * Delete all contents of prod folder.
- */
-gulp.task('prod-clean', function (cb) {
-    del('../prod/*', {force:true}, cb);
-});
-
-
-/**
-  * Move root .php files
-  */
-gulp.task('prod-move-files', function() {
-    return gulp.src(['*.php', 'screenshot.png', 'style-critical.css', '!test-styles-forms.php', '!test-styles-image-alignment.php', '!test-styles-typography.php'])
-        .pipe(gulp.dest('../prod'));
-});
-
-
-/**
-  * Move fontawesome fonts.
-  */
-gulp.task('prod-move-fontawesome-fonts', function() {
-    return gulp.src('bower_components/fontawesome/fonts/**')
-        .pipe(gulp.dest('../prod/fonts'));
-});
-
-
-/**
-  * Move root directories and their contents.
-  */
-gulp.task('prod-move-dir', function() {
-    return gulp.src(['img/**', 'languages/**'], { base: './'} )
-        .pipe(gulp.dest('../prod'));
-});
-
-
-/**
- * Compile our SASS, autoprefix.
- * Doesn't support globs hence the return sass rather than gulp.src.
- */
-gulp.task('prod-styles', function() {
-    return sass('sass', { sourcemap: true, style: 'compressed' })
-    .on('error', function (err) {console.error('SASS Error - ', err.message);})
-    .pipe(autoprefixer({browsers: ['last 5 versions']}))
-    .pipe(gulp.dest('../prod'));
-});
-
-
-/**
- * Pull in the plugin styles into main style.css.
- * Add to the compiled sass from dev-styles.
- * Sourcemap still works for SASS gnerated styles. The plugins don't use sourcemaps or SASS.
- * Also replace ..img/ path with img/.
- * Mainly uses loader.gif and is in the theme directory.
- */
-gulp.task('prod-concat-plugin-styles', function() {
-    return gulp.src([   '../prod/style.css', 
-                        'bower_components/fontawesome/css/font-awesome.min.css'])
-        .pipe(concat('style.css'))
-        .pipe(cssUrlAdjuster({
-            replace:  ['../','']
-        }))
-        .pipe(minifyCSS())
-        .pipe(gulp.dest('../prod'));
-});
-
-
-/**
- * Cache buster for the inline and async references to styles.css in header.php
- */
-gulp.task('prod-css-cache-buster', function() {
-    return gulp.src('../prod/header.php')
-        .pipe(replace(/style.css/g, function() {
-            return 'style.' + Date.now() + '.css';        
-        }))
-        .pipe(gulp.dest('../prod'));
-})
-
-
-/**
- * Concat (rename) and minify our JS.
- *
- * Don't minimize google maps as it's loaded on it's on and wp_localize_script with php settings if applicable.
- * Don't minimize moderinzer seperatley as it is loaded in the header.
- * Don't minimize respond.js as it's only loaded in IE8 from the footer.
- */
-gulp.task('prod-scripts', function() {
-    return gulp.src(['js/*.js', '!js/googlemap.js', '!js/html5shiv.js', '!js/modernizr-2.8.3.js', '!js/respond.js'])
-        .pipe(concat('scripts.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('../prod/js'));
-});
-
-
-/**
- * Minify googlemap.js
- *
- * Always use concat before uglify else source map isn't generated correctly.
- */
-gulp.task('prod-scripts-google-map', function() {
-    return gulp.src('js/googlemap.js')
-        .pipe(concat('googlemap.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('../prod/js'));
-});
-
-
-/**
- * Minify modernizr.js.
- *
- * Always use concat before uglify else source map isn't generated correctly.
- */
-gulp.task('prod-scripts-modernizer', function() {
-    return gulp.src('js/modernizr-2.8.3.js')
-        .pipe(concat('modernizr-2.8.3.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('../prod/js'));
-});
-
-
-/**
- * Minify respond.js and htmlshiv.js.
- *
- * No concat just uglify and keep the same name.
- */
-gulp.task('prod-scripts-ltie10', function() {
-    return gulp.src(['js/respond.js', 'js/html5shiv.js'])
-        .pipe(uglify())
-        .pipe(gulp.dest('../prod/js'));
-});
-
-
-/**
- * Prod deploy
- *
- * Deploy the theme folder.
- */
-gulp.task('prod-deploy', function() {
-    rsync({
-        src: "../prod/",
+        src: "../dist/",
         dest: "CPANEL@DOMAIN:/home/CPANEL/public_html/wp-content/themes/THEMENAME",
         ssh: true,
         recursive: true,
@@ -544,57 +335,19 @@ gulp.task('prod-deploy', function() {
 
 
 /**
- * Set up prod task.
+ * Set up dist task.
  */
-gulp.task('prod', function() {
-    runSequence('prod-clean', 
-                'prod-move-files', 
-                'prod-move-fontawesome-fonts',                 
-                'prod-move-dir', 
-                'prod-styles', 
-                'prod-concat-plugin-styles', 
-                'prod-css-cache-buster',                 
-                'prod-scripts', 
-                'prod-scripts-google-map', 
-                'prod-scripts-modernizer',
-                'prod-scripts-ltie10', 
-                'prod-deploy'
+gulp.task('dist', function() {
+    runSequence('dist-clean',
+                'dist-move-files',
+                'dist-move-fontawesome-fonts',             
+                'dist-move-dir',
+                'dist-styles',
+                'dist-concat-plugin-styles',
+                'dist-css-cache-buster',    
+                'dist-scripts',
+                'dist-scripts-google-map',
+                'dist-scripts-ltie10'//,
+                //'dist-deploy'
             );
-})
-
-
-/* ------------------------------------------------------------------------ *
- * Copy parent files into child.
- * Run from parent theme directory.
- * 
- * gulp child-theme-setup
- *
- * Grab all folders and files in parent SASS folder.
- * Exclude style.scss file as this is already in the child theme and
- * contains Wordpress specific child theme info.
- * ------------------------------------------------------------------------ */
-
-/**
- * Copy parent SASS into child theme.
- */
-gulp.task('child-theme-sass', function() {
-    return gulp.src(['sass/**', '!sass/style.scss'])
-    .pipe(gulp.dest('../malinky-wp-starter-theme-child/sass'));
 });
-
-/**
- * Copy other files into child theme.
- */
-gulp.task('child-theme-files', function() {
-    return gulp.src(['gulpfile.js', 'package.json'])
-    .pipe(gulp.dest('../malinky-wp-starter-theme-child'));
-});
-
-/**
- * Run child-theme-setup task.
- */
-gulp.task('child-theme-setup', function() {
-    runSequence('child-theme-sass', 
-                'child-theme-files'
-            );
-})

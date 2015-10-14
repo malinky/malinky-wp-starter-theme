@@ -47,7 +47,6 @@ FOOTER
 POSTS AND PAGES
 ALIGNMENT
 GOOGLE MAPS
-OWL CAROUSEL
 CONTACT FORM
 PRINT
 MEDIA QUERIES
@@ -219,6 +218,13 @@ POSTS FOOTER
 
 @import "site/posts-footer";
 
+/*
+**********************************************************************
+PAGES
+**********************************************************************
+*/
+
+@import "site/pages";
 
 /*
 **********************************************************************
@@ -246,19 +252,13 @@ GOOGLE MAPS
 
 /*
 **********************************************************************
-OWL CAROUSEL
+PHOTOSWIPE
 **********************************************************************
 */
 
-@import "modules/owl-carousel";
-
-/*
-**********************************************************************
-CONTACT FORM
-**********************************************************************
-*/
-
-@import "modules/contact-form";
+@import "modules/photoswipe-variables";
+@import "modules/photoswipe";
+@import "modules/photoswipe-skin";
 
 /*
 **********************************************************************

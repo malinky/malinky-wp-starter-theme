@@ -1,15 +1,33 @@
 /*
  * Google maps.
  */
-#map-canvas {
+#malinky-map-canvas {
     max-width: 100%;
     height: 500px;
-    margin-bottom: 20px;
+    margin-bottom: $text-margin-bottom;
+}
+
+@media screen and (max-width: 480px) {
+
+    #malinky-map-canvas {
+        height: 300px;
+    }
+
+}
+
+.malinky-map-info-window {
+    width: 180px;
+    padding-right: 10px;
+}
+
+.malinky-map-info-window p {
+    font-size: 13px;
+    margin-bottom: 0;
 }
 
 /*
  * Sort out zoom controls.
  */
 .gm-style img {
-	max-width: none;
+    max-width: none;
 }

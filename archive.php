@@ -7,19 +7,19 @@
 
 get_header(); ?>
 
-<main role="main" class="wrap wrap-mobile">
+<!-- <main> in header() -->
 
 	<div class="col">
 
 		<div class="col-item col-item-7-10">
 			
-			<?php if ( have_posts() ) : ?>
+			<?php if ( have_posts() ) { ?>
 
 				<div class="col">
 					<div class="col-item col-item-full">
 						<header class="content-introduction">
-							<h1 class="content-introduction__title"><?php malinky_archive_title(); ?></h1>
-							<p class="content-introduction__description"><?php malinky_archive_description(); ?></p>
+							<h1 class="content-introduction__title" itemprop="name"><?php malinky_archive_title(); ?></h1>
+							<p class="content-introduction__description" itemprop="about"><?php malinky_archive_description(); ?></p>
 						</header><!-- .content-header -->
 					</div>
 				</div>
@@ -28,7 +28,7 @@ get_header(); ?>
 
 					<div class="col">
 						<div class="col-item col-item-full malinky-ajax-paging-content">
-							<?php get_template_part( 'content', get_post_format() ); ?>
+							<?php get_template_part( 'partials/archives/content', get_post_format() ); ?>
 						</div>
 					</div>	
 
@@ -36,15 +36,15 @@ get_header(); ?>
 
 				malinky_posts_pagination();
 
-			else : ?>
+			} else { ?>
 
 				<div class="col">
 					<div class="col-item col-item-full">
-						<?php get_template_part( 'content', 'none' ); ?>
+						<?php get_template_part( 'partials/general/content', 'none' ); ?>
 					</div>
 				</div>				
 
-			<?php endif; ?>
+			<?php } ?>
 			
 		</div><!--
 	

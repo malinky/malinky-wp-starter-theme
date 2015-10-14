@@ -5,26 +5,14 @@
 
 get_header(); ?>
 
-<main role="main" class="wrap wrap-mobile">
+<!-- <main> in header() -->
 
 	<div class="col">
-
-		<div class="col-item col-item-7-10">
-
-			<header class="content-header">
-				<h1 class="content-header__title">Oops! That page can&rsquo;t be found</h1>
-			</header><!-- .content-header -->
-
-		</div><!--
-	
-		--><div class="col-item col-item-3-10">
-		
-			<?php get_sidebar(); ?>
-
+		<div class="col-item">
+			<h1 class="bold-text">Sorry, that page can't be found.</h1>
 		</div>
+	</div>
 
-	</div><!-- .col -->
-
-</main><!-- .main -->
-
+</main><!-- #main -->
+	
 <?php get_footer(); ?>

@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-<main role="main" class="wrap wrap-mobile">
+<!-- <main> in header() -->
 
 	<div class="col">
 
@@ -15,7 +15,7 @@ get_header(); ?>
 
 			<div class="col">
 				<div class="col-item col-item-full">
-					<?php get_template_part( 'content', 'single' ); ?>
+					<?php get_template_part( 'partials/posts/content', 'single-guides' ); ?>
 				</div>
 			</div>
 

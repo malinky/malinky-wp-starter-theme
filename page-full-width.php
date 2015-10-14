@@ -7,13 +7,13 @@
 
 get_header(); ?>
 
-<main role="main" class="wrap wrap-mobile">
+<!-- <main> in header() -->
 
 	<?php while ( have_posts() ) : the_post(); ?>
 
 		<div class="col">
 			<div class="col-item col-item-full">
-				<?php get_template_part( 'content', 'page' ); ?>
+				<?php get_template_part( 'partials/pages/content', 'page' ); ?>
 			</div>
 		</div>
 
