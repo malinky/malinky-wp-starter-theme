@@ -554,9 +554,6 @@ jQuery(document).ready(function($){
                     malinkyHiDensitySwap($(this), 'src', /-(\d)+x(\d)+/i, '-600x440', 'data-original');
                 }
             });
-            $('.barber-image__inner__img').each(function(index) {
-                malinkyHiDensitySwap($(this), 'src', /-(\d)+x(\d)+/i, '-600x600', 'data-original');
-            });
         }
     });
 
