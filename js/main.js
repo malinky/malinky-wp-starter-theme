@@ -1,31 +1,3 @@
-/* ------------------------------------------------------------------------ *
- * JavaScript
- * ------------------------------------------------------------------------ */
-
-/**
- * Mobile navigation.
- * Ensure mobile nav is always hidden when back / forward cache is used. 
- */
-function pageShown(evt)
-{
-    if (evt.persisted) {
-
-        $('.mobile-navigation').hide();
-
-    }
-}
-
-if(window.addEventListener) {
-
-  window.addEventListener("pageshow", pageShown, false);
-
-} else {
-
-  window.attachEvent("pageshow", pageShown, false);
-
-}
-
-
 /**
  * Is high density screen.
  * Uses min-resoution and prefixes, then device pixel ratio.
@@ -429,23 +401,42 @@ jQuery(document).ready(function($){
 
 
     /*
-     * Toggle mobile navigation.
+     * Mobile navigation function.
      */
-    $('#mobile-navigation-toggle-id').click(function(event) {
+    var mobileNavigation = function() {
+
+        var toggleId = $('#mobile-navigation-toggle-id');
 
         $('.mobile-navigation-bar').toggleClass('mobile-navigation-bar--on');
         $('.mobile-navigation').toggleClass('mobile-navigation-show');
         
-        $(this).toggleClass('collapsed');
+        $(toggleId).toggleClass('collapsed');
 
-        if ($(this).hasClass('collapsed')) {
-            $(this).attr('aria-expanded', false);
+        if ($(toggleId).hasClass('collapsed')) {
+            $(toggleId).attr('aria-expanded', false);
         } else {
-            $(this).attr('aria-expanded', true);
+            $(toggleId).attr('aria-expanded', true);
         }
 
+    }
+
+
+    /*
+     * Toggle mobile navigation.
+     */
+    $('#mobile-navigation-toggle-id').click(function(event) {
+        mobileNavigation();
         event.preventDefault();
 
+    });
+
+
+    /*
+     * Close mobile navigation when a link is clicked.
+     * Ensures it's closed on back button click.
+     */
+    $('.mobile-navigation a').click(function() {
+        mobileNavigation();
     });
 
 
