@@ -189,8 +189,8 @@ gulp.task('default', function() {
 /**
  * Delete all contents of dist folder.
  */
-gulp.task('dist-clean', function (cb) {
-    del('../dist/*', {force:true}, cb);
+gulp.task('dist-clean', function () {
+    del('../dist/*');
 });
 
 
@@ -217,7 +217,7 @@ gulp.task('dist-move-fontawesome-fonts', function() {
   * Move js and SASS to be used with sourcemaps.
   */
 gulp.task('dist-move-dir', function() {
-    return gulp.src(['functions/**', 'img/**', 'js/**', 'languages/**', 'sass/**'], { base: './'} )
+    return gulp.src(['functions/**', 'img/**', 'js/**', 'languages/**', 'partials/**', 'sass/**'], { base: './'} )
         .pipe(gulp.dest('../dist'));
 });
 
@@ -230,7 +230,7 @@ gulp.task('dist-move-dir', function() {
  * This makes things appear in the correct folders when viewing through developer tools.
  */
 gulp.task('dist-styles', function() {
-    return sass('sass', { sourcemap: true, style: 'compressed' })
+    return sass('sass/**', { sourcemap: true, style: 'compressed' })
     .on('error', function (err) {console.error('SASS Error - ', err.message);})
     .pipe(autoprefixer({browsers: ['last 5 versions']}))
     .pipe(sourcemaps.write('sourcemaps', {includeContent: false, sourceRoot: '../sass'}))
