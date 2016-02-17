@@ -152,7 +152,7 @@
 				<nav class="main-navigation" role="navigation">
 					<?php
 			        $args = array(
-			            'theme_location'    => 'primary_navigation',
+			            'theme_location'    => 'main_navigation',
 			            'container'   		=> false
 			        );
 			        ?>
@@ -173,7 +173,7 @@
 					<nav class="main-navigation main-navigation--fixed" role="navigation">
 						<?php
 				        $args = array(
-				            'theme_location'    => 'primary_navigation',
+				            'theme_location'    => 'main_navigation',
 				            'container'   		=> false
 				        );
 				        ?>
@@ -200,7 +200,7 @@
 				<nav class="mobile-navigation" role="navigation">
 					<?php
 			        $args = array(
-			            'theme_location'    => 'primary_navigation',
+			            'theme_location'    => 'mobile_navigation',
 			            'container'   		=> false
 			        );
 			        ?>
