@@ -7,6 +7,15 @@ function isHighDensity() {
     return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 124dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (min-device-pixel-ratio: 1.3)').matches)) || (window.devicePixelRatio && window.devicePixelRatio > 1.3));
 }
 
+/**
+ * Back forward nav issue ios.
+ */
+window.onpageshow = function(event) {
+    if (event.persisted) {
+        document.querySelector('.mobile-navigation').classList.remove('mobile-navigation-show');
+        document.querySelector('#mobile-navigation-toggle-id').classList.add('collapsed');
+    }
+};
 
 /* ------------------------------------------------------------------------ *
  * Packery
@@ -428,15 +437,6 @@ jQuery(document).ready(function($){
         mobileNavigation();
         event.preventDefault();
 
-    });
-
-
-    /*
-     * Close mobile navigation when a link is clicked.
-     * Ensures it's closed on back button click.
-     */
-    $('.mobile-navigation a').click(function() {
-        mobileNavigation();
     });
 
 
