@@ -91,14 +91,11 @@
     top: $navigation-mobile-height; /* 1 */ 
     padding: 0;
     margin: 0;
-    -webkit-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    -moz-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    -o-transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     background: $navigation-mobile-background-color; /* 2 */
 }
 
 .mobile-navigation-show {
+    transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     left: 0;
 }
 
