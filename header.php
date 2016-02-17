@@ -190,11 +190,17 @@
 
 		<div id="mobile-navigation-id" class="col col--gutterless">
 			<div class="col-item col-item-4-10">
-				<a href="" id="mobile-navigation-navicon" class="image-font"><span class="navicon-menu image-font__sizing image-font__fontawesome fa-bars"></span></a>
+				<a href="" id="mobile-navigation-toggle-id" class="mobile-navigation-toggle collapsed" aria-expanded="false">
+					<span class="mobile-navigation-toggle__bar"></span>
+					<span class="mobile-navigation-toggle__bar"></span>
+					<span class="mobile-navigation-toggle__bar"></span>
+				</a>
 			</div><!--
 			--><div class="col-item col-item-6-10 col-item--align-right">
-	    		<a href="mailto:" class="image-font"><span class="navicon-contact image-font__sizing image-font__fontawesome fa-envelope"></span></a>
-	    		<a href="tel:" class="image-font"><span class="navicon-contact image-font__sizing image-font__fontawesome fa-phone"></span></a>
+				<div class="mobile-navigation-bar__social">
+					<a href="tel:+44<?php echo esc_html( str_replace( ' ', '', get_field( 'malinky_settings_contact_phone_number', 'option' ) ) ); ?>" class="image-font"><span class="image-font__fontawesome fa-phone"></span></a>
+					<a href="mailto:<?php echo esc_html( str_replace( ' ', '', get_field( 'malinky_settings_contact_email_address', 'option' ) ) ); ?>" class="image-font"><span class="image-font__fontawesome fa-envelope"></span></a>
+				</div>
 	  		</div>
 			<div class="col-item col-item-full">
 				<nav class="mobile-navigation" role="navigation">
