@@ -194,6 +194,7 @@
 					<span class="mobile-navigation-toggle__bar"></span>
 					<span class="mobile-navigation-toggle__bar"></span>
 					<span class="mobile-navigation-toggle__bar"></span>
+					<span class="mobile-navigation-toggle__text">Menu</span>
 				</a>
 			</div><!--
 			--><div class="col-item col-item-6-10 col-item--align-right">
