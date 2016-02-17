@@ -4,16 +4,70 @@
  * 1. Set to 41px keeps the main section at 40px especially when used with a bottom border.
  */
 .mobile-navigation-bar {
-    font-family: $navigation-mobile-font-family;
-    font-size: $navigation-mobile-font-size;
     display: none;
     position: fixed;
-    width: 100%; 
-    z-index: 9997;
-    background: $navigation-mobile-bar-background-color;
-    height: $navigation-mobile-height; /* 1 */
     top: 0px;
+    font-family: $navigation-mobile-font-family;
+    font-size: $navigation-mobile-font-size;
     border-bottom: $navigation-mobile-seperator;
+    width: 100%; 
+    z-index: 998;
+    background-color: $navigation-mobile-bar-background-color;
+    height: $navigation-mobile-height; /* 1 */
+}
+
+.mobile-navigation-toggle {
+    display: inline-block;
+    padding: 12px 10px 12px 10px;
+    cursor: pointer;
+}
+
+.mobile-navigation-toggle__bar {
+    display: block;
+    width: 22px;
+    height: 3px;
+    transform-origin: 1px;
+    transition: transform 0.3s;
+    background: #fff;
+}
+
+.mobile-navigation-toggle__bar + .mobile-navigation-toggle__bar {
+    margin-top: 4px;
+}
+
+.mobile-navigation-toggle:not(.collapsed) .mobile-navigation-toggle__bar:nth-child(1) {
+    transform: rotate(45deg);
+}
+
+.mobile-navigation-toggle:not(.collapsed) .mobile-navigation-toggle__bar:nth-child(2) {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.mobile-navigation-toggle:not(.collapsed) .mobile-navigation-toggle__bar:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+.mobile-navigation-bar__social {
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 38px;
+}
+
+.mobile-navigation-bar__social a {
+    width: 41px;
+    text-align: center;
+    margin-left: -4px;
+    font-size: 1.4em;
+    color: #fff;
+    border-left: 1px solid $navigation-mobile-link-background-color-hover;
+}
+
+.mobile-navigation-bar__social a:hover,
+.mobile-navigation-bar__social a:focus,
+.mobile-navigation-bar__social a:active {
+    text-decoration: none;
 }
 
 /*
