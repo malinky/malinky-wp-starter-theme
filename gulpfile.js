@@ -149,7 +149,7 @@ gulp.task('critical-render-css', function() {
  * This makes things appear in the correct folders when viewing through developer tools.
  */
 gulp.task('styles', function() {
-    return sass('sass', { sourcemap: true, style: 'expanded' })
+    return sass('sass/**', { sourcemap: true, style: 'expanded' })
     .on('error', function (err) {console.error('SASS Error - ', err.message);})
     .pipe(autoprefixer({browsers: ['last 5 versions']}))
     .pipe(sourcemaps.write('sourcemaps', {includeContent: false, sourceRoot: '../sass'}))
