@@ -3,6 +3,8 @@
  * The template for displaying all archive pages.
  *
  * This can be overwritten with author.php, category.php, taxonomy.php, date.php, tag.php.
+ *
+ * @package Malinky Media
  */
 
 get_header(); ?>
@@ -28,7 +30,7 @@ get_header(); ?>
 
 					<div class="col">
 						<div class="col-item col-item-full malinky-ajax-paging-content">
-							<?php get_template_part( 'partials/archives/content', get_post_format() ); ?>
+							<?php get_template_part( 'partials/posts/content', get_post_format() ); ?>
 						</div>
 					</div>	
 
@@ -40,7 +42,7 @@ get_header(); ?>
 
 				<div class="col">
 					<div class="col-item col-item-full">
-						<?php get_template_part( 'partials/general/content', 'none' ); ?>
+						<?php get_template_part( 'partials/posts/content', 'none' ); ?>
 					</div>
 				</div>				
 
@@ -58,4 +60,4 @@ get_header(); ?>
 
 </main><!-- .main -->
 
-<?php get_footer(); ?>
+<?php get_footer();

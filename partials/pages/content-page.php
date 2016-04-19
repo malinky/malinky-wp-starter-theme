@@ -1,3 +1,10 @@
+<?php
+/**
+ * The template part for a page.
+ *
+ * @package Malinky Media
+ */
+?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/ItemPage">
 
 	<h1 class="col--align-center" itemprop="name"><?php echo esc_html( bloginfo( 'name' ) ); ?></h1>
@@ -20,4 +27,4 @@
 		</div>
 	<?php } ?>
 
-</article><!-- #post-## -->
+</article>

@@ -55,7 +55,6 @@ function malinky_google_map_shortcode( $atts )
 		
 }
 
-
 /* ------------------------------------------------------------------------ *
  * Recent Posts Shortcode
  * ------------------------------------------------------------------------ */
@@ -130,7 +129,6 @@ function malinky_recent_posts( $atts )
 
 }
 
-
 /* ------------------------------------------------------------------------ *
  * Phone Number Shortcode
  * ------------------------------------------------------------------------ */
@@ -149,7 +147,6 @@ function malinky_phone_number()
 
 }
 
-
 /* ------------------------------------------------------------------------ *
  * Email Shortcode
  * ------------------------------------------------------------------------ */
@@ -167,7 +164,6 @@ function malinky_email()
 	return get_field( 'malinky_settings_contact_email_address', 'option' );
 
 }
-
 
 /* ------------------------------------------------------------------------ *
  * Display Font Awesome Icon With Link
@@ -199,61 +195,5 @@ function malinky_font_awesome( $atts )
 	$output = '<span style="margin-right: 10px;">' . esc_html( $atts['fa_link_text'] ) . '</span><a href="' . esc_url( $atts['fa_link'] ) . '" class="image-font" target="_blank"><span class="image-font__fontawesome ' . esc_attr( $atts['fa_icon'] ) . '"></span></a>';
 
 	return $output;
-
-}
-
-
-/* ------------------------------------------------------------------------ *
- * Output Packery Gallery
- * ------------------------------------------------------------------------ */
-
-/**
- * Shortcode to display a packery gallery in a post
- *
- * [malinky-post-packery
- * ids = Comma seperated list of ids.
- * ]
- */
-add_shortcode( 'malinky-post-packery', 'malinky_post_packery' );
-
-function malinky_post_packery( $atts )
-{
-
-	$atts = shortcode_atts(
-		array(
-	        'ids' 	=> '',
-    	),
-		$atts,
-		'malinky-post-packery'
-	); 
-
-	$attachmentIds = explode( ',', $atts['ids'] );
-
-	foreach ( $attachmentIds as $id ) {
-		$attachments[] = acf_get_attachment( $id );
-	}
-
-	ob_start(); ?>
-
-	<div id="malinky-gallery-<?php echo rand(1, 100); ?>" class="malinky-gallery malinky-gallery--blog packery-container malinky-fade-in-long-delay<?php echo get_sub_field( 'column_spacing_type' ) == 'padding' || get_sub_field( 'column_spacing_type' ) == 'margin-bottom' ? ' col--' . esc_attr( get_sub_field( 'column_spacing_type' ) ) . '-' . esc_attr( get_sub_field( 'column_spacing_value' ) ) : ''; ?>" itemscope itemtype="http://schema.org/ImageGallery">
-		<meta itemprop="about" content="<?php echo esc_attr( get_the_title() ); ?> Project Photos by Malinky Media" />
-		<div class="packery-gutter"></div>
-		<?php 
-		$malinkyImageCount = 0;
-		foreach ( $attachments as $key => $malinkyImage ) { ?>
-			<div class="packery-item packery-item--half">
-				<?php $malinkyImageSize = 'mm_projects_400'; ?>
-				<div class="packery-image" itemscope itemtype="http://schema.org/ImageObject" data-image-index="<?php echo esc_attr( $malinkyImageCount ); ?>">
-					<a href="<?php echo esc_url( $malinkyImage['url'] ); ?>" itemprop="contentUrl image" data-image-size-large="<?php echo esc_attr( $malinkyImage['width'] ); ?>x<?php echo esc_attr( $malinkyImage['height'] ); ?>" data-image-medium="<?php echo esc_url( $malinkyImage['sizes']['mm_projects_960'] ); ?>" data-image-size-medium="<?php echo esc_attr( $malinkyImage['sizes']['mm_projects_960-width'] ); ?>x<?php echo esc_attr( $malinkyImage['sizes']['mm_projects_960-height'] ); ?>" class="malinky-photoswipe-image">
-						<img data-original="<?php echo esc_url( $malinkyImage['sizes']['mm_projects_400'] ); ?>" data-original-malinky="<?php echo esc_attr( $malinkyImageSize ); ?>" class="packery-image__img lazy" itemprop="thumbnail" />
-						<span class="packery-image__expand"></span>
-					</a>
-				</div>
-			</div>
-			<?php $malinkyImageCount++; ?>
-		<?php } ?>
-	</div>
-
-	<?php return ob_get_clean();
 
 }

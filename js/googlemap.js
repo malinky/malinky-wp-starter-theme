@@ -3,8 +3,7 @@
  */    
 function malinky_initialize()
 {
-
-    //If not map-canvas element.
+    // If not map-canvas element.
     if ( ! document.getElementById( 'malinky-map-canvas' ) ) return;
 
     var mapOptions = {
@@ -71,7 +70,6 @@ function malinky_initialize()
         }
 
     }
-
 
     /*
      * Center on resize.

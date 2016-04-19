@@ -6,6 +6,8 @@
  * Only if front-page.php doesn't exist as that takes precedence.
  *
  * Or set Front page displays = A static page. (Remember to remove front-page.php from theme).
+ *
+ * @package Malinky Media
  */
 
 get_header(); ?>
@@ -52,4 +54,4 @@ get_header(); ?>
 
 </main><!-- .main -->
 
-<?php get_footer(); ?>								
+<?php get_footer();

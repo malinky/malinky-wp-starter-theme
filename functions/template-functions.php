@@ -4,7 +4,6 @@
  * ------------------------------------------------------------------------ */
 
 if ( ! function_exists( 'malinky_is_blog_page' ) ) {
-
 	/**
 	 * Check if current page is the blog home page, archive or single.
 	 * Archive includes category, tag, date, author pages.
@@ -27,12 +26,9 @@ if ( ! function_exists( 'malinky_is_blog_page' ) ) {
 	    return ( ( is_home() || is_archive() || is_single() ) && ( $post_type == 'post' ) );
 
 	}
-
 }
 
-
 if ( ! function_exists( 'malinky_cpt_menu_item_classes' ) ) {
-
 	/**
 	 * Add current_page_parent class to Custom Post Type menu items.
 	 * Works on a CPT archive, single or custom taxonomy and multiple CPT at once.
@@ -47,7 +43,6 @@ if ( ! function_exists( 'malinky_cpt_menu_item_classes' ) ) {
 	 */
 	function malinky_cpt_menu_item_classes( $classes, $item )
 	{
-
 		/*
 		 * Get array of all custom post types, not builtin.
 		 */
@@ -95,22 +90,23 @@ if ( ! function_exists( 'malinky_cpt_menu_item_classes' ) ) {
 		return $classes;
 
 	}
-
 	add_filter( 'nav_menu_css_class', 'malinky_cpt_menu_item_classes', 10, 2 );
-
 }
-
 
 /**
  * Move archive/category count (1) inline as they sit underneath due to links in the sidebar being display: block;
  * @param  str $links The output string of links
  * @return str
  */
+/*
 function malinky_post_count_inline( $links )
 {
 	$links = preg_replace('/<\/a>.*\(([0-9]+)\)/', ' <span class="cat-count">($1)</span></a>', $links);
 	return $links;
 }
+*/
 
-/*add_filter( 'get_archives_link', 'malinky_post_count_inline' );
-add_filter( 'wp_list_categories', 'malinky_post_count_inline' );*/
+/*
+add_filter( 'get_archives_link', 'malinky_post_count_inline' );
+add_filter( 'wp_list_categories', 'malinky_post_count_inline' );
+*/

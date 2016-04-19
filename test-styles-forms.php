@@ -1,6 +1,8 @@
 <?php
 /**
  * Template Name: Test Styles Forms
+ *
+ * @package Malinky Media
  */
 
 get_header(); ?>
@@ -227,4 +229,4 @@ The cat was playing in the garden.
 
 </form>
 
-<?php get_footer(); ?>
+<?php get_footer();

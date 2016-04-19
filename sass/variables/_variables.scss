@@ -3,12 +3,16 @@
  */
 $font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-family-heading: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-size-base: 0.9375em; /*15.5/16*/
+$font-size-base: 0.9375em; /*15/16*/
 
 /*
  * Colors
  */
 $text-color: #666;
+$brand-color: #f47b20;
+$secondary-color: #9c0009;
+// Seems silly but on darker sites might want to replace all whites with another color.
+$white: #fff;
 
 /*
  * Social Media
@@ -19,7 +23,7 @@ $googleplus: #dd4c39;
 $linkedin: #0274b3;
 
 /* Text */
-$text-margin-bottom: 21px;
+$text-margin-bottom: 20px;
 $link-color: $text-color;
 $link-color-hover: $text-color;
 
@@ -50,17 +54,17 @@ $link-color-hover: $text-color;
  * 5. Text color of the links that slide in.
  */
 $navigation-mobile-height: 41px;
-$navigation-mobile-bar-background-color: #f47b20; /* 1 */
-$navigation-mobile-bar-link-color: #fff; /* 2 */
-$navigation-mobile-bar-seperator: 1px solid #fff;
-$navigation-mobile-background-color: #f47b20; /* 3 */
-$navigation-mobile-link-background-color: #f47b20; /* 4 */
-$navigation-mobile-link-background-color-hover: #9c0009; /* 4 */
-$navigation-mobile-link-color: #fff; /* 5 */
-$navigation-mobile-link-color-hover: #fff; /* 5 */
+$navigation-mobile-bar-background-color: $brand-color; /* 1 */
+$navigation-mobile-bar-link-color: $white; /* 2 */
+$navigation-mobile-bar-seperator: 1px solid $white;
+$navigation-mobile-background-color: $brand-color; /* 3 */
+$navigation-mobile-link-background-color: $brand-color; /* 4 */
+$navigation-mobile-link-background-color-hover: $secondary-color; /* 4 */
+$navigation-mobile-link-color: $white; /* 5 */
+$navigation-mobile-link-color-hover: $white; /* 5 */
 $navigation-mobile-font-family: $font-family;
 $navigation-mobile-font-size: 1em; /* 14/14 */
-$navigation-mobile-seperator: 1px solid #fff;
+$navigation-mobile-seperator: 1px solid $white;
 
 /*
  * Main header image.
@@ -74,9 +78,9 @@ $main-header-image-mobile-height: 310px;
 /*
  * Button
  */
-$button-background-color: #f47b20;
-$button-background-color-hover: #f47b20;
-$button-text-color: #fff;
+$button-background-color: $brand-color;
+$button-background-color-hover: $secondary-color;
+$button-text-color: $white;
 $button-font-family: $font-family-heading;
 
 /*
@@ -84,14 +88,14 @@ $button-font-family: $font-family-heading;
  */
 $form-placeholder-color: #bababa;
 
-$border-color: #f47b20;
+$border-color: $brand-color;
 
 $back-to-top-color: $text-color;
-$back-to-top-color-hover: $text-color;
+$back-to-top-color-hover: $secondary-color;
 
-$footer-background-color: #f47b20;
-$footer-border: 5px solid #f47b20;
+$footer-background-color: $brand-color;
+$footer-border: 5px solid $brand-color;
 
-$button-background-color: #f47b20;
-$button-background-color-hover: #9c0009;
-$button-text-color: #fff;
+$button-background-color: $brand-color;
+$button-background-color-hover: $secondary-color;
+$button-text-color: $white;

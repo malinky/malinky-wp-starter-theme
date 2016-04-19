@@ -2,14 +2,11 @@
 /**
  * The template for displaying the footer.
  *
- * Contains the closing of the #content div and all content after
- *
  * @package Malinky Media
  */
 ?>
 
 <footer class="main-footer wrap" role="contentinfo">
-
 	<div class="col">
 		<div class="col-item col-item-half main-footer__navigation">
 			<nav class="footer-navigation" role="navigation">
@@ -26,7 +23,6 @@
 			<?php echo bloginfo( 'name' ); ?> &copy; <?php echo date('Y'); ?>
 		</div>
 	</div>
-
 </footer><!-- .main-footer -->
 
 <a class="back-top fa-angle-up"></a>

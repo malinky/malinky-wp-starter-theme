@@ -10,7 +10,7 @@ var del             = require('del');
 var minifyCSS       = require('gulp-minify-css');
 var rename          = require('gulp-rename');
 var replace         = require('gulp-replace');
-var rsync           = require("rsyncwrapper").rsync;
+var rsync           = require("rsyncwrapper");
 var runSequence     = require('run-sequence');
 var sass            = require('gulp-ruby-sass');
 var sourcemaps      = require('gulp-sourcemaps');
@@ -156,14 +156,12 @@ gulp.task('styles', function() {
     .pipe(gulp.dest('./'));
 });
 
-
 /**
  * Watch files for changes.
  */
 gulp.task('watch', function() {
     gulp.watch('sass/**/*.scss', ['styles']);
 });
-
 
 /**
  * Set up default (local) task.
@@ -173,7 +171,6 @@ gulp.task('default', function() {
                 'watch'
     );
 })
-
 
 /* ------------------------------------------------------------------------ *
  * Dist
@@ -193,7 +190,6 @@ gulp.task('dist-clean', function () {
     del('../dist/*');
 });
 
-
 /**
   * Move root .php files.
   */
@@ -201,7 +197,6 @@ gulp.task('dist-move-files', function() {
     return gulp.src(['*.php', 'screenshot.png', 'style-critical.css', '!test-styles-forms.php', '!test-styles-image-alignment.php', '!test-styles-typography.php'])
         .pipe(gulp.dest('../dist'));
 });
-
 
 /**
   * Move fontawesome fonts.
@@ -211,7 +206,6 @@ gulp.task('dist-move-fontawesome-fonts', function() {
         .pipe(gulp.dest('../dist/fonts'));
 });
 
-
 /**
   * Move root directories and their contents.
   * Move js and SASS to be used with sourcemaps.
@@ -220,7 +214,6 @@ gulp.task('dist-move-dir', function() {
     return gulp.src(['functions/**', 'img/**', 'js/**', 'languages/**', 'partials/**', 'sass/**'], { base: './'} )
         .pipe(gulp.dest('../dist'));
 });
-
 
 /**
  * Compile our SASS, autoprefix and create sourcemap.
@@ -237,7 +230,6 @@ gulp.task('dist-styles', function() {
     .pipe(gulp.dest('../dist'));
 });
 
-
 /**
  * Pull in the plugin styles into main style.css.
  * Add to the compiled sass from dist-styles.
@@ -253,7 +245,6 @@ gulp.task('dist-concat-plugin-styles', function() {
         .pipe(gulp.dest('../dist'));
 });
 
-
 /**
  * Cache buster for the inline and async references to styles.css in header.php
  */
@@ -265,7 +256,6 @@ gulp.task('dist-css-cache-buster', function() {
         .pipe(gulp.dest('../dist'));
 })
 
-
 /**
  * Concat (rename) and minify our JS.
  *
@@ -275,14 +265,13 @@ gulp.task('dist-css-cache-buster', function() {
  * Don't minimize respond.js as it's only loaded in IE8 from the footer.
  */
 gulp.task('dist-scripts', function() {
-    return gulp.src(['js/packery.pkgd.min.js', 'js/*.js', 'node_modules/jquery-lazyload/jquery.lazyload.js', '!js/googlemap.js', '!js/html5shiv.js', '!js/respond.js'])
+    return gulp.src(['js/*.js', 'node_modules/jquery-lazyload/jquery.lazyload.js', '!js/googlemap.js', '!js/html5shiv.js', '!js/respond.js'])
         .pipe(sourcemaps.init())
         .pipe(concat('scripts.min.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write('../sourcemaps', {includeContent: false, sourceRoot: '../js'}))
         .pipe(gulp.dest('../dist/js'));
 });
-
 
 /**
  * Minify googlemap.js
@@ -296,7 +285,6 @@ gulp.task('dist-scripts-google-map', function() {
         .pipe(gulp.dest('../dist/js'));
 });
 
-
 /**
  * Minify respond.js and htmlshiv.js
  *
@@ -307,7 +295,6 @@ gulp.task('dist-scripts-ltie10', function() {
         .pipe(uglify())
         .pipe(gulp.dest('../dist/js'));
 });
-
 
 /**
  * Dist deploy
@@ -332,7 +319,6 @@ gulp.task('dist-deploy', function() {
         }
     })
 })
-
 
 /**
  * Set up dist task.

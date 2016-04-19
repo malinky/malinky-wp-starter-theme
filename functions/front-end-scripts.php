@@ -51,7 +51,6 @@ function malinky_scripts()
 		 */
 		wp_enqueue_style( 'malinky-style', get_stylesheet_uri() );		
 
-
 		/**
 		 * Font awesome font.
 		 *
@@ -63,21 +62,6 @@ function malinky_scripts()
 						   NULL
 		);
 		wp_enqueue_style( 'malinky-font-awesome' );
-
-
-		/**
-		 * Images Loaded
-		 *
-		 * @link https://github.com/desandro/imagesloaded
-		 */		
-		wp_register_script( 'malinky-imagesloaded-js', 
-						   	get_template_directory_uri() . '/js/imagesloaded.pkgd.js', 
-						   	false, 
-						   	NULL,
-							true
-		);
-		wp_enqueue_script( 'malinky-imagesloaded-js' );
-
 
 		/**
 		 * Matchmedia polyfill
@@ -92,7 +76,6 @@ function malinky_scripts()
 		);
 		wp_enqueue_script( 'malinky-matchmedia-js' );
 
-
 		/**
 		 * Matchmedia polyfill
 		 *
@@ -106,7 +89,6 @@ function malinky_scripts()
 		);
 		wp_enqueue_script( 'malinky-matchmedialistener-js' );
 
-
 		/**
 		 * Lazy Load
 		 *
@@ -119,49 +101,6 @@ function malinky_scripts()
 							true
 		);
 		wp_enqueue_script( 'malinky-lazyload-js' );
-
-
-		/**
-		 * Packery
-		 *
-		 * @link http://packery.metafizzy.co/
-		 */
-		wp_register_script( 'malinky-packery-js',
-							get_template_directory_uri() . '/js/packery.pkgd.min.js',
-							false, 
-							NULL,
-							true
-		);
-		wp_enqueue_script( 'malinky-packery-js' );
-
-
-		/**
-		 * Photoswipe.
-		 *
-		 * @link http://photoswipe.com/
-		 */
-		wp_register_script( 'malinky-gallery-photoswipe-js',
-							get_template_directory_uri() . '/js/photoswipe.js',
-							false,
-							NULL,
-							true
-		);
-		wp_enqueue_script( 'malinky-gallery-photoswipe-js' );	
-
-
-		/**
-		 * Photoswipe UI.
-		 *
-		 * @link http://photoswipe.com/
-		 */
-		wp_register_script( 'malinky-gallery-photoswipe-ui-js',
-							get_template_directory_uri() . '/js/photoswipe-ui.js',
-							false,
-							NULL,
-							true
-		);
-		wp_enqueue_script( 'malinky-gallery-photoswipe-ui-js' );
-
 
 		/*
 		 * Malinky Media related javascript and jQuery.
@@ -184,13 +123,9 @@ function malinky_scripts()
 		 * -------------------------------- */
 
 		/*
-		 * imagesloaded.pkgd.js
 		 * matchMedia.js
 		 * matchMedia.addListener.js
 		 * jquery.lazyload.js
-		 * packery.pkgd.min.js
-		 * photoswipe.js
-		 * photoswipe-ui.js
 		 * main.js
 		 */
 		wp_register_script( 'malinky-scripts-min-js',
@@ -245,7 +180,6 @@ function malinky_scripts()
 
 			/* --------------- *
 			 * Local
-			 * No API Key
 			 * --------------- */
 
 			if ( WP_ENV == 'local' ) {
@@ -266,7 +200,6 @@ function malinky_scripts()
 				wp_localize_script( 'malinky-googlemap-js', 'google_map_settings', $google_map_settings );
 				wp_enqueue_script( 'malinky-googlemap-js' );
 
-
 				/**
 				 * Load Google maps API without key.
 				 * Uses malinky_initialize function which is in googlemap.js.
@@ -275,7 +208,7 @@ function malinky_scripts()
 				 * @link https://developers.google.com/maps/documentation/javascript/tutorial
 				 */
 				wp_register_script( 'malinky-googlemap-api-js', 
-									'https://maps.googleapis.com/maps/api/js?callback=malinky_initialize', 
+									'https://maps.googleapis.com/maps/api/js?key=' . $google_map_settings['api_key'] . '&callback=malinky_initialize', 
 									false, 
 									NULL, 
 									true
@@ -307,12 +240,6 @@ function malinky_scripts()
 				wp_localize_script( 'malinky-googlemap-min-js', 'google_map_settings', $google_map_settings );
 				wp_enqueue_script( 'malinky-googlemap-min-js' );
 
-
-				/*
-				 * Get my default API Key if one isn't set.
-				 */
-				$google_map_settings['api_key'] == '' ? 'AIzaSyBC4B2o5cX8GuFyKrh1CpwtdVz7-j5ccOg' : $google_map_settings['api_key'];
-
 				/**
 				 * Load Google maps API without key.
 				 * Uses malinky_initialize function which is in googlemap.js.
@@ -328,7 +255,6 @@ function malinky_scripts()
 				);
 
 			}
-
 			wp_enqueue_script( 'malinky-googlemap-api-js' );
 
 		}	
@@ -336,7 +262,6 @@ function malinky_scripts()
 }
 
 add_action( 'wp_enqueue_scripts', 'malinky_scripts' );
-
 
 /**
  * Filter to amend the script tags that are loaded.

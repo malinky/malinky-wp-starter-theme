@@ -1,6 +1,8 @@
 <?php
 /**
  * The template part for displaying ACF flexible content.
+ *
+ * @package Malinky Media
  */
 
 if ( have_rows( 'blocks' ) ) :
@@ -13,13 +15,7 @@ if ( have_rows( 'blocks' ) ) :
 
         		include 'content-flexible-content-text-block.php';
 
-			break;
-
-            case 'gallery_block':
-
-                include 'content-flexible-content-gallery-packery.php';
-
-            break;         
+			break;       
 
             case 'shortcode_block':
 
@@ -34,5 +30,3 @@ if ( have_rows( 'blocks' ) ) :
 else :
 
 endif;
-
-?>

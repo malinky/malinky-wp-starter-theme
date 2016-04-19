@@ -1,6 +1,8 @@
 <?php
 /**
  * Template Name: Test Styles Alignment
+ *
+ * @package Malinky Media
  */
 
 get_header(); ?>
@@ -37,4 +39,4 @@ get_header(); ?>
 
 <figure><img class="size-full wp-image-904 alignleft" title="Image Alignment 150x150" src="http://wpthemetestdata.files.wordpress.com/2013/03/image-alignment-150x150.jpg" alt="Image Alignment 150x150" width="150" height="150" /><figcaption class="aligncenter">This is a caption</figcaption></figure>
 
-<?php get_footer(); ?>
+<?php get_footer();

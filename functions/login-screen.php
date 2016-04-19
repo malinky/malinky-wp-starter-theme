@@ -64,6 +64,7 @@ function malinky_login_screen()
 		    border: none;
 		    border-radius: 0;
 		    box-shadow: none;
+            text-shadow: none;
         }
         body.login .button-primary:hover,
         body.login .button-primary:focus,

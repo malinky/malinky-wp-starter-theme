@@ -3,6 +3,8 @@
  * Template Name: Full Width
  *
  * The template for displaying full width pages. Template chosen from admin.
+ *
+ * @package Malinky Media
  */
 
 get_header(); ?>
@@ -21,4 +23,4 @@ get_header(); ?>
 
 </main><!-- #main -->
 	
-<?php get_footer(); ?>
+<?php get_footer();

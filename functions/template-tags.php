@@ -11,7 +11,6 @@
  */
 function malinky_get_page_names( $default )
 {
-
 	$malinky_all_pages = '';
 	$malinky_page_titles = '';
 	
@@ -28,9 +27,7 @@ function malinky_get_page_names( $default )
 	}
 
 	return $malinky_page_titles;
-
 }
-
 
 /**
  * Climb to parent page and return slug.
@@ -53,7 +50,6 @@ function malinky_tree()
 	return $parent_post_name;
 }
 
-
 /**
  * Get a page ID from the slug.
  *
@@ -70,7 +66,6 @@ function malinky_id_by_slug( $post_slug )
     }
 }
 
-
 /**
  * Get a term_id, name or slug from the category taxonomy
  *
@@ -80,7 +75,6 @@ function malinky_id_by_slug( $post_slug )
  */
 function malinky_get_the_category( $post_id = '', $return = 'slug' )
 {
-
 	$return_values = array( 'term_id', 'name', 'slug' );
 
 	if ( ! in_array( $return, $return_values ) ) return;
@@ -97,9 +91,7 @@ function malinky_get_the_category( $post_id = '', $return = 'slug' )
 	}
 }
 
-
 if ( ! function_exists( 'malinky_truncate_words' ) ) {
-
 	/**
 	 * Truncate a string.
 	 *
@@ -115,9 +107,7 @@ if ( ! function_exists( 'malinky_truncate_words' ) ) {
 	   }
 	   return $text;
 	}
-
 }
-
 
 if ( ! function_exists( 'malinky_content_meta' ) ) {
 	/**
@@ -127,7 +117,6 @@ if ( ! function_exists( 'malinky_content_meta' ) ) {
 	 */
 	function malinky_content_meta( $show_updated = true, $show_author = true, $show_date_only = false )
 	{
-
 		$posted_time = '';
 		$updated_string = '';
 		$author = '';
@@ -162,20 +151,15 @@ if ( ! function_exists( 'malinky_content_meta' ) ) {
 			return '<span class="content-header__meta__date">' . $posted_string . $updated_string . '</span>';
 
 		return '<span class="content-header__meta__date">' . $posted_string .'</span><span class="byline"> by ' . $author . '</span>';
-
 	}
-
 }
 
-
 if ( ! function_exists( 'malinky_content_footer' ) ) {
-
 	/**
 	 * Post categories, tags and edit link.
 	 */
 	function malinky_content_footer( $show_categories = true, $show_tags = true , $show_edit_link = true )
 	{
-
 		$categories = '';
 		$tags = '';
 		$edit_link = '';
@@ -204,22 +188,17 @@ if ( ! function_exists( 'malinky_content_footer' ) ) {
 		}
 
 		return apply_filters( 'malinky_content_footer', $categories . $tags . $edit_link );
-
 	}
-
 }
 
-
 if ( ! function_exists( 'malinky_content_microdata_footer' ) ) {
-
 	/**
-	 * Cretae author, published and updated tags for use microdata.
+	 * Create author, published and updated tags for use microdata.
 	 * Use on pages that wouldn't naturally or don't show any of the above.
 	 * For example a single might show the posted date but hide the updated when using malinky_content_meta().
 	 */
 	function malinky_content_microdata_footer( $author = true, $published = true, $updated = true )
 	{
-
 		$malinky_microdata = '';
 
 		if ( $author )
@@ -232,20 +211,16 @@ if ( ! function_exists( 'malinky_content_microdata_footer' ) ) {
 			$malinky_microdata .= '<meta itemprop="dateModified" content="' . esc_attr( get_the_modified_date( 'c' ) ) . '" />';
 
 		return $malinky_microdata;
-	
 	}
-
 }
 
 
 if ( ! function_exists( 'malinky_posts_pagination' ) ) {
-
 	/**
 	 * Display navigation to next/previous set of posts when applicable.
 	 */
 	function malinky_posts_pagination()
 	{
-
 		global $wp_query;
 
 		//Return if only 1 page
@@ -268,14 +243,11 @@ if ( ! function_exists( 'malinky_posts_pagination' ) ) {
 			</div>
 
 		</nav><!-- .posts-pagination -->
-
 	<?php }
-
 }
 
 
 if ( ! function_exists( 'malinky_post_pagination' ) ) {
-
 	/**
 	 * Display navigation to next/previous post when applicable.
 	 * This is amended from the master in malinky wordpress starter theme.
@@ -283,7 +255,6 @@ if ( ! function_exists( 'malinky_post_pagination' ) ) {
 	 */
 	function malinky_post_pagination()
 	{
-
 		//Return if no navigation.
 		$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( true, '', true );
 		$next     = get_adjacent_post( true, '', false );
@@ -315,20 +286,16 @@ if ( ! function_exists( 'malinky_post_pagination' ) ) {
 			</div>
 
 		</nav><!-- .post-pagination -->
-		
+	
 	<?php }
-
 }
 
-
 if ( ! function_exists( 'malinky_page_pagination' ) ) {
-
 	/**
 	 * Display navigation to next/previous pages.
 	 */
 	function malinky_page_pagination()
 	{
-
 		global $post;
 
 		$getPages = get_pages('child_of='.$post->post_parent);
@@ -387,15 +354,11 @@ if ( ! function_exists( 'malinky_page_pagination' ) ) {
 				<?php echo $nextOutput; ?>
 			</div>
 
-		</nav><!-- .page-pagination -->
-		
+		</nav><!-- .page-pagination -->	
 	<?php }
-
 }
 
-
 if ( ! function_exists( 'malinky_archive_title' ) ) {
-
 	/**
 	 * Shim for `the_archive_title()`.
 	 *
@@ -408,7 +371,6 @@ if ( ! function_exists( 'malinky_archive_title' ) ) {
 	 */
 	function malinky_archive_title( $before = '', $after = '' )
 	{
-
 		if ( is_category() ) {
 			$title = sprintf( __( 'Category Archives: %s', 'malinky' ), single_cat_title( '', false ) );
 		} elseif ( is_tag() ) {
@@ -463,14 +425,10 @@ if ( ! function_exists( 'malinky_archive_title' ) ) {
 		if ( ! empty( $title ) ) {
 			echo $before . $title . $after;
 		}
-
 	}
-
 }
 
-
 if ( ! function_exists( 'malinky_archive_description' ) ) {
-
 	/**
 	 * Shim for `the_archive_description()`.
 	 *
@@ -483,7 +441,6 @@ if ( ! function_exists( 'malinky_archive_description' ) ) {
 	 */
 	function malinky_archive_description( $before = '', $after = '', $is_cpt = false , $cpt = '')
 	{
-
 		$description = apply_filters( 'get_the_archive_description', term_description() );
 
 		if ( ! empty( $description ) ) {
@@ -501,15 +458,10 @@ if ( ! function_exists( 'malinky_archive_description' ) ) {
 			$obj = get_post_type_object( $cpt );
 			echo $obj->description;
 		}
-		
-
 	}
-
 }
 
-
 if ( ! function_exists( 'malinky_static_page_for_posts' ) ) {
-
 	/**
 	 * Show title or content from the blog home when set as a static page, usually in home.php template.
 	 *
@@ -519,7 +471,6 @@ if ( ! function_exists( 'malinky_static_page_for_posts' ) ) {
 	 */
 	function malinky_static_page_for_posts( $return = 'title' )
 	{
-
 		global $post;
 
 		$return_content = '';
@@ -537,15 +488,10 @@ if ( ! function_exists( 'malinky_static_page_for_posts' ) ) {
 		    return $return_content;
 
 		}
-
 	}
-
 }
 
-
-
 if ( ! function_exists( 'malinky_acf_image_array' ) ) {
-
 	/**
 	 * Output an image URL from ACF that is added as an image_array.
 	 * Check for get_field and get_sub_field.
@@ -572,12 +518,9 @@ if ( ! function_exists( 'malinky_acf_image_array' ) ) {
 		
 		return $malinky_acf_hero_shot;
 	}
-
 }
 
-
 if ( ! function_exists( 'malinky_acf_image_array_field' ) ) {
-
 	/**
 	 * Output an field from an ACF image_array.
 	 * Defaults to the alt tag.
@@ -611,12 +554,9 @@ if ( ! function_exists( 'malinky_acf_image_array_field' ) ) {
 			return $malinky_acf_hero_shot[ $field ];
 		}
 	}
-
 }
 
-
-if ( ! function_exists( 'malinky_awp_image' ) ) {
-
+if ( ! function_exists( 'malinky_wp_image' ) ) {
 	/**
 	 * Output image based on the attachment id, size and return value.
 	 * If the attachment size doesn't exist in wordpress returns the original.
@@ -644,19 +584,16 @@ if ( ! function_exists( 'malinky_awp_image' ) ) {
 			}
 		}
 	}
-
 }
 
-
 if ( ! function_exists( 'malinky_content_footer_filter' ) ) {
-
 	/**
 	 * Filter output of categories.
 	 */
-	function malinky_content_footer_filter( $output ) {
+	function malinky_content_footer_filter( $output )
+	{
 		return str_replace( 'Posted ', ', ', $output );
 	}
 
 	add_filter( 'malinky_content_footer', 'malinky_content_footer_filter' );
-
 }

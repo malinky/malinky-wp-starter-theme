@@ -75,55 +75,10 @@ function malinky_mce_insert_formats( $init_array )
     		'classes' => 'list-content'
 		),
 		array(
-			'title' => 'List Checklist',
-    		'selector' => 'ul, ol',
-    		'classes' => 'list-content-checklist'
-		),
-		array(
 			'title' => 'List 2 Column',
     		'selector' => 'ul, ol',
     		'classes' => 'list-two-column'
-		),
-		array(
-			'title' => 'List No Margin',
-    		'selector' => 'ul, ol',
-    		'classes' => 'list-content-no-margin'
-		),
-		array(
-			'title' => 'Brand Orange',
-    		'selector' => 'p, h1, h2, h3, h4, h5, h6',
-    		'classes' => 'color-brand-orange'
-		),
-		array(
-			'title' => 'Brand Blue',
-    		'selector' => 'p, h1, h2, h3, h4, h5, h6',
-    		'classes' => 'color-brand-blue'
-		),		
-		array(
-			'title' => 'Light Grey',
-    		'selector' => 'p, h1, h2, h3, h4, h5, h6',
-    		'classes' => 'color-text-color-light'
-		),
-		array(
-			'title' => 'Button White Orange',
-    		'selector' => 'p',
-    		'classes' => 'button button-white-orange'
-		),
-		array(
-			'title' => 'Button White Blue',
-    		'selector' => 'p',
-    		'classes' => 'button button-white-blue'
-		),
-		array(
-			'title' => 'Button Orange White',
-    		'selector' => 'a',
-    		'classes' => 'button button-orange-white'
-		),
-		array(
-			'title' => 'Button No Margin',
-    		'selector' => 'a',
-    		'classes' => 'no-margin'
-		),		
+		),	
 	);
 
 	/*

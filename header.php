@@ -1,5 +1,11 @@
-<?php malinky_contact_form_header() ?>
-<!DOCTYPE html>
+<?php
+/**
+ * This is the template that displays all of the <head> section and everything up until <main class="wrap wrap-mobile" role="main">
+ *
+ * @package Malinky Media
+ */
+
+?><!DOCTYPE html>
 <!--[if IE 8]>         <html class="no-js lt-ie10 lt-ie9" <?php language_attributes(); ?>> <![endif]-->
 <!--[if IE 9]>         <html class="no-js lt-ie10" <?php language_attributes(); ?>> <![endif]-->
 <!--[if gt IE 9]><!--> <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
@@ -12,6 +18,9 @@
 
 	<!-- Mobile viewport -->    
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
 	<!-- Icons for mobile for touch home screens and bookmarks. Remember to upload favicon.ico too! -->
 
@@ -28,7 +37,17 @@
     <meta name="msapplication-TileImage" content="<?php echo esc_url( home_url( 'ms-touch-icon-144x144-precomposed.png' ) ); ?>">
     <meta name="msapplication-TileColor" content="#3372DF">
 
-	<!-- Google Fonts -->
+	<!-- Google Font Loader -->
+	<!-- <script>
+		WebFontConfig = {
+			google: { families: ['PT+Sans:400,700'] }
+		};
+		(function(d) {
+			var wf = d.createElement('script'), s = d.scripts[0];
+			wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+			s.parentNode.insertBefore(wf, s);
+		})(document);
+   	</script> -->
 
 	<!-- Meta -->
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
@@ -102,28 +121,37 @@
 
 	<?php } ?>
 
-	<?php if ( WP_ENV == 'dev' ) { ?>
+	<?php if ( WP_ENV == 'local' || WP_ENV == 'dev' ) { ?>
 		<meta name="robots" content="noindex,nofollow">
 	<?php } ?>
 
 	<?php if ( WP_ENV == 'prod' ) { ?>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-		<script type="text/javascript">
-
-		  var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', "<?php echo get_field( 'malinky_settings_contact_google_analytics', 'option' ); ?>"]);
-		  _gaq.push(['_trackPageview']);
-
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
-
+		  ga('create', "<?php echo get_field( 'malinky_settings_contact_google_analytics', 'option' ); ?>", 'auto');
+		  ga('send', 'pageview');
 		</script>
-
 	<?php } ?>
 	
+	
+	<?php
+	/*
+	 * Load contact form 7 scripts when needed.
+	 * Removed in actions-filters.php.
+	 * Set the page.
+	 */
+	// if ( is_page ( '' )) {
+	//     if ( function_exists( 'wpcf7_enqueue_scripts' ) ) {
+	//         wpcf7_enqueue_scripts();
+	//         wp_enqueue_script( 'jquery-ui-datepicker' );
+	//     }	    
+	// }
+	?>
+
 	<?php wp_head(); ?>
 
 	<!--https://github.com/scottjehl/Respond-->
@@ -136,10 +164,6 @@
 </head>
 
 <body <?php body_class(); ?>>
-
-<!--[if lt IE 7]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
 
 <header class="main-header" role="banner">
 
@@ -220,4 +244,4 @@
 
 </header><!-- .main-header -->
 
-<main role="main" class="wrap wrap-mobile">
+<main class="wrap wrap-mobile" role="main">

@@ -1,6 +1,8 @@
 <?php
 /**
  * The template for displaying the home page.
+ *
+ * @package Malinky Media
  */
 
 get_header(); ?>
@@ -19,4 +21,4 @@ get_header(); ?>
 
 </main><!-- #main -->
     
-<?php get_footer(); ?>
+<?php get_footer();

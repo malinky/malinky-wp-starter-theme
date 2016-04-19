@@ -1,6 +1,8 @@
 <?php
 /**
  * The template part for displaying a single post in single.php.
+ *
+ * @package Malinky Media
  */
 ?>
 

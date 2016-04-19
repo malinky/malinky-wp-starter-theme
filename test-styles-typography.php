@@ -1,6 +1,8 @@
 <?php
 /**
  * Template Name: Test Styles Typography
+ *
+ * @package Malinky Media
  */
 
 get_header(); ?>
@@ -244,4 +246,4 @@ United States</address>
 
 <h2>Horizontal Rule</h2>
 
-<?php get_footer(); ?>
+<?php get_footer();
