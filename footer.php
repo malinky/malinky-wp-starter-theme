@@ -24,9 +24,9 @@
 			<!-- Optional address information and structured data -->
 			<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
 				<?php while ( have_rows( 'malinky_settings_contact_address', 'option' ) ) : the_row(); ?>
-					<span itemprop="streetAddress"><?php echo esc_html( get_sub_field( 'address' ) ); ?></span>, 
+					<span itemprop="streetAddress"><?php echo esc_html( get_sub_field( 'address' ) ); ?></span>
 				<?php endwhile; ?>
-	            <span itemprop="addressRegion"><?php echo esc_html( get_field( 'malinky_settings_contact_county', 'option' ) ); ?></span>, 
+	            <span itemprop="addressRegion"><?php echo esc_html( get_field( 'malinky_settings_contact_county', 'option' ) ); ?></span>
 	            <span itemprop="postalCode"><?php echo esc_html( get_field( 'malinky_settings_contact_postcode', 'option' ) ); ?></span>
 	        </div>
 			<p itemprop="telephone">
