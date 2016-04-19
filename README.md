@@ -1,2 +1,2 @@
-Wordpress Starter Theme
-Wordpress starter theme.
+## WordPress Starter Theme
+Download and use how you see fit.
