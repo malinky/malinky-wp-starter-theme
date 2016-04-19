@@ -4,7 +4,6 @@
  * Init
  * Front End Scripts
  * Actions and Filters
- * Contact Form
  * Contact Settings
  * CPT
  * Login Screen
@@ -23,8 +22,6 @@ require get_template_directory() . '/functions/init.php';
 require get_template_directory() . '/functions/front-end-scripts.php';
 
 require get_template_directory() . '/functions/actions-filters.php';
-
-require get_template_directory() . '/functions/contact-form.php';
 
 require get_template_directory() . '/functions/contact-settings.php';
 
